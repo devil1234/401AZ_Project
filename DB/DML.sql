@@ -30,15 +30,19 @@ INSERT INTO tbl_classes (classroom_id, subject, teacher_id, start_time_day_id, e
 SELECT * FROM tbl_classes; 
 SELECT * FROM tbl_classes WHERE class_id = 1;
 
-/* SELECT STATEMENT INNER JOIN BY CLASS_ID */
+/* SELECT STATEMENT LEFT INNER JOIN BY class_id */
 SELECT
-   CONCAT(tbl_first_names.first_names, " ",tbl_last_names.last_name) AS teacher_full_name,
-   tbl_classrooms.classroom, 
-   tbl_classes.subject,
-   tbl_start_time_day.start_time_day,
+	tbl_classes.class_id,
+	tbl_days.day,
+	tbl_start_time_day.start_time_day,
    tbl_end_time_day.end_time_day,
-   tbl_days.day
-FROM tbl_classes
+   tbl_classrooms.classroom,
+	CONCAT(tbl_first_names.first_names, " ",tbl_last_names.last_name) AS Teacher_Name, 
+	tbl_classes.subject
+FROM
+    tbl_classes
+    INNER JOIN tbl_teachers 
+        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
     INNER JOIN tbl_classrooms 
         ON (tbl_classes.classrom_id = tbl_classrooms.classroom_id)
     INNER JOIN tbl_start_time_day 
@@ -50,8 +54,39 @@ FROM tbl_classes
     INNER JOIN tbl_last_names 
         ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
     INNER JOIN tbl_days 
-        ON (tbl_classes.day_id = tbl_days.day_id)
-	WHERE class_id = 1;
+        ON (tbl_classes.day_id = tbl_days.day_id) 
+	WHERE tbl_classes.class_id = '1'
+   GROUP BY DAYOFWEEK(tbl_days.day)
+   ORDER BY DAYOFWEEK(tbl_days.day);
+   
+/* SELECT STATEMENT LEFT INNER JOIN BY CLASSROOM NAME */
+SELECT
+	tbl_classes.class_id,
+	tbl_days.day,
+	tbl_start_time_day.start_time_day,
+   tbl_end_time_day.end_time_day,
+   tbl_classrooms.classroom,
+	CONCAT(tbl_first_names.first_names, " ",tbl_last_names.last_name) AS Teacher_Name, 
+	tbl_classes.subject
+FROM
+    tbl_classes
+    INNER JOIN tbl_teachers 
+        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_classrooms 
+        ON (tbl_classes.classrom_id = tbl_classrooms.classroom_id)
+    INNER JOIN tbl_start_time_day 
+        ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
+    INNER JOIN tbl_end_time_day 
+        ON (tbl_classes.end_time_day_id = tbl_end_time_day.end_time_day_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_Id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_days 
+        ON (tbl_classes.day_id = tbl_days.day_id) 
+	WHERE tbl_classrooms.classroom = 'M250'
+   GROUP BY DAYOFWEEK(tbl_days.day)
+   ORDER BY DAYOFWEEK(tbl_days.day);
 
 /* UPDATE STATEMENT */
 UPDATE tbl_classes
@@ -229,10 +264,71 @@ DELETE FROM tbl_emails WHERE e_mail_id = 1;
 
 	/* END */
 
-/* PLACEHOLDERS FOR REMAINING TABLES TO WRITE THE SQL CODE
-tbl_end_time_day
-tbl_enrolments
-tbl_file_types
+/* TBL_END_TIME_DAY */
+/* INSERT STATEMENT */
+INSERT INTO tbl_end_time_day (end_time_day) VALUES 
+('13:00:00');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_end_time_day; 
+SELECT * FROM tbl_end_time_day WHERE end_time_day_id = 1;
+
+/* UPDATE STATEMENT */
+UPDATE tbl_end_time_day
+SET 
+	end_time_day = IFNULL('13:30:00', end_time_day)
+WHERE end_time_day_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_end_time_day WHERE e_mail_id = 1;
+
+	/* END */
+
+/* TBL_ENROLMENTS */
+/* INSERT STATEMENT */
+INSERT INTO tbl_enrolments (student_id,class_id,date_start_id,date_end_id) VALUES 
+('1','1','1','1');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_enrolments; 
+
+/* UPDATE STATEMENT */
+UPDATE tbl_enrolments
+SET 
+	student_id = IFNULL('2', student_id),
+	class_id = IFNULL('2', class_id),
+	date_start_id = IFNULL('2', date_start_id),
+	date_end_id = IFNULL('2', date_end_id)
+WHERE student_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_enrolments WHERE student_id = 1;
+DELETE FROM tbl_enrolments WHERE class_id = 1;
+	/* END */
+
+/* TBL_FILE_TYPES */
+/* INSERT STATEMENT */
+INSERT INTO tbl_file_types (file_extension) VALUES 
+('.txt'),
+('.ppt');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_end_time_day; 
+SELECT * FROM tbl_end_time_day WHERE end_time_day_id = 1;
+
+/* UPDATE STATEMENT */
+UPDATE tbl_end_time_day
+SET 
+	end_time_day = IFNULL('13:30:00', end_time_day)
+WHERE end_time_day_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_end_time_day WHERE e_mail_id = 1;
+
+	/* END */
+
+/* 
+PLACEHOLDERS FOR REMAINING TABLES TO WRITE THE SQL CODE
 tbl_first_names
 tbl_genders
 tbl_last_names
