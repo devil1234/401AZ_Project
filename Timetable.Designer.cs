@@ -32,7 +32,7 @@
             this.mySqlDataAdapter2 = new MySqlConnector.MySqlDataAdapter();
             this.dgv_classes = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_class_search = new System.Windows.Forms.TextBox();
             this.btn_search_timetable = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_classes)).BeginInit();
             this.SuspendLayout();
@@ -82,13 +82,13 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Classroom name search";
             // 
-            // textBox1
+            // txt_class_search
             // 
-            this.textBox1.Location = new System.Drawing.Point(254, 72);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 22);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txt_class_search.Location = new System.Drawing.Point(254, 72);
+            this.txt_class_search.Name = "txt_class_search";
+            this.txt_class_search.Size = new System.Drawing.Size(163, 22);
+            this.txt_class_search.TabIndex = 2;
+            this.txt_class_search.TextChanged += new System.EventHandler(this.txt_class_search_TextChanged);
             // 
             // btn_search_timetable
             // 
@@ -112,7 +112,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(863, 548);
             this.Controls.Add(this.btn_search_timetable);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_class_search);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgv_classes);
             this.ForeColor = System.Drawing.SystemColors.Control;
@@ -134,7 +134,7 @@
         private MySqlConnector.MySqlDataAdapter mySqlDataAdapter2;
         private System.Windows.Forms.DataGridView dgv_classes;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_class_search;
         private System.Windows.Forms.Button btn_search_timetable;
     }
 }
