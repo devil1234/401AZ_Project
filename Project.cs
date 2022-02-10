@@ -16,5 +16,11 @@ namespace _401AZ_PROJECT
         {
             InitializeComponent();
         }
+
+        private void btn_timetables_Click(object sender, EventArgs e)
+        {
+            Timetable timetable = new Timetable();
+            timetable.Show();
+        }
     }
 }
