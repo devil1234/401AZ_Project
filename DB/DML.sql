@@ -27,7 +27,7 @@ DELETE FROM tbl_addresses WHERE address_id = 1;
 /* TBL_CLASSES */
 /* INSERT STATEMENT */
 INSERT INTO tbl_classes (classroom_id, subject, teacher_id, start_time_day_id, end_time_day_id, day_id) VALUES 
-('1', 'Bolean Algebra', '1', '1', '1', '1', '1');
+('1', 'Bolean Algebra', '1', '1', '1', '1');
 
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_classes; 
