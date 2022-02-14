@@ -15,7 +15,6 @@ namespace _401AZ_PROJECT
         
         static void Main()
         {
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Project());
