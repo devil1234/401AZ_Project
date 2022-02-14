@@ -97,6 +97,14 @@ CREATE TABLE tbl_start_time_day (
   PRIMARY KEY (start_time_day_id)
 );
 
+CREATE TABLE tbl_student_parents_details (
+  parent_id INT(11) NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(10) NOT NULL,
+  last_name VARCHAR(10) NOT NULL,
+  phone_number VARCHAR(11) NOT NULL,
+  PRIMARY KEY (parent_id)
+);
+
 CREATE TABLE tbl_students (
   student_id INT(11) NOT NULL AUTO_INCREMENT,
   student_first_name_id INT(11) NOT NULL,
@@ -108,17 +116,6 @@ CREATE TABLE tbl_students (
   student_parent_id INT(11) NOT NULL,
   student_address_home_id INT(11) NOT NULL,
   PRIMARY KEY (student_id)
-);
-
-CREATE TABLE tbl_student_parents_details (
-  parent_id INT(11) NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(10) NOT NULL,
-  last_name VARCHAR(10) NOT NULL,
-  phone_number_type VARCHAR(6) NOT NULL,
-  phone_number_main VARCHAR(11) NOT NULL,
-  phone_number_home VARCHAR(11) NULL,
-  phone_number_mobile VARCHAR(11) NULL,
-  PRIMARY KEY (parent_id)
 );
 
 CREATE TABLE tbl_teachers (
