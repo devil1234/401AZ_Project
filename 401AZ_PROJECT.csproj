@@ -69,6 +69,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enrolments_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enrolments_form.Designer.cs">
+      <DependentUpon>Enrolments_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student_form.Designer.cs">
+      <DependentUpon>Student_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Teachers_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Teachers_form.Designer.cs">
+      <DependentUpon>Teachers_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Teaching_materials_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Teaching_materials_form.Designer.cs">
+      <DependentUpon>Teaching_materials_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Timetable_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +115,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Enrolments_form.resx">
+      <DependentUpon>Enrolments_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Student_form.resx">
+      <DependentUpon>Student_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Teachers_form.resx">
+      <DependentUpon>Teachers_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Teaching_materials_form.resx">
+      <DependentUpon>Teaching_materials_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Timetable_form.resx">
       <DependentUpon>Timetable_form.cs</DependentUpon>
     </EmbeddedResource>

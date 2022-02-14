@@ -63,6 +63,7 @@ namespace _401AZ_PROJECT
             {
                 Txt_class_search.Enabled = false;
                 Btn_search_timetable.Visible=false;
+                Btn_Refresh.PerformClick();
             }
 
 
@@ -174,21 +175,57 @@ namespace _401AZ_PROJECT
             Cb_T_Fname.Enabled = true;
             Cb_T_Lname.Enabled = true;
             Cb_Subject.Enabled = true;
+
             btn_InsertNew.Enabled = false;
+            btn_InsertNew.Visible = false;
+            
             Btn_Delete.Enabled = false;
+            Btn_Delete.Visible = false;
+
             Btn_Update.Enabled = false;
+            Btn_Update.Visible = false;
+
             Btn_SaveNew.Enabled = true;
+
             Btn_Refresh.Enabled = false;
+            Btn_Refresh.Visible = false;
+
             btn_EnableSearch.Enabled = false;
+            btn_EnableSearch.Visible = false;
+
             Btn_Cancel.Enabled = true;
+
             dgv_classes.Enabled = false ;
+            dgv_classes.Visible = false ;
 
             //cb_Day
             cb_Day.DataSource = DM.ToDataTable(day.GetDays());
             cb_Day.DisplayMember = "Day_Name";
             cb_Day.ValueMember = "Day_Id_pk";
 
-            //Dtp_End_Time.Text = 
+            //Start time dtp
+            Dtp_Start_Time.Text = DateTime.Now.ToString();
+
+            //End Time
+            Dtp_End_Time.Text = DateTime.Now.ToString();
+
+            //cb_T_Fname
+            //to do (change the datasource query)
+            Cb_T_Fname.DataSource = DM.ToDataTable(day.GetDays());
+            Cb_T_Fname.DisplayMember = "Day_Name";
+            Cb_T_Fname.ValueMember = "Day_Id_pk";
+
+            //cb_T_Lname
+            //to do (change the datasource query)
+            Cb_T_Lname.DataSource = DM.ToDataTable(day.GetDays());
+            Cb_T_Lname.DisplayMember = "Day_Name";
+            Cb_T_Lname.ValueMember = "Day_Id_pk";
+
+            //cb_Subject
+            //to do (change the datasource query)
+            Cb_Subject.DataSource = DM.ToDataTable(day.GetDays());
+            Cb_Subject.DisplayMember = "Day_Name";
+            Cb_Subject.ValueMember = "Day_Id_pk";
 
 
         }
@@ -203,14 +240,28 @@ namespace _401AZ_PROJECT
             Cb_T_Fname.Enabled = false;
             Cb_T_Lname.Enabled = false;
             Cb_Subject.Enabled = false;
+
             btn_InsertNew.Enabled = true;
+            btn_InsertNew.Visible = true;
+
             Btn_Delete.Enabled = true;
+            Btn_Delete.Visible = true;
+
             Btn_Update.Enabled = true;
+            Btn_Update.Visible = true;
+
             Btn_SaveNew.Enabled = false;
+
             Btn_Refresh.Enabled = true;
+            Btn_Refresh.Visible = true;
+
             btn_EnableSearch.Enabled = true;
+            btn_EnableSearch.Visible = true;
+
             Btn_Cancel.Enabled = false;
+
             dgv_classes.Enabled = true;
+            dgv_classes.Visible = true;
             Populate_Form();
         }
 
@@ -223,5 +274,6 @@ namespace _401AZ_PROJECT
         {
             Button_Reset();
         }
+
     }
 }
