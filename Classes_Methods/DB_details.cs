@@ -11,10 +11,12 @@ namespace _401AZ_PROJECT
     public class DB_details
     {
         public string connection_details = "Server=localhost; User ID=root;Password=Joyride2!;Database=test2";
+        
     }
     public class DataManager
     {
-        public DataTable toDataTable<T>(List<T> items)
+
+        public DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
             PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);

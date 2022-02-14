@@ -28,77 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_teachers = new System.Windows.Forms.Button();
-            this.btn_timetables = new System.Windows.Forms.Button();
-            this.btn_enrolments = new System.Windows.Forms.Button();
-            this.btn_students = new System.Windows.Forms.Button();
-            this.btn_teaching_material = new System.Windows.Forms.Button();
+            this.Btn_teachers = new System.Windows.Forms.Button();
+            this.Btn_timetables = new System.Windows.Forms.Button();
+            this.Btn_enrolments = new System.Windows.Forms.Button();
+            this.Btn_students = new System.Windows.Forms.Button();
+            this.Btn_teaching_material = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btn_teachers
+            // Btn_teachers
             // 
-            this.btn_teachers.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_teachers.Location = new System.Drawing.Point(13, 190);
-            this.btn_teachers.Name = "btn_teachers";
-            this.btn_teachers.Size = new System.Drawing.Size(755, 58);
-            this.btn_teachers.TabIndex = 0;
-            this.btn_teachers.Text = "Teachers";
-            this.btn_teachers.UseVisualStyleBackColor = true;
+            this.Btn_teachers.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_teachers.Location = new System.Drawing.Point(13, 140);
+            this.Btn_teachers.Name = "Btn_teachers";
+            this.Btn_teachers.Size = new System.Drawing.Size(755, 58);
+            this.Btn_teachers.TabIndex = 0;
+            this.Btn_teachers.Text = "Teachers";
+            this.Btn_teachers.UseVisualStyleBackColor = true;
+            this.Btn_teachers.Click += new System.EventHandler(this.Btn_Teachers_Click);
             // 
-            // btn_timetables
+            // Btn_timetables
             // 
-            this.btn_timetables.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_timetables.Location = new System.Drawing.Point(13, 62);
-            this.btn_timetables.Name = "btn_timetables";
-            this.btn_timetables.Size = new System.Drawing.Size(755, 58);
-            this.btn_timetables.TabIndex = 1;
-            this.btn_timetables.Text = "Time Tables";
-            this.btn_timetables.UseVisualStyleBackColor = true;
-            this.btn_timetables.Click += new System.EventHandler(this.btn_timetables_Click);
+            this.Btn_timetables.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_timetables.Location = new System.Drawing.Point(13, 12);
+            this.Btn_timetables.Name = "Btn_timetables";
+            this.Btn_timetables.Size = new System.Drawing.Size(755, 58);
+            this.Btn_timetables.TabIndex = 1;
+            this.Btn_timetables.Text = "Time tables manager";
+            this.Btn_timetables.UseVisualStyleBackColor = true;
+            this.Btn_timetables.Click += new System.EventHandler(this.Btn_Timetables_Click);
             // 
-            // btn_enrolments
+            // Btn_enrolments
             // 
-            this.btn_enrolments.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_enrolments.Location = new System.Drawing.Point(13, 126);
-            this.btn_enrolments.Name = "btn_enrolments";
-            this.btn_enrolments.Size = new System.Drawing.Size(755, 58);
-            this.btn_enrolments.TabIndex = 2;
-            this.btn_enrolments.Text = "Enrolments";
-            this.btn_enrolments.UseVisualStyleBackColor = true;
+            this.Btn_enrolments.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_enrolments.Location = new System.Drawing.Point(13, 76);
+            this.Btn_enrolments.Name = "Btn_enrolments";
+            this.Btn_enrolments.Size = new System.Drawing.Size(755, 58);
+            this.Btn_enrolments.TabIndex = 2;
+            this.Btn_enrolments.Text = "Enrolments";
+            this.Btn_enrolments.UseVisualStyleBackColor = true;
+            this.Btn_enrolments.Click += new System.EventHandler(this.Btn_Enrolments_Click);
             // 
-            // btn_students
+            // Btn_students
             // 
-            this.btn_students.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_students.Location = new System.Drawing.Point(11, 254);
-            this.btn_students.Name = "btn_students";
-            this.btn_students.Size = new System.Drawing.Size(755, 58);
-            this.btn_students.TabIndex = 3;
-            this.btn_students.Text = "Students";
-            this.btn_students.UseVisualStyleBackColor = true;
+            this.Btn_students.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_students.Location = new System.Drawing.Point(12, 204);
+            this.Btn_students.Name = "Btn_students";
+            this.Btn_students.Size = new System.Drawing.Size(755, 58);
+            this.Btn_students.TabIndex = 3;
+            this.Btn_students.Text = "Students";
+            this.Btn_students.UseVisualStyleBackColor = true;
+            this.Btn_students.Click += new System.EventHandler(this.Btn_Students_Click);
             // 
-            // btn_teaching_material
+            // Btn_teaching_material
             // 
-            this.btn_teaching_material.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_teaching_material.Location = new System.Drawing.Point(13, 318);
-            this.btn_teaching_material.Name = "btn_teaching_material";
-            this.btn_teaching_material.Size = new System.Drawing.Size(755, 58);
-            this.btn_teaching_material.TabIndex = 4;
-            this.btn_teaching_material.Text = "Teaching Materials";
-            this.btn_teaching_material.UseVisualStyleBackColor = true;
+            this.Btn_teaching_material.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_teaching_material.Location = new System.Drawing.Point(13, 268);
+            this.Btn_teaching_material.Name = "Btn_teaching_material";
+            this.Btn_teaching_material.Size = new System.Drawing.Size(755, 58);
+            this.Btn_teaching_material.TabIndex = 4;
+            this.Btn_teaching_material.Text = "Teaching Materials";
+            this.Btn_teaching_material.UseVisualStyleBackColor = true;
+            this.Btn_teaching_material.Click += new System.EventHandler(this.Btn_Teaching_Material_Click);
             // 
             // Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(780, 456);
-            this.Controls.Add(this.btn_teaching_material);
-            this.Controls.Add(this.btn_students);
-            this.Controls.Add(this.btn_enrolments);
-            this.Controls.Add(this.btn_timetables);
-            this.Controls.Add(this.btn_teachers);
+            this.ClientSize = new System.Drawing.Size(777, 336);
+            this.Controls.Add(this.Btn_teaching_material);
+            this.Controls.Add(this.Btn_students);
+            this.Controls.Add(this.Btn_enrolments);
+            this.Controls.Add(this.Btn_timetables);
+            this.Controls.Add(this.Btn_teachers);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Project";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ShowIcon = false;
@@ -109,10 +115,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_teachers;
-        private System.Windows.Forms.Button btn_timetables;
-        private System.Windows.Forms.Button btn_enrolments;
-        private System.Windows.Forms.Button btn_students;
-        private System.Windows.Forms.Button btn_teaching_material;
+        private System.Windows.Forms.Button Btn_teachers;
+        private System.Windows.Forms.Button Btn_timetables;
+        private System.Windows.Forms.Button Btn_enrolments;
+        private System.Windows.Forms.Button Btn_students;
+        private System.Windows.Forms.Button Btn_teaching_material;
     }
 }

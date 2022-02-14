@@ -17,10 +17,30 @@ namespace _401AZ_PROJECT
             InitializeComponent();
         }
 
-        private void btn_timetables_Click(object sender, EventArgs e)
+        private void Btn_Timetables_Click(object sender, EventArgs e)
         {
-            Timetable timetable = new Timetable();
+            Timetable_form timetable = new Timetable_form();
             timetable.Show();
+        }
+
+        private void Btn_Enrolments_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Teachers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Students_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Teaching_Material_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
