@@ -9,7 +9,7 @@ CREATE TABLE tbl_addresses (
 
 CREATE TABLE tbl_classes (
   class_id INT(11) NOT NULL AUTO_INCREMENT,
-  classrom_id INT(11) NOT NULL,
+  classroom_id INT(11) NOT NULL,
   subject VARCHAR(30) NOT NULL,
   teacher_id INT(11) NOT NULL,
   start_time_day_id INT(11) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE tbl_enrolments (
   date_end_id INT(11) NOT NULL
 );
 
-CREATE TABLE tbl_file_types (
+CREATE TABLE tbl_file_extensions (
   file_extension_id INT(11) NOT NULL AUTO_INCREMENT,
   file_extension VARCHAR(6) NOT NULL,
   PRIMARY KEY (file_extension_id)
@@ -123,10 +123,10 @@ CREATE TABLE tbl_student_parents_details (
 
 CREATE TABLE tbl_teachers (
   teacher_id INT(11) NOT NULL AUTO_INCREMENT,
-  first_name_Id INT(11) NOT NULL,
-  last_name_Id INT(11) NOT NULL,
+  first_name_id INT(11) NOT NULL,
+  last_name_id INT(11) NOT NULL,
   dob_id INT(11) NOT NULL,
-  gender_Id INT(11) NOT NULL,
+  gender_id INT(11) NOT NULL,
   e_mail_id INT(11) NOT NULL,
   payroll_nr INT(11) NOT NULL,
   teachers_address_id INT(11) NOT NULL,
@@ -144,12 +144,12 @@ CREATE TABLE tbl_teaching_materials (
 );
 
 ALTER TABLE tbl_classes 
-  ADD KEY classroom_id1 (classrom_id),
+  ADD KEY classroom_id1 (classroom_id),
   ADD KEY start_time_id (start_time_day_id),
   ADD KEY end_time_id (end_time_day_id),
   ADD KEY day_id (day_id),
   ADD KEY teacher_id_2 (teacher_id),
-  ADD CONSTRAINT classroom_id1 FOREIGN KEY (classrom_id) REFERENCES tbl_classrooms (classroom_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT classroom_id1 FOREIGN KEY (classroom_id) REFERENCES tbl_classrooms (classroom_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT day_id FOREIGN KEY (day_id) REFERENCES tbl_days (day_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT end_time_id FOREIGN KEY (end_time_day_id) REFERENCES tbl_end_time_day (end_time_day_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT start_time_id FOREIGN KEY (start_time_day_id) REFERENCES tbl_start_time_day (start_time_day_id) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -198,5 +198,5 @@ ALTER TABLE tbl_teachers
 ALTER TABLE tbl_teaching_materials
   ADD KEY file_extension_id (file_extension_id),
   ADD KEY teacher_id_1 (teacher_id),
-  ADD CONSTRAINT file_extension_id FOREIGN KEY (file_extension_id) REFERENCES tbl_file_types (file_extension_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT file_extension_id FOREIGN KEY (file_extension_id) REFERENCES tbl_file_extensions (file_extension_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT teacher_id_1 FOREIGN KEY (teacher_id) REFERENCES tbl_teachers (teacher_id) ON UPDATE CASCADE ON DELETE NO ACTION;
