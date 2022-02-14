@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace _401AZ_PROJECT
 {
 
-    public abstract class Students
+    public abstract class Students : StudentParentsDetails
     {
         public int StudentId { get; set; }
         public string Student_First_Name { get; set; }
