@@ -1,3 +1,4 @@
+   /* START */
 /* TBL_ADDRESSES */
 /* INSERT STATEMENT */
 INSERT INTO tbl_addresses (address_street, address_city, address_region, address_postcode) VALUES 
@@ -21,6 +22,8 @@ DELETE FROM tbl_addresses WHERE address_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_CLASSES */
 /* INSERT STATEMENT */
 INSERT INTO tbl_classes (classroom_id, subject, teacher_id, start_time_day_id, end_time_day_id, day_id) VALUES 
@@ -104,6 +107,8 @@ DELETE FROM tbl_classes WHERE class_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_CLASSROOMS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_classrooms (classroom, ) VALUES 
@@ -124,6 +129,8 @@ DELETE FROM tbl_classrooms WHERE classroom_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_DATE_END */
 /* INSERT STATEMENT */
 INSERT INTO tbl_date_end (date_end) VALUES 
@@ -144,6 +151,8 @@ DELETE FROM tbl_date_end WHERE date_end_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_DATE_START */
 /* INSERT STATEMENT */
 INSERT INTO tbl_date_start (date_start) VALUES 
@@ -164,6 +173,8 @@ DELETE FROM tbl_date_end WHERE date_end_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_DAYS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_days (day) VALUES 
@@ -184,6 +195,8 @@ DELETE FROM tbl_days WHERE day_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_DOB */
 /* INSERT STATEMENT */
 INSERT INTO tbl_dob (dob) VALUES 
@@ -204,6 +217,8 @@ DELETE FROM tbl_dob WHERE dob_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_EMAILS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_emails (e_mail_address) VALUES 
@@ -224,6 +239,8 @@ DELETE FROM tbl_emails WHERE e_mail_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_DOB */
 /* INSERT STATEMENT */
 INSERT INTO tbl_dob (dob) VALUES 
@@ -244,6 +261,8 @@ DELETE FROM tbl_dob WHERE dob_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_EMAILS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_emails (e_mail_address) VALUES 
@@ -264,6 +283,8 @@ DELETE FROM tbl_emails WHERE e_mail_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_END_TIME_DAY */
 /* INSERT STATEMENT */
 INSERT INTO tbl_end_time_day (end_time_day) VALUES 
@@ -284,6 +305,8 @@ DELETE FROM tbl_end_time_day WHERE e_mail_id = 1;
 
 	/* END */
 
+
+   /* START */
 /* TBL_ENROLMENTS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_enrolments (student_id,class_id,date_start_id,date_end_id) VALUES 
@@ -306,6 +329,8 @@ DELETE FROM tbl_enrolments WHERE student_id = 1;
 DELETE FROM tbl_enrolments WHERE class_id = 1;
 	/* END */
 
+
+   /* START */
 /* TBL_FILE_TYPES */
 /* INSERT STATEMENT */
 INSERT INTO tbl_file_types (file_extension) VALUES 
@@ -327,13 +352,77 @@ DELETE FROM tbl_end_time_day WHERE e_mail_id = 1;
 
 	/* END */
 
+
+   /* START */
+/* TBL_FIRST_NAMES */
+/* INSERT STATEMENT */
+INSERT INTO tbl_first_names (first_names) VALUES 
+('Alexander');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_first_names; 
+SELECT * FROM tbl_end_time_day WHERE first_names_id = 1;
+
+/* UPDATE STATEMENT */
+UPDATE tbl_first_names
+SET 
+	first_names = IFNULL('Alex', first_names)
+WHERE first_names_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_first_names WHERE first_names_id = 1;
+
+	/* END */
+
+
+   /* START */
+/* tbl_genders */
+/* INSERT STATEMENT */
+INSERT INTO tbl_genders (gender) VALUES 
+('None');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_genders; 
+SELECT * FROM tbl_genders WHERE gender_id = 1;
+
+/* UPDATE STATEMENT */
+UPDATE tbl_genders
+SET 
+	gender = IFNULL('male', gender)
+WHERE gender_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_genders WHERE gender_id = 1;
+
+	/* END */
+
+
+   /* START */
+/* tbl_genders */
+/* INSERT STATEMENT */
+INSERT INTO tbl_last_names (last_name) VALUES 
+('Robert');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_last_names; 
+SELECT * FROM tbl_last_names WHERE last_name_id = 1;
+SELECT last_name FROM tbl_last_names WHERE last_name = "Marley";
+
+/* UPDATE STATEMENT */
+UPDATE tbl_last_names
+SET 
+	last_name = IFNULL('Harley', last_name)
+WHERE last_name_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM last_name WHERE last_name_id = 1;
+
+	/* END */
+
+
 /* 
 PLACEHOLDERS FOR REMAINING TABLES TO WRITE THE SQL CODE
-tbl_first_names
-tbl_genders
-tbl_last_names
 tbl_start_time_day
-
 tbl_students
 tbl_teachers
 tbl_teaching_materials
