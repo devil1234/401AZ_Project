@@ -76,7 +76,7 @@
       <DependentUpon>Timetable.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes_Methods\DB_details.cs" />
-    <Compile Include="Classes_Methods\Class\Class.cs" />
+    <Compile Include="Classes_Methods\TimeTable\TimeTable.cs" />
     <Compile Include="Classes_Methods\Enrolments\Enrolments.cs" />
     <Compile Include="Classes_Methods\PersonalDetails\Addresses.cs" />
     <Compile Include="Classes_Methods\Students\StudentParentsDetails.cs" />
