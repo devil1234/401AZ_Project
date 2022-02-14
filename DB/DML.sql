@@ -449,13 +449,9 @@ WHERE start_time_day_id = 1;
 DELETE FROM tbl_start_time_day WHERE start_time_day_id = 1;
 
 	/* END */
-/* 
-PLACEHOLDERS FOR REMAINING TABLES TO WRITE THE SQL CODE
-tbl_students
-tbl_teachers
-tbl_teaching_materials
-*/
 
+
+  /* START */
 /* tbl_parents_details */
 /* INSERT STATEMENT */
 INSERT INTO tbl_student_parents_details (first_name, last_name, phone_number_type, phone_number_main, phone_number_mobile) VALUES 
@@ -478,5 +474,168 @@ WHERE parent_id = 1;
 
 /* DELETE STATEMENT */
 DELETE FROM tbl_student_parents_details WHERE parent_id = 1;
+
+/* END */
+
+  /* START */
+/* TBL_STUDENTS */
+/* INSERT STATEMENT */
+INSERT INTO tbl_students (student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_picture,student_e_mail_id, student_parent_id, student_address_home_id) VALUES 
+('1','1','1','1','','1','1','1');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_students; 
+SELECT * FROM tbl_students WHERE student_id = 1;
+
+/* SELECT STATEMENT WITH INNER JOIN */
+SELECT
+    tbl_students.student_id, 
+    tbl_first_names.first_names,
+    tbl_last_names.last_name,
+    tbl_dob.dob,
+    tbl_genders.gender,
+    tbl_emails.e_mail_address,
+    tbl_student_parents_details.first_name AS Parent_FirstName,
+    tbl_student_parents_details.last_name AS Parent_LastName,
+    tbl_student_parents_details.phone_number_type AS Parent_Phone_Number_Type,
+    tbl_student_parents_details.phone_number_main AS Parent_Phone_Number_Main,
+    tbl_student_parents_details.phone_number_home AS Parent_Phone_Number_Home,
+    tbl_student_parents_details.phone_number_mobile AS Parent_Phone_Number_Mobile,
+    tbl_addresses.address_street,
+    tbl_addresses.address_city,
+    tbl_addresses.address_region,
+    tbl_addresses.address_postcode
+FROM
+    tbl_students
+    INNER JOIN tbl_first_names 
+        ON (tbl_students.student_first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_genders 
+        ON (tbl_students.gender_id = tbl_genders.gender_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_students.student_last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_dob 
+        ON (tbl_students.student_dob_id = tbl_dob.dob_id)
+    INNER JOIN tbl_emails 
+        ON (tbl_students.student_e_mail_id = tbl_emails.e_mail_id)
+    INNER JOIN tbl_student_parents_details 
+        ON (tbl_students.student_parent_id = tbl_student_parents_details.parent_id)
+    INNER JOIN tbl_addresses 
+        ON (tbl_students.student_address_home_id = tbl_addresses.address_id);
+
+/* UPDATE STATEMENT */
+UPDATE tbl_students
+SET 
+	student_first_name_id = IFNULL('1', student_first_name_id),
+	student_last_name_id = IFNULL('1', student_last_name_id),
+	student_dob_id = IFNULL('1', student_dob_id),
+	gender_id = IFNULL('1', gender_id),
+	student_picture = IFNULL('1', student_picture),
+	student_e_mail_id = IFNULL('1', student_e_mail_id),
+	student_parent_id = IFNULL('1', student_parent_id),
+	student_address_home_id = IFNULL('1', student_address_home_id)
+WHERE start_time_day_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_students WHERE student_id = 1;
+
+	/* END */
+
+  /* START */
+/* TBL_TEACHERS */
+/* INSERT STATEMENT */
+INSERT INTO tbl_teachers (first_name_id, last_name_id, dob_id, gender_id, e_mail_id, payroll_nr, teachers_address_id) VALUES 
+('1', '1', '1', '1', '1','234231','1');
+
+/* SELECT STATEMENTS */
+SELECT * FROM tbl_teachers; 
+SELECT * FROM tbl_teachers WHERE teachers_id = 1;
+
+/* SELECT STATEMENT WITH INNER JOIN */ 
+SELECT
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_names,
+    tbl_last_names.last_name,
+    tbl_dob.dob,
+    tbl_genders.gender,
+    tbl_emails.e_mail_address,
+    tbl_teachers.payroll_nr,
+    tbl_addresses.address_street,
+    tbl_addresses.address_city,
+    tbl_addresses.address_region,
+    tbl_addresses.address_postcode
+FROM
+    tbl_teachers
+    INNER JOIN tbl_emails 
+        ON (tbl_teachers.e_mail_id = tbl_emails.e_mail_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_genders 
+        ON (tbl_teachers.gender_id = tbl_genders.gender_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_dob 
+        ON (tbl_teachers.dob_id = tbl_dob.dob_id)
+    INNER JOIN tbl_addresses 
+        ON (tbl_teachers.teachers_address_id = tbl_addresses.address_id);
+
+/* UPDATE STATEMENT */
+UPDATE tbl_teachers
+SET 
+	first_name_id = IFNULL('1', first_name_id),
+	last_name_id = IFNULL('1', last_name_id),
+	dob_id = IFNULL('1', dob_id),
+	gender_id = IFNULL('1', gender_id),
+	e_mail_id = IFNULL(NULL, e_mail_id),
+	payroll_nr = IFNULL('1', payroll_nr),
+	teachers_address_id = IFNULL('1', teachers_address_id),
+WHERE teachers_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_teachers WHERE teachers_id = 1;
+
+/* END */
+
+  /* START */
+/* tbl_teaching_materials */
+/* INSERT STATEMENT */
+INSERT INTO tbl_teaching_materials (file_name, file_extension_id, description, file_content, teacher_id) VALUES 
+('Bolean Algebra', '1', 'Bolean Algebra Teaching Materials', '', '1');
+
+/* SELECT STATEMENTS */
+SELECT * FROM tbl_teaching_materials; 
+SELECT * FROM tbl_teaching_materials WHERE teaching_id = 1;
+
+/* SELECT STATEMENT WITH INNER JOIN FROM OTHER TABLES */
+SELECT
+    tbl_teaching_materials.teaching_id
+    tbl_teaching_materials.file_name
+    tbl_file_extensions.file_extension
+    tbl_teaching_materials.description
+    tbl_teaching_materials.file_content
+    tbl_teachers.teacher_id
+    tbl_first_names.first_names AS Teacher_First_Name
+    tbl_last_names.last_name AS Teacher_Last_Name
+FROM
+    tbl_file_extensions, 
+    tbl_teaching_materials
+    INNER JOIN tbl_teachers 
+        ON (tbl_teaching_materials.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id);
+
+/* UPDATE STATEMENT */
+UPDATE tbl_teaching_materials
+SET 
+	file_name = IFNULL('Logic Gates', file_name),
+	file_extension_id = IFNULL('1', last_name),
+	description = IFNULL('Logic Gates Presentation', description),
+	file_content = IFNULL('aa', phone_number_main),
+	teacher_id = IFNULL('1', teacher_id)
+WHERE teaching_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_teaching_materials WHERE teaching_id = 1;
 
 /* END */
