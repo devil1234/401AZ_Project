@@ -111,8 +111,16 @@ DELETE FROM tbl_classes WHERE class_id = 1;
    /* START */
 /* TBL_CLASSROOMS */
 /* INSERT STATEMENT */
-INSERT INTO tbl_classrooms (classroom, ) VALUES 
+INSERT INTO tbl_classrooms (classroom) VALUES 
 ('26 Culworth Court');
+
+
+/* INSERT STATEMENT WITH DUPLICATE CHECK */
+INSERT INTO tbl_classrooms (classroom)
+SELECT * FROM (SELECT 'M251') AS tmp
+WHERE NOT EXISTS (
+    SELECT classroom FROM tbl_classrooms WHERE classroom = 'M251'
+) LIMIT 1;
 
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_classrooms; 
@@ -398,7 +406,7 @@ DELETE FROM tbl_genders WHERE gender_id = 1;
 
 
    /* START */
-/* tbl_genders */
+/* TBL_LAST_NAMES */
 /* INSERT STATEMENT */
 INSERT INTO tbl_last_names (last_name) VALUES 
 ('Robert');
@@ -420,9 +428,29 @@ DELETE FROM last_name WHERE last_name_id = 1;
 	/* END */
 
 
+   /* START */
+/* TBL_START_TIME_DAY */
+/* INSERT STATEMENT */
+INSERT INTO tbl_start_time_day (start_time_day) VALUES 
+('09:30:00');
+
+/* SELECT STATEMENT */
+SELECT * FROM tbl_start_time_day; 
+SELECT * FROM tbl_start_time_day WHERE start_time_day_id = 1;
+SELECT start_time_day_id FROM tbl_start_time_day WHERE start_time_day = "09:00:00";
+
+/* UPDATE STATEMENT */
+UPDATE tbl_start_time_day
+SET 
+	start_time_day = IFNULL('Harley', start_time_day)
+WHERE start_time_day_id = 1;
+
+/* DELETE STATEMENT */
+DELETE FROM tbl_start_time_day WHERE start_time_day_id = 1;
+
+	/* END */
 /* 
 PLACEHOLDERS FOR REMAINING TABLES TO WRITE THE SQL CODE
-tbl_start_time_day
 tbl_students
 tbl_teachers
 tbl_teaching_materials
