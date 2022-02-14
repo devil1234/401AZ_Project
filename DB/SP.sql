@@ -249,13 +249,14 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_update_classroom_by_name(
     IN classroom_id_par INT,
-    IN classroom_name_par VARCHAR(10)
+    IN classroom_name_old_par VARCHAR(10),
+    IN classroom_name_new_par VARCHAR(10)
 )
 BEGIN
 UPDATE tbl_classrooms
 SET 
-	classroom = IFNULL(classroom_name_par, classroom)
-WHERE classroom_name = class_name_par;
+	classroom = IFNULL(classroom_name_new_par, classroom)
+WHERE classroom_name = class_name_old_par;
 END // 
 DELIMITER ;
 
@@ -310,13 +311,14 @@ DELIMITER ;
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_date_end_by_date(
-    IN date_end_par DATE
+    IN date_end_old_par DATE,
+    IN date_end_new_par DATE
 )
 BEGIN
 UPDATE tbl_date_end
 SET 
-	date_end = IFNULL(date_end_par, date_end)
-WHERE date_end = date_end_par;
+	date_end = IFNULL(date_end_new_par, date_end)
+WHERE date_end = date_end_old_par;
 END // 
 DELIMITER ;
 
@@ -362,13 +364,14 @@ DELIMITER ;
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_date_start_by_date(
-    IN date_start_par DATE
+    IN date_start_old_par DATE,
+    IN date_start_new_par DATE
 )
 BEGIN
 UPDATE tbl_date_start
 SET 
-	date_start = IFNULL(date_start_par, date_start)
-WHERE date_start = date_start_par;
+	date_start = IFNULL(date_start_new_par, date_start)
+WHERE date_start = date_start_old_par;
 END // 
 DELIMITER ;
 
@@ -412,14 +415,15 @@ DELIMITER ;
 
 /* UPDATE SP */
 DELIMITER //
-CREATE PROCEDURE sp_update_day_by_date(
-    IN day_par VARCHAR(10)
+CREATE PROCEDURE sp_update_day_by_day(
+    IN day_old_par VARCHAR(10),
+    IN day_new_par VARCHAR(10)
 )
 BEGIN
 UPDATE tbl_days
 SET 
-	day = IFNULL(day_par, day)
-WHERE day = day_par;
+	day = IFNULL(day_new_par, day)
+WHERE day = day_old_par;
 END // 
 DELIMITER ;
 
@@ -463,13 +467,14 @@ DELIMITER ;
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_dob_by_date(
-    IN dob_par DATE
+    IN dob_old_par DATE,
+    IN dob_new_par DATE
 )
 BEGIN
 UPDATE tbl_dob
 SET 
-	dob = IFNULL(dob_par, dob)
-WHERE dob = dob_par;
+	dob = IFNULL(dob_new_par, dob)
+WHERE dob = dob_old_par;
 END // 
 DELIMITER ;
 
@@ -514,13 +519,14 @@ DELIMITER ;
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_e_mail_address_by_e_mail(
-    IN e_mail_address_par VARCHAR(255)
+    IN e_mail_address_old_par VARCHAR(255),
+    IN e_mail_address_new_par VARCHAR(255)
 )
 BEGIN
 UPDATE tbl_emails
 SET 
-	e_mail_address = IFNULL(e_mail_address_par, e_mail_address)
-WHERE e_mail_address = e_mail_address_par;
+	e_mail_address = IFNULL(e_mail_address_new_par, e_mail_address)
+WHERE e_mail_address = e_mail_address_old_par;
 END // 
 DELIMITER ;
 
@@ -563,14 +569,15 @@ DELIMITER ;
 
 /* UPDATE SP */
 DELIMITER //
-CREATE PROCEDURE sp_update_end_time_day_by_e_mail(
-    IN end_time_day_par TIME
+CREATE PROCEDURE sp_update_end_time_day_by_end_time_day(
+    IN end_time_day_old_par TIME,
+    IN end_time_day_new_par TIME
 )
 BEGIN
 UPDATE tbl_end_time_day
 SET 
-	end_time_day = IFNULL(end_time_day_par, end_time_day)
-WHERE end_time_day = end_time_day_par;
+	end_time_day = IFNULL(end_time_day_new_par, end_time_day)
+WHERE end_time_day = end_time_day_old_par;
 END // 
 DELIMITER ;
 
@@ -587,3 +594,280 @@ DELIMITER ;
 
 
    /* START */
+/* TBL_ENROLMENTS */
+/* INSERT SP WITH DUPLICATE CHECKS */
+DELIMITER //
+CREATE PROCEDURE sp_insert_enrolments(
+    IN `student_id_par` INT,
+	IN `class_id_par` INT,
+	IN `date_start_id_par` INT,
+	IN `date_end_id_par` INT
+)
+BEGIN
+INSERT INTO tbl_enrolments (student_id, class_id, date_start_id, date_end_id)
+SELECT * FROM (SELECT student_id_par, class_id_par, date_start_id_par,date_end_id_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT student_id, class_id, date_start_id, date_end_i FROM tbl_enrolments 
+	 WHERE 
+	 student_id = student_id_par AND 
+	 class_id = class_id_par AND
+	 date_start_id = date_start_id_par AND
+	 date_end_id = date_end_id_par
+) LIMIT 1;
+END // 
+DELIMITER ;
+
+/*SELECT SP INNER JOIN */
+DELIMITER //
+CREATE PROCEDURE sp_select_enrolments(
+)
+BEGIN
+SELECT
+    tbl_students.student_first_name_id AS Student_FName,
+    tbl_students.student_last_name_id AS Student_LName,
+    tbl_classrooms.classroom AS Classroom,
+    tbl_classes.subject AS Subject,
+    tbl_teachers.first_name_id AS Teacher_FNane,
+    tbl_teachers.last_name_id AS Teacher_LName,
+    tbl_date_start.date_start AS StartDate,
+    tbl_date_end.date_end AS EndDate
+FROM
+    tbl_enrolments
+    INNER JOIN tbl_students 
+        ON (tbl_enrolments.student_id = tbl_students.student_id)
+    INNER JOIN tbl_classes 
+        ON (tbl_enrolments.class_id = tbl_classes.class_id)
+    INNER JOIN tbl_date_start 
+        ON (tbl_enrolments.date_start_id = tbl_date_start.date_start_id)
+    INNER JOIN tbl_date_end 
+        ON (tbl_enrolments.date_end_id = tbl_date_end.date_end_id)
+    INNER JOIN tbl_classrooms 
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
+    INNER JOIN tbl_teachers 
+        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id);
+END // 
+DELIMITER ;
+
+/* UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_enrolments_by_student_id(
+    IN student_id_par INT,
+    IN class_id_par INT,
+    IN date_start_id_par INT,
+    IN date_end_id_par INT,
+)
+BEGIN
+UPDATE tbl_enrolments
+SET 
+	student_id = IFNULL(student_id_par, student_id),
+	class_id = IFNULL(class_id_par, class_id),
+	date_start_id = IFNULL(date_start_id_par, date_start_id),
+	date_end_id = IFNULL(date_end_id_par, date_end_id)
+WHERE student_id = student_id_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP */
+DELIMITER //
+CREATE PROCEDURE sp_delete_enrolment_by_student_id(
+    IN student_id_par INT
+)
+BEGIN
+DELETE FROM tbl_enrolments WHERE student_id = student_id_par;
+END // 
+DELIMITER ;
+
+	/* END */
+
+
+   /* START */
+/* TBL_FILE_EXTENSIONS */
+
+/* INSERT SP */
+DELIMITER //
+CREATE PROCEDURE sp_insert_file_extension(
+    IN file_extension_par VARCHAR(6)
+)
+BEGIN
+INSERT INTO tbl_file_extensions (file_extension) VALUES (file_extension_par);
+END // 
+DELIMITER ;
+
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_file_extension(
+)
+BEGIN
+SELECT * FROM tbl_file_extensions; 
+END // 
+DELIMITER ;
+
+/*UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_file_extension(
+    IN file_extension_old_par VARCHAR(6),
+    IN file_extension_new_par VARCHAR(6)
+)
+BEGIN
+UPDATE tbl_file_extensions
+SET 
+	file_extension = IFNULL(file_extension_new_par, file_extension)
+WHERE file_extension = file_extension_old_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP BY file_extension */
+DELIMITER //
+CREATE PROCEDURE sp_delete_file_extension(
+    in file_extension_par VARCHAR(6),
+)
+BEGIN
+DELETE FROM tbl_file_extensions WHERE file_extension = file_extension_par;
+END // 
+DELIMITER ;
+
+	/* END */
+
+
+   /* START */
+/* TBL_FIRST_NAMES */
+/* INSERT SP */
+DELIMITER //
+CREATE PROCEDURE sp_insert_first_name(
+    IN first_name_par VARCHAR(10)
+)
+BEGIN
+INSERT INTO tbl_first_names (first_name) VALUES (first_name_par);
+END // 
+DELIMITER ;
+
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_first_name(
+)
+BEGIN
+SELECT * FROM tbl_first_names; 
+END // 
+DELIMITER ;
+
+/*UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_first_name(
+    IN first_name_old_par VARCHAR(10),
+    IN first_name_new_par VARCHAR(10)
+)
+BEGIN
+UPDATE tbl_first_names
+SET 
+	first_name = IFNULL(first_name_new_par, first_name)
+WHERE first_name = first_name_old_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP BY first_name */
+DELIMITER //
+CREATE PROCEDURE sp_delete_first_name(
+    in first_name_par VARCHAR(10),
+)
+BEGIN
+DELETE FROM tbl_first_names WHERE first_name = first_name_par;
+END // 
+DELIMITER ;
+
+	/* END */
+
+
+   /* START */
+/* TBL_GENDERS */
+/* INSERT SP */
+DELIMITER //
+CREATE PROCEDURE sp_insert_gender(
+    IN gender_par VARCHAR(6)
+)
+BEGIN
+INSERT INTO tbl_genders (gender) VALUES (gender_par);
+END // 
+DELIMITER ;
+
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_genders(
+)
+BEGIN
+SELECT * FROM tbl_genders; 
+END // 
+DELIMITER ;
+
+/*UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_genders(
+    IN genders_old_par VARCHAR(6),
+    IN genders_new_par VARCHAR(6)
+)
+BEGIN
+UPDATE tbl_genders
+SET 
+	gender = IFNULL(genders_new_par, gender)
+WHERE genders = genders_old_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP BY genders */
+DELIMITER //
+CREATE PROCEDURE sp_delete_gender(
+    in gender_par VARCHAR(6),
+)
+BEGIN
+DELETE FROM tbl_genders WHERE gender = gender_par;
+END // 
+DELIMITER ;
+
+	/* END */
+
+
+   /* START */
+/* TBL_LAST_NAMES */
+/* INSERT SP */
+DELIMITER //
+CREATE PROCEDURE sp_insert_last_name(
+    IN last_name_par VARCHAR(10)
+)
+BEGIN
+INSERT INTO tbl_last_names (last_name) VALUES (last_name_par);
+END // 
+DELIMITER ;
+
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_last_name(
+)
+BEGIN
+SELECT * FROM tbl_last_names; 
+END // 
+DELIMITER ;
+
+/*UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_last_name(
+    IN last_name_old_par VARCHAR(10),
+    IN last_name_new_par VARCHAR(10)
+)
+BEGIN
+UPDATE tbl_last_names
+SET 
+	last_name = IFNULL(last_name_new_par, last_name)
+WHERE last_name = last_name_old_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP BY last_name */
+DELIMITER //
+CREATE PROCEDURE sp_delete_last_name(
+    in last_name_par VARCHAR(10),
+)
+BEGIN
+DELETE FROM tbl_last_names WHERE last_name = last_name_par;
+END // 
+DELIMITER ;
+
+	/* END */
