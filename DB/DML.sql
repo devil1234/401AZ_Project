@@ -29,6 +29,13 @@ DELETE FROM tbl_addresses WHERE address_id = 1;
 INSERT INTO tbl_classes (classroom_id, subject, teacher_id, start_time_day_id, end_time_day_id, day_id) VALUES 
 ('1', 'Bolean Algebra', '1', '1', '1', '1');
 
+/* INSERT STATEMENT WITH CHECKING */
+INSERT INTO tbl_classrooms (classroom)
+SELECT * FROM (SELECT 'M251') AS tmp
+WHERE NOT EXISTS (
+    SELECT classroom FROM tbl_classrooms WHERE classroom = 'M251'
+) LIMIT 1;
+
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_classes; 
 SELECT * FROM tbl_classes WHERE class_id = 1;
@@ -38,9 +45,10 @@ SELECT
 	tbl_classes.class_id,
 	tbl_days.day,
 	tbl_start_time_day.start_time_day,
-   tbl_end_time_day.end_time_day,
-   tbl_classrooms.classroom,
-	CONCAT(tbl_first_names.first_names, " ",tbl_last_names.last_name) AS Teacher_Name, 
+    tbl_end_time_day.end_time_day,
+    tbl_classrooms.classroom,
+	tbl_first_names.first_names AS Teacher_FName,
+	tbl_last_names.last_name AS Teacher_LName, 
 	tbl_classes.subject
 FROM
     tbl_classes
@@ -57,10 +65,8 @@ FROM
     INNER JOIN tbl_last_names 
         ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
     INNER JOIN tbl_days 
-        ON (tbl_classes.day_id = tbl_days.day_id) 
-	WHERE tbl_classes.class_id = '1'
-   GROUP BY DAYOFWEEK(tbl_days.day)
-   ORDER BY DAYOFWEEK(tbl_days.day);
+        ON (tbl_classes.day_id = tbl_days.day_id)
+	WHERE tbl_classes.class_id = '1';
    
 /* SELECT STATEMENT LEFT INNER JOIN BY CLASSROOM NAME */
 SELECT
@@ -87,9 +93,7 @@ FROM
         ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
     INNER JOIN tbl_days 
         ON (tbl_classes.day_id = tbl_days.day_id) 
-	WHERE tbl_classrooms.classroom = 'M250'
-   GROUP BY DAYOFWEEK(tbl_days.day)
-   ORDER BY DAYOFWEEK(tbl_days.day);
+	WHERE tbl_classrooms.classroom = 'M250';
 
 /* UPDATE STATEMENT */
 UPDATE tbl_classes
@@ -112,7 +116,7 @@ DELETE FROM tbl_classes WHERE class_id = 1;
 /* TBL_CLASSROOMS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_classrooms (classroom) VALUES 
-('26 Culworth Court');
+('M250');
 
 
 /* INSERT STATEMENT WITH DUPLICATE CHECK */
@@ -125,6 +129,7 @@ WHERE NOT EXISTS (
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_classrooms; 
 SELECT * FROM tbl_classrooms WHERE classroom_id = 1;
+SELECT * FROM tbl_classrooms WHERE classroom_name = 'M250';
 
 /* UPDATE STATEMENT */
 UPDATE tbl_classrooms
@@ -143,6 +148,13 @@ DELETE FROM tbl_classrooms WHERE classroom_id = 1;
 /* INSERT STATEMENT */
 INSERT INTO tbl_date_end (date_end) VALUES 
 ('2022-02-25');
+
+/* INSERT STATEMENT WITH DUPLICATE CHECK */
+INSERT INTO tbl_date_end (date_end)
+SELECT * FROM (SELECT '2022-02-25') AS tmp
+WHERE NOT EXISTS (
+    SELECT date_end FROM tbl_date_end WHERE date_end = '2022-02-25'
+) LIMIT 1;
 
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_date_end; 
@@ -200,50 +212,6 @@ WHERE day_id = 1;
 
 /* DELETE STATEMENT */
 DELETE FROM tbl_days WHERE day_id = 1;
-
-	/* END */
-
-
-   /* START */
-/* TBL_DOB */
-/* INSERT STATEMENT */
-INSERT INTO tbl_dob (dob) VALUES 
-('1996-5-5');
-
-/* SELECT STATEMENTS */
-SELECT * FROM tbl_dob; 
-SELECT * FROM tbl_dob WHERE dob_id = 1;
-
-/* UPDATE STATEMENT */
-UPDATE tbl_dob
-SET 
-	dob = IFNULL('1992-09-22', dob)
-WHERE dob_id = 1;
-
-/* DELETE STATEMENT */
-DELETE FROM tbl_dob WHERE dob_id = 1;
-
-	/* END */
-
-
-   /* START */
-/* TBL_EMAILS */
-/* INSERT STATEMENT */
-INSERT INTO tbl_emails (e_mail_address) VALUES 
-('test@example.com');
-
-/* SELECT STATEMENT */
-SELECT * FROM tbl_emails; 
-SELECT * FROM tbl_emails WHERE e_mail_id = 1;
-
-/* UPDATE STATEMENT */
-UPDATE tbl_emails
-SET 
-	e_mail_address = IFNULL('ursus@coventry.ac.uk', e_mail_address)
-WHERE e_mail_id = 1;
-
-/* DELETE STATEMENT */
-DELETE FROM tbl_emails WHERE e_mail_id = 1;
 
 	/* END */
 
