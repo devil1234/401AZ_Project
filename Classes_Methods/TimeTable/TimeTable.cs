@@ -68,7 +68,6 @@ namespace _401AZ_PROJECT
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_select_timetable_by_classroom", connection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("classroom_par", classroom);
                     cmd.CommandType = CommandType.StoredProcedure;
                     using (var reader = cmd.ExecuteReader())
@@ -101,7 +100,7 @@ namespace _401AZ_PROJECT
             {
                 connection.Open();
                 
-                using (MySqlCommand cmd = new MySqlCommand("CALL sp_select_timetable", connection))
+                using (MySqlCommand cmd = new MySqlCommand("CALL sp_select_time_table", connection))
                 {
                     //cmd.CommandType = CommandType.StoredProcedure;
                     using (var reader = cmd.ExecuteReader())

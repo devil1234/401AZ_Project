@@ -47,7 +47,6 @@ namespace _401AZ_PROJECT
         //Load the database data on load
         private void Timetable_Load(object sender, EventArgs e)
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetTimeTable());
             Populate_Form();
         }
 
@@ -100,6 +99,7 @@ namespace _401AZ_PROJECT
 
         private void Populate_Form()
         {
+            dgv_classes.DataSource = DM.ToDataTable(timetable.GetTimeTable());
             if (dgv_classes.SelectedRows.Count > 0)
             {
                 //Class Id text
