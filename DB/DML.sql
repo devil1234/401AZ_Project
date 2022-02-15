@@ -47,7 +47,7 @@ SELECT
 	tbl_start_time_day.start_time_day,
     tbl_end_time_day.end_time_day,
     tbl_classrooms.classroom,
-	tbl_first_names.first_names AS Teacher_FName,
+	tbl_first_names.first_name AS Teacher_FName,
 	tbl_last_names.last_name AS Teacher_LName, 
 	tbl_classes.subject
 FROM
@@ -55,7 +55,7 @@ FROM
     INNER JOIN tbl_teachers 
         ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
     INNER JOIN tbl_classrooms 
-        ON (tbl_classes.classrom_id = tbl_classrooms.classroom_id)
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
     INNER JOIN tbl_start_time_day 
         ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
     INNER JOIN tbl_end_time_day 
@@ -73,16 +73,17 @@ SELECT
 	tbl_classes.class_id,
 	tbl_days.day,
 	tbl_start_time_day.start_time_day,
-   tbl_end_time_day.end_time_day,
-   tbl_classrooms.classroom,
-	CONCAT(tbl_first_names.first_names, " ",tbl_last_names.last_name) AS Teacher_Name, 
+    tbl_end_time_day.end_time_day,
+    tbl_classrooms.classroom,
+	tbl_first_names.first_names AS Teacher_FName,
+	tbl_last_names.last_name AS Teacher_LName, 
 	tbl_classes.subject
 FROM
     tbl_classes
     INNER JOIN tbl_teachers 
         ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
     INNER JOIN tbl_classrooms 
-        ON (tbl_classes.classrom_id = tbl_classrooms.classroom_id)
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
     INNER JOIN tbl_start_time_day 
         ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
     INNER JOIN tbl_end_time_day 
@@ -129,7 +130,7 @@ WHERE NOT EXISTS (
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_classrooms; 
 SELECT * FROM tbl_classrooms WHERE classroom_id = 1;
-SELECT * FROM tbl_classrooms WHERE classroom_name = 'M250';
+SELECT * FROM tbl_classrooms WHERE classroom = 'M250';
 
 /* UPDATE STATEMENT */
 UPDATE tbl_classrooms
@@ -291,6 +292,31 @@ INSERT INTO tbl_enrolments (student_id,class_id,date_start_id,date_end_id) VALUE
 /* SELECT STATEMENT */
 SELECT * FROM tbl_enrolments; 
 
+/*SELECT STATEMENT INNER JOIN */
+SELECT
+    tbl_students.student_first_name_id AS Student_FName,
+    tbl_students.student_last_name_id AS Student_LName,
+    tbl_classrooms.classroom AS Classroom,
+    tbl_classes.subject AS Subject,
+    tbl_teachers.first_name_id AS Teacher_FNane,
+    tbl_teachers.last_name_id AS Teacher_LName,
+    tbl_date_start.date_start AS StartDate,
+    tbl_date_end.date_end AS EndDate
+FROM
+    tbl_enrolments
+    INNER JOIN tbl_students 
+        ON (tbl_enrolments.student_id = tbl_students.student_id)
+    INNER JOIN tbl_classes 
+        ON (tbl_enrolments.class_id = tbl_classes.class_id)
+    INNER JOIN tbl_date_start 
+        ON (tbl_enrolments.date_start_id = tbl_date_start.date_start_id)
+    INNER JOIN tbl_date_end 
+        ON (tbl_enrolments.date_end_id = tbl_date_end.date_end_id)
+    INNER JOIN tbl_classrooms 
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
+    INNER JOIN tbl_teachers 
+        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id);
+
 /* UPDATE STATEMENT */
 UPDATE tbl_enrolments
 SET 
@@ -303,28 +329,30 @@ WHERE student_id = 1;
 /* DELETE STATEMENT */
 DELETE FROM tbl_enrolments WHERE student_id = 1;
 DELETE FROM tbl_enrolments WHERE class_id = 1;
+
+
 	/* END */
 
 
    /* START */
-/* TBL_FILE_TYPES */
+/* TBL_FILE_EXTENSIONS */
 /* INSERT STATEMENT */
-INSERT INTO tbl_file_types (file_extension) VALUES 
+INSERT INTO tbl_file_extensions (file_extension) VALUES 
 ('.txt'),
 ('.ppt');
 
 /* SELECT STATEMENT */
-SELECT * FROM tbl_end_time_day; 
-SELECT * FROM tbl_end_time_day WHERE end_time_day_id = 1;
+SELECT * FROM tbl_file_extensions; 
+SELECT * FROM tbl_file_extensions WHERE file_extension_id = 1;
 
 /* UPDATE STATEMENT */
-UPDATE tbl_end_time_day
+UPDATE tbl_file_extensions
 SET 
-	end_time_day = IFNULL('13:30:00', end_time_day)
-WHERE end_time_day_id = 1;
+	file_extension = IFNULL('.txt', file_extension)
+WHERE file_extension_id = 1;
 
 /* DELETE STATEMENT */
-DELETE FROM tbl_end_time_day WHERE e_mail_id = 1;
+DELETE FROM tbl_file_extensions WHERE file_extension_id = 1;
 
 	/* END */
 
@@ -337,22 +365,22 @@ INSERT INTO tbl_first_names (first_names) VALUES
 
 /* SELECT STATEMENT */
 SELECT * FROM tbl_first_names; 
-SELECT * FROM tbl_end_time_day WHERE first_names_id = 1;
+SELECT * FROM tbl_first_names WHERE first_name_id = 1;
 
 /* UPDATE STATEMENT */
 UPDATE tbl_first_names
 SET 
 	first_names = IFNULL('Alex', first_names)
-WHERE first_names_id = 1;
+WHERE first_name_id = 1;
 
 /* DELETE STATEMENT */
-DELETE FROM tbl_first_names WHERE first_names_id = 1;
+DELETE FROM tbl_first_names WHERE first_name_id = 1;
 
 	/* END */
 
 
    /* START */
-/* tbl_genders */
+/* TBL_GENDERS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_genders (gender) VALUES 
 ('None');
@@ -391,7 +419,7 @@ SET
 WHERE last_name_id = 1;
 
 /* DELETE STATEMENT */
-DELETE FROM last_name WHERE last_name_id = 1;
+DELETE FROM tbl_last_names WHERE last_name_id = 1;
 
 	/* END */
 
@@ -410,7 +438,7 @@ SELECT start_time_day_id FROM tbl_start_time_day WHERE start_time_day = "09:00:0
 /* UPDATE STATEMENT */
 UPDATE tbl_start_time_day
 SET 
-	start_time_day = IFNULL('Harley', start_time_day)
+	start_time_day = IFNULL('09:10:00', start_time_day)
 WHERE start_time_day_id = 1;
 
 /* DELETE STATEMENT */
@@ -420,10 +448,10 @@ DELETE FROM tbl_start_time_day WHERE start_time_day_id = 1;
 
 
   /* START */
-/* tbl_parents_details */
+/* TBL_STUDENT_PARENTS_DETAILS */
 /* INSERT STATEMENT */
-INSERT INTO tbl_student_parents_details (first_name, last_name, phone_number_type, phone_number_main, phone_number_mobile) VALUES 
-('Stefan', 'Ursu', 'Mobile', '07864143737', '07864143737');
+INSERT INTO tbl_student_parents_details (first_name, last_name, phone_number) VALUES 
+('Stefan', 'Ursu', '07864143737');
 
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_student_parents_details; 
@@ -434,10 +462,7 @@ UPDATE tbl_student_parents_details
 SET 
 	first_name = IFNULL('Test', first_name),
 	last_name = IFNULL('Last Test', last_name),
-	phone_number_type = IFNULL('Main', phone_number_type),
-	phone_number_main = IFNULL('07869723145', phone_number_main),
-	phone_number_home = IFNULL(NULL, phone_number_home),
-	phone_number_mobile = IFNULL('07869723145', phone_number_mobile)
+	phone_number = IFNULL('07869723145', phone_number)
 WHERE parent_id = 1;
 
 /* DELETE STATEMENT */
@@ -458,17 +483,14 @@ SELECT * FROM tbl_students WHERE student_id = 1;
 /* SELECT STATEMENT WITH INNER JOIN */
 SELECT
     tbl_students.student_id, 
-    tbl_first_names.first_names,
+    tbl_first_names.first_name,
     tbl_last_names.last_name,
     tbl_dob.dob,
     tbl_genders.gender,
     tbl_emails.e_mail_address,
     tbl_student_parents_details.first_name AS Parent_FirstName,
     tbl_student_parents_details.last_name AS Parent_LastName,
-    tbl_student_parents_details.phone_number_type AS Parent_Phone_Number_Type,
-    tbl_student_parents_details.phone_number_main AS Parent_Phone_Number_Main,
-    tbl_student_parents_details.phone_number_home AS Parent_Phone_Number_Home,
-    tbl_student_parents_details.phone_number_mobile AS Parent_Phone_Number_Mobile,
+    tbl_student_parents_details.phone_number AS Parent_Phone_Number,
     tbl_addresses.address_street,
     tbl_addresses.address_city,
     tbl_addresses.address_region,
@@ -501,7 +523,7 @@ SET
 	student_e_mail_id = IFNULL('1', student_e_mail_id),
 	student_parent_id = IFNULL('1', student_parent_id),
 	student_address_home_id = IFNULL('1', student_address_home_id)
-WHERE start_time_day_id = 1;
+WHERE student_id = 1;
 
 /* DELETE STATEMENT */
 DELETE FROM tbl_students WHERE student_id = 1;
@@ -511,22 +533,43 @@ DELETE FROM tbl_students WHERE student_id = 1;
   /* START */
 /* TBL_TEACHERS */
 /* INSERT STATEMENT */
-INSERT INTO tbl_teachers (first_name_id, last_name_id, dob_id, gender_id, e_mail_id, payroll_nr, teachers_address_id) VALUES 
-('1', '1', '1', '1', '1','234231','1');
+INSERT INTO tbl_teachers (first_name_id, last_name_id, dob_id, gender_id, e_mail_id, teachers_address_id) VALUES 
+('1', '1', '1', '1', '1','1');
+
+/* INSERT WITH LAST_INSERT_ID SAVED*/
+INSERT INTO tbl_first_names (first_names) VALUES ('Teddy');
+SET @tbl_first_names_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_last_names (last_name) VALUES ('Marrow');
+SET @tbl_last_names_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_dob (dob) VALUES ('1995-02-04');
+SET @tbl_dob_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_emails (e_mail_address) VALUES ('test@dot.com');
+SET @tbl_emails_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_addresses (address_street, address_city, address_region, address_postcode) VALUES 
+("38 Culworth Court","Coventry", "West Midlands", "CV6 8JY");
+SET @tbl_addresses_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_teachers (first_name_Id,last_name_Id, dob_id,gender_Id, e_mail_id, teachers_address_id) VALUES 
+(@tbl_first_names_id, @tbl_last_names_id, @tbl_dob_id, 1, @tbl_emails_id, @tbl_addresses_id); 
+
+/* INSERT END */
 
 /* SELECT STATEMENTS */
 SELECT * FROM tbl_teachers; 
-SELECT * FROM tbl_teachers WHERE teachers_id = 1;
+SELECT * FROM tbl_teachers WHERE teacher_id = 1;
 
 /* SELECT STATEMENT WITH INNER JOIN */ 
 SELECT
-    tbl_teachers.teacher_id,
-    tbl_first_names.first_names,
+    tbl_teachers.teacher_id AS TeacherId,
+    tbl_first_names.first_name AS FirstName,
     tbl_last_names.last_name,
     tbl_dob.dob,
     tbl_genders.gender,
     tbl_emails.e_mail_address,
-    tbl_teachers.payroll_nr,
     tbl_addresses.address_street,
     tbl_addresses.address_city,
     tbl_addresses.address_region,
@@ -554,17 +597,16 @@ SET
 	dob_id = IFNULL('1', dob_id),
 	gender_id = IFNULL('1', gender_id),
 	e_mail_id = IFNULL(NULL, e_mail_id),
-	payroll_nr = IFNULL('1', payroll_nr),
 	teachers_address_id = IFNULL('1', teachers_address_id),
-WHERE teachers_id = 1;
+WHERE teacher_id = 1;
 
 /* DELETE STATEMENT */
-DELETE FROM tbl_teachers WHERE teachers_id = 1;
+DELETE FROM tbl_teachers WHERE teacher_id = 1;
 
 /* END */
 
   /* START */
-/* tbl_teaching_materials */
+/* TBL_TEACHING_MATERIALS */
 /* INSERT STATEMENT */
 INSERT INTO tbl_teaching_materials (file_name, file_extension_id, description, file_content, teacher_id) VALUES 
 ('Bolean Algebra', '1', 'Bolean Algebra Teaching Materials', '', '1');
@@ -575,29 +617,29 @@ SELECT * FROM tbl_teaching_materials WHERE teaching_id = 1;
 
 /* SELECT STATEMENT WITH INNER JOIN FROM OTHER TABLES */
 SELECT
-    tbl_teaching_materials.teaching_id
-    tbl_teaching_materials.file_name
-    tbl_file_extensions.file_extension
-    tbl_teaching_materials.description
-    tbl_teaching_materials.file_content
-    tbl_teachers.teacher_id
-    tbl_first_names.first_names AS Teacher_First_Name
-    tbl_last_names.last_name AS Teacher_Last_Name
+    tbl_teaching_materials.teaching_id,
+    tbl_teaching_materials.file_name,
+    tbl_file_extensions.file_extension,
+    tbl_teaching_materials.description,
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name
 FROM
-    tbl_file_extensions, 
     tbl_teaching_materials
     INNER JOIN tbl_teachers 
         ON (tbl_teaching_materials.teacher_id = tbl_teachers.teacher_id)
     INNER JOIN tbl_first_names 
         ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
     INNER JOIN tbl_last_names 
-        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id);
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_file_extensions 
+        ON (tbl_teaching_materials.file_extension_id = tbl_file_extensions.file_extension_id);
 
 /* UPDATE STATEMENT */
 UPDATE tbl_teaching_materials
 SET 
 	file_name = IFNULL('Logic Gates', file_name),
-	file_extension_id = IFNULL('1', last_name),
+	file_extension_id = IFNULL('1', file_extension_id),
 	description = IFNULL('Logic Gates Presentation', description),
 	file_content = IFNULL('aa', phone_number_main),
 	teacher_id = IFNULL('1', teacher_id)

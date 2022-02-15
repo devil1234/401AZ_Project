@@ -66,7 +66,7 @@ DELIMITER ;
 /* INSERT SP */
 DELIMITER //
 CREATE PROCEDURE sp_insert_classes(
-    IN classrom_id_par INT,
+    IN classroom_id_par INT,
     IN subject_par VARCHAR(30),
     IN teacher_id_par INT,
     IN start_time_day_id_par INT,
@@ -74,7 +74,7 @@ CREATE PROCEDURE sp_insert_classes(
     IN day_id_par INT)
 BEGIN
 INSERT INTO tbl_classes (classroom_id, subject, teacher_id, start_time_day_id,end_time_day_id, day_id) VALUES 
-(classrom_id_par, subject_par, teacher_id_par, start_time_day_id_par, end_time_day_id_par, classrom_id_par, day_id_par);
+(classroom_id_par, subject_par, teacher_id_par, start_time_day_id_par, end_time_day_id_par, classroom_id_par, day_id_par);
 END // 
 DELIMITER ;
 
@@ -91,7 +91,7 @@ SELECT
 	tbl_start_time_day.start_time_day,
     tbl_end_time_day.end_time_day,
     tbl_classrooms.classroom,
-	tbl_first_names.first_names AS Teacher_FName,
+	tbl_first_names.first_name AS Teacher_FName,
 	tbl_last_names.last_name AS Teacher_LName, 
 	tbl_classes.subject
 FROM
@@ -99,7 +99,7 @@ FROM
     INNER JOIN tbl_teachers 
         ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
     INNER JOIN tbl_classrooms 
-        ON (tbl_classes.classrom_id = tbl_classrooms.classroom_id)
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
     INNER JOIN tbl_start_time_day 
         ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
     INNER JOIN tbl_end_time_day 
@@ -114,6 +114,40 @@ FROM
 END // 
 DELIMITER ;
 
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_time_table(
+)
+
+BEGIN
+SELECT
+	tbl_classes.class_id,
+	tbl_days.day,
+	tbl_start_time_day.start_time_day,
+    tbl_end_time_day.end_time_day,
+    tbl_classrooms.classroom,
+	tbl_first_names.first_name AS Teacher_FName,
+	tbl_last_names.last_name AS Teacher_LName, 
+	tbl_classes.subject
+FROM
+    tbl_classes
+    INNER JOIN tbl_teachers 
+        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_classrooms 
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
+    INNER JOIN tbl_start_time_day 
+        ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
+    INNER JOIN tbl_end_time_day 
+        ON (tbl_classes.end_time_day_id = tbl_end_time_day.end_time_day_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_Id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_days 
+        ON (tbl_classes.day_id = tbl_days.day_id);
+END // 
+DELIMITER ;
+
 /* SELECT SP BY classroom_name */ 
 DELIMITER //
 CREATE PROCEDURE sp_select_time_table_by_classroom_name(
@@ -124,16 +158,17 @@ SELECT
 	tbl_classes.class_id,
 	tbl_days.day,
 	tbl_start_time_day.start_time_day,
-   tbl_end_time_day.end_time_day,
-   tbl_classrooms.classroom,
-	CONCAT(tbl_first_names.first_names, " ",tbl_last_names.last_name) AS Teacher_Name, 
+    tbl_end_time_day.end_time_day,
+    tbl_classrooms.classroom,
+	tbl_first_names.first_name AS Teacher_FName,
+	tbl_last_names.last_name AS Teacher_LName, 
 	tbl_classes.subject
 FROM
     tbl_classes
     INNER JOIN tbl_teachers 
         ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
     INNER JOIN tbl_classrooms 
-        ON (tbl_classes.classrom_id = tbl_classrooms.classroom_id)
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
     INNER JOIN tbl_start_time_day 
         ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
     INNER JOIN tbl_end_time_day 
@@ -152,7 +187,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_update_timetable(
     IN class_id_par INT,
-    IN classrom_id_par INT,
+    IN classroom_id_par INT,
     IN subject_par VARCHAR(30),
     IN teacher_id_par INT,
     IN start_time_day_id_par INT,
@@ -162,7 +197,7 @@ CREATE PROCEDURE sp_update_timetable(
 BEGIN
 UPDATE tbl_classes
 SET 
-	classroom_id = IFNULL(classrom_id_par, classroom_id),
+	classroom_id = IFNULL(classroom_id_par, classroom_id),
 	subject = IFNULL(subject_par, subject),
 	teacher_id = IFNULL(teacher_id_par, teacher_id),
 	start_time_day_id = IFNULL(start_time_day_id_par, start_time_day_id),
@@ -263,17 +298,17 @@ DELIMITER ;
 /* DELETE SP by classroom_id */
 DELIMITER //
 CREATE PROCEDURE sp_delete_classroom_by_id(
-    IN classrom_id_par INT,
+    IN classroom_id_par INT
 )
 BEGIN
-DELETE FROM tbl_classrooms WHERE classroom_id = classrom_id_par;
+DELETE FROM tbl_classrooms WHERE classroom_id = classroom_id_par;
 END // 
 DELIMITER ;
 
 /* DELETE SP by classroom_name */
 DELIMITER //
 CREATE PROCEDURE sp_delete_classroom_by_name(
-    IN classrom_id_name VARCHAR(10),
+    IN classroom_id_name VARCHAR(10)
 )
 BEGIN
 DELETE FROM tbl_classrooms WHERE classroom_name = classrom_name_par;
@@ -654,7 +689,7 @@ CREATE PROCEDURE sp_update_enrolments_by_student_id(
     IN student_id_par INT,
     IN class_id_par INT,
     IN date_start_id_par INT,
-    IN date_end_id_par INT,
+    IN date_end_id_par INT
 )
 BEGIN
 UPDATE tbl_enrolments
@@ -695,10 +730,11 @@ DELIMITER ;
 
 /* SELECT SP */
 DELIMITER //
-CREATE PROCEDURE sp_select_file_extension(
+CREATE PROCEDURE sp_select_file_extension_by_file_extension(
+    IN file_extension_par VARCHAR(6)
 )
 BEGIN
-SELECT * FROM tbl_file_extensions; 
+SELECT file_extension FROM tbl_file_extensions WHERE file_extension = file_extension_par; 
 END // 
 DELIMITER ;
 
@@ -719,7 +755,7 @@ DELIMITER ;
 /* DELETE SP BY file_extension */
 DELIMITER //
 CREATE PROCEDURE sp_delete_file_extension(
-    in file_extension_par VARCHAR(6),
+    in file_extension_par VARCHAR(6)
 )
 BEGIN
 DELETE FROM tbl_file_extensions WHERE file_extension = file_extension_par;
@@ -767,7 +803,7 @@ DELIMITER ;
 /* DELETE SP BY first_name */
 DELIMITER //
 CREATE PROCEDURE sp_delete_first_name(
-    in first_name_par VARCHAR(10),
+    in first_name_par VARCHAR(10)
 )
 BEGIN
 DELETE FROM tbl_first_names WHERE first_name = first_name_par;
@@ -815,7 +851,7 @@ DELIMITER ;
 /* DELETE SP BY genders */
 DELIMITER //
 CREATE PROCEDURE sp_delete_gender(
-    in gender_par VARCHAR(6),
+    in gender_par VARCHAR(6)
 )
 BEGIN
 DELETE FROM tbl_genders WHERE gender = gender_par;
@@ -863,7 +899,7 @@ DELIMITER ;
 /* DELETE SP BY last_name */
 DELIMITER //
 CREATE PROCEDURE sp_delete_last_name(
-    in last_name_par VARCHAR(10),
+    in last_name_par VARCHAR(10)
 )
 BEGIN
 DELETE FROM tbl_last_names WHERE last_name = last_name_par;
@@ -871,3 +907,429 @@ END //
 DELIMITER ;
 
 	/* END */
+
+
+   /* START */
+/* TBL_START_TIME_DAY */
+/* INSERT SP */
+DELIMITER //
+CREATE PROCEDURE sp_insert_start_time_day(
+    IN start_time_day_par TIME
+)
+BEGIN
+INSERT INTO tbl_start_time_day (start_time_day) VALUES (start_time_day_par);
+END // 
+DELIMITER ;
+
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_start_time_day(
+)
+BEGIN
+SELECT * FROM tbl_start_time_day; 
+END // 
+DELIMITER ;
+
+/*UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_start_time_day(
+    IN start_time_day_old_par TIME,
+    IN start_time_day_new_par TIME
+)
+BEGIN
+UPDATE tbl_start_time_day
+SET 
+	start_time_day = IFNULL(start_time_day_new_par, start_time_day)
+WHERE start_time_day = start_time_day_old_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP BY start_time_day */
+DELIMITER //
+CREATE PROCEDURE sp_delete_start_time_day(
+    in start_time_day_par TIME
+)
+BEGIN
+DELETE FROM tbl_start_time_day WHERE start_time_day = start_time_day_par;
+END // 
+DELIMITER ;
+
+	/* END */
+
+
+  /* START */
+/* tbl_parents_details */
+/* INSERT SP WITH DUPLICATE CHECK */
+DELIMITER //
+CREATE PROCEDURE sp_insert_student_parent_details(
+    IN first_name_par VARCHAR(10),
+    IN last_name_par VARCHAR(10),
+    IN phone_number_par VARCHAR(6)
+)
+BEGIN
+INSERT INTO tbl_student_parents_details (first_name, last_name, phone_number)
+SELECT * FROM (SELECT first_name_par, last_name_par, phone_number_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT first_name, last_name, phone_number FROM tbl_student_parents_details 
+	 WHERE 
+	 first_name = first_name_par AND 
+	 last_name = last_name_par AND
+	 phone_number = phone_number_par
+) LIMIT 1;
+END // 
+DELIMITER ;
+
+/* SELECT SP */
+DELIMITER //
+CREATE PROCEDURE sp_select_student_parent_details(
+)
+BEGIN
+SELECT * FROM tbl_student_parents_details; 
+END // 
+DELIMITER ;
+
+/* SELECT SP by parent_id */
+DELIMITER //
+CREATE PROCEDURE sp_select_student_parent_details_by_parent_id(
+    IN parent_id_par INT
+)
+BEGIN
+SELECT * FROM tbl_student_parents_details WHERE parent_id = parent_id_par;
+END // 
+DELIMITER ;
+
+/*UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_student_parents_details_by_parent_id(
+    IN parent_id_par INT,
+    IN first_name_par VARCHAR(10),
+    IN last_name_par VARCHAR(10),
+    IN phone_number_par VARCHAR(6)
+)
+BEGIN
+UPDATE tbl_student_parents_details
+SET 
+	first_name = IFNULL(first_name_par, first_name),
+	last_name = IFNULL(last_name_par, last_name),
+	phone_number = IFNULL(phone_number_par, phone_number_type)
+WHERE parent_id = parent_id_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP */
+DELIMITER //
+CREATE PROCEDURE sp_delete_student_parent_details_by_parent_id(
+    IN parent_id_par INT
+)
+BEGIN
+DELETE FROM tbl_student_parents_details WHERE parent_id = parent_id_par;
+END // 
+DELIMITER ;
+
+    /* END */
+
+
+  /* START */
+/* TBL_STUDENTS */
+/* INSERT SP WITH DUPLICATE CHECK */
+DELIMITER //
+CREATE PROCEDURE sp_insert_student(
+    IN student_first_name_id_par INT,
+    IN student_last_name_id_par INT,
+    IN student_dob_id_par INT,
+    IN gender_id_par INT,
+    IN student_picture_par VARBINARY(255),
+    IN student_e_mail_id_par INT,
+    IN student_parent_id_par INT,
+    IN student_address_home_id_par INT
+
+)
+BEGIN
+INSERT INTO tbl_students (student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_picture,student_e_mail_id, student_parent_id, student_address_home_id)
+SELECT * FROM (SELECT student_first_name_id_par, student_last_name_id_par, student_dob_id_par, gender_id_par, student_picture, student_e_mail_id_par, student_parent_id_par, student_address_home_id_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_picture_par,student_e_mail_id, student_parent_id, student_address_home_id FROM tbl_students 
+    WHERE 
+	student_first_name_id = student_first_name_id_par AND
+	student_last_name_id = student_last_name_id_par AND
+	student_dob_id = student_dob_id_par AND
+	gender_id = gender_id_par AND
+	student_picture = student_picture_par AND
+	student_e_mail_id = student_e_mail_id_par AND
+	student_parent_id = student_parent_id_par AND
+	student_address_home_id = student_address_home_id_par
+) LIMIT 1;
+END // 
+DELIMITER ;
+
+/* SELECT SP INNER JOIN */
+DELIMITER //
+CREATE PROCEDURE sp_select_students(
+)
+BEGIN
+SELECT
+    tbl_students.student_id, 
+    tbl_first_names.first_name,
+    tbl_last_names.last_name,
+    tbl_dob.dob,
+    tbl_genders.gender,
+    tbl_emails.e_mail_address,
+    tbl_student_parents_details.first_name AS Parent_FirstName,
+    tbl_student_parents_details.last_name AS Parent_LastName,
+    tbl_student_parents_details.phone_number AS Parent_Phone_Number,
+    tbl_addresses.address_street,
+    tbl_addresses.address_city,
+    tbl_addresses.address_region,
+    tbl_addresses.address_postcode
+FROM
+    tbl_students
+    INNER JOIN tbl_first_names 
+        ON (tbl_students.student_first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_genders 
+        ON (tbl_students.gender_id = tbl_genders.gender_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_students.student_last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_dob 
+        ON (tbl_students.student_dob_id = tbl_dob.dob_id)
+    INNER JOIN tbl_emails 
+        ON (tbl_students.student_e_mail_id = tbl_emails.e_mail_id)
+    INNER JOIN tbl_student_parents_details 
+        ON (tbl_students.student_parent_id = tbl_student_parents_details.parent_id)
+    INNER JOIN tbl_addresses 
+        ON (tbl_students.student_address_home_id = tbl_addresses.address_id);
+END // 
+DELIMITER ;
+
+/* UPDATE SP by student_id */
+DELIMITER //
+CREATE PROCEDURE sp_update_student(
+    IN student_id_par INT,
+    IN student_first_name_id_par INT,
+    IN student_last_name_id_par INT,
+    IN student_dob_id_par INT,
+    IN gender_id_par INT,
+    IN student_picture_par VARBINARY(255),
+    IN student_e_mail_id_par INT,
+    IN student_parent_id_par INT,
+    IN student_address_home_id_par INT
+)
+BEGIN
+UPDATE tbl_students
+SET 
+	student_first_name_id = IFNULL(student_first_name_id_par, student_first_name_id),
+	student_last_name_id = IFNULL(student_last_name_id_par, student_last_name_id),
+	student_dob_id = IFNULL(student_dob_id_par, student_dob_id),
+	gender_id = IFNULL(gender_id_par, gender_id),
+	student_picture = IFNULL(student_picture_par, student_picture),
+	student_e_mail_id = IFNULL(student_e_mail_id_par, student_e_mail_id),
+	student_parent_id = IFNULL(student_parent_id_par, student_parent_id),
+	student_address_home_id = IFNULL(student_address_home_id_par, student_address_home_id)
+WHERE student_id = student_id_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP */
+DELIMITER //
+CREATE PROCEDURE sp_delete_student_by_student_id(
+    IN student_id_par INT
+)
+BEGIN
+DELETE FROM tbl_students WHERE student_id = student_id_par;
+END // 
+DELIMITER ;
+
+
+	/* END */
+
+  /* START */
+/* TBL_TEACHERS */
+/* INSERT SP WITH DUPLICATE CHECK */
+DELIMITER //
+CREATE PROCEDURE sp_insert_teacher(
+    IN first_name_id_par INT,
+    IN last_name_id_par INT,
+    IN dob_id_par INT,
+    IN gender_id_par INT,
+    IN e_mail_id_par INT,
+    IN teachers_address_id_par INT
+
+)
+BEGIN
+INSERT INTO tbl_teachers (first_name_id, last_name_id, dob_id, gender_id, e_mail_id, teachers_address_id)
+SELECT * FROM (SELECT first_name_id_par, last_name_id_par, dob_id_par, gender_id_par, e_mail_id_par, teachers_address_id_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT first_name_id, last_name_id, dob_id, gender_id, e_mail_id, teachers_address_id FROM tbl_teachers
+    WHERE 
+	first_name_id = first_name_id_par AND
+	last_name_id = last_name_id_par AND
+	dob_id = dob_id_par AND
+	gender_id = gender_id_par AND
+	e_mail_id = e_mail_id_par AND
+	teachers_address_home_id =teachers_address_home_id_par
+) LIMIT 1;
+END // 
+DELIMITER ;
+
+/* SELECT SP WITH INNER JOIN */
+DELIMITER //
+CREATE PROCEDURE sp_select_teachers_(
+)
+BEGIN
+SELECT
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name,
+    tbl_dob.dob,
+    tbl_genders.gender,
+    tbl_emails.e_mail_address,
+    tbl_addresses.address_street,
+    tbl_addresses.address_city,
+    tbl_addresses.address_region,
+    tbl_addresses.address_postcode
+FROM
+    tbl_teachers
+    INNER JOIN tbl_emails 
+        ON (tbl_teachers.e_mail_id = tbl_emails.e_mail_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_genders 
+        ON (tbl_teachers.gender_id = tbl_genders.gender_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_dob 
+        ON (tbl_teachers.dob_id = tbl_dob.dob_id)
+    INNER JOIN tbl_addresses 
+        ON (tbl_teachers.teachers_address_id = tbl_addresses.address_id);
+END // 
+DELIMITER ;
+
+/* UPDATE SP */
+DELIMITER //
+CREATE PROCEDURE sp_update_teacher_by_teacher_id(
+    IN teacher_id_par INT,
+    IN first_name_id_par INT,
+    IN last_name_id_par INT,
+    IN dob_id_par INT,
+    IN gender_id_par INT,
+    IN e_mail_id_par INT,
+    IN teachers_address_id_par INT
+)
+BEGIN
+UPDATE tbl_teachers
+SET 
+	first_name_id = IFNULL(first_name_id_par, first_name_id),
+	last_name_id = IFNULL(last_name_id_par, last_name_id),
+	dob_id = IFNULL(dob_id_par, dob_id),
+	gender_id = IFNULL(gender_id_par, gender_id),
+	e_mail_id = IFNULL(e_mail_id_par, e_mail_id),
+	teachers_address_id = IFNULL(teachers_address_id_par, teachers_address_id)
+WHERE teacher_id = teacher_id_par;
+END // 
+DELIMITER ;
+
+/* DELETE SP by teacher_id */
+DELIMITER //
+CREATE PROCEDURE sp_delete_teacher_by_teacher_id(
+    IN teacher_id_par INT
+)
+BEGIN
+DELETE FROM tbl_teachers WHERE teacher_id = teacher_id_par;
+END // 
+DELIMITER ;
+
+
+/* END */
+
+  /* START */
+/* TBL_TEACHING_MATERIALS */
+/* INSERT SP WITH DUPLICATE CHECK */
+DELIMITER //
+CREATE PROCEDURE sp_insert_teaching_material(
+    IN file_name_par VARCHAR(20),
+    IN file_extension_id_par INT,
+    IN description_par VARCHAR(255),
+    IN file_content_par LONGBLOB,
+    IN teacher_id_par INT
+
+)
+BEGIN
+INSERT INTO tbl_teaching_materials (file_name, file_extension_id, description, file_content, teacher_id)
+SELECT * FROM (SELECT file_name_par, file_extension_id_par, description_par, file_content_par, teacher_id_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT file_name, file_extension_id, description, file_content, teacher_idd FROM tbl_teaching_materials
+    WHERE 
+	file_name = first_name_id_par AND
+	file_extension_id = last_name_id_par AND
+	description = dob_id_par AND
+	file_content = gender_id_par AND
+	teacher_id = e_mail_id_par
+) LIMIT 1;
+END // 
+DELIMITER ;
+
+/* SELECT SP WITH INNER JOIN FROM OTHER TABLES */
+DELIMITER //
+CREATE PROCEDURE sp_select_teaching_material(
+)
+BEGIN
+SELECT
+    tbl_teaching_materials.teaching_id,
+    tbl_teaching_materials.file_name,
+    tbl_file_extensions.file_extension,
+    tbl_teaching_materials.description,
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name
+FROM
+    tbl_teaching_materials
+    INNER JOIN tbl_teachers 
+        ON (tbl_teaching_materials.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_file_extensions 
+        ON (tbl_teaching_materials.file_extension_id = tbl_file_extensions.file_extension_id);
+END // 
+DELIMITER ;
+
+/* SELECT SP WITH INNER JOIN FROM OTHER TABLES BY TEACHER_ID  */
+DELIMITER //
+CREATE PROCEDURE sp_select_teaching_material_with_file_content_by_teaching_id(
+    IN teaching_id_par INT
+)
+BEGIN
+SELECT
+    tbl_teaching_materials.teaching_id,
+    tbl_teaching_materials.file_name,
+    tbl_file_extensions.file_extension,
+    tbl_teaching_materials.description,
+    tbl_teaching_materials.file_content,
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name
+FROM
+    tbl_teaching_materials
+    INNER JOIN tbl_teachers 
+        ON (tbl_teaching_materials.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_file_extensions 
+        ON (tbl_teaching_materials.file_extension_id = tbl_file_extensions.file_extension_id)
+    WHERE tbl_teaching_materials.teaching_id = teaching_id;
+END // 
+DELIMITER ;
+
+/* DELETE SP */
+DELIMITER //
+CREATE PROCEDURE sp_delete_teaching_material_by_teaching_id(
+    IN teaching_id INT
+)
+BEGIN
+DELETE FROM tbl_teaching_materials WHERE teaching_id = teaching_id;
+END // 
+DELIMITER ;
+
+/* END */

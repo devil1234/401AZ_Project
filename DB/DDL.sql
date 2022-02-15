@@ -75,7 +75,7 @@ CREATE TABLE tbl_file_extensions (
 
 CREATE TABLE tbl_first_names (
   first_name_id INT(11) NOT NULL AUTO_INCREMENT,
-  first_names VARCHAR(10) NOT NULL,
+  first_name VARCHAR(10) NOT NULL,
   PRIMARY KEY (first_name_id)
 );
 
@@ -111,7 +111,7 @@ CREATE TABLE tbl_students (
   student_last_name_id INT(11) NOT NULL,
   student_dob_id INT(11) NOT NULL,
   gender_id INT(11) NOT NULL,
-  student_picture varbinary(255) NOT NULL,
+  student_picture VARBINARY(255) NOT NULL,
   student_e_mail_id INT(11) NOT NULL,
   student_parent_id INT(11) NOT NULL,
   student_address_home_id INT(11) NOT NULL,
@@ -125,7 +125,6 @@ CREATE TABLE tbl_teachers (
   dob_id INT(11) NOT NULL,
   gender_id INT(11) NOT NULL,
   e_mail_id INT(11) NOT NULL,
-  payroll_nr INT(11) NOT NULL,
   teachers_address_id INT(11) NOT NULL,
   PRIMARY KEY (teacher_id)
 );
@@ -135,7 +134,7 @@ CREATE TABLE tbl_teaching_materials (
   file_name VARCHAR(20) NOT NULL,
   file_extension_id INT(11) NOT NULL,
   description VARCHAR(255) NOT NULL DEFAULT '',
-  file_content varbinary(255) NOT NULL DEFAULT '',
+  file_content LONGBLOB NOT NULL DEFAULT '',
   teacher_id INT(11) NOT NULL,
   PRIMARY KEY (teaching_id)
 );
@@ -163,6 +162,7 @@ ALTER TABLE tbl_enrolments
   ADD CONSTRAINT student_id_2 FOREIGN KEY (student_id) REFERENCES tbl_students (student_id) ON UPDATE CASCADE ON DELETE NO ACTION;
   
 ALTER TABLE tbl_students
+  AUTO_INCREMENT=20000,
   ADD KEY student_first_name_id (student_first_name_id),
   ADD KEY student_last_name_id (student_last_name_id),
   ADD KEY student_dob_id (student_dob_id),
@@ -174,11 +174,12 @@ ALTER TABLE tbl_students
   ADD CONSTRAINT student_address_home_id FOREIGN KEY (student_address_home_id) REFERENCES tbl_addresses (address_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT student_dob_id FOREIGN KEY (student_dob_id) REFERENCES tbl_dob (dob_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT student_e_mail_id FOREIGN KEY (student_e_mail_id) REFERENCES tbl_emails (e_mail_id) ON UPDATE CASCADE ON DELETE NO ACTION,
-  ADD CONSTRAINT student_first_name_id FOREIGN KEY (student_first_name_id) REFERENCES tbl_first_names (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT student_first_name_id FOREIGN KEY (student_first_name_id) REFERENCES tbl_first_name (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT student_last_name_id FOREIGN KEY (student_last_name_id) REFERENCES tbl_last_names (last_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT student_parent_id FOREIGN KEY (student_parent_id) REFERENCES tbl_student_parents_details (parent_id) ON UPDATE CASCADE ON DELETE NO ACTION;
 
 ALTER TABLE tbl_teachers
+  AUTO_INCREMENT=50000,
   ADD KEY first_name_id1 (first_name_Id),
   ADD KEY last_name_id1 (last_name_Id),
   ADD KEY dob_id1 (dob_id),
@@ -187,7 +188,7 @@ ALTER TABLE tbl_teachers
   ADD KEY teachers_address_id (teachers_address_id),
   ADD CONSTRAINT dob_id1 FOREIGN KEY (dob_id) REFERENCES tbl_dob (dob_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT e_mail_id1 FOREIGN KEY (e_mail_id) REFERENCES tbl_emails (e_mail_id) ON UPDATE CASCADE ON DELETE NO ACTION,
-  ADD CONSTRAINT first_name_id1 FOREIGN KEY (first_name_Id) REFERENCES tbl_first_names (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT first_name_id1 FOREIGN KEY (first_name_Id) REFERENCES tbl_first_name (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT gender_id1 FOREIGN KEY (gender_Id) REFERENCES tbl_genders (gender_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT last_name_id1 FOREIGN KEY (last_name_Id) REFERENCES tbl_last_names (last_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT teachers_address_id FOREIGN KEY (teachers_address_id) REFERENCES tbl_addresses (address_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
