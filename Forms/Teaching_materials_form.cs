@@ -66,19 +66,37 @@ namespace _401AZ_PROJECT
 
         }
 
-        private void Btn_Upload_Click(object sender, EventArgs e)
+        private void HideButtons()
         {
             Btn_ChooseFile.Visible = true;
             Btn_Download.Visible = false;
-            Lbl_TeacherId.Visible = true ;
-            Num_TeacherId.Visible= true;
+            Lbl_TeacherId.Visible = true;
+            Num_TeacherId.Visible = true;
             Num_TeacherId.ReadOnly = false;
             Btn_Refresh.Visible = false;
             Btn_Cancel.Visible = true;
             Lbl_Description.Visible = true;
             Txt_Description.Visible = true;
             Btn_Upload.Visible = false;
+        }
 
+        private void ShowButtons()
+        {
+            Btn_ChooseFile.Visible = false;
+            Btn_Download.Visible = true;
+            Lbl_TeacherId.Visible = false;
+            Num_TeacherId.Visible = false;
+            Num_TeacherId.ReadOnly = true;
+            Btn_Refresh.Visible = true;
+            Btn_Cancel.Visible = false;
+            Btn_Upload.Visible = true;
+            Lbl_Description.Visible = false;
+            Txt_Description.Visible = false;
+        }
+
+        private void Btn_Upload_Click(object sender, EventArgs e)
+        {
+            HideButtons();
         }
 
         private void Btn_ChooseFile_Click(object sender, EventArgs e)
@@ -88,17 +106,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            Btn_ChooseFile.Visible = false;
-            Btn_Download.Visible = true;
-            Lbl_TeacherId.Visible = false;
-            Num_TeacherId.Visible = false;
-            Num_TeacherId.ReadOnly = true;
-            Btn_Refresh.Visible = true;
-            Btn_Cancel.Visible= false;
-            Btn_Upload.Visible = true;
-
-            Lbl_Description.Visible = false;
-            Txt_Description.Visible = false;
+            ShowButtons();
         }
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
