@@ -74,7 +74,7 @@ CREATE PROCEDURE sp_insert_classes(
     IN day_id_par INT)
 BEGIN
 INSERT INTO tbl_classes (classroom_id, subject, teacher_id, start_time_day_id,end_time_day_id, day_id) VALUES 
-(classroom_id_par, subject_par, teacher_id_par, start_time_day_id_par, end_time_day_id_par, classroom_id_par, day_id_par);
+(classroom_id_par, subject_par, teacher_id_par, start_time_day_id_par, end_time_day_id_par, day_id_par);
 END // 
 DELIMITER ;
 
@@ -128,7 +128,9 @@ SELECT
     tbl_classrooms.classroom,
 	tbl_first_names.first_name AS Teacher_FName,
 	tbl_last_names.last_name AS Teacher_LName, 
-	tbl_classes.subject
+	tbl_classes.subject,
+	tbl_teachers.teacher_id,
+	tbl_days.day_id
 FROM
     tbl_classes
     INNER JOIN tbl_teachers 
@@ -151,7 +153,7 @@ DELIMITER ;
 /* SELECT SP BY classroom_name */ 
 DELIMITER //
 CREATE PROCEDURE sp_select_time_table_by_classroom_name(
-    IN classroom_nanme_par VARCHAR(10)
+    IN classroom_par VARCHAR(10)
 )
 BEGIN
 SELECT
@@ -162,7 +164,9 @@ SELECT
     tbl_classrooms.classroom,
 	tbl_first_names.first_name AS Teacher_FName,
 	tbl_last_names.last_name AS Teacher_LName, 
-	tbl_classes.subject
+	tbl_classes.subject,
+	tbl_teachers.teacher_id,
+	tbl_days.day_id
 FROM
     tbl_classes
     INNER JOIN tbl_teachers 
@@ -178,8 +182,8 @@ FROM
     INNER JOIN tbl_last_names 
         ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
     INNER JOIN tbl_days 
-        ON (tbl_classes.day_id = tbl_days.day_id) 
-	WHERE tbl_classrooms.classroom = class_name_par;
+        ON (tbl_classes.day_id = tbl_days.day_id);
+	WHERE tbl_classrooms.classroom LIKE classroom_par;
 END // 
 DELIMITER ;
 
@@ -257,10 +261,10 @@ DELIMITER ;
 /* SELECT SP by classroom_name */
 DELIMITER //
 CREATE PROCEDURE sp_select_classroom_by_name(
-    IN classroom_name_par VARCHAR(10)
+    IN classroom_par VARCHAR(10)
 )
 BEGIN
-SELECT * FROM tbl_classrooms WHERE classroom_name = classroom_name_par;
+SELECT classroom_id FROM tbl_classrooms WHERE classroom = classroom_par;
 END // 
 DELIMITER ;
 
@@ -283,15 +287,14 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE sp_update_classroom_by_name(
-    IN classroom_id_par INT,
-    IN classroom_name_old_par VARCHAR(10),
-    IN classroom_name_new_par VARCHAR(10)
+    IN classroom_old_par VARCHAR(10),
+    IN classroom_new_par VARCHAR(10)
 )
 BEGIN
 UPDATE tbl_classrooms
 SET 
-	classroom = IFNULL(classroom_name_new_par, classroom)
-WHERE classroom_name = class_name_old_par;
+	classroom = IFNULL(classroom_new_par, classroom)
+WHERE classroom = classroom_old_par;
 END // 
 DELIMITER ;
 
@@ -342,6 +345,15 @@ BEGIN
 SELECT * FROM tbl_date_end; 
 END // 
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_select_date_end_by_date(
+    IN date_end_par DATE
+)
+BEGIN
+SELECT * FROM tbl_date_end WHERE date_end = date_end_par;
+END //
+DELIMTER ;
 
 /* UPDATE SP */
 DELIMITER //
@@ -395,6 +407,15 @@ BEGIN
 SELECT * FROM tbl_date_start; 
 END // 
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_select_date_start_by_date(
+    IN date_start_par DATE
+)
+BEGIN
+SELECT * FROM tbl_date_start WHERE date_start= date_start_par;
+END //
+DELIMTER ;
 
 /* UPDATE SP */
 DELIMITER //
@@ -602,6 +623,15 @@ SELECT * FROM tbl_end_time_day;
 END // 
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_select_end_time_day_by_std(
+    IN end_time_day TIME
+)
+BEGIN
+SELECT * FROM tbl_end_time_day WHERE end_time_day = end_time_day;
+END // 
+DELIMITER ;
+
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_end_time_day_by_end_time_day(
@@ -633,10 +663,10 @@ DELIMITER ;
 /* INSERT SP WITH DUPLICATE CHECKS */
 DELIMITER //
 CREATE PROCEDURE sp_insert_enrolments(
-    IN `student_id_par` INT,
-	IN `class_id_par` INT,
-	IN `date_start_id_par` INT,
-	IN `date_end_id_par` INT
+    IN student_id_par INT,
+	IN class_id_par INT,
+	IN date_start_id_par INT,
+	IN date_end_id_par INT
 )
 BEGIN
 INSERT INTO tbl_enrolments (student_id, class_id, date_start_id, date_end_id)
@@ -658,28 +688,67 @@ CREATE PROCEDURE sp_select_enrolments(
 )
 BEGIN
 SELECT
-    tbl_students.student_first_name_id AS Student_FName,
-    tbl_students.student_last_name_id AS Student_LName,
-    tbl_classrooms.classroom AS Classroom,
-    tbl_classes.subject AS Subject,
-    tbl_teachers.first_name_id AS Teacher_FNane,
-    tbl_teachers.last_name_id AS Teacher_LName,
-    tbl_date_start.date_start AS StartDate,
-    tbl_date_end.date_end AS EndDate
+    tbl_students.student_id,
+    tbl_classes.class_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name,
+    tbl_classrooms.classroom,
+    tbl_classes.subject,
+    tbl_date_start.date_start,
+    tbl_date_end.date_end,
+    tbl_classes.teacher_id
 FROM
     tbl_enrolments
     INNER JOIN tbl_students 
         ON (tbl_enrolments.student_id = tbl_students.student_id)
-    INNER JOIN tbl_classes 
-        ON (tbl_enrolments.class_id = tbl_classes.class_id)
-    INNER JOIN tbl_date_start 
-        ON (tbl_enrolments.date_start_id = tbl_date_start.date_start_id)
     INNER JOIN tbl_date_end 
         ON (tbl_enrolments.date_end_id = tbl_date_end.date_end_id)
+    INNER JOIN tbl_date_start 
+        ON (tbl_enrolments.date_start_id = tbl_date_start.date_start_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_students.student_first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_students.student_last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_classes 
+        ON (tbl_enrolments.class_id = tbl_classes.class_id)
+    INNER JOIN tbl_classrooms 
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id);
+END // 
+DELIMITER ;
+
+/*SELECT SP INNER JOIN */
+DELIMITER //
+CREATE PROCEDURE sp_select_enrolments_by_student_id(
+    IN student_id_par INT
+)
+BEGIN
+SELECT
+    tbl_students.student_id,
+    tbl_classes.class_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name,
+    tbl_classrooms.classroom,
+    tbl_classes.subject,
+    tbl_date_start.date_start,
+    tbl_date_end.date_end,
+    tbl_classes.teacher_id
+FROM
+    tbl_enrolments
+    INNER JOIN tbl_students 
+        ON (tbl_enrolments.student_id = tbl_students.student_id)
+    INNER JOIN tbl_date_end 
+        ON (tbl_enrolments.date_end_id = tbl_date_end.date_end_id)
+    INNER JOIN tbl_date_start 
+        ON (tbl_enrolments.date_start_id = tbl_date_start.date_start_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_students.student_first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_students.student_last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_classes 
+        ON (tbl_enrolments.class_id = tbl_classes.class_id)
     INNER JOIN tbl_classrooms 
         ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
-    INNER JOIN tbl_teachers 
-        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id);
+    WHERE tbl_students.student_id = student_id_par;
 END // 
 DELIMITER ;
 
@@ -734,7 +803,7 @@ CREATE PROCEDURE sp_select_file_extension_by_file_extension(
     IN file_extension_par VARCHAR(6)
 )
 BEGIN
-SELECT file_extension FROM tbl_file_extensions WHERE file_extension = file_extension_par; 
+SELECT file_extension_id FROM tbl_file_extensions WHERE file_extension = file_extension_par; 
 END // 
 DELIMITER ;
 
@@ -930,6 +999,15 @@ SELECT * FROM tbl_start_time_day;
 END // 
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_select_start_time_day_by_std(
+    IN start_time_day TIME
+)
+BEGIN
+SELECT * FROM tbl_start_time_day WHERE start_time_day = start_time_day;
+END // 
+DELIMITER ;
+
 /*UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_start_time_day(
@@ -1100,6 +1178,25 @@ FROM
 END // 
 DELIMITER ;
 
+/* SELECT SP STUDENT ID, FNAME AND LNAME*/
+
+DELIMITER //
+CREATE PROCEDURE sp_select_student_fname_lname(
+)
+BEGIN
+SELECT
+    tbl_students.student_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name
+FROM
+    tbl_students
+    INNER JOIN tbl_first_names 
+        ON (tbl_students.student_first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_students.student_last_name_id = tbl_last_names.last_name_id);
+END // 
+DELIMITER ;
+
 /* UPDATE SP by student_id */
 DELIMITER //
 CREATE PROCEDURE sp_update_student(
@@ -1170,9 +1267,29 @@ WHERE NOT EXISTS (
 END // 
 DELIMITER ;
 
+
+/*SELECT SP TEACHER FNAME AND LASTNAME */
+DELIMITER //
+CREATE PROCEDURE sp_select_teacher_fname_lname(
+)
+BEGIN
+SELECT
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name
+FROM
+    tbl_teachers
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id);
+END // 
+DELIMITER ;
+
+
 /* SELECT SP WITH INNER JOIN */
 DELIMITER //
-CREATE PROCEDURE sp_select_teachers_(
+CREATE PROCEDURE sp_select_teachers(
 )
 BEGIN
 SELECT
@@ -1256,13 +1373,13 @@ BEGIN
 INSERT INTO tbl_teaching_materials (file_name, file_extension_id, description, file_content, teacher_id)
 SELECT * FROM (SELECT file_name_par, file_extension_id_par, description_par, file_content_par, teacher_id_par) AS tmp
 WHERE NOT EXISTS (
-    SELECT file_name, file_extension_id, description, file_content, teacher_idd FROM tbl_teaching_materials
+    SELECT file_name, file_extension_id, description, file_content, teacher_id FROM tbl_teaching_materials
     WHERE 
-	file_name = first_name_id_par AND
-	file_extension_id = last_name_id_par AND
-	description = dob_id_par AND
-	file_content = gender_id_par AND
-	teacher_id = e_mail_id_par
+	file_name = file_name_par AND
+	file_extension_id = file_extension_id_par AND
+	description = file_content_par AND
+	file_content = teacher_id_par AND
+	teacher_id = teacher_id_par
 ) LIMIT 1;
 END // 
 DELIMITER ;
@@ -1325,10 +1442,10 @@ DELIMITER ;
 /* DELETE SP */
 DELIMITER //
 CREATE PROCEDURE sp_delete_teaching_material_by_teaching_id(
-    IN teaching_id INT
+    IN teaching_id_par INT
 )
 BEGIN
-DELETE FROM tbl_teaching_materials WHERE teaching_id = teaching_id;
+DELETE FROM tbl_teaching_materials WHERE teaching_id = teaching_id_par;
 END // 
 DELIMITER ;
 

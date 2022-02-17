@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _401AZ_PROJECT
+namespace _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails
 {
-    public abstract class StudentParentsDetails
+    public class StudentParentsDetails
     {
         public int Student_Parent_Id { get; set; }
         public string Parent_First_Name { get; set; }

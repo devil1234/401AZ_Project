@@ -1,4 +1,7 @@
-﻿using MySqlConnector;
+﻿using _401AZ_PROJECT.Classes_Methods.Teachers.Teacher;
+using _401AZ_PROJECT.Classes_Methods.TimeTable;
+using _401AZ_PROJECT.Models;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +18,12 @@ namespace _401AZ_PROJECT
     {
 
         readonly DataManager DM = new DataManager();
-        readonly Time_Table_Db_Con timetable = new Time_Table_Db_Con();
+        readonly TimeTable timetable = new TimeTable();
         readonly Days day = new Days();
-
+        readonly Teachers teacher = new Teachers();
+        readonly Classrooms classroom = new Classrooms();
+        readonly StartTimeDay std = new StartTimeDay();
+        readonly EndTimeDay etd = new EndTimeDay();
 
         public Timetable_form()
         {
@@ -40,13 +46,14 @@ namespace _401AZ_PROJECT
         //Search the database by textbox entry
         private void Btn_search_timetable_Click(object sender, EventArgs e)
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetTimeTable_By_Classroom(Txt_class_search.Text));
+            dgv_classes.DataSource = DM.ToDataTable(timetable.GetClasses_By_Classroom(Txt_class_search.Text));
 
         }
 
         //Load the database data on load
         private void Timetable_Load(object sender, EventArgs e)
         {
+            dgv_classes.DataSource = DM.ToDataTable(timetable.GetClasses());
             Populate_Form();
         }
 
@@ -56,7 +63,6 @@ namespace _401AZ_PROJECT
             {
                 Txt_class_search.Enabled = true;
                 Btn_search_timetable.Visible = true;
-                //dgv_classes.DataSource = null;
             }
             else
             {
@@ -79,7 +85,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetTimeTable());
+            dgv_classes.DataSource = DM.ToDataTable(timetable.GetClasses());
             Populate_Form();
         }
 
@@ -99,9 +105,10 @@ namespace _401AZ_PROJECT
 
         private void Populate_Form()
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetTimeTable());
             if (dgv_classes.SelectedRows.Count > 0)
             {
+                dgv_classes.Columns["TeacherId"].Visible = false;
+                dgv_classes.Columns["DayId"].Visible = false;
                 //Class Id text
                 Tb_ClassId.Text = dgv_classes.SelectedCells[0].Value.ToString();
 
@@ -119,21 +126,24 @@ namespace _401AZ_PROJECT
                 //Classroom name
                 Txt_class_search.Text = dgv_classes.SelectedCells[4].Value.ToString();
 
+                //Subject
+                Txtb_Subject.Text = dgv_classes.SelectedCells[5].Value.ToString();
+
                 //Teacher First name
-                Cb_T_Fname.Items.Insert(0, dgv_classes.SelectedCells[5].Value.ToString());
+                Cb_T_Fname.Items.Insert(0, dgv_classes.SelectedCells[6].Value.ToString());
                 Cb_T_Fname.SelectedIndex = 0;
-                Cb_T_Fname.Text = dgv_classes.SelectedCells[5].Value.ToString();
+                Cb_T_Fname.Text = dgv_classes.SelectedCells[6].Value.ToString();
 
                 //Teacher Last name
-                Cb_T_Lname.Items.Insert(0, dgv_classes.SelectedCells[6].Value.ToString());
+                Cb_T_Lname.Items.Insert(0, dgv_classes.SelectedCells[7].Value.ToString());
                 Cb_T_Lname.SelectedIndex = 0;
-                Cb_T_Lname.Text = dgv_classes.SelectedCells[6].Value.ToString();
+                Cb_T_Lname.Text = dgv_classes.SelectedCells[7].Value.ToString();
 
-                //Subject
-                Cb_Subject.Items.Insert(0, dgv_classes.SelectedCells[7].Value.ToString());
-                Cb_Subject.SelectedIndex = 0;
-                Cb_Subject.Text = dgv_classes.SelectedCells[7].Value.ToString();
 
+                //TeacherId
+                Cb_TeacherId.Items.Insert(0, dgv_classes.SelectedCells[8].Value.ToString());
+                Cb_TeacherId.SelectedIndex = 0;
+                Cb_TeacherId.Text = dgv_classes.SelectedCells[8].Value.ToString();
             }
         }
 
@@ -161,24 +171,60 @@ namespace _401AZ_PROJECT
             Cb_T_Lname.DataSource = null;
 
             //Subject
-            Cb_Subject.DataSource = null;
+            Txtb_Subject.Text = null;
+
+            //TeacherId
+            Cb_TeacherId.DataSource = null;
 
         }
 
         private void btn_InsertNew_Click(object sender, EventArgs e)
+        {
+            Button_Enable();
+            PopulateButtons();
+        }
+
+        private void PopulateButtons()
+        {
+            //cb_Day_id
+            cb_Day.DataSource = DM.ToDataTable(day.GetDays());
+            cb_Day.DisplayMember = "Day_Name";
+            cb_Day.ValueMember = "Day_Id_pk";
+            cb_Day.SelectedValue = dgv_classes.SelectedCells[1].Value.ToString();
+
+            //Start Time Day
+            Dtp_Start_Time.Text = dgv_classes.SelectedCells[2].Value.ToString();
+
+            //End Time Day
+            Dtp_End_Time.Text = dgv_classes.SelectedCells[3].Value.ToString();
+
+            //cb_TeacherId
+            Cb_TeacherId.DataSource = DM.ToDataTable(teacher.GetTeacher_FName_LName());
+            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            Cb_TeacherId.SelectedValue = Int32.Parse(dgv_classes.SelectedCells[8].Value.ToString());
+
+            //Classroom name
+            Txt_class_search.Text = dgv_classes.SelectedCells[4].Value.ToString();
+
+            //Subject
+            Txtb_Subject.Text = dgv_classes.SelectedCells[5].Value.ToString();
+
+        }
+
+        private void Button_Enable()
         {
             //Unpopulate_Form();
             cb_Day.Enabled = true;
             Dtp_Start_Time.Enabled = true;
             Dtp_End_Time.Enabled = true;
             Txt_class_search.Enabled = true;
-            Cb_T_Fname.Enabled = true;
-            Cb_T_Lname.Enabled = true;
-            Cb_Subject.Enabled = true;
+
+            Cb_TeacherId.Enabled = true;
+            Txtb_Subject.Enabled = true;
 
             btn_InsertNew.Enabled = false;
             btn_InsertNew.Visible = false;
-            
+
             Btn_Delete.Enabled = false;
             Btn_Delete.Visible = false;
 
@@ -186,6 +232,7 @@ namespace _401AZ_PROJECT
             Btn_Update.Visible = false;
 
             Btn_SaveNew.Enabled = true;
+            Btn_SaveNew.Visible = true;
 
             Btn_Refresh.Enabled = false;
             Btn_Refresh.Visible = false;
@@ -193,53 +240,22 @@ namespace _401AZ_PROJECT
             btn_EnableSearch.Enabled = false;
             btn_EnableSearch.Visible = false;
 
-            Btn_Cancel.Enabled = true;
+            Btn_Cancel.Visible = true;
 
             dgv_classes.Enabled = false ;
             dgv_classes.Visible = false ;
-
-            //cb_Day
-            cb_Day.DataSource = DM.ToDataTable(day.GetDays());
-            cb_Day.DisplayMember = "Day_Name";
-            cb_Day.ValueMember = "Day_Id_pk";
-
-            //Start time dtp
-            Dtp_Start_Time.Text = DateTime.Now.ToString();
-
-            //End Time
-            Dtp_End_Time.Text = DateTime.Now.ToString();
-
-            //cb_T_Fname
-            //to do (change the datasource query)
-            Cb_T_Fname.DataSource = DM.ToDataTable(day.GetDays());
-            Cb_T_Fname.DisplayMember = "Day_Name";
-            Cb_T_Fname.ValueMember = "Day_Id_pk";
-
-            //cb_T_Lname
-            //to do (change the datasource query)
-            Cb_T_Lname.DataSource = DM.ToDataTable(day.GetDays());
-            Cb_T_Lname.DisplayMember = "Day_Name";
-            Cb_T_Lname.ValueMember = "Day_Id_pk";
-
-            //cb_Subject
-            //to do (change the datasource query)
-            Cb_Subject.DataSource = DM.ToDataTable(day.GetDays());
-            Cb_Subject.DisplayMember = "Day_Name";
-            Cb_Subject.ValueMember = "Day_Id_pk";
-
-
         }
 
-        private void Button_Reset()
+        private void Button_Disable()
         {
             Unpopulate_Form();
             cb_Day.Enabled = false;
             Dtp_Start_Time.Enabled = false;
             Dtp_End_Time.Enabled = false;
             Txt_class_search.Enabled = false;
-            Cb_T_Fname.Enabled = false;
-            Cb_T_Lname.Enabled = false;
-            Cb_Subject.Enabled = false;
+
+            Cb_TeacherId.Enabled = false;
+            Txtb_Subject.Enabled = false;
 
             btn_InsertNew.Enabled = true;
             btn_InsertNew.Visible = true;
@@ -250,7 +266,9 @@ namespace _401AZ_PROJECT
             Btn_Update.Enabled = true;
             Btn_Update.Visible = true;
 
-            Btn_SaveNew.Enabled = false;
+            Btn_Save.Visible= false;
+
+            Btn_SaveNew.Visible = false;
 
             Btn_Refresh.Enabled = true;
             Btn_Refresh.Visible = true;
@@ -258,21 +276,174 @@ namespace _401AZ_PROJECT
             btn_EnableSearch.Enabled = true;
             btn_EnableSearch.Visible = true;
 
-            Btn_Cancel.Enabled = false;
+            Btn_Cancel.Visible = false;
 
             dgv_classes.Enabled = true;
             dgv_classes.Visible = true;
+
             Populate_Form();
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            Button_Reset();
+            Button_Disable();
         }
 
         private void Btn_SaveNew_Click(object sender, EventArgs e)
         {
-            Button_Reset();
+
+            // Check if the ClassroomName is existing in db, if not insert it and return the id
+            var classroom_name = Txt_class_search.Text;
+            if (DM.ToDataTable(classroom.GetClassroomId(classroom_name)).Rows.Count == 0)
+            {
+                classroom.InsertClassroom(classroom_name);
+            }
+            var ClassroomId = Int32.Parse(DM.ToDataTable(classroom.GetClassroomId(classroom_name)).Rows[0].Field<string>("classroom_id"));
+
+
+            //Retrive the subject text from textbox
+            var Subject = Txtb_Subject.Text;
+            
+            //Retrieve the Teacher Id text from ComboBox
+            var teacherId = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
+            
+            // Check if the StartTimeDay is existing in db, if not insert it and retrieve the id
+            var StartTimeDay = Dtp_Start_Time.Value.ToShortTimeString();
+            if (DM.ToDataTable(std.GetStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay))).Rows.Count == 0)
+            {
+                std.InsertStartTimeDay(Convert.ToDateTime(StartTimeDay));
+            }
+            var StartTimeDayId = Int32.Parse(DM.ToDataTable(std.GetStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay))).Rows[0].Field<string>("start_time_day_id"));
+
+            // Check if the EndTimeDay is existing in db, if not insert it and return the id
+            var EndTimeDay = Dtp_End_Time.Value.ToShortTimeString();
+            if (DM.ToDataTable(etd.GetEndTimeDayIdByStd(Convert.ToDateTime(EndTimeDay))).Rows.Count == 0)
+            {
+                etd.InsertEndTimeDay(Convert.ToDateTime(EndTimeDay));
+            }
+            var EndTimeDayId = Int32.Parse(DM.ToDataTable(etd.GetEndTimeDayIdByStd(Convert.ToDateTime(EndTimeDay))).Rows[0].Field<string>("end_time_day_id"));
+
+            var DayId = Int32.Parse(cb_Day.SelectedValue.ToString());
+
+            MessageBox.Show(Convert.ToString(DayId));
+            timetable.InsertClasses(ClassroomId, Subject, teacherId, StartTimeDayId, EndTimeDayId, DayId);
+            Btn_Cancel.PerformClick();
+            //Btn_Refresh.PerformClick();
+        }
+
+        private void Cb_TeacherId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Cb_T_Fname.DataSource = Cb_TeacherId.DataSource;
+            Cb_T_Lname.DataSource = Cb_TeacherId.DataSource;
+            Cb_T_Fname.DisplayMember = "First_Name";
+            Cb_T_Fname.ValueMember = "Teacher_Id";
+
+            Cb_T_Lname.DisplayMember = "Last_Name";
+            Cb_T_Lname.ValueMember = "Teacher_Id";
+
+            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            Cb_TeacherId.ValueMember = "Teacher_Id";
+
+
+        }
+
+        private void Btn_Delete_Click(object sender, EventArgs e)
+        {
+            if (dgv_classes.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
+            {
+                int index = Int32.Parse(dgv_classes.SelectedCells[0].Value.ToString());
+                string caption = "Are you sure you want to delete?";
+                string message = "Do you want to delete the file with the record Id of" + " " + index + " ?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, caption, buttons);
+
+                if (result == DialogResult.Yes)
+                {
+                    timetable.DeleteTimetable(index);
+                    Btn_Refresh.PerformClick();
+                }
+            }
+        }
+
+        private void Btn_Update_Click(object sender, EventArgs e)
+        {
+            if (dgv_classes.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
+            {
+                //hide the buttons
+                btn_InsertNew.Visible = false;
+                Btn_SaveNew.Visible = false;
+                Btn_Update.Visible = false;
+                Btn_Delete.Visible = false;
+                Btn_Cancel.Visible = true;
+                btn_EnableSearch.Visible = false;
+                Btn_Refresh.Visible = false;
+                Btn_Save.Visible = true;
+                Btn_search_timetable.Visible = false;
+                dgv_classes.Enabled = false;
+                dgv_classes.Visible = false;
+
+                //enable boxes
+                cb_Day.Enabled = true;
+                Dtp_Start_Time.Enabled = true;
+                Dtp_End_Time.Enabled = true;
+                Txt_class_search.Enabled = true;
+                Cb_TeacherId.Enabled = true;
+                Txtb_Subject.Enabled = true;
+                PopulateButtons();
+            }
+        }
+
+        private void Btn_Save_Click(object sender, EventArgs e)
+        {
+
+            //Populate the forms
+            //Populate_Form();
+
+            //retrive the TimetableId
+            var classId = Int32.Parse(Tb_ClassId.Text);
+
+            //UPDTAE THE CLASSROOM NAME based on text and if not null check and retrieve the id
+            var classroom_name_new = Txt_class_search.Text;
+            if(classroom_name_new != null)
+            {
+                var classroom_name_old = dgv_classes.SelectedCells[4].Value.ToString();
+                classroom.UpdateClassroom(classroom_name_old, classroom_name_new);
+            }
+            var ClassroomId = Int32.Parse(DM.ToDataTable(classroom.GetClassroomId(classroom_name_new)).Rows[0].Field<string>("classroom_id"));
+
+            //Retrive the subject text from textbox
+            var Subject = Txtb_Subject.Text;
+
+            //Retrieve the Teacher Id text from ComboBox
+            var teacherId = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
+
+            //UPDATE START TIME BASED ON COMBOBOX AND ONLY IF IS NEW StartTimeDay
+            var StartTimeDay_new = Dtp_Start_Time.Value.ToShortTimeString();
+            if(StartTimeDay_new != dgv_classes.SelectedCells[2].Value.ToString()) 
+            {
+                var StartTimeDay_old = dgv_classes.SelectedCells[2].Value.ToString();
+                std.UpdateStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay_old), Convert.ToDateTime(StartTimeDay_new));
+            }
+            var StartTimeDayId = Int32.Parse(DM.ToDataTable(std.GetStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay_new))).Rows[0].Field<string>("start_time_day_id"));
+
+            //UPDATE END TIME BASED ON COMBOBOX AND ONLY IF IS NEW EndTimeDay
+            var EndTimeDay_new = Dtp_End_Time.Value.ToShortTimeString();
+            if(EndTimeDay_new != dgv_classes.SelectedCells[3].Value.ToString())
+            {
+                var EndTimeDay_old = dgv_classes.SelectedCells[3].Value.ToString();
+                std.UpdateStartTimeDayIdByStd(Convert.ToDateTime(EndTimeDay_old), Convert.ToDateTime(EndTimeDay_new));
+            }
+            var EndTimeDayId = Int32.Parse(DM.ToDataTable(etd.GetEndTimeDayIdByStd(Convert.ToDateTime(EndTimeDay_new))).Rows[0].Field<string>("end_time_day_id"));
+
+            //retrive the DayId from Combobox
+            var DayId = Int32.Parse(cb_Day.SelectedValue.ToString());
+            
+            //Execute the Update with above variables
+            timetable.UpdateTimeTable(classId, ClassroomId, Subject, teacherId, StartTimeDayId, EndTimeDayId, DayId);
+
+            Btn_Cancel.PerformClick();
+            //Btn_Refresh.PerformClick();
         }
 
     }

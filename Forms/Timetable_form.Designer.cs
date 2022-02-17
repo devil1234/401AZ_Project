@@ -53,9 +53,11 @@
             this.Lbl_Subject = new System.Windows.Forms.Label();
             this.Cb_T_Fname = new System.Windows.Forms.ComboBox();
             this.Cb_T_Lname = new System.Windows.Forms.ComboBox();
-            this.Cb_Subject = new System.Windows.Forms.ComboBox();
             this.btn_InsertNew = new System.Windows.Forms.Button();
             this.Btn_Cancel = new System.Windows.Forms.Button();
+            this.Lbl_TeacherId = new System.Windows.Forms.Label();
+            this.Cb_TeacherId = new System.Windows.Forms.ComboBox();
+            this.Txtb_Subject = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_classes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +116,7 @@
             this.Txt_class_search.Enabled = false;
             this.Txt_class_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Txt_class_search.Location = new System.Drawing.Point(200, 188);
-            this.Txt_class_search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_class_search.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_class_search.Name = "Txt_class_search";
             this.Txt_class_search.Size = new System.Drawing.Size(117, 27);
             this.Txt_class_search.TabIndex = 2;
@@ -126,7 +128,7 @@
             this.Btn_search_timetable.Enabled = false;
             this.Btn_search_timetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_search_timetable.Location = new System.Drawing.Point(325, 188);
-            this.Btn_search_timetable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_search_timetable.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_search_timetable.Name = "Btn_search_timetable";
             this.Btn_search_timetable.Size = new System.Drawing.Size(159, 28);
             this.Btn_search_timetable.TabIndex = 3;
@@ -146,6 +148,7 @@
             this.Btn_SaveNew.TabIndex = 5;
             this.Btn_SaveNew.Text = "Save New";
             this.Btn_SaveNew.UseVisualStyleBackColor = false;
+            this.Btn_SaveNew.Visible = false;
             this.Btn_SaveNew.Click += new System.EventHandler(this.Btn_SaveNew_Click);
             // 
             // Btn_Update
@@ -157,18 +160,20 @@
             this.Btn_Update.TabIndex = 6;
             this.Btn_Update.Text = "Update";
             this.Btn_Update.UseVisualStyleBackColor = false;
+            this.Btn_Update.Click += new System.EventHandler(this.Btn_Update_Click);
             // 
             // Btn_Save
             // 
-            this.Btn_Save.Enabled = false;
             this.Btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Save.Location = new System.Drawing.Point(1060, 147);
-            this.Btn_Save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Save.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Save.Name = "Btn_Save";
             this.Btn_Save.Size = new System.Drawing.Size(159, 28);
             this.Btn_Save.TabIndex = 7;
             this.Btn_Save.Text = "Update Save";
             this.Btn_Save.UseVisualStyleBackColor = false;
+            this.Btn_Save.Visible = false;
+            this.Btn_Save.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
             // Btn_Delete
             // 
@@ -179,12 +184,13 @@
             this.Btn_Delete.TabIndex = 8;
             this.Btn_Delete.Text = "Delete";
             this.Btn_Delete.UseVisualStyleBackColor = false;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
             // 
             // btn_EnableSearch
             // 
             this.btn_EnableSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.btn_EnableSearch.Location = new System.Drawing.Point(1395, 124);
-            this.btn_EnableSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_EnableSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btn_EnableSearch.Name = "btn_EnableSearch";
             this.btn_EnableSearch.Size = new System.Drawing.Size(159, 58);
             this.btn_EnableSearch.TabIndex = 9;
@@ -295,7 +301,7 @@
             // 
             this.Lbl_Teacher_First_Name.AutoSize = true;
             this.Lbl_Teacher_First_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Teacher_First_Name.Location = new System.Drawing.Point(506, 46);
+            this.Lbl_Teacher_First_Name.Location = new System.Drawing.Point(507, 75);
             this.Lbl_Teacher_First_Name.Name = "Lbl_Teacher_First_Name";
             this.Lbl_Teacher_First_Name.Size = new System.Drawing.Size(176, 20);
             this.Lbl_Teacher_First_Name.TabIndex = 19;
@@ -305,7 +311,7 @@
             // 
             this.Lbl_Teacher_Last_Name.AutoSize = true;
             this.Lbl_Teacher_Last_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Teacher_Last_Name.Location = new System.Drawing.Point(506, 87);
+            this.Lbl_Teacher_Last_Name.Location = new System.Drawing.Point(507, 109);
             this.Lbl_Teacher_Last_Name.Name = "Lbl_Teacher_Last_Name";
             this.Lbl_Teacher_Last_Name.Size = new System.Drawing.Size(174, 20);
             this.Lbl_Teacher_Last_Name.TabIndex = 20;
@@ -315,7 +321,7 @@
             // 
             this.Lbl_Subject.AutoSize = true;
             this.Lbl_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Subject.Location = new System.Drawing.Point(506, 119);
+            this.Lbl_Subject.Location = new System.Drawing.Point(507, 148);
             this.Lbl_Subject.Name = "Lbl_Subject";
             this.Lbl_Subject.Size = new System.Drawing.Size(72, 20);
             this.Lbl_Subject.TabIndex = 21;
@@ -327,7 +333,7 @@
             this.Cb_T_Fname.Enabled = false;
             this.Cb_T_Fname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Cb_T_Fname.FormattingEnabled = true;
-            this.Cb_T_Fname.Location = new System.Drawing.Point(706, 43);
+            this.Cb_T_Fname.Location = new System.Drawing.Point(707, 72);
             this.Cb_T_Fname.Name = "Cb_T_Fname";
             this.Cb_T_Fname.Size = new System.Drawing.Size(225, 28);
             this.Cb_T_Fname.TabIndex = 22;
@@ -338,21 +344,10 @@
             this.Cb_T_Lname.Enabled = false;
             this.Cb_T_Lname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Cb_T_Lname.FormattingEnabled = true;
-            this.Cb_T_Lname.Location = new System.Drawing.Point(706, 77);
+            this.Cb_T_Lname.Location = new System.Drawing.Point(707, 106);
             this.Cb_T_Lname.Name = "Cb_T_Lname";
             this.Cb_T_Lname.Size = new System.Drawing.Size(225, 28);
             this.Cb_T_Lname.TabIndex = 23;
-            // 
-            // Cb_Subject
-            // 
-            this.Cb_Subject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_Subject.Enabled = false;
-            this.Cb_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Cb_Subject.FormattingEnabled = true;
-            this.Cb_Subject.Location = new System.Drawing.Point(706, 111);
-            this.Cb_Subject.Name = "Cb_Subject";
-            this.Cb_Subject.Size = new System.Drawing.Size(225, 28);
-            this.Cb_Subject.TabIndex = 24;
             // 
             // btn_InsertNew
             // 
@@ -367,7 +362,6 @@
             // 
             // Btn_Cancel
             // 
-            this.Btn_Cancel.Enabled = false;
             this.Btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Cancel.Location = new System.Drawing.Point(1230, 189);
             this.Btn_Cancel.Name = "Btn_Cancel";
@@ -375,16 +369,50 @@
             this.Btn_Cancel.TabIndex = 26;
             this.Btn_Cancel.Text = "Cancel";
             this.Btn_Cancel.UseVisualStyleBackColor = false;
+            this.Btn_Cancel.Visible = false;
             this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
+            // 
+            // Lbl_TeacherId
+            // 
+            this.Lbl_TeacherId.AutoSize = true;
+            this.Lbl_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_TeacherId.Location = new System.Drawing.Point(507, 42);
+            this.Lbl_TeacherId.Name = "Lbl_TeacherId";
+            this.Lbl_TeacherId.Size = new System.Drawing.Size(102, 20);
+            this.Lbl_TeacherId.TabIndex = 27;
+            this.Lbl_TeacherId.Text = "Teacher ID";
+            // 
+            // Cb_TeacherId
+            // 
+            this.Cb_TeacherId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cb_TeacherId.Enabled = false;
+            this.Cb_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cb_TeacherId.FormattingEnabled = true;
+            this.Cb_TeacherId.Location = new System.Drawing.Point(707, 35);
+            this.Cb_TeacherId.Name = "Cb_TeacherId";
+            this.Cb_TeacherId.Size = new System.Drawing.Size(225, 28);
+            this.Cb_TeacherId.TabIndex = 28;
+            this.Cb_TeacherId.SelectedIndexChanged += new System.EventHandler(this.Cb_TeacherId_SelectedIndexChanged);
+            // 
+            // Txtb_Subject
+            // 
+            this.Txtb_Subject.Enabled = false;
+            this.Txtb_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txtb_Subject.Location = new System.Drawing.Point(707, 148);
+            this.Txtb_Subject.Name = "Txtb_Subject";
+            this.Txtb_Subject.Size = new System.Drawing.Size(225, 27);
+            this.Txtb_Subject.TabIndex = 29;
             // 
             // Timetable_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1567, 756);
+            this.Controls.Add(this.Txtb_Subject);
+            this.Controls.Add(this.Cb_TeacherId);
+            this.Controls.Add(this.Lbl_TeacherId);
             this.Controls.Add(this.Btn_Cancel);
             this.Controls.Add(this.btn_InsertNew);
-            this.Controls.Add(this.Cb_Subject);
             this.Controls.Add(this.Cb_T_Lname);
             this.Controls.Add(this.Cb_T_Fname);
             this.Controls.Add(this.Lbl_Subject);
@@ -449,8 +477,10 @@
         private System.Windows.Forms.Label Lbl_Subject;
         private System.Windows.Forms.ComboBox Cb_T_Fname;
         private System.Windows.Forms.ComboBox Cb_T_Lname;
-        private System.Windows.Forms.ComboBox Cb_Subject;
         private System.Windows.Forms.Button btn_InsertNew;
         private System.Windows.Forms.Button Btn_Cancel;
+        private System.Windows.Forms.Label Lbl_TeacherId;
+        private System.Windows.Forms.ComboBox Cb_TeacherId;
+        private System.Windows.Forms.TextBox Txtb_Subject;
     }
 }

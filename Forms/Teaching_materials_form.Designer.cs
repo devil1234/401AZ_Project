@@ -67,7 +67,7 @@
             // Btn_Upload
             // 
             this.Btn_Upload.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Upload.Location = new System.Drawing.Point(1239, 78);
+            this.Btn_Upload.Location = new System.Drawing.Point(1239, 107);
             this.Btn_Upload.Name = "Btn_Upload";
             this.Btn_Upload.Size = new System.Drawing.Size(176, 54);
             this.Btn_Upload.TabIndex = 1;
@@ -78,7 +78,7 @@
             // Btn_Download
             // 
             this.Btn_Download.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Download.Location = new System.Drawing.Point(1239, 138);
+            this.Btn_Download.Location = new System.Drawing.Point(1239, 167);
             this.Btn_Download.Name = "Btn_Download";
             this.Btn_Download.Size = new System.Drawing.Size(176, 54);
             this.Btn_Download.TabIndex = 2;
@@ -115,7 +115,7 @@
             // Btn_ChooseFile
             // 
             this.Btn_ChooseFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_ChooseFile.Location = new System.Drawing.Point(1239, 18);
+            this.Btn_ChooseFile.Location = new System.Drawing.Point(1239, 26);
             this.Btn_ChooseFile.Name = "Btn_ChooseFile";
             this.Btn_ChooseFile.Size = new System.Drawing.Size(176, 54);
             this.Btn_ChooseFile.TabIndex = 6;
@@ -193,7 +193,6 @@
             // 
             // sv_Download
             // 
-            this.sv_Download.FileOk += new System.ComponentModel.CancelEventHandler(this.sv_Download_FileOk);
             // 
             // Teaching_materials_form
             // 

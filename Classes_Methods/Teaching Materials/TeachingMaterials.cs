@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using _401AZ_PROJECT.Models;
 
-namespace _401AZ_PROJECT.Classes.Teaching_Materials
+namespace _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial
 {
-    class TeachingMaterials : TeachingMaterials_Db_Con
+    class TeachingMaterials
     {
         public int TeachingId { get; set; }
         public string Filename { get; set; }
@@ -18,64 +19,7 @@ namespace _401AZ_PROJECT.Classes.Teaching_Materials
         public byte[] FileContent { get; set; }
         public string Teacher_FName { get; set;}
         public string Teacher_LName { get;set;}
-    }
 
-    class FileExtension : FileExtension_Db_Con
-    {
-        public int File_Extension_Id { get; set; }
-        public string File_Extension { get; set; }
-    }
-
-    class FileExtension_Db_Con
-    {
-        readonly DB_details c = new DB_details();
-
-
-        public void InsertFileExtension(FileExtension fe)
-        {
-            using (var connection = new MySqlConnection(c.connection_details))
-            {
-                connection.Open();
-                using (MySqlCommand cmd = new MySqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "CALL sp_insert_file_extension(@p1)";
-                    //cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p1", fe.File_Extension);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public List<FileExtension> GetFileExtension(string extension)
-        {
-            List<FileExtension> fe = new List<FileExtension>();
-            using (var connection = new MySqlConnection(c.connection_details))
-            {
-                connection.Open();
-                using (MySqlCommand cmd = new MySqlCommand("sp_select_file_extension_by_file_extension", connection))
-                {
-                    cmd.Parameters.AddWithValue("file_extension_par", extension);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            fe.Add(new FileExtension
-                            {
-                                File_Extension_Id = reader.GetInt32(0)
-                            });
-                        }
-                    }
-                }
-                return fe;
-            }
-        }
-
-    }
-
-    class TeachingMaterials_Db_Con
-    {
         readonly DB_details c = new DB_details();
 
         public List<TeachingMaterials> GetTeachingMaterials()

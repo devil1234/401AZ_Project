@@ -99,13 +99,13 @@
     <Compile Include="Forms\Timetable_form.Designer.cs">
       <DependentUpon>Timetable_form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes_Methods\DB_details.cs" />
+    <Compile Include="Models\DB_details.cs" />
     <Compile Include="Classes_Methods\TimeTable\TimeTable.cs" />
     <Compile Include="Classes_Methods\Enrolments\Enrolments.cs" />
-    <Compile Include="Classes_Methods\PersonalDetails\Addresses.cs" />
+    <Compile Include="Models\PersonalDetails\Addresses.cs" />
     <Compile Include="Classes_Methods\Students\StudentParentsDetails.cs" />
     <Compile Include="Classes_Methods\Students\Students.cs" />
-    <Compile Include="Classes_Methods\Teacher\Teachers.cs" />
+    <Compile Include="Classes_Methods\Teachers\Teacher.cs" />
     <Compile Include="Classes_Methods\Teaching Materials\TeachingMaterials.cs" />
     <Compile Include="Forms\Project.cs">
       <SubType>Form</SubType>
@@ -113,6 +113,7 @@
     <Compile Include="Forms\Project.Designer.cs">
       <DependentUpon>Project.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Models.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Enrolments_form.resx">
