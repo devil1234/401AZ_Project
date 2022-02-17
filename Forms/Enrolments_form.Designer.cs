@@ -397,6 +397,7 @@
             this.Cb_StudentId.Name = "Cb_StudentId";
             this.Cb_StudentId.Size = new System.Drawing.Size(212, 28);
             this.Cb_StudentId.TabIndex = 59;
+            this.Cb_StudentId.SelectedIndexChanged += new System.EventHandler(this.Cb_StudentId_SelectedIndexChanged);
             // 
             // Enrolments_form
             // 

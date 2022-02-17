@@ -165,12 +165,6 @@ namespace _401AZ_PROJECT
             Lbl_TeacherId.Visible = false;
             Cb_TeacherId.Visible = false;
 
-            Lbl_Student_FName.Visible = false;
-            Cb_Student_FName.Visible = false;
-
-            Lbl_Student_LName.Visible = false;
-            Cb_Student_LName.Visible = false;
-
             Lbl_Subject.Visible = false;
             Cb_Subject.Visible = false;
 
@@ -484,6 +478,21 @@ namespace _401AZ_PROJECT
             //Perform click on Cancel Button after update
             Btn_Cancel.PerformClick();
             Btn_Refresh.PerformClick();
+        }
+
+        private void Cb_StudentId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cb_Student_FName.DataSource = Cb_StudentId.DataSource;
+            Cb_Student_LName.DataSource = Cb_StudentId.DataSource;
+            Cb_Student_FName.DisplayMember = "Student_FName";
+            Cb_Student_FName.ValueMember = "StudentId";
+
+            Cb_Student_LName.DisplayMember = "Student_LName";
+            Cb_Student_LName.ValueMember = "StudentId";
+
+            Cb_StudentId.DisplayMember = "StudentId";
+            Cb_StudentId.ValueMember = "StudentId";
+
         }
     }
 }
