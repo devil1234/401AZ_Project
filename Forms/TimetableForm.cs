@@ -14,18 +14,18 @@ using System.Windows.Forms;
 
 namespace _401AZ_PROJECT
 {
-    public partial class Timetable_form : Form
+    public partial class TimetableForm : Form
     {
 
-        readonly DataManager DM = new DataManager();
-        readonly TimeTable timetable = new TimeTable();
-        readonly Days day = new Days();
-        readonly Teachers teacher = new Teachers();
-        readonly Classrooms classroom = new Classrooms();
-        readonly StartTimeDay std = new StartTimeDay();
-        readonly EndTimeDay etd = new EndTimeDay();
+        readonly DataManager _dm = new DataManager();
+        readonly TimeTable _timetable = new TimeTable();
+        readonly Days _day = new Days();
+        readonly Teachers _teacher = new Teachers();
+        readonly Classrooms _classroom = new Classrooms();
+        readonly StartTimeDay _std = new StartTimeDay();
+        readonly EndTimeDay _etd = new EndTimeDay();
 
-        public Timetable_form()
+        public TimetableForm()
         {
             InitializeComponent();
         }
@@ -46,14 +46,14 @@ namespace _401AZ_PROJECT
         //Search the database by textbox entry
         private void Btn_search_timetable_Click(object sender, EventArgs e)
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetClasses_By_Classroom(Txt_class_search.Text));
+            dgv_classes.DataSource = _dm.ToDataTable(_timetable.GetClasses_By_Classroom(Txt_class_search.Text));
 
         }
 
         //Load the database data on load
         private void Timetable_Load(object sender, EventArgs e)
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetClasses());
+            dgv_classes.DataSource = _dm.ToDataTable(_timetable.GetClasses());
             Populate_Form();
         }
 
@@ -85,7 +85,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            dgv_classes.DataSource = DM.ToDataTable(timetable.GetClasses());
+            dgv_classes.DataSource = _dm.ToDataTable(_timetable.GetClasses());
             Populate_Form();
         }
 
@@ -187,7 +187,7 @@ namespace _401AZ_PROJECT
         private void PopulateButtons()
         {
             //cb_Day_id
-            cb_Day.DataSource = DM.ToDataTable(day.GetDays());
+            cb_Day.DataSource = _dm.ToDataTable(_day.GetDays());
             cb_Day.DisplayMember = "Day_Name";
             cb_Day.ValueMember = "Day_Id_pk";
             cb_Day.Text = dgv_classes.SelectedCells[1].Value.ToString();
@@ -199,7 +199,7 @@ namespace _401AZ_PROJECT
             Dtp_End_Time.Text = dgv_classes.SelectedCells[3].Value.ToString();
 
             //cb_TeacherId
-            Cb_TeacherId.DataSource = DM.ToDataTable(teacher.GetTeacher_FName_LName());
+            Cb_TeacherId.DataSource = _dm.ToDataTable(_teacher.GetTeacher_FName_LName());
             Cb_TeacherId.DisplayMember = "Teacher_Id";
             if (dgv_classes.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
@@ -300,40 +300,40 @@ namespace _401AZ_PROJECT
         {
 
             // Check if the ClassroomName is existing in db, if not insert it and return the id
-            var classroom_name = Txt_class_search.Text;
-            if (DM.ToDataTable(classroom.GetClassroomId(classroom_name)).Rows.Count == 0)
+            var classroomName = Txt_class_search.Text;
+            if (_dm.ToDataTable(_classroom.GetClassroomId(classroomName)).Rows.Count == 0)
             {
-                classroom.InsertClassroom(classroom_name);
+                _classroom.InsertClassroom(classroomName);
             }
-            var ClassroomId = Int32.Parse(DM.ToDataTable(classroom.GetClassroomId(classroom_name)).Rows[0].Field<string>("classroom_id"));
+            var classroomId = Int32.Parse(_dm.ToDataTable(_classroom.GetClassroomId(classroomName)).Rows[0].Field<string>("classroom_id"));
 
 
             //Retrive the subject text from textbox
-            var Subject = Txtb_Subject.Text;
+            var subject = Txtb_Subject.Text;
             
             //Retrieve the Teacher Id text from ComboBox
             var teacherId = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
             
             // Check if the StartTimeDay is existing in db, if not insert it and retrieve the id
-            var StartTimeDay = Dtp_Start_Time.Value.ToShortTimeString();
-            if (DM.ToDataTable(std.GetStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay))).Rows.Count == 0)
+            var startTimeDay = Dtp_Start_Time.Value.ToShortTimeString();
+            if (_dm.ToDataTable(_std.GetStartTimeDayIdByStd(Convert.ToDateTime(startTimeDay))).Rows.Count == 0)
             {
-                std.InsertStartTimeDay(Convert.ToDateTime(StartTimeDay));
+                _std.InsertStartTimeDay(Convert.ToDateTime(startTimeDay));
             }
-            var StartTimeDayId = Int32.Parse(DM.ToDataTable(std.GetStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay))).Rows[0].Field<string>("start_time_day_id"));
+            var startTimeDayId = Int32.Parse(_dm.ToDataTable(_std.GetStartTimeDayIdByStd(Convert.ToDateTime(startTimeDay))).Rows[0].Field<string>("start_time_day_id"));
 
             // Check if the EndTimeDay is existing in db, if not insert it and return the id
-            var EndTimeDay = Dtp_End_Time.Value.ToShortTimeString();
-            if (DM.ToDataTable(etd.GetEndTimeDayIdByStd(Convert.ToDateTime(EndTimeDay))).Rows.Count == 0)
+            var endTimeDay = Dtp_End_Time.Value.ToShortTimeString();
+            if (_dm.ToDataTable(_etd.GetEndTimeDayIdByStd(Convert.ToDateTime(endTimeDay))).Rows.Count == 0)
             {
-                etd.InsertEndTimeDay(Convert.ToDateTime(EndTimeDay));
+                _etd.InsertEndTimeDay(Convert.ToDateTime(endTimeDay));
             }
-            var EndTimeDayId = Int32.Parse(DM.ToDataTable(etd.GetEndTimeDayIdByStd(Convert.ToDateTime(EndTimeDay))).Rows[0].Field<string>("end_time_day_id"));
+            var endTimeDayId = Int32.Parse(_dm.ToDataTable(_etd.GetEndTimeDayIdByStd(Convert.ToDateTime(endTimeDay))).Rows[0].Field<string>("end_time_day_id"));
 
-            var DayId = Int32.Parse(cb_Day.SelectedValue.ToString());
+            var dayId = Int32.Parse(cb_Day.SelectedValue.ToString());
 
 
-            timetable.InsertClasses(ClassroomId, Subject, teacherId, StartTimeDayId, EndTimeDayId, DayId);
+            _timetable.InsertClasses(classroomId, subject, teacherId, startTimeDayId, endTimeDayId, dayId);
             Btn_Cancel.PerformClick();
             //Btn_Refresh.PerformClick();
         }
@@ -367,7 +367,7 @@ namespace _401AZ_PROJECT
 
                 if (result == DialogResult.Yes)
                 {
-                    timetable.DeleteTimetable(index);
+                    _timetable.DeleteTimetable(index);
                     Btn_Refresh.PerformClick();
                 }
             }
@@ -400,48 +400,48 @@ namespace _401AZ_PROJECT
             var classId = Int32.Parse(Tb_ClassId.Text);
 
             //UPDTAE THE CLASSROOM NAME based on text and if not null check and retrieve the id
-            var classroom_name_new = Txt_class_search.Text;
-            if(classroom_name_new != null)
+            var classroomNameNew = Txt_class_search.Text;
+            if(classroomNameNew != null)
             {
-                var classroom_name_old = dgv_classes.SelectedCells[4].Value.ToString();
-                classroom.UpdateClassroom(classroom_name_old, classroom_name_new);
+                var classroomNameOld = dgv_classes.SelectedCells[4].Value.ToString();
+                _classroom.UpdateClassroom(classroomNameOld, classroomNameNew);
             }
-            var ClassroomId = Int32.Parse(DM.ToDataTable(classroom.GetClassroomId
-                (classroom_name_new)).Rows[0].Field<string>("classroom_id"));
+            var classroomId = Int32.Parse(_dm.ToDataTable(_classroom.GetClassroomId
+                (classroomNameNew)).Rows[0].Field<string>("classroom_id"));
 
             //Retrive the subject text from textbox
-            var Subject = Txtb_Subject.Text;
+            var subject = Txtb_Subject.Text;
 
             //Retrieve the Teacher Id text from ComboBox
             var teacherId = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
 
             //UPDATE START TIME BASED ON COMBOBOX AND ONLY IF IS NEW StartTimeDay
-            var StartTimeDay_new = Dtp_Start_Time.Value.ToShortTimeString();
-            if(StartTimeDay_new != dgv_classes.SelectedCells[2].Value.ToString()) 
+            var startTimeDayNew = Dtp_Start_Time.Value.ToShortTimeString();
+            if(startTimeDayNew != dgv_classes.SelectedCells[2].Value.ToString()) 
             {
-                var StartTimeDay_old = dgv_classes.SelectedCells[2].Value.ToString();
-                std.UpdateStartTimeDayIdByStd(Convert.ToDateTime(StartTimeDay_old), Convert.ToDateTime(StartTimeDay_new));
+                var startTimeDayOld = dgv_classes.SelectedCells[2].Value.ToString();
+                _std.UpdateStartTimeDayIdByStd(Convert.ToDateTime(startTimeDayOld), Convert.ToDateTime(startTimeDayNew));
             }
-            var StartTimeDayId = Int32.Parse(DM.ToDataTable(std.GetStartTimeDayIdByStd
-                (Convert.ToDateTime(StartTimeDay_new))).Rows[0].Field<string>("start_time_day_id"));
+            var startTimeDayId = Int32.Parse(_dm.ToDataTable(_std.GetStartTimeDayIdByStd
+                (Convert.ToDateTime(startTimeDayNew))).Rows[0].Field<string>("start_time_day_id"));
 
             //UPDATE END TIME BASED ON COMBOBOX AND ONLY IF IS NEW EndTimeDay
-            var EndTimeDay_new = Dtp_End_Time.Value.ToShortTimeString();
-            if(EndTimeDay_new != dgv_classes.SelectedCells[3].Value.ToString())
+            var endTimeDayNew = Dtp_End_Time.Value.ToShortTimeString();
+            if(endTimeDayNew != dgv_classes.SelectedCells[3].Value.ToString())
             {
-                var EndTimeDay_old = dgv_classes.SelectedCells[3].Value.ToString();
-                etd.UpdateEndTimeDayIdByEtd(Convert.ToDateTime(EndTimeDay_old), Convert.ToDateTime(EndTimeDay_new));
+                var endTimeDayOld = dgv_classes.SelectedCells[3].Value.ToString();
+                _etd.UpdateEndTimeDayIdByEtd(Convert.ToDateTime(endTimeDayOld), Convert.ToDateTime(endTimeDayNew));
             }
-            var EndTimeDayId = Int32.Parse(DM.ToDataTable(etd.GetEndTimeDayIdByStd(Convert.ToDateTime(EndTimeDay_new))).Rows[0].Field<string>("end_time_day_id"));
+            var endTimeDayId = Int32.Parse(_dm.ToDataTable(_etd.GetEndTimeDayIdByStd(Convert.ToDateTime(endTimeDayNew))).Rows[0].Field<string>("end_time_day_id"));
 
             //retrive the DayId from Combobox
 
             //cb_Day.SelectedValue = dgv_classes.SelectedCells[1].Value.ToString();
-            var DayId = Int32.Parse(cb_Day.SelectedValue.ToString());
+            var dayId = Int32.Parse(cb_Day.SelectedValue.ToString());
 
-            MessageBox.Show(Convert.ToString(DayId));
+            MessageBox.Show(Convert.ToString(dayId));
             //Execute the Update with above variables
-            timetable.UpdateTimeTable(classId, ClassroomId, Subject, teacherId, StartTimeDayId, EndTimeDayId, DayId);
+            _timetable.UpdateTimeTable(classId, classroomId, subject, teacherId, startTimeDayId, endTimeDayId, dayId);
 
             Btn_Cancel.PerformClick();
             Btn_Refresh.PerformClick();

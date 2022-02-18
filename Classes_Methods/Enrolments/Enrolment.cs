@@ -15,20 +15,20 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
     {
         public int StudentId { get; set; } //0
         public int ClassId { get; set; } // 1
-        public string Student_FName { get; set; } // 2
-        public string Student_LName { get; set; } // 3
+        public string StudentFName { get; set; } // 2
+        public string StudentLName { get; set; } // 3
         public string Classroom { get; set; } // 4
         public string Subject { get; set; } // 5 
         public DateTime StartDate { get; set; } //6
         public DateTime EndDate { get; set; } //7
         public int TeacherId { get; set; } //8
 
-        readonly DataManager c = new DataManager();
+        readonly DataManager _c = new DataManager();
 
         public List<Enrolment> GetEnrolments()
         {
             List<Enrolment> e = new List<Enrolment>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -43,8 +43,8 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
                             {
                                 StudentId = reader.GetInt32(0),
                                 ClassId = reader.GetInt32(1),
-                                Student_FName = reader.GetString(2),
-                                Student_LName = reader.GetString(3),
+                                StudentFName = reader.GetString(2),
+                                StudentLName = reader.GetString(3),
                                 Classroom = reader.GetString(4),
                                 Subject = reader.GetString(5),
                                 StartDate = reader.GetDateTime(6),
@@ -62,7 +62,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
         public List<Enrolment> GetEnrolmentsByStudentId(int studentId)
         {
             List<Enrolment> e = new List<Enrolment>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -78,8 +78,8 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
                             {
                                 StudentId = reader.GetInt32(0),
                                 ClassId = reader.GetInt32(1),
-                                Student_FName = reader.GetString(2),
-                                Student_LName = reader.GetString(3),
+                                StudentFName = reader.GetString(2),
+                                StudentLName = reader.GetString(3),
                                 Classroom = reader.GetString(4),
                                 Subject = reader.GetString(5),
                                 StartDate = reader.GetDateTime(6),
@@ -96,7 +96,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
 
         public void DeleteEnrolment(int classId)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_delete_enrolment_by_class_id", connection))
@@ -113,7 +113,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
 
         async public void InsertEnrolment(int student_id_par, int class_id_par, int date_start_id_par, int date_end_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 await connection.OpenAsync();
                 using (MySqlCommand cmd = new MySqlCommand("sp_insert_enrolments", connection))
@@ -132,7 +132,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
 
         public void UpdateEnrolment(int student_id_par, int class_id_par, int date_start_id_par, int date_end_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_update_enrolments_by_student_id", connection))

@@ -1,6 +1,6 @@
 ﻿namespace _401AZ_PROJECT
 {
-    partial class Timetable_form
+    partial class TimetableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -488,7 +488,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.Name = "Timetable_form";
+            this.Name = "TimetableForm";
             this.ShowIcon = false;
             this.Text = "Time tables manager";
             this.Load += new System.EventHandler(this.Timetable_Load);

@@ -1,6 +1,6 @@
 ﻿namespace _401AZ_PROJECT
 {
-    partial class Enrolments_form
+    partial class EnrolmentsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -467,7 +467,7 @@
             this.Controls.Add(this.Btn_SaveNew);
             this.Controls.Add(this.Dgv_Enrolments);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Enrolments_form";
+            this.Name = "EnrolmentsForm";
             this.ShowIcon = false;
             this.Text = "Enrolments Manager";
             this.Load += new System.EventHandler(this.Enrolments_form_Load);

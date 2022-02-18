@@ -1,6 +1,6 @@
 ﻿namespace _401AZ_PROJECT
 {
-    partial class Student_form
+    partial class StudentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -607,7 +607,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.Name = "Student_form";
+            this.Name = "StudentForm";
             this.ShowIcon = false;
             this.Text = "Students Manager";
             this.Load += new System.EventHandler(this.Student_form_Load);

@@ -12,13 +12,13 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails
 {
     public class StudentParentsDetail : Person
     {
-        readonly DataManager c = new DataManager();
+        readonly DataManager _c = new DataManager();
 
         //Create a new datatable with a variable classroom
         public List<StudentParentsDetail> GetParentDetailsByFName(string parent_fname_par)
         {
             List<StudentParentsDetail> spd = new List<StudentParentsDetail>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_select_parent_by_first_name", connection))
@@ -47,7 +47,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails
 
         public void UpdateParentDetails(int parent_id_par, string first_name_par, string last_name_par, string phone_number_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_update_student_parents_details_by_parent_id", connection))
@@ -66,7 +66,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails
         // INSERT TO DATABASE AND END RETURN THE LAST ID INSERTED
         public int InsertParentsDetails(string first_name_par, string last_name_par, string phone_number_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_insert_student_parent_details", connection))
@@ -78,8 +78,8 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails
                     cmd.Parameters["@parent_id_par"].Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteScalar();
-                    int parent_id = Convert.ToInt32(cmd.Parameters["@parent_id_par"].Value.ToString());
-                    return parent_id;
+                    int parentId = Convert.ToInt32(cmd.Parameters["@parent_id_par"].Value.ToString());
+                    return parentId;
                 }
             }
         }

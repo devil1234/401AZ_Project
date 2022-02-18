@@ -17,13 +17,13 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
         public int StudentId { get; set; }
 
 
-        readonly DataManager c = new DataManager();
+        readonly DataManager _c = new DataManager();
 
         //SELECT FNAME AND LNAME FOR STUDENT BY STUDENT ID
         public List<Student> GetStudent_FName_LName_By_Id()
         {
-            List<Student> Students = new List<Student>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            List<Student> students = new List<Student>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -34,25 +34,25 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
                     {
                         while (reader.Read())
                         {
-                            Students.Add(new Student
+                            students.Add(new Student
                             {
                                 StudentId = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2)
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2)
 
                             });
                         }
                     }
                 }
-                return Students;
+                return students;
             }
         }
 
         // SELECT ONLY THE STUDENT FNAME AND LNAME AND RETURNING AS A LIST
         public List<Student> GetStudent_FName_LName()
         {
-            List<Student> Students = new List<Student>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            List<Student> students = new List<Student>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -63,25 +63,25 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
                     {
                         while (reader.Read())
                         {
-                            Students.Add(new Student
+                            students.Add(new Student
                             {
                                 StudentId = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2)
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2)
 
                             });
                         }
                     }
                 }
-                return Students;
+                return students;
             }
         }
 
         // GET THE LIST OF STUDENTS AND RETURN THE LIST OF STUDENTS
         public List<Student> GetStudents()
         {
-            List<Student> Students = new List<Student>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            List<Student> students = new List<Student>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -92,14 +92,14 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
                     {
                         while (reader.Read())
                         {
-                            Students.Add(new Student 
+                            students.Add(new Student 
                             {
                                 StudentId = reader.GetInt32(0),
-                                First_Name= reader.GetString(1),
-                                Last_Name= reader.GetString(2),
-                                DOB = reader.GetDateTime(3),
+                                FirstName= reader.GetString(1),
+                                LastName= reader.GetString(2),
+                                Dob = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                EMail_Address = reader.GetString(5),
+                                EMailAddress = reader.GetString(5),
                                 ParentId = reader.GetInt32(6),
                                 ParentFName = reader.GetString(7),
                                 ParentLName = reader.GetString(8),
@@ -114,15 +114,15 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
                         }
                     }
                 }
-                return Students;
+                return students;
             }
         }
 
         // GET THE LIST OF STUDENTS BY ID 
-        public List<Student> GetStudentsByID(int studentId)
+        public List<Student> GetStudentsById(int studentId)
         {
-            List<Student> Students = new List<Student>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            List<Student> students = new List<Student>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -134,14 +134,14 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
                     {
                         while (reader.Read())
                         {
-                            Students.Add(new Student
+                            students.Add(new Student
                             {
                                 StudentId = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2),
-                                DOB = reader.GetDateTime(3),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dob = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                EMail_Address = reader.GetString(5),
+                                EMailAddress = reader.GetString(5),
                                 ParentId = reader.GetInt32(6),
                                 ParentFName = reader.GetString(7),
                                 ParentLName = reader.GetString(8),
@@ -156,7 +156,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
                         }
                     }
                 }
-                return Students;
+                return students;
             }
         }
 
@@ -164,7 +164,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
         async public void InsertStudent(int student_first_name_id_par, int student_last_name_id_par, int student_dob_id_par, 
             int gender_id_par, int student_e_mail_id_par, int student_parent_id_par, int student_address_home_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 await connection.OpenAsync();
                 using (MySqlCommand cmd = new MySqlCommand("sp_insert_student", connection))
@@ -185,7 +185,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
 
         public void DeleteStudent(int student_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_delete_student_by_student_id", connection))
@@ -202,7 +202,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Students.Students
         public void UpdateStudent(int student_id_par, int student_first_name_id_par, int student_last_name_id_par, int student_dob_id_par, 
             int gender_id_par, int student_e_mail_id_par, int student_parent_id_par, int student_address_home_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_update_student", connection))

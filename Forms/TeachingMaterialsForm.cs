@@ -15,55 +15,55 @@ using _401AZ_PROJECT.Models;
 
 namespace _401AZ_PROJECT
 {
-    public partial class Teaching_materials_form : Form
+    public partial class TeachingMaterialsForm : Form
     {
-        readonly DataManager DM = new DataManager();
-        readonly TeachingMaterials tm = new TeachingMaterials();
-        readonly FileExtension fe = new FileExtension();
-        readonly Teachers teacher = new Teachers();
+        readonly DataManager _dm = new DataManager();
+        readonly TeachingMaterials _tm = new TeachingMaterials();
+        readonly FileExtension _fe = new FileExtension();
+        readonly Teachers _teacher = new Teachers();
 
-        public Teaching_materials_form()
+        public TeachingMaterialsForm()
         {
             InitializeComponent();
         }
 
         private void Fd_Upload_FileOk(object sender, CancelEventArgs e)
         {
-            UInt32 FileSize;
+            UInt32 fileSize;
             byte[] rawData;
             FileStream fs;
 
             TeachingMaterials t = new TeachingMaterials();
-            FileExtension FE = new FileExtension();
+            FileExtension fe = new FileExtension();
 
             Fd_Upload.Filter = "all file|*.*";
             var filepath = Fd_Upload.FileName;
             
             t.Filename = Path.GetFileNameWithoutExtension(filepath);
-            FE.File_Extension = Path.GetExtension(filepath);
+            fe.FileExtension = Path.GetExtension(filepath);
             t.Description = Txt_Description.Text;
 
             fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
-            FileSize = Convert.ToUInt32(fs.Length);
+            fileSize = Convert.ToUInt32(fs.Length);
 
-            rawData = new byte[FileSize];
-            fs.Read(rawData, 0, (Convert.ToInt32(FileSize)));
+            rawData = new byte[fileSize];
+            fs.Read(rawData, 0, (Convert.ToInt32(fileSize)));
             fs.Close();
 
-            int Teacher_id = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
+            int teacherId = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
 
-            if (DM.ToDataTable(FE.GetFileExtensionId(FE.File_Extension)).Rows.Count == 0)
+            if (_dm.ToDataTable(fe.GetFileExtensionId(fe.FileExtension)).Rows.Count == 0)
             {
-                FE.InsertFileExtension(FE);
+                fe.InsertFileExtension(fe);
             }
 
-            var file_extension_id = DM.ToDataTable(FE.GetFileExtensionId(FE.File_Extension)).Rows[0].Field<string>("file_extension_id");
+            var fileExtensionId = _dm.ToDataTable(fe.GetFileExtensionId(fe.FileExtension)).Rows[0].Field<string>("file_extension_id");
             if (Txt_Description.Text.Length < 0)
             {
                 Txt_Description.Text = "No Description";
             }
 
-            try {t.InsertTeachingMaterial(t.Filename, Convert.ToInt32(file_extension_id), t.Description, rawData, Teacher_id);}
+            try {t.InsertTeachingMaterial(t.Filename, Convert.ToInt32(fileExtensionId), t.Description, rawData, teacherId);}
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
 
@@ -112,7 +112,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_Upload_Click(object sender, EventArgs e)
         {
-            Cb_TeacherId.DataSource = DM.ToDataTable(teacher.GetTeacher_FName_LName());
+            Cb_TeacherId.DataSource = _dm.ToDataTable(_teacher.GetTeacher_FName_LName());
             Cb_TeacherId.DisplayMember = "Teacher_Id";
             if (Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
@@ -134,14 +134,14 @@ namespace _401AZ_PROJECT
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            Dgv_TeachingMaterials.DataSource = DM.ToDataTable(tm.GetTeachingMaterials());
+            Dgv_TeachingMaterials.DataSource = _dm.ToDataTable(_tm.GetTeachingMaterials());
             Dgv_TeachingMaterials.Columns["FileContent"].Visible = false;
         }
 
 
         private void Teaching_materials_form_Load(object sender, EventArgs e)
         {
-            Dgv_TeachingMaterials.DataSource = DM.ToDataTable(tm.GetTeachingMaterials());
+            Dgv_TeachingMaterials.DataSource = _dm.ToDataTable(_tm.GetTeachingMaterials());
             Dgv_TeachingMaterials.Columns["FileContent"].Visible = false;
             Dgv_TeachingMaterials.Columns["Teacher_id"].Visible = false;
         }
@@ -158,7 +158,7 @@ namespace _401AZ_PROJECT
 
                 if (result == DialogResult.Yes)
                 {
-                    tm.DeleteTeachingMaterial(index);
+                    _tm.DeleteTeachingMaterial(index);
                     Btn_Refresh.PerformClick();
                 }
             }
@@ -170,12 +170,12 @@ namespace _401AZ_PROJECT
             if(Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
 
-                string fn_no_ext = Dgv_TeachingMaterials.SelectedCells[1].Value.ToString();
+                string fnNoExt = Dgv_TeachingMaterials.SelectedCells[1].Value.ToString();
                 string fe = Dgv_TeachingMaterials.SelectedCells[2].Value.ToString();
                 
-                sv_Download.Filter = fn_no_ext + fe + "|*" + fe;
+                sv_Download.Filter = fnNoExt + fe + "|*" + fe;
                 sv_Download.Title = "Get a file from database";
-                sv_Download.FileName = fn_no_ext + fe;
+                sv_Download.FileName = fnNoExt + fe;
                 sv_Download.DefaultExt = fe;
                 sv_Download.ShowDialog();
             }
@@ -184,7 +184,7 @@ namespace _401AZ_PROJECT
         private void sv_Download_FileOk(object sender, CancelEventArgs e)
         {
             int index = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[0].Value.ToString());
-            TeachingMaterials downloadData = tm.GetTeachingMaterialsWithFileContentByTeachingId(index);
+            TeachingMaterials downloadData = _tm.GetTeachingMaterialsWithFileContentByTeachingId(index);
             try 
             {   
                 File.WriteAllBytes(sv_Download.FileName, downloadData.FileContent);

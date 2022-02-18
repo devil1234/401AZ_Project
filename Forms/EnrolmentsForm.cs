@@ -15,17 +15,17 @@ using _401AZ_PROJECT.Classes_Methods.TimeTables;
 
 namespace _401AZ_PROJECT
 {
-    public partial class Enrolments_form : Form
+    public partial class EnrolmentsForm : Form
     {
 
-        readonly DataManager DM = new DataManager();
-        readonly Enrolment enrol = new Enrolment();
-        readonly Student student = new Student();
-        readonly TimeTable tm = new TimeTable();
-        readonly DateStart ds = new DateStart();
-        readonly DateEnd de = new DateEnd();
+        readonly DataManager _dm = new DataManager();
+        readonly Enrolment _enrol = new Enrolment();
+        readonly Student _student = new Student();
+        readonly TimeTable _tm = new TimeTable();
+        readonly DateStart _ds = new DateStart();
+        readonly DateEnd _de = new DateEnd();
 
-        public Enrolments_form()
+        public EnrolmentsForm()
         {
             InitializeComponent();
         }
@@ -53,7 +53,7 @@ namespace _401AZ_PROJECT
 
         private void Enrolments_form_Load(object sender, EventArgs e)
         {
-            Dgv_Enrolments.DataSource = DM.ToDataTable(enrol.GetEnrolments());
+            Dgv_Enrolments.DataSource = _dm.ToDataTable(_enrol.GetEnrolments());
             PopulateForm();
         }
 
@@ -72,7 +72,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            Dgv_Enrolments.DataSource = DM.ToDataTable(enrol.GetEnrolments());
+            Dgv_Enrolments.DataSource = _dm.ToDataTable(_enrol.GetEnrolments());
             PopulateForm();
         }
 
@@ -273,7 +273,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_search_student_by_id_Click(object sender, EventArgs e)
         {
-            Dgv_Enrolments.DataSource = DM.ToDataTable(enrol.GetEnrolmentsByStudentId(Convert.ToInt32(Txtb_StudentId_Search.Text)));
+            Dgv_Enrolments.DataSource = _dm.ToDataTable(_enrol.GetEnrolmentsByStudentId(Convert.ToInt32(Txtb_StudentId_Search.Text)));
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
@@ -288,7 +288,7 @@ namespace _401AZ_PROJECT
 
                 if (result == DialogResult.Yes)
                 {
-                    enrol.DeleteEnrolment(index);
+                    _enrol.DeleteEnrolment(index);
                     Btn_Refresh.PerformClick();
                 }
             }
@@ -306,7 +306,7 @@ namespace _401AZ_PROJECT
         private void PopulateButtons()
         {
             //Student Id
-            Cb_StudentId.DataSource = DM.ToDataTable(student.GetStudent_FName_LName());
+            Cb_StudentId.DataSource = _dm.ToDataTable(_student.GetStudent_FName_LName());
             Cb_StudentId.DisplayMember = "StudentId";
             Cb_StudentId.ValueMember = "StudentId";
             //Cb_StudentId.SelectedValue = Dgv_Enrolments.SelectedCells[0].Value.ToString();
@@ -318,7 +318,7 @@ namespace _401AZ_PROJECT
             Dtp_DateEnd.Text = DateTime.Now.ToString();
 
             //Class Id
-            Cb_ClassId.DataSource = DM.ToDataTable(tm.GetClasses());
+            Cb_ClassId.DataSource = _dm.ToDataTable(_tm.GetClasses());
             Cb_ClassId.DisplayMember = "Class_Id";
             Cb_ClassId.ValueMember = "Class_Id";
             //Cb_ClassId.SelectedIndex = 0;
@@ -366,27 +366,27 @@ namespace _401AZ_PROJECT
             var studentId = Int32.Parse(Cb_StudentId.SelectedValue.ToString());
 
             //Retrieve the ClassId from Combobox
-            var ClassId = Int32.Parse(Cb_ClassId.SelectedValue.ToString());
+            var classId = Int32.Parse(Cb_ClassId.SelectedValue.ToString());
 
             //check if the Date Start is existing in db, if not insert it and retrieve the id
-            var DateStart = Dtp_DateStart.Value.ToShortDateString();
-            if(DM.ToDataTable(ds.GetStartDateByDate(Convert.ToDateTime(DateStart))).Rows.Count == 0)
+            var dateStart = Dtp_DateStart.Value.ToShortDateString();
+            if(_dm.ToDataTable(_ds.GetStartDateByDate(Convert.ToDateTime(dateStart))).Rows.Count == 0)
             {
-                ds.InsertDateStart(Convert.ToDateTime(DateStart));
+                _ds.InsertDateStart(Convert.ToDateTime(dateStart));
             }
-            var DateStartId = Int32.Parse(DM.ToDataTable(ds.GetStartDateByDate
-                (Convert.ToDateTime(DateStart))).Rows[0].Field<string>("date_start_id"));
+            var dateStartId = Int32.Parse(_dm.ToDataTable(_ds.GetStartDateByDate
+                (Convert.ToDateTime(dateStart))).Rows[0].Field<string>("date_start_id"));
 
             //check if the Date End is existing in db, if not insert it and retrieve the id
-            var DateEnd = Dtp_DateEnd.Value.ToShortDateString();
-            if (DM.ToDataTable(de.GetEndDateByDate(Convert.ToDateTime(DateEnd))).Rows.Count == 0)
+            var dateEnd = Dtp_DateEnd.Value.ToShortDateString();
+            if (_dm.ToDataTable(_de.GetEndDateByDate(Convert.ToDateTime(dateEnd))).Rows.Count == 0)
             {
-                de.InsertDateEnd(Convert.ToDateTime(DateEnd));
+                _de.InsertDateEnd(Convert.ToDateTime(dateEnd));
             }
-            var DateEndId = Int32.Parse(DM.ToDataTable(de.GetEndDateByDate
-                (Convert.ToDateTime(DateEnd))).Rows[0].Field<string>("date_end_id"));
+            var dateEndId = Int32.Parse(_dm.ToDataTable(_de.GetEndDateByDate
+                (Convert.ToDateTime(dateEnd))).Rows[0].Field<string>("date_end_id"));
 
-            enrol.InsertEnrolment(studentId,ClassId,DateStartId,DateEndId);
+            _enrol.InsertEnrolment(studentId,classId,dateStartId,dateEndId);
             Btn_Cancel.PerformClick();
             Btn_Refresh.PerformClick();
 
@@ -417,31 +417,31 @@ namespace _401AZ_PROJECT
             var studentId = Int32.Parse(Cb_StudentId.SelectedValue.ToString());
 
             //Retrieve the ClassId from Combobox
-            var ClassId = Int32.Parse(Cb_ClassId.SelectedValue.ToString());
+            var classId = Int32.Parse(Cb_ClassId.SelectedValue.ToString());
 
             //Update Start Date Based on date time picker and only if is new Start Date
-            var StartDate_new = Dtp_DateStart.Value.ToShortDateString();
-            if(StartDate_new != Dgv_Enrolments.SelectedCells[6].Value.ToString())
+            var startDateNew = Dtp_DateStart.Value.ToShortDateString();
+            if(startDateNew != Dgv_Enrolments.SelectedCells[6].Value.ToString())
             {
-                var StartDate_old = Dgv_Enrolments.SelectedCells[6].Value.ToString();
-                ds.UpdateDateStartByDate(Convert.ToDateTime(StartDate_old), Convert.ToDateTime(StartDate_new));
+                var startDateOld = Dgv_Enrolments.SelectedCells[6].Value.ToString();
+                _ds.UpdateDateStartByDate(Convert.ToDateTime(startDateOld), Convert.ToDateTime(startDateNew));
             }
-            var StartDateId = Int32.Parse(DM.ToDataTable(ds.GetStartDateByDate
-                (Convert.ToDateTime(StartDate_new))).Rows[0].Field<string>("date_start_id"));
+            var startDateId = Int32.Parse(_dm.ToDataTable(_ds.GetStartDateByDate
+                (Convert.ToDateTime(startDateNew))).Rows[0].Field<string>("date_start_id"));
 
 
             //Update End Date Based on date time picker and only if is new Start Date
-            var EndDate_new = Dtp_DateEnd.Value.ToShortDateString();
-            if(EndDate_new != Dgv_Enrolments.SelectedCells[7].Value.ToString())
+            var endDateNew = Dtp_DateEnd.Value.ToShortDateString();
+            if(endDateNew != Dgv_Enrolments.SelectedCells[7].Value.ToString())
             {
-                var EndDate_old = Dgv_Enrolments.SelectedCells[7].Value.ToString();
-                de.UpdateDateEndByDate(Convert.ToDateTime(EndDate_old), Convert.ToDateTime(EndDate_new));
+                var endDateOld = Dgv_Enrolments.SelectedCells[7].Value.ToString();
+                _de.UpdateDateEndByDate(Convert.ToDateTime(endDateOld), Convert.ToDateTime(endDateNew));
             }
-            var EndDateId = Int32.Parse(DM.ToDataTable(de.GetEndDateByDate
-                 (Convert.ToDateTime(EndDate_new))).Rows[0].Field<string>("date_end_id"));
+            var endDateId = Int32.Parse(_dm.ToDataTable(_de.GetEndDateByDate
+                 (Convert.ToDateTime(endDateNew))).Rows[0].Field<string>("date_end_id"));
 
             //Execute the update with above variables 
-            enrol.UpdateEnrolment(studentId, ClassId, StartDateId, EndDateId);
+            _enrol.UpdateEnrolment(studentId, classId, startDateId, endDateId);
 
             //Perform click on Cancel Button after update
             Btn_Cancel.PerformClick();

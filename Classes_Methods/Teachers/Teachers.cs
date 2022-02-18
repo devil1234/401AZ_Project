@@ -11,14 +11,14 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
 {
     public class Teachers : Person
     {
-        public int Teacher_Id { get; set; }
+        public int TeacherId { get; set; }
 
-        readonly DataManager c = new DataManager();
+        readonly DataManager _c = new DataManager();
 
         public List<Teachers> GetTeachers()
         {
             List<Teachers> teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -31,12 +31,12 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             teachers.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2),
-                                DOB = reader.GetDateTime(3),
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dob = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                EMail_Address = reader.GetString(5),
+                                EMailAddress = reader.GetString(5),
                                 AddressId = reader.GetInt32(6),
                                 AddressStreet = reader.GetString(7),
                                 AddressCity = reader.GetString(8),
@@ -53,7 +53,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
         public List<Teachers> GetTeacher_FName_LName_By_Id()
         {
             List<Teachers> teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -66,9 +66,9 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             teachers.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2)
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2)
 
                             });
                         }
@@ -81,7 +81,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
         public List<Teachers> GetTeacher_FName_LName()
         {
             List<Teachers> teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -94,9 +94,9 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             teachers.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2)
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2)
 
                             });
                         }
@@ -107,10 +107,10 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
         }
 
         // GET THE LIST OF TEACHERS BY ID 
-        public List<Teachers> GetTeacherByID(int teacher_id_par)
+        public List<Teachers> GetTeacherById(int teacher_id_par)
         {
             List<Teachers> tc = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
@@ -124,12 +124,12 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             tc.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2),
-                                DOB = reader.GetDateTime(3),
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dob = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                EMail_Address = reader.GetString(5),
+                                EMailAddress = reader.GetString(5),
                                 AddressId = reader.GetInt32(6),
                                 AddressStreet = reader.GetString(7),
                                 AddressCity = reader.GetString(8),
@@ -146,7 +146,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
 
         async public void InsertTeacher(int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 await connection.OpenAsync();
                 using (MySqlCommand cmd = new MySqlCommand("sp_insert_teacher", connection))
@@ -167,7 +167,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
 
         public void DeleteTeacher(int teacher_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_delete_teacher_by_teacher_id", connection))
@@ -183,7 +183,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
 
         public void UpdateTeacher(int teacher_id_par, int first_name_id_par, int last_name_id_par, int dob_id_par,int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_update_teacher_by_teacher_id", connection))

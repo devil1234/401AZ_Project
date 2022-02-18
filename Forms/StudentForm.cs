@@ -16,19 +16,19 @@ using System.Windows.Forms;
 
 namespace _401AZ_PROJECT
 {
-    public partial class Student_form : Form
+    public partial class StudentForm : Form
     {
-        readonly DataManager DM = new DataManager();
-        readonly Student st = new Student();
-        readonly FirstNames fn = new FirstNames();
-        readonly LastName ln = new LastName();
-        readonly DOB dob = new DOB();
-        readonly Genders genders = new Genders();
-        readonly Emails em = new Emails();
-        readonly StudentParentsDetail spd = new StudentParentsDetail();
-        readonly Address adr = new Address();
+        readonly DataManager _dm = new DataManager();
+        readonly Student _st = new Student();
+        readonly FirstNames _fn = new FirstNames();
+        readonly LastName _ln = new LastName();
+        readonly Dob _dob = new Dob();
+        readonly Genders _genders = new Genders();
+        readonly Emails _em = new Emails();
+        readonly StudentParentsDetail _spd = new StudentParentsDetail();
+        readonly Address _adr = new Address();
 
-        public Student_form()
+        public StudentForm()
         {
             InitializeComponent();
         }
@@ -68,12 +68,12 @@ namespace _401AZ_PROJECT
 
         private void Btn_search_student_Click(object sender, EventArgs e)
         {
-            Dgv_Students.DataSource = DM.ToDataTable(st.GetStudentsByID(Convert.ToInt32(Txtb_StudentId.Text)));
+            Dgv_Students.DataSource = _dm.ToDataTable(_st.GetStudentsById(Convert.ToInt32(Txtb_StudentId.Text)));
         }
 
         private void Student_form_Load(object sender, EventArgs e)
         {
-            Dgv_Students.DataSource = DM.ToDataTable(st.GetStudents());
+            Dgv_Students.DataSource = _dm.ToDataTable(_st.GetStudents());
             Populate_Form();
         }
 
@@ -103,7 +103,7 @@ namespace _401AZ_PROJECT
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            Dgv_Students.DataSource = DM.ToDataTable(st.GetStudents());
+            Dgv_Students.DataSource = _dm.ToDataTable(_st.GetStudents());
             Populate_Form();
         }
 
@@ -259,7 +259,7 @@ namespace _401AZ_PROJECT
             Dtp_DOB.Text = DateTime.Now.ToString();
 
             //Gender ComboBox
-            Cb_Gender.DataSource = DM.ToDataTable(genders.GetGenders());
+            Cb_Gender.DataSource = _dm.ToDataTable(_genders.GetGenders());
             Cb_Gender.DisplayMember = "Gender";
             Cb_Gender.ValueMember = "gender_id";
             Cb_Gender.Text = Dgv_Students.SelectedCells[4].Value.ToString();
@@ -372,67 +372,67 @@ namespace _401AZ_PROJECT
         private void Btn_SaveNew_Click(object sender, EventArgs e)
         {
             //Retrive the Student FName from txtbox, insert it into db with checks and retrieve the id
-            var StudentFName = TxtB_StudentFName.Text;
-            if (DM.ToDataTable(fn.GetFirstNameIdByFName(StudentFName)).Rows.Count == 0)
+            var studentFName = TxtB_StudentFName.Text;
+            if (_dm.ToDataTable(_fn.GetFirstNameIdByFName(studentFName)).Rows.Count == 0)
             {
-                fn.InsertFirstName(StudentFName);
+                _fn.InsertFirstName(studentFName);
             }
-            var StudentFNameId = Int32.Parse(DM.ToDataTable(fn.GetFirstNameIdByFName(StudentFName)).Rows[0].Field<string>("first_name_id"));
+            var studentFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName(studentFName)).Rows[0].Field<string>("first_name_id"));
 
             //Retrive the Student LName from txtbox, insert it into db with checks and retrieve the id
-            var StudentLName = Txtb_StudentLName.Text;
-            if (DM.ToDataTable(ln.GetLastNameIdByLName(StudentLName)).Rows.Count == 0)
+            var studentLName = Txtb_StudentLName.Text;
+            if (_dm.ToDataTable(_ln.GetLastNameIdByLName(studentLName)).Rows.Count == 0)
             {
-                ln.InsertLastName(StudentLName);
+                _ln.InsertLastName(studentLName);
             }
-            var StudentLNameId = Int32.Parse(DM.ToDataTable(ln.GetLastNameIdByLName(StudentLName)).Rows[0].Field<string>("last_name_id"));
+            var studentLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(studentLName)).Rows[0].Field<string>("last_name_id"));
 
             //Retrive the Student DOB from DateTimePicker, insert it into db with checks and retrieve the id
-            var DOB = Dtp_DOB.Value.ToShortDateString();
-            if (DM.ToDataTable(dob.GetDoBIdByDoBDate(Convert.ToDateTime(DOB))).Rows.Count == 0)
+            var dob = Dtp_DOB.Value.ToShortDateString();
+            if (_dm.ToDataTable(_dob.GetDoBIdByDoBDate(Convert.ToDateTime(dob))).Rows.Count == 0)
             {
-                dob.InsertDoB(Convert.ToDateTime(DOB));
+                _dob.InsertDoB(Convert.ToDateTime(dob));
             }
-            var dobId = Int32.Parse(DM.ToDataTable(dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(DOB))).Rows[0].Field<string>("dob_id"));
+            var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
+                (Convert.ToDateTime(dob))).Rows[0].Field<string>("dob_id"));
 
             //Retrive the Student Gender from ComboBox
-            var GenderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
+            var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
 
             //Retrive the Student email from txtbox, insert it into db with checks and retrieve the id
-            var StudentEmail = Txtb_email.Text;
-            if (DM.ToDataTable(em.GetEmailIdByEmail(StudentEmail)).Rows.Count == 0)
+            var studentEmail = Txtb_email.Text;
+            if (_dm.ToDataTable(_em.GetEmailIdByEmail(studentEmail)).Rows.Count == 0)
             {
-                em.InsertEmail(StudentEmail);
+                _em.InsertEmail(studentEmail);
             }
-            var StudentEmailId = Int32.Parse(DM.ToDataTable(em.GetEmailIdByEmail
-                (StudentEmail)).Rows[0].Field<string>("e_mail_id"));
+            var studentEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
+                (studentEmail)).Rows[0].Field<string>("e_mail_id"));
 
             //Retrieve parent details from txtboxes,insert with checks and retrieve the id
-            var ParentFname = Txtb_ParentFName.Text;
-            var ParentLname = TxtB_ParentLName.Text;
-            var ParentPN = Txtb_ParentPN.Text;
-            if(DM.ToDataTable(spd.GetParentDetailsByFName(ParentFname)).Rows.Count == 0)
+            var parentFname = Txtb_ParentFName.Text;
+            var parentLname = TxtB_ParentLName.Text;
+            var parentPn = Txtb_ParentPN.Text;
+            if(_dm.ToDataTable(_spd.GetParentDetailsByFName(parentFname)).Rows.Count == 0)
             {
-                spd.InsertParentsDetails(ParentFname, ParentLname, ParentPN);
+                _spd.InsertParentsDetails(parentFname, parentLname, parentPn);
             }
-            var ParentId = Int32.Parse(DM.ToDataTable(spd.GetParentDetailsByFName
-                (ParentFname)).Rows[0].Field<string>("ParentId"));
+            var parentId = Int32.Parse(_dm.ToDataTable(_spd.GetParentDetailsByFName
+                (parentFname)).Rows[0].Field<string>("ParentId"));
 
             //Retrieve address details from txtboxes, insert with checks and retrieve the id
-            var AddressStreet = Txtb_AddressStreet.Text;
-            var AddressCity = Txtb_AddressCity.Text;
-            var AddressRegion = Txtb_AddressRegion.Text;
-            var AddressPostCode = Txtb_AddressPostCode.Text;
-            if (DM.ToDataTable(adr.GetAddressesByCity(AddressCity)).Rows.Count == 0)
+            var addressStreet = Txtb_AddressStreet.Text;
+            var addressCity = Txtb_AddressCity.Text;
+            var addressRegion = Txtb_AddressRegion.Text;
+            var addressPostCode = Txtb_AddressPostCode.Text;
+            if (_dm.ToDataTable(_adr.GetAddressesByCity(addressCity)).Rows.Count == 0)
             {
-                adr.InsertAddressDetails(AddressStreet, AddressCity, AddressRegion, AddressPostCode);
+                _adr.InsertAddressDetails(addressStreet, addressCity, addressRegion, addressPostCode);
             }
-            var AddressId = Int32.Parse(DM.ToDataTable(adr.GetAddressesByCity
-                (AddressCity)).Rows[0].Field<string>("AddressId"));
+            var addressId = Int32.Parse(_dm.ToDataTable(_adr.GetAddressesByCity
+                (addressCity)).Rows[0].Field<string>("AddressId"));
 
             //Insert the Student Details
-            st.InsertStudent(StudentFNameId, StudentLNameId, dobId, GenderId, StudentEmailId, ParentId, AddressId);
+            _st.InsertStudent(studentFNameId, studentLNameId, dobId, genderId, studentEmailId, parentId, addressId);
             Btn_Cancel.PerformClick();
         }
 
@@ -449,7 +449,7 @@ namespace _401AZ_PROJECT
 
                 if (result == DialogResult.Yes)
                 {
-                    st.DeleteStudent(index);
+                    _st.DeleteStudent(index);
                     Btn_Refresh.PerformClick();
                 }
             }
@@ -481,70 +481,70 @@ namespace _401AZ_PROJECT
         private void Btn_Save_Click(object sender, EventArgs e)
         {
             //Retrieve the StudentId
-            var StudentId = Int32.Parse(Dgv_Students.SelectedCells[0].Value.ToString());
+            var studentId = Int32.Parse(Dgv_Students.SelectedCells[0].Value.ToString());
 
             //Update Student FName
-            var StudentFName_new = TxtB_StudentFName.Text;
-            if(StudentFName_new != null)
+            var studentFNameNew = TxtB_StudentFName.Text;
+            if(studentFNameNew != null)
             {
-                var StudentFname_old = Dgv_Students.SelectedCells[1].Value.ToString();
-                fn.UpdateFName(StudentFname_old, StudentFName_new);
+                var studentFnameOld = Dgv_Students.SelectedCells[1].Value.ToString();
+                _fn.UpdateFName(studentFnameOld, studentFNameNew);
             }
-            var StudentFNameId = Int32.Parse(DM.ToDataTable(fn.GetFirstNameIdByFName
-                (StudentFName_new)).Rows[0].Field<string>("first_name_id"));
+            var studentFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName
+                (studentFNameNew)).Rows[0].Field<string>("first_name_id"));
 
             //Update Student LName
-            var StudentLName_new = Txtb_StudentLName.Text;
-            if (StudentLName_new != null)
+            var studentLNameNew = Txtb_StudentLName.Text;
+            if (studentLNameNew != null)
             {
-                var StudentLname_old = Dgv_Students.SelectedCells[2].Value.ToString();
-                ln.UpdateLName(StudentLname_old, StudentLName_new);
+                var studentLnameOld = Dgv_Students.SelectedCells[2].Value.ToString();
+                _ln.UpdateLName(studentLnameOld, studentLNameNew);
             }
-            var StudentLNameId = Int32.Parse(DM.ToDataTable(ln.GetLastNameIdByLName
-                (StudentLName_new)).Rows[0].Field<string>("last_name_id"));
+            var studentLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName
+                (studentLNameNew)).Rows[0].Field<string>("last_name_id"));
 
             //Update DOB
-            var dob_new = Dtp_DOB.Value.ToShortDateString();
-            if (dob_new != Dgv_Students.SelectedCells[3].Value.ToString())
+            var dobNew = Dtp_DOB.Value.ToShortDateString();
+            if (dobNew != Dgv_Students.SelectedCells[3].Value.ToString())
             {
-                var dob_old = Dgv_Students.SelectedCells[3].Value.ToString();
-                dob.UpdateDoB(Convert.ToDateTime(dob_old), Convert.ToDateTime(dob_new));
+                var dobOld = Dgv_Students.SelectedCells[3].Value.ToString();
+                _dob.UpdateDoB(Convert.ToDateTime(dobOld), Convert.ToDateTime(dobNew));
             }
-            var dobId = Int32.Parse(DM.ToDataTable(dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(dob_new))).Rows[0].Field<string>("dob_id"));
+            var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
+                (Convert.ToDateTime(dobNew))).Rows[0].Field<string>("dob_id"));
 
             //Update Gender
-            var GenderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
+            var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
 
             //Update Email
-            var Email_new = Txtb_email.Text;
-            if (Email_new != null)
+            var emailNew = Txtb_email.Text;
+            if (emailNew != null)
             {
-                var email_old = Dgv_Students.SelectedCells[5].Value.ToString();
-                em.UpdateEmail(email_old, Email_new);
+                var emailOld = Dgv_Students.SelectedCells[5].Value.ToString();
+                _em.UpdateEmail(emailOld, emailNew);
             }
-            var StudentEmailId = Int32.Parse(DM.ToDataTable(em.GetEmailIdByEmail
-                (Email_new)).Rows[0].Field<string>("e_mail_id"));
+            var studentEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
+                (emailNew)).Rows[0].Field<string>("e_mail_id"));
 
             //Parent Details
             //Retrieve the text from txtboxes and passed on update function
             var parentId = Int32.Parse(Dgv_Students.SelectedCells[6].Value.ToString());
-            var ParentFname_new = Txtb_ParentFName.Text;
-            var ParentLname_new = Txtb_ParentFName.Text;
-            var ParentPN_new = Txtb_ParentPN.Text;
-            spd.UpdateParentDetails(parentId, ParentFname_new, ParentLname_new, ParentPN_new);
+            var parentFnameNew = Txtb_ParentFName.Text;
+            var parentLnameNew = Txtb_ParentFName.Text;
+            var parentPnNew = Txtb_ParentPN.Text;
+            _spd.UpdateParentDetails(parentId, parentFnameNew, parentLnameNew, parentPnNew);
 
             //Address Details
             //For addressId exist two methods can be retrivied
             var addressId = Int32.Parse(Dgv_Students.SelectedCells[10].Value.ToString());
-            var AddressStreet = Txtb_AddressStreet.Text;
-            var AddressCity = Txtb_AddressCity.Text;
-            var AddressRegion = Txtb_AddressRegion.Text;
-            var AddressPostcode = Txtb_AddressPostCode.Text;
-            adr.UpdateAddressDetails(addressId, AddressStreet, AddressCity, AddressRegion, AddressPostcode);
+            var addressStreet = Txtb_AddressStreet.Text;
+            var addressCity = Txtb_AddressCity.Text;
+            var addressRegion = Txtb_AddressRegion.Text;
+            var addressPostcode = Txtb_AddressPostCode.Text;
+            _adr.UpdateAddressDetails(addressId, addressStreet, addressCity, addressRegion, addressPostcode);
 
             //Update the student details
-            st.UpdateStudent(StudentId, StudentFNameId, StudentLNameId, dobId, GenderId, StudentEmailId, parentId, addressId);
+            _st.UpdateStudent(studentId, studentFNameId, studentLNameId, dobId, genderId, studentEmailId, parentId, addressId);
 
             Btn_Cancel.PerformClick();
             

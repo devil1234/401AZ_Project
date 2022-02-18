@@ -13,12 +13,12 @@ namespace _401AZ_PROJECT.Classes_Methods.Addresses
     public class Address : Person
     {
 
-        readonly DataManager c = new DataManager();
+        readonly DataManager _c = new DataManager();
 
         public List<Address> GetAddressesByCity(string address_city_par)
         {
             List<Address> adr = new List<Address>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_select_address_by_adddress_city", connection))
@@ -48,7 +48,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Addresses
         // INSERT TO DATABASE AND END RETURN THE LAST ID INSERTED
         public int InsertAddressDetails(string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_insert_address", connection))
@@ -61,15 +61,15 @@ namespace _401AZ_PROJECT.Classes_Methods.Addresses
                     cmd.Parameters["@address_id_par"].Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteScalar();
-                    int address_id = Convert.ToInt32(cmd.Parameters["@address_id_par"].Value.ToString());
-                    return address_id;
+                    int addressId = Convert.ToInt32(cmd.Parameters["@address_id_par"].Value.ToString());
+                    return addressId;
                 }
             }
         }
 
         public void UpdateAddressDetails(int address_id_par, string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand("sp_update_address", connection))

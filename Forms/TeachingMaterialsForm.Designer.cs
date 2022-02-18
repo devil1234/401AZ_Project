@@ -1,6 +1,6 @@
 ﻿namespace _401AZ_PROJECT
 {
-    partial class Teaching_materials_form
+    partial class TeachingMaterialsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -286,7 +286,7 @@
             this.Controls.Add(this.Dgv_TeachingMaterials);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Teaching_materials_form";
+            this.Name = "TeachingMaterialsForm";
             this.ShowIcon = false;
             this.Text = "Teaching Materials";
             this.Load += new System.EventHandler(this.Teaching_materials_form_Load);
