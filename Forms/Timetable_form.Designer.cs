@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mySqlDataAdapter1 = new MySqlConnector.MySqlDataAdapter();
             this.mySqlDataAdapter2 = new MySqlConnector.MySqlDataAdapter();
             this.dgv_classes = new System.Windows.Forms.DataGridView();
             this.Lbl_ClassNameSearch = new System.Windows.Forms.Label();
             this.Txt_class_search = new System.Windows.Forms.TextBox();
             this.Btn_search_timetable = new System.Windows.Forms.Button();
-            this.Btn_SaveNew = new System.Windows.Forms.Button();
             this.Btn_Update = new System.Windows.Forms.Button();
             this.Btn_Save = new System.Windows.Forms.Button();
             this.Btn_Delete = new System.Windows.Forms.Button();
@@ -53,11 +54,13 @@
             this.Lbl_Subject = new System.Windows.Forms.Label();
             this.Cb_T_Fname = new System.Windows.Forms.ComboBox();
             this.Cb_T_Lname = new System.Windows.Forms.ComboBox();
-            this.btn_InsertNew = new System.Windows.Forms.Button();
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Lbl_TeacherId = new System.Windows.Forms.Label();
             this.Cb_TeacherId = new System.Windows.Forms.ComboBox();
             this.Txtb_Subject = new System.Windows.Forms.TextBox();
+            this.Lbl_Timetabledetails = new System.Windows.Forms.Label();
+            this.Btn_SaveNew = new System.Windows.Forms.Button();
+            this.btn_InsertNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_classes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,18 +87,34 @@
             this.dgv_classes.AllowUserToResizeColumns = false;
             this.dgv_classes.AllowUserToResizeRows = false;
             this.dgv_classes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_classes.BackgroundColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_classes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_classes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_classes.GridColor = System.Drawing.Color.DarkBlue;
-            this.dgv_classes.Location = new System.Drawing.Point(12, 222);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_classes.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_classes.Location = new System.Drawing.Point(12, 267);
+            this.dgv_classes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgv_classes.Name = "dgv_classes";
             this.dgv_classes.ReadOnly = true;
             this.dgv_classes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgv_classes.RowHeadersVisible = false;
             this.dgv_classes.RowHeadersWidth = 51;
             this.dgv_classes.RowTemplate.Height = 24;
             this.dgv_classes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_classes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_classes.Size = new System.Drawing.Size(1543, 523);
+            this.dgv_classes.Size = new System.Drawing.Size(1543, 478);
             this.dgv_classes.TabIndex = 0;
             this.dgv_classes.SelectionChanged += new System.EventHandler(this.dgv_classes_SelectionChanged);
             // 
@@ -104,10 +123,10 @@
             this.Lbl_ClassNameSearch.AutoSize = true;
             this.Lbl_ClassNameSearch.BackColor = System.Drawing.Color.Transparent;
             this.Lbl_ClassNameSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_ClassNameSearch.Location = new System.Drawing.Point(13, 195);
+            this.Lbl_ClassNameSearch.Location = new System.Drawing.Point(13, 194);
             this.Lbl_ClassNameSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_ClassNameSearch.Name = "Lbl_ClassNameSearch";
-            this.Lbl_ClassNameSearch.Size = new System.Drawing.Size(150, 20);
+            this.Lbl_ClassNameSearch.Size = new System.Drawing.Size(127, 17);
             this.Lbl_ClassNameSearch.TabIndex = 1;
             this.Lbl_ClassNameSearch.Text = "Classroom name";
             // 
@@ -117,8 +136,9 @@
             this.Txt_class_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Txt_class_search.Location = new System.Drawing.Point(200, 188);
             this.Txt_class_search.Margin = new System.Windows.Forms.Padding(4);
+            this.Txt_class_search.MaxLength = 10;
             this.Txt_class_search.Name = "Txt_class_search";
-            this.Txt_class_search.Size = new System.Drawing.Size(117, 27);
+            this.Txt_class_search.Size = new System.Drawing.Size(117, 23);
             this.Txt_class_search.TabIndex = 2;
             this.Txt_class_search.TextChanged += new System.EventHandler(this.Txt_class_search_TextChanged);
             this.Txt_class_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_class_search_KeyDown);
@@ -137,24 +157,11 @@
             this.Btn_search_timetable.Visible = false;
             this.Btn_search_timetable.Click += new System.EventHandler(this.Btn_search_timetable_Click);
             // 
-            // Btn_SaveNew
-            // 
-            this.Btn_SaveNew.BackColor = System.Drawing.SystemColors.Control;
-            this.Btn_SaveNew.Enabled = false;
-            this.Btn_SaveNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_SaveNew.Location = new System.Drawing.Point(1060, 75);
-            this.Btn_SaveNew.Name = "Btn_SaveNew";
-            this.Btn_SaveNew.Size = new System.Drawing.Size(159, 28);
-            this.Btn_SaveNew.TabIndex = 5;
-            this.Btn_SaveNew.Text = "Save New";
-            this.Btn_SaveNew.UseVisualStyleBackColor = false;
-            this.Btn_SaveNew.Visible = false;
-            this.Btn_SaveNew.Click += new System.EventHandler(this.Btn_SaveNew_Click);
-            // 
             // Btn_Update
             // 
             this.Btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Update.Location = new System.Drawing.Point(1060, 111);
+            this.Btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Update.Name = "Btn_Update";
             this.Btn_Update.Size = new System.Drawing.Size(159, 28);
             this.Btn_Update.TabIndex = 6;
@@ -165,7 +172,7 @@
             // Btn_Save
             // 
             this.Btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Save.Location = new System.Drawing.Point(1060, 147);
+            this.Btn_Save.Location = new System.Drawing.Point(1060, 146);
             this.Btn_Save.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Save.Name = "Btn_Save";
             this.Btn_Save.Size = new System.Drawing.Size(159, 28);
@@ -178,7 +185,8 @@
             // Btn_Delete
             // 
             this.Btn_Delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Delete.Location = new System.Drawing.Point(1060, 189);
+            this.Btn_Delete.Location = new System.Drawing.Point(1060, 190);
+            this.Btn_Delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Delete.Name = "Btn_Delete";
             this.Btn_Delete.Size = new System.Drawing.Size(159, 28);
             this.Btn_Delete.TabIndex = 8;
@@ -205,7 +213,7 @@
             this.Lbl_ClassID.Location = new System.Drawing.Point(13, 43);
             this.Lbl_ClassID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_ClassID.Name = "Lbl_ClassID";
-            this.Lbl_ClassID.Size = new System.Drawing.Size(82, 20);
+            this.Lbl_ClassID.Size = new System.Drawing.Size(67, 17);
             this.Lbl_ClassID.TabIndex = 10;
             this.Lbl_ClassID.Text = "Class ID";
             // 
@@ -213,10 +221,10 @@
             // 
             this.Lbl_Day.AutoSize = true;
             this.Lbl_Day.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Day.Location = new System.Drawing.Point(13, 83);
+            this.Lbl_Day.Location = new System.Drawing.Point(13, 82);
             this.Lbl_Day.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Day.Name = "Lbl_Day";
-            this.Lbl_Day.Size = new System.Drawing.Size(42, 20);
+            this.Lbl_Day.Size = new System.Drawing.Size(36, 17);
             this.Lbl_Day.TabIndex = 11;
             this.Lbl_Day.Text = "Day";
             // 
@@ -224,10 +232,10 @@
             // 
             this.Lbl_StartTime.AutoSize = true;
             this.Lbl_StartTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_StartTime.Location = new System.Drawing.Point(13, 115);
+            this.Lbl_StartTime.Location = new System.Drawing.Point(13, 114);
             this.Lbl_StartTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_StartTime.Name = "Lbl_StartTime";
-            this.Lbl_StartTime.Size = new System.Drawing.Size(97, 20);
+            this.Lbl_StartTime.Size = new System.Drawing.Size(83, 17);
             this.Lbl_StartTime.TabIndex = 12;
             this.Lbl_StartTime.Text = "Start Time";
             // 
@@ -235,10 +243,10 @@
             // 
             this.Lbl_EndTimeDay.AutoSize = true;
             this.Lbl_EndTimeDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_EndTimeDay.Location = new System.Drawing.Point(13, 147);
+            this.Lbl_EndTimeDay.Location = new System.Drawing.Point(13, 146);
             this.Lbl_EndTimeDay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_EndTimeDay.Name = "Lbl_EndTimeDay";
-            this.Lbl_EndTimeDay.Size = new System.Drawing.Size(88, 20);
+            this.Lbl_EndTimeDay.Size = new System.Drawing.Size(76, 17);
             this.Lbl_EndTimeDay.TabIndex = 13;
             this.Lbl_EndTimeDay.Text = "End Time";
             // 
@@ -248,9 +256,10 @@
             this.Tb_ClassId.Enabled = false;
             this.Tb_ClassId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Tb_ClassId.Location = new System.Drawing.Point(200, 39);
+            this.Tb_ClassId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Tb_ClassId.Name = "Tb_ClassId";
             this.Tb_ClassId.ReadOnly = true;
-            this.Tb_ClassId.Size = new System.Drawing.Size(117, 27);
+            this.Tb_ClassId.Size = new System.Drawing.Size(117, 23);
             this.Tb_ClassId.TabIndex = 14;
             // 
             // cb_Day
@@ -259,8 +268,9 @@
             this.cb_Day.Enabled = false;
             this.cb_Day.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.cb_Day.Location = new System.Drawing.Point(200, 75);
+            this.cb_Day.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cb_Day.Name = "cb_Day";
-            this.cb_Day.Size = new System.Drawing.Size(117, 28);
+            this.cb_Day.Size = new System.Drawing.Size(117, 25);
             this.cb_Day.TabIndex = 15;
             // 
             // Dtp_Start_Time
@@ -269,10 +279,11 @@
             this.Dtp_Start_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Dtp_Start_Time.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.Dtp_Start_Time.Location = new System.Drawing.Point(200, 110);
+            this.Dtp_Start_Time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dtp_Start_Time.Name = "Dtp_Start_Time";
             this.Dtp_Start_Time.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Dtp_Start_Time.ShowUpDown = true;
-            this.Dtp_Start_Time.Size = new System.Drawing.Size(117, 27);
+            this.Dtp_Start_Time.Size = new System.Drawing.Size(117, 23);
             this.Dtp_Start_Time.TabIndex = 16;
             // 
             // Dtp_End_Time
@@ -280,16 +291,18 @@
             this.Dtp_End_Time.Enabled = false;
             this.Dtp_End_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Dtp_End_Time.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.Dtp_End_Time.Location = new System.Drawing.Point(200, 147);
+            this.Dtp_End_Time.Location = new System.Drawing.Point(200, 146);
+            this.Dtp_End_Time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dtp_End_Time.Name = "Dtp_End_Time";
             this.Dtp_End_Time.ShowUpDown = true;
-            this.Dtp_End_Time.Size = new System.Drawing.Size(117, 27);
+            this.Dtp_End_Time.Size = new System.Drawing.Size(117, 23);
             this.Dtp_End_Time.TabIndex = 17;
             // 
             // Btn_Refresh
             // 
             this.Btn_Refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Refresh.Location = new System.Drawing.Point(1395, 189);
+            this.Btn_Refresh.Location = new System.Drawing.Point(1395, 190);
+            this.Btn_Refresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Refresh.Name = "Btn_Refresh";
             this.Btn_Refresh.Size = new System.Drawing.Size(159, 28);
             this.Btn_Refresh.TabIndex = 18;
@@ -303,7 +316,7 @@
             this.Lbl_Teacher_First_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Lbl_Teacher_First_Name.Location = new System.Drawing.Point(507, 75);
             this.Lbl_Teacher_First_Name.Name = "Lbl_Teacher_First_Name";
-            this.Lbl_Teacher_First_Name.Size = new System.Drawing.Size(176, 20);
+            this.Lbl_Teacher_First_Name.Size = new System.Drawing.Size(151, 17);
             this.Lbl_Teacher_First_Name.TabIndex = 19;
             this.Lbl_Teacher_First_Name.Text = "Teacher First Name";
             // 
@@ -311,9 +324,9 @@
             // 
             this.Lbl_Teacher_Last_Name.AutoSize = true;
             this.Lbl_Teacher_Last_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Teacher_Last_Name.Location = new System.Drawing.Point(507, 109);
+            this.Lbl_Teacher_Last_Name.Location = new System.Drawing.Point(507, 110);
             this.Lbl_Teacher_Last_Name.Name = "Lbl_Teacher_Last_Name";
-            this.Lbl_Teacher_Last_Name.Size = new System.Drawing.Size(174, 20);
+            this.Lbl_Teacher_Last_Name.Size = new System.Drawing.Size(150, 17);
             this.Lbl_Teacher_Last_Name.TabIndex = 20;
             this.Lbl_Teacher_Last_Name.Text = "Teacher Last Name";
             // 
@@ -323,7 +336,7 @@
             this.Lbl_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Lbl_Subject.Location = new System.Drawing.Point(507, 148);
             this.Lbl_Subject.Name = "Lbl_Subject";
-            this.Lbl_Subject.Size = new System.Drawing.Size(72, 20);
+            this.Lbl_Subject.Size = new System.Drawing.Size(62, 17);
             this.Lbl_Subject.TabIndex = 21;
             this.Lbl_Subject.Text = "Subject";
             // 
@@ -333,9 +346,10 @@
             this.Cb_T_Fname.Enabled = false;
             this.Cb_T_Fname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Cb_T_Fname.FormattingEnabled = true;
-            this.Cb_T_Fname.Location = new System.Drawing.Point(707, 72);
+            this.Cb_T_Fname.Location = new System.Drawing.Point(707, 71);
+            this.Cb_T_Fname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_T_Fname.Name = "Cb_T_Fname";
-            this.Cb_T_Fname.Size = new System.Drawing.Size(225, 28);
+            this.Cb_T_Fname.Size = new System.Drawing.Size(225, 25);
             this.Cb_T_Fname.TabIndex = 22;
             // 
             // Cb_T_Lname
@@ -345,25 +359,16 @@
             this.Cb_T_Lname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Cb_T_Lname.FormattingEnabled = true;
             this.Cb_T_Lname.Location = new System.Drawing.Point(707, 106);
+            this.Cb_T_Lname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_T_Lname.Name = "Cb_T_Lname";
-            this.Cb_T_Lname.Size = new System.Drawing.Size(225, 28);
+            this.Cb_T_Lname.Size = new System.Drawing.Size(225, 25);
             this.Cb_T_Lname.TabIndex = 23;
-            // 
-            // btn_InsertNew
-            // 
-            this.btn_InsertNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_InsertNew.Location = new System.Drawing.Point(1060, 39);
-            this.btn_InsertNew.Name = "btn_InsertNew";
-            this.btn_InsertNew.Size = new System.Drawing.Size(159, 28);
-            this.btn_InsertNew.TabIndex = 25;
-            this.btn_InsertNew.Text = "Insert New";
-            this.btn_InsertNew.UseVisualStyleBackColor = false;
-            this.btn_InsertNew.Click += new System.EventHandler(this.btn_InsertNew_Click);
             // 
             // Btn_Cancel
             // 
             this.Btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Cancel.Location = new System.Drawing.Point(1230, 189);
+            this.Btn_Cancel.Location = new System.Drawing.Point(1229, 190);
+            this.Btn_Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Cancel.Name = "Btn_Cancel";
             this.Btn_Cancel.Size = new System.Drawing.Size(159, 28);
             this.Btn_Cancel.TabIndex = 26;
@@ -378,7 +383,7 @@
             this.Lbl_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherId.Location = new System.Drawing.Point(507, 42);
             this.Lbl_TeacherId.Name = "Lbl_TeacherId";
-            this.Lbl_TeacherId.Size = new System.Drawing.Size(102, 20);
+            this.Lbl_TeacherId.Size = new System.Drawing.Size(88, 17);
             this.Lbl_TeacherId.TabIndex = 27;
             this.Lbl_TeacherId.Text = "Teacher ID";
             // 
@@ -388,9 +393,10 @@
             this.Cb_TeacherId.Enabled = false;
             this.Cb_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cb_TeacherId.FormattingEnabled = true;
-            this.Cb_TeacherId.Location = new System.Drawing.Point(707, 35);
+            this.Cb_TeacherId.Location = new System.Drawing.Point(707, 34);
+            this.Cb_TeacherId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_TeacherId.Name = "Cb_TeacherId";
-            this.Cb_TeacherId.Size = new System.Drawing.Size(225, 28);
+            this.Cb_TeacherId.Size = new System.Drawing.Size(225, 25);
             this.Cb_TeacherId.TabIndex = 28;
             this.Cb_TeacherId.SelectedIndexChanged += new System.EventHandler(this.Cb_TeacherId_SelectedIndexChanged);
             // 
@@ -399,15 +405,57 @@
             this.Txtb_Subject.Enabled = false;
             this.Txtb_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txtb_Subject.Location = new System.Drawing.Point(707, 148);
+            this.Txtb_Subject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Txtb_Subject.MaxLength = 30;
             this.Txtb_Subject.Name = "Txtb_Subject";
-            this.Txtb_Subject.Size = new System.Drawing.Size(225, 27);
+            this.Txtb_Subject.Size = new System.Drawing.Size(225, 23);
             this.Txtb_Subject.TabIndex = 29;
+            // 
+            // Lbl_Timetabledetails
+            // 
+            this.Lbl_Timetabledetails.AutoSize = true;
+            this.Lbl_Timetabledetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Timetabledetails.Location = new System.Drawing.Point(12, 235);
+            this.Lbl_Timetabledetails.Name = "Lbl_Timetabledetails";
+            this.Lbl_Timetabledetails.Size = new System.Drawing.Size(168, 24);
+            this.Lbl_Timetabledetails.TabIndex = 30;
+            this.Lbl_Timetabledetails.Text = "Timetable details";
+            // 
+            // Btn_SaveNew
+            // 
+            this.Btn_SaveNew.AutoSize = true;
+            this.Btn_SaveNew.BackColor = System.Drawing.SystemColors.Control;
+            this.Btn_SaveNew.Enabled = false;
+            this.Btn_SaveNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_SaveNew.Location = new System.Drawing.Point(1060, 77);
+            this.Btn_SaveNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_SaveNew.Name = "Btn_SaveNew";
+            this.Btn_SaveNew.Size = new System.Drawing.Size(159, 27);
+            this.Btn_SaveNew.TabIndex = 5;
+            this.Btn_SaveNew.Text = "Save New";
+            this.Btn_SaveNew.UseVisualStyleBackColor = false;
+            this.Btn_SaveNew.Visible = false;
+            this.Btn_SaveNew.Click += new System.EventHandler(this.Btn_SaveNew_Click);
+            // 
+            // btn_InsertNew
+            // 
+            this.btn_InsertNew.AutoSize = true;
+            this.btn_InsertNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_InsertNew.Location = new System.Drawing.Point(1060, 39);
+            this.btn_InsertNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_InsertNew.Name = "btn_InsertNew";
+            this.btn_InsertNew.Size = new System.Drawing.Size(159, 27);
+            this.btn_InsertNew.TabIndex = 25;
+            this.btn_InsertNew.Text = "Insert New";
+            this.btn_InsertNew.UseVisualStyleBackColor = false;
+            this.btn_InsertNew.Click += new System.EventHandler(this.btn_InsertNew_Click);
             // 
             // Timetable_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1567, 756);
+            this.Controls.Add(this.Lbl_Timetabledetails);
             this.Controls.Add(this.Txtb_Subject);
             this.Controls.Add(this.Cb_TeacherId);
             this.Controls.Add(this.Lbl_TeacherId);
@@ -458,7 +506,6 @@
         private System.Windows.Forms.Label Lbl_ClassNameSearch;
         private System.Windows.Forms.TextBox Txt_class_search;
         private System.Windows.Forms.Button Btn_search_timetable;
-        private System.Windows.Forms.Button Btn_SaveNew;
         private System.Windows.Forms.Button Btn_Update;
         private System.Windows.Forms.Button Btn_Save;
         private System.Windows.Forms.Button Btn_Delete;
@@ -477,10 +524,12 @@
         private System.Windows.Forms.Label Lbl_Subject;
         private System.Windows.Forms.ComboBox Cb_T_Fname;
         private System.Windows.Forms.ComboBox Cb_T_Lname;
-        private System.Windows.Forms.Button btn_InsertNew;
         private System.Windows.Forms.Button Btn_Cancel;
         private System.Windows.Forms.Label Lbl_TeacherId;
         private System.Windows.Forms.ComboBox Cb_TeacherId;
         private System.Windows.Forms.TextBox Txtb_Subject;
+        private System.Windows.Forms.Label Lbl_Timetabledetails;
+        private System.Windows.Forms.Button Btn_SaveNew;
+        private System.Windows.Forms.Button btn_InsertNew;
     }
 }

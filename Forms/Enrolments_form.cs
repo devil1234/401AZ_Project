@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _401AZ_PROJECT.Classes_Methods.Enrolments;
 using _401AZ_PROJECT.Classes_Methods.Students.Students;
-using _401AZ_PROJECT.Classes_Methods.TimeTable;
+using _401AZ_PROJECT.Classes_Methods.TimeTables;
 
 namespace _401AZ_PROJECT
 {
@@ -189,6 +189,8 @@ namespace _401AZ_PROJECT
             Btn_Cancel.Visible = true;
 
             Dgv_Enrolments.Visible = false;
+
+            Lbl_EnrolmentsDetails.Visible = false;
         }
 
         private void Button_Disable()
@@ -238,6 +240,8 @@ namespace _401AZ_PROJECT
 
             Btn_Save.Visible = false;
 
+            Lbl_EnrolmentsDetails.Visible = true;
+
             PopulateForm();
         }
 
@@ -276,9 +280,9 @@ namespace _401AZ_PROJECT
         {
             if (Dgv_Enrolments.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
-                int index = Int32.Parse(Dgv_Enrolments.SelectedCells[0].Value.ToString());
+                int index = Int32.Parse(Dgv_Enrolments.SelectedCells[1].Value.ToString());
                 string caption = "Are you sure you want to delete?";
-                string message = "Do you want to delete the file with the record Id of" + " " + index + " ?";
+                string message = "Do you want to delete the Enrolment with the Class Id of" + " " + index + " ?";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, caption, buttons);
 
@@ -293,9 +297,10 @@ namespace _401AZ_PROJECT
 
         private void btn_InsertNew_Click(object sender, EventArgs e)
         {
-            //UnpopulateForm();
+            UnpopulateForm();
             Button_Enable();
             PopulateButtons();
+            Btn_Cancel.Location = new Point(790, 149);
         }
 
         private void PopulateButtons()
@@ -352,6 +357,7 @@ namespace _401AZ_PROJECT
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Button_Disable();
+            Btn_Cancel.Location = new Point(918, 210);
         }
 
         private void Btn_SaveNew_Click(object sender, EventArgs e)
@@ -361,7 +367,6 @@ namespace _401AZ_PROJECT
 
             //Retrieve the ClassId from Combobox
             var ClassId = Int32.Parse(Cb_ClassId.SelectedValue.ToString());
-
 
             //check if the Date Start is existing in db, if not insert it and retrieve the id
             var DateStart = Dtp_DateStart.Value.ToShortDateString();
@@ -392,53 +397,16 @@ namespace _401AZ_PROJECT
             if (Dgv_Enrolments.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
                 //hide the buttons
-                btn_InsertNew.Visible = false;
-                Btn_SaveNew.Visible = false;
-                Btn_Update.Visible = false;
-                Btn_Delete.Visible = false;
-                Btn_Cancel.Visible = true;
-                btn_EnableSearchById.Visible = false;
-                Btn_Refresh.Visible = false;
-                Btn_Save.Visible = true;
-                Btn_search_student_by_id.Visible = false;
-                Dgv_Enrolments.Enabled = false;
-                Dgv_Enrolments.Visible = false;
+                Button_Enable();
 
                 //enable boxes
-                Cb_ClassId.Enabled = true;
-                Cb_StudentId.Enabled = true;
-                Dtp_DateStart.Enabled = true;
-                Dtp_DateEnd.Enabled = true;
-
-                Lbl_Classroom.Visible = false;
-                Cb_Classroom.Visible = false;
-
-                Lbl_TeacherId.Visible = false;
-                Cb_TeacherId.Visible = false;
-
-                Lbl_Student_FName.Visible = false;
-                Cb_Student_FName.Visible = false;
-
-                Lbl_Student_LName.Visible = false;
-                Cb_Student_LName.Visible = false;
-
-                Lbl_Subject.Visible = false;
-                Cb_Subject.Visible = false;
-
-                Btn_Update.Enabled = false;
-                Btn_Update.Visible = false;
+                Btn_SaveNew.Enabled = false;
+                Btn_SaveNew.Visible = false;
 
                 Btn_Save.Enabled = true;
                 Btn_Save.Visible = true;
 
-                Btn_Refresh.Enabled = false;
-                Btn_Refresh.Visible = false;
-
-                btn_EnableSearchById.Enabled = false;
-                btn_EnableSearchById.Visible = false;
-
-                Btn_Cancel.Visible = true;
-
+                Btn_Cancel.Location = new Point(790, 210);
                 PopulateButtons();
             }
         }
@@ -484,15 +452,27 @@ namespace _401AZ_PROJECT
         {
             Cb_Student_FName.DataSource = Cb_StudentId.DataSource;
             Cb_Student_LName.DataSource = Cb_StudentId.DataSource;
-            Cb_Student_FName.DisplayMember = "Student_FName";
+            Cb_Student_FName.DisplayMember = "First_Name";
             Cb_Student_FName.ValueMember = "StudentId";
 
-            Cb_Student_LName.DisplayMember = "Student_LName";
+            Cb_Student_LName.DisplayMember = "Last_Name";
             Cb_Student_LName.ValueMember = "StudentId";
 
             Cb_StudentId.DisplayMember = "StudentId";
             Cb_StudentId.ValueMember = "StudentId";
 
+        }
+
+        private void Dgv_Enrolments_SelectionChanged(object sender, EventArgs e)
+        {
+            if (Dgv_Enrolments.SelectedRows.Count > 0)
+            {
+                PopulateForm();
+            }
+            else
+            {
+                UnpopulateForm();
+            }
         }
     }
 }

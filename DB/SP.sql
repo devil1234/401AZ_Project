@@ -30,14 +30,23 @@ SELECT * FROM tbl_addresses;
 END // 
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_select_address_by_adddress_city(
+    IN address_city_par VARCHAR(30)
+)
+BEGIN
+SELECT * FROM tbl_addresses WHERE address_city = address_city_par;
+END // 
+DELIMITER ;
+
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_address (   
-    IN `address_id_par` INT, 
-    IN `address_street_par` VARCHAR(30),
-	IN `address_city_par` VARCHAR(30),
-	IN `address_region_par` VARCHAR(30),
-	IN `address_postcode_par` VARCHAR(30))
+    IN address_id_par INT, 
+    IN address_street_par VARCHAR(30),
+	IN address_city_par VARCHAR(30),
+	IN address_region_par VARCHAR(30),
+	IN address_postcode_par VARCHAR(30))
 BEGIN
 UPDATE tbl_addresses
 SET 
@@ -520,6 +529,15 @@ SELECT * FROM tbl_dob;
 END // 
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_select_dobid_by_dob(
+    IN dob_par DATE
+)
+BEGIN
+SELECT * FROM tbl_dob WHERE dob = dob_par; 
+END // 
+DELIMITER ;
+
 /* UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_dob_by_date(
@@ -569,6 +587,15 @@ CREATE PROCEDURE sp_select_e_mail_address(
 )
 BEGIN
 SELECT * FROM tbl_emails; 
+END // 
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_select_e_mail_address_id_by_email(
+    IN e_mail_address_par VARCHAR(255)
+)
+BEGIN
+SELECT * FROM tbl_emails WHERE e_mail_address = e_mail_address_par; 
 END // 
 DELIMITER ;
 
@@ -672,7 +699,7 @@ BEGIN
 INSERT INTO tbl_enrolments (student_id, class_id, date_start_id, date_end_id)
 SELECT * FROM (SELECT student_id_par, class_id_par, date_start_id_par,date_end_id_par) AS tmp
 WHERE NOT EXISTS (
-    SELECT student_id, class_id, date_start_id, date_end_i FROM tbl_enrolments 
+    SELECT student_id, class_id, date_start_id, date_end_id FROM tbl_enrolments 
 	 WHERE 
 	 student_id = student_id_par AND 
 	 class_id = class_id_par AND
@@ -773,11 +800,11 @@ DELIMITER ;
 
 /* DELETE SP */
 DELIMITER //
-CREATE PROCEDURE sp_delete_enrolment_by_student_id(
-    IN student_id_par INT
+CREATE PROCEDURE sp_delete_enrolment_by_class_id(
+    IN class_id_par INT
 )
 BEGIN
-DELETE FROM tbl_enrolments WHERE student_id = student_id_par;
+DELETE FROM tbl_enrolments WHERE class_id = class_id_par;
 END // 
 DELIMITER ;
 
@@ -854,6 +881,15 @@ BEGIN
 SELECT * FROM tbl_first_names; 
 END // 
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_select_first_name_by_first_name(
+    IN first_name_par VARCHAR(10)
+)
+BEGIN
+SELECT * FROM tbl_first_names WHERE first_name = first_name_par;
+END //
+DELIMTER ;
 
 /*UPDATE SP */
 DELIMITER //
@@ -951,6 +987,15 @@ SELECT * FROM tbl_last_names;
 END // 
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_select_last_name_by_last_name(
+    IN last_name_par VARCHAR(10)
+)
+BEGIN
+SELECT * FROM tbl_last_names WHERE last_name = last_name_par;
+END //
+DELIMTER ;
+
 /*UPDATE SP */
 DELIMITER //
 CREATE PROCEDURE sp_update_last_name(
@@ -1036,13 +1081,14 @@ DELIMITER ;
 
 
   /* START */
-/* tbl_parents_details */
-/* INSERT SP WITH DUPLICATE CHECK */
+/* TBL_STUDENT_PARENTS_DETAILS */
+/* INSERT SP WITH DUPLICATE CHECK AND RETURN THE LAST INSERTED ID AS A OUT PARAMETER */
 DELIMITER //
 CREATE PROCEDURE sp_insert_student_parent_details(
     IN first_name_par VARCHAR(10),
     IN last_name_par VARCHAR(10),
-    IN phone_number_par VARCHAR(6)
+    IN phone_number_par VARCHAR(11),
+    OUT parent_id_pare INT(11)
 )
 BEGIN
 INSERT INTO tbl_student_parents_details (first_name, last_name, phone_number)
@@ -1054,6 +1100,7 @@ WHERE NOT EXISTS (
 	 last_name = last_name_par AND
 	 phone_number = phone_number_par
 ) LIMIT 1;
+SET parent_id_par = LAST_INSERT_ID();
 END // 
 DELIMITER ;
 
@@ -1063,6 +1110,15 @@ CREATE PROCEDURE sp_select_student_parent_details(
 )
 BEGIN
 SELECT * FROM tbl_student_parents_details; 
+END // 
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_select_parent_by_first_name(
+   IN parent_fname_par VARCHAR(10)
+)
+BEGIN
+SELECT * FROM tbl_student_parents_details WHERE first_name = parent_fname_par; 
 END // 
 DELIMITER ;
 
@@ -1082,14 +1138,14 @@ CREATE PROCEDURE sp_update_student_parents_details_by_parent_id(
     IN parent_id_par INT,
     IN first_name_par VARCHAR(10),
     IN last_name_par VARCHAR(10),
-    IN phone_number_par VARCHAR(6)
+    IN phone_number_par VARCHAR(11)
 )
 BEGIN
 UPDATE tbl_student_parents_details
 SET 
 	first_name = IFNULL(first_name_par, first_name),
 	last_name = IFNULL(last_name_par, last_name),
-	phone_number = IFNULL(phone_number_par, phone_number_type)
+	phone_number = IFNULL(phone_number_par, phone_number)
 WHERE parent_id = parent_id_par;
 END // 
 DELIMITER ;
@@ -1116,23 +1172,21 @@ CREATE PROCEDURE sp_insert_student(
     IN student_last_name_id_par INT,
     IN student_dob_id_par INT,
     IN gender_id_par INT,
-    IN student_picture_par VARBINARY(255),
     IN student_e_mail_id_par INT,
     IN student_parent_id_par INT,
     IN student_address_home_id_par INT
 
 )
 BEGIN
-INSERT INTO tbl_students (student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_picture,student_e_mail_id, student_parent_id, student_address_home_id)
-SELECT * FROM (SELECT student_first_name_id_par, student_last_name_id_par, student_dob_id_par, gender_id_par, student_picture, student_e_mail_id_par, student_parent_id_par, student_address_home_id_par) AS tmp
+INSERT INTO tbl_students (student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_e_mail_id, student_parent_id, student_address_home_id)
+SELECT * FROM (SELECT student_first_name_id_par, student_last_name_id_par, student_dob_id_par, gender_id_par, student_e_mail_id_par, student_parent_id_par, student_address_home_id_par) AS tmp
 WHERE NOT EXISTS (
-    SELECT student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_picture_par,student_e_mail_id, student_parent_id, student_address_home_id FROM tbl_students 
+    SELECT student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_e_mail_id, student_parent_id, student_address_home_id FROM tbl_students 
     WHERE 
 	student_first_name_id = student_first_name_id_par AND
 	student_last_name_id = student_last_name_id_par AND
 	student_dob_id = student_dob_id_par AND
 	gender_id = gender_id_par AND
-	student_picture = student_picture_par AND
 	student_e_mail_id = student_e_mail_id_par AND
 	student_parent_id = student_parent_id_par AND
 	student_address_home_id = student_address_home_id_par
@@ -1152,9 +1206,11 @@ SELECT
     tbl_dob.dob,
     tbl_genders.gender,
     tbl_emails.e_mail_address,
+    tbl_student_parents_details.parent_id AS ParentID,
     tbl_student_parents_details.first_name AS Parent_FirstName,
     tbl_student_parents_details.last_name AS Parent_LastName,
     tbl_student_parents_details.phone_number AS Parent_Phone_Number,
+    tbl_addresses.address_id,
     tbl_addresses.address_street,
     tbl_addresses.address_city,
     tbl_addresses.address_region,
@@ -1175,6 +1231,48 @@ FROM
         ON (tbl_students.student_parent_id = tbl_student_parents_details.parent_id)
     INNER JOIN tbl_addresses 
         ON (tbl_students.student_address_home_id = tbl_addresses.address_id);
+END // 
+DELIMITER ;
+
+/* SELECT SP BY STUDENT ID */
+DELIMITER //
+CREATE PROCEDURE sp_select_students_by_student_id(
+    IN student_id_par INT
+)
+BEGIN
+SELECT
+    tbl_students.student_id, 
+    tbl_first_names.first_name,
+    tbl_last_names.last_name,
+    tbl_dob.dob,
+    tbl_genders.gender,
+    tbl_emails.e_mail_address,
+    tbl_student_parents_details.parent_id AS ParentID,
+    tbl_student_parents_details.first_name AS Parent_FirstName,
+    tbl_student_parents_details.last_name AS Parent_LastName,
+    tbl_student_parents_details.phone_number AS Parent_Phone_Number,
+    tbl_addresses.address_id,
+    tbl_addresses.address_street,
+    tbl_addresses.address_city,
+    tbl_addresses.address_region,
+    tbl_addresses.address_postcode
+FROM
+    tbl_students
+    INNER JOIN tbl_first_names 
+        ON (tbl_students.student_first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_genders 
+        ON (tbl_students.gender_id = tbl_genders.gender_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_students.student_last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_dob 
+        ON (tbl_students.student_dob_id = tbl_dob.dob_id)
+    INNER JOIN tbl_emails 
+        ON (tbl_students.student_e_mail_id = tbl_emails.e_mail_id)
+    INNER JOIN tbl_student_parents_details 
+        ON (tbl_students.student_parent_id = tbl_student_parents_details.parent_id)
+    INNER JOIN tbl_addresses 
+        ON (tbl_students.student_address_home_id = tbl_addresses.address_id)
+	WHERE tbl_students.student_id LIKE student_id_par;
 END // 
 DELIMITER ;
 
@@ -1205,7 +1303,6 @@ CREATE PROCEDURE sp_update_student(
     IN student_last_name_id_par INT,
     IN student_dob_id_par INT,
     IN gender_id_par INT,
-    IN student_picture_par VARBINARY(255),
     IN student_e_mail_id_par INT,
     IN student_parent_id_par INT,
     IN student_address_home_id_par INT
@@ -1217,8 +1314,7 @@ SET
 	student_last_name_id = IFNULL(student_last_name_id_par, student_last_name_id),
 	student_dob_id = IFNULL(student_dob_id_par, student_dob_id),
 	gender_id = IFNULL(gender_id_par, gender_id),
-	student_picture = IFNULL(student_picture_par, student_picture),
-	student_e_mail_id = IFNULL(student_e_mail_id_par, student_e_mail_id),
+    student_e_mail_id = IFNULL(student_e_mail_id_par, student_e_mail_id),
 	student_parent_id = IFNULL(student_parent_id_par, student_parent_id),
 	student_address_home_id = IFNULL(student_address_home_id_par, student_address_home_id)
 WHERE student_id = student_id_par;

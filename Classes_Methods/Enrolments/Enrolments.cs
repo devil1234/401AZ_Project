@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _401AZ_PROJECT.Classes_Methods.TimeTables;
 
 namespace _401AZ_PROJECT.Classes_Methods.Enrolments
 {
@@ -22,7 +23,7 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
         public DateTime EndDate { get; set; } //7
         public int TeacherId { get; set; } //8
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public List<Enrolment> GetEnrolments()
         {
@@ -93,15 +94,15 @@ namespace _401AZ_PROJECT.Classes_Methods.Enrolments
             }
         }
 
-        public void DeleteEnrolment(int studentId)
+        public void DeleteEnrolment(int classId)
         {
             using (var connection = new MySqlConnection(c.connection_details))
             {
                 connection.Open();
-                using (MySqlCommand cmd = new MySqlCommand("sp_delete_enrolment_by_student_id", connection))
+                using (MySqlCommand cmd = new MySqlCommand("sp_delete_enrolment_by_class_id", connection))
                 {
                     cmd.Connection = connection;
-                    cmd.Parameters.AddWithValue("student_id_par", studentId);
+                    cmd.Parameters.AddWithValue("class_id_par", classId);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();

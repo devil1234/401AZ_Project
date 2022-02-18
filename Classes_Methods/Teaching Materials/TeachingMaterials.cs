@@ -9,18 +9,18 @@ using _401AZ_PROJECT.Models;
 
 namespace _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial
 {
-    class TeachingMaterials
+    public class TeachingMaterials
     {
         public int TeachingId { get; set; }
         public string Filename { get; set; }
-        public string FileExtension { get; set; }
+        public string File_Extension { get; set; }
         public string Description { get; set; }
         public int Teacher_id { get; set; } 
         public byte[] FileContent { get; set; }
         public string Teacher_FName { get; set;}
         public string Teacher_LName { get;set;}
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public List<TeachingMaterials> GetTeachingMaterials()
         {
@@ -40,7 +40,7 @@ namespace _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial
                             {
                                 TeachingId = reader.GetInt32(0),
                                 Filename = reader.GetString(1),
-                                FileExtension = reader.GetString(2),
+                                File_Extension = reader.GetString(2),
                                 Description = reader.GetString(3),
                                 Teacher_id = reader.GetInt32(4),
                                 Teacher_FName = reader.GetString(5),
@@ -71,7 +71,7 @@ namespace _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial
                         {
                             tm_filecontent.TeachingId = reader.GetInt32(0);
                             tm_filecontent.Filename = reader.GetString(1);
-                            tm_filecontent.FileExtension = reader.GetString(2);
+                            tm_filecontent.File_Extension = reader.GetString(2);
                             tm_filecontent.Description = reader.GetString(3);
                             tm_filecontent.FileContent = (byte[])reader.GetValue(4);
                             tm_filecontent.Teacher_id = reader.GetInt32(5);

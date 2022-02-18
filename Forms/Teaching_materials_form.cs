@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _401AZ_PROJECT.Classes.Teaching_Materials;
 using _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial;
+using _401AZ_PROJECT.Classes_Methods.Teachers.Teacher;
 using _401AZ_PROJECT.Models;
 
 namespace _401AZ_PROJECT
@@ -19,6 +20,7 @@ namespace _401AZ_PROJECT
         readonly DataManager DM = new DataManager();
         readonly TeachingMaterials tm = new TeachingMaterials();
         readonly FileExtension fe = new FileExtension();
+        readonly Teachers teacher = new Teachers();
 
         public Teaching_materials_form()
         {
@@ -48,7 +50,7 @@ namespace _401AZ_PROJECT
             fs.Read(rawData, 0, (Convert.ToInt32(FileSize)));
             fs.Close();
 
-            t.Teacher_id = Int32.Parse(Num_TeacherId.Value.ToString());
+            int Teacher_id = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
 
             if (DM.ToDataTable(FE.GetFileExtensionId(FE.File_Extension)).Rows.Count == 0)
             {
@@ -61,7 +63,7 @@ namespace _401AZ_PROJECT
                 Txt_Description.Text = "No Description";
             }
 
-            try {t.InsertTeachingMaterial(t.Filename, Convert.ToInt32(file_extension_id), t.Description, rawData, t.Teacher_id);}
+            try {t.InsertTeachingMaterial(t.Filename, Convert.ToInt32(file_extension_id), t.Description, rawData, Teacher_id);}
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
 
@@ -75,13 +77,18 @@ namespace _401AZ_PROJECT
             Btn_ChooseFile.Visible = true;
             Btn_Download.Visible = false;
             Lbl_TeacherId.Visible = true;
-            Num_TeacherId.Visible = true;
-            Num_TeacherId.ReadOnly = false;
+            Cb_TeacherId.Visible = true;
+            Cb_TeacherId.Enabled = true;
             Btn_Refresh.Visible = false;
             Btn_Cancel.Visible = true;
             Lbl_Description.Visible = true;
             Txt_Description.Visible = true;
             Btn_Upload.Visible = false;
+            Btn_DeleteRecord.Visible = false;
+            Lbl_TeacherFName.Visible = true;
+            Lbl_TeacherLName.Visible = true;
+            Cb_TFName.Visible = true;
+            Cb_TLName.Visible = true;
         }
 
         private void ShowButtons()
@@ -89,17 +96,28 @@ namespace _401AZ_PROJECT
             Btn_ChooseFile.Visible = false;
             Btn_Download.Visible = true;
             Lbl_TeacherId.Visible = false;
-            Num_TeacherId.Visible = false;
-            Num_TeacherId.ReadOnly = true;
+            Cb_TeacherId.Visible = false;
+            Cb_TeacherId.Enabled = false;
             Btn_Refresh.Visible = true;
             Btn_Cancel.Visible = false;
             Btn_Upload.Visible = true;
             Lbl_Description.Visible = false;
             Txt_Description.Visible = false;
+            Btn_DeleteRecord.Visible = true;
+            Lbl_TeacherFName.Visible= false;
+            Lbl_TeacherLName.Visible = false;
+            Cb_TFName.Visible = false;
+            Cb_TLName.Visible = false;
         }
 
         private void Btn_Upload_Click(object sender, EventArgs e)
         {
+            Cb_TeacherId.DataSource = DM.ToDataTable(teacher.GetTeacher_FName_LName());
+            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            if (Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
+            {
+                Cb_TeacherId.SelectedValue = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[4].Value.ToString());
+            }
             HideButtons();
         }
 
@@ -125,6 +143,7 @@ namespace _401AZ_PROJECT
         {
             Dgv_TeachingMaterials.DataSource = DM.ToDataTable(tm.GetTeachingMaterials());
             Dgv_TeachingMaterials.Columns["FileContent"].Visible = false;
+            Dgv_TeachingMaterials.Columns["Teacher_id"].Visible = false;
         }
 
         private void Btn_DeleteRecord_Click(object sender, EventArgs e)
@@ -174,6 +193,20 @@ namespace _401AZ_PROJECT
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Cb_TeacherId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cb_TFName.DataSource = Cb_TeacherId.DataSource;
+            Cb_TLName.DataSource = Cb_TeacherId.DataSource;
+            Cb_TFName.DisplayMember = "First_Name";
+            Cb_TFName.ValueMember = "Teacher_Id";
+
+            Cb_TLName.DisplayMember = "Last_Name";
+            Cb_TLName.ValueMember = "Teacher_Id";
+
+            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            Cb_TeacherId.ValueMember = "Teacher_Id";
         }
     }
 }

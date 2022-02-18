@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Dgv_Enrolments = new System.Windows.Forms.DataGridView();
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.btn_InsertNew = new System.Windows.Forms.Button();
@@ -58,6 +60,7 @@
             this.Txtb_StudentId_Search = new System.Windows.Forms.TextBox();
             this.lbl = new System.Windows.Forms.Label();
             this.Cb_StudentId = new System.Windows.Forms.ComboBox();
+            this.Lbl_EnrolmentsDetails = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Enrolments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,21 +72,39 @@
             this.Dgv_Enrolments.AllowUserToResizeColumns = false;
             this.Dgv_Enrolments.AllowUserToResizeRows = false;
             this.Dgv_Enrolments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Enrolments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.Dgv_Enrolments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_Enrolments.Location = new System.Drawing.Point(12, 260);
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Enrolments.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Dgv_Enrolments.Location = new System.Drawing.Point(12, 300);
             this.Dgv_Enrolments.Name = "Dgv_Enrolments";
             this.Dgv_Enrolments.ReadOnly = true;
+            this.Dgv_Enrolments.RowHeadersVisible = false;
             this.Dgv_Enrolments.RowHeadersWidth = 51;
             this.Dgv_Enrolments.RowTemplate.Height = 24;
             this.Dgv_Enrolments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgv_Enrolments.Size = new System.Drawing.Size(1536, 550);
+            this.Dgv_Enrolments.Size = new System.Drawing.Size(1536, 510);
             this.Dgv_Enrolments.TabIndex = 0;
             this.Dgv_Enrolments.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_Enrolments_CellFormatting);
+            this.Dgv_Enrolments.SelectionChanged += new System.EventHandler(this.Dgv_Enrolments_SelectionChanged);
             // 
             // Btn_Cancel
             // 
             this.Btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Cancel.Location = new System.Drawing.Point(1225, 222);
+            this.Btn_Cancel.Location = new System.Drawing.Point(1224, 259);
             this.Btn_Cancel.Name = "Btn_Cancel";
             this.Btn_Cancel.Size = new System.Drawing.Size(159, 28);
             this.Btn_Cancel.TabIndex = 34;
@@ -95,7 +116,7 @@
             // btn_InsertNew
             // 
             this.btn_InsertNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_InsertNew.Location = new System.Drawing.Point(1055, 72);
+            this.btn_InsertNew.Location = new System.Drawing.Point(1054, 109);
             this.btn_InsertNew.Name = "btn_InsertNew";
             this.btn_InsertNew.Size = new System.Drawing.Size(159, 28);
             this.btn_InsertNew.TabIndex = 33;
@@ -106,7 +127,7 @@
             // Btn_Refresh
             // 
             this.Btn_Refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Refresh.Location = new System.Drawing.Point(1390, 222);
+            this.Btn_Refresh.Location = new System.Drawing.Point(1389, 259);
             this.Btn_Refresh.Name = "Btn_Refresh";
             this.Btn_Refresh.Size = new System.Drawing.Size(159, 28);
             this.Btn_Refresh.TabIndex = 32;
@@ -117,7 +138,7 @@
             // btn_EnableSearchById
             // 
             this.btn_EnableSearchById.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.btn_EnableSearchById.Location = new System.Drawing.Point(1390, 157);
+            this.btn_EnableSearchById.Location = new System.Drawing.Point(1389, 194);
             this.btn_EnableSearchById.Margin = new System.Windows.Forms.Padding(4);
             this.btn_EnableSearchById.Name = "btn_EnableSearchById";
             this.btn_EnableSearchById.Size = new System.Drawing.Size(159, 58);
@@ -129,7 +150,7 @@
             // Btn_Delete
             // 
             this.Btn_Delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Delete.Location = new System.Drawing.Point(1055, 222);
+            this.Btn_Delete.Location = new System.Drawing.Point(1054, 259);
             this.Btn_Delete.Name = "Btn_Delete";
             this.Btn_Delete.Size = new System.Drawing.Size(159, 28);
             this.Btn_Delete.TabIndex = 30;
@@ -140,7 +161,7 @@
             // Btn_Save
             // 
             this.Btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Save.Location = new System.Drawing.Point(1055, 180);
+            this.Btn_Save.Location = new System.Drawing.Point(1054, 217);
             this.Btn_Save.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Save.Name = "Btn_Save";
             this.Btn_Save.Size = new System.Drawing.Size(159, 28);
@@ -153,9 +174,9 @@
             // Btn_Update
             // 
             this.Btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_Update.Location = new System.Drawing.Point(1055, 144);
+            this.Btn_Update.Location = new System.Drawing.Point(1054, 183);
             this.Btn_Update.Name = "Btn_Update";
-            this.Btn_Update.Size = new System.Drawing.Size(159, 28);
+            this.Btn_Update.Size = new System.Drawing.Size(159, 27);
             this.Btn_Update.TabIndex = 28;
             this.Btn_Update.Text = "Update";
             this.Btn_Update.UseVisualStyleBackColor = false;
@@ -166,7 +187,7 @@
             this.Btn_SaveNew.BackColor = System.Drawing.SystemColors.Control;
             this.Btn_SaveNew.Enabled = false;
             this.Btn_SaveNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Btn_SaveNew.Location = new System.Drawing.Point(1055, 108);
+            this.Btn_SaveNew.Location = new System.Drawing.Point(1054, 145);
             this.Btn_SaveNew.Name = "Btn_SaveNew";
             this.Btn_SaveNew.Size = new System.Drawing.Size(159, 28);
             this.Btn_SaveNew.TabIndex = 27;
@@ -182,7 +203,7 @@
             this.Dtp_DateStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.Dtp_DateStart.Location = new System.Drawing.Point(159, 78);
             this.Dtp_DateStart.Name = "Dtp_DateStart";
-            this.Dtp_DateStart.Size = new System.Drawing.Size(146, 27);
+            this.Dtp_DateStart.Size = new System.Drawing.Size(146, 23);
             this.Dtp_DateStart.TabIndex = 35;
             // 
             // Dtp_DateEnd
@@ -192,7 +213,7 @@
             this.Dtp_DateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.Dtp_DateEnd.Location = new System.Drawing.Point(159, 126);
             this.Dtp_DateEnd.Name = "Dtp_DateEnd";
-            this.Dtp_DateEnd.Size = new System.Drawing.Size(146, 27);
+            this.Dtp_DateEnd.Size = new System.Drawing.Size(146, 23);
             this.Dtp_DateEnd.TabIndex = 36;
             // 
             // Lbl_DateStart
@@ -201,7 +222,7 @@
             this.Lbl_DateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_DateStart.Location = new System.Drawing.Point(21, 85);
             this.Lbl_DateStart.Name = "Lbl_DateStart";
-            this.Lbl_DateStart.Size = new System.Drawing.Size(96, 20);
+            this.Lbl_DateStart.Size = new System.Drawing.Size(82, 17);
             this.Lbl_DateStart.TabIndex = 37;
             this.Lbl_DateStart.Text = "Date Start";
             // 
@@ -211,7 +232,7 @@
             this.Lbl_DateEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_DateEnd.Location = new System.Drawing.Point(21, 133);
             this.Lbl_DateEnd.Name = "Lbl_DateEnd";
-            this.Lbl_DateEnd.Size = new System.Drawing.Size(87, 20);
+            this.Lbl_DateEnd.Size = new System.Drawing.Size(75, 17);
             this.Lbl_DateEnd.TabIndex = 38;
             this.Lbl_DateEnd.Text = "Date End";
             // 
@@ -221,7 +242,7 @@
             this.Lbl_ClassId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_ClassId.Location = new System.Drawing.Point(21, 34);
             this.Lbl_ClassId.Name = "Lbl_ClassId";
-            this.Lbl_ClassId.Size = new System.Drawing.Size(82, 20);
+            this.Lbl_ClassId.Size = new System.Drawing.Size(67, 17);
             this.Lbl_ClassId.TabIndex = 39;
             this.Lbl_ClassId.Text = "Class ID";
             // 
@@ -231,7 +252,7 @@
             this.Lbl_StudentIdSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_StudentIdSearch.Location = new System.Drawing.Point(385, 226);
             this.Lbl_StudentIdSearch.Name = "Lbl_StudentIdSearch";
-            this.Lbl_StudentIdSearch.Size = new System.Drawing.Size(163, 20);
+            this.Lbl_StudentIdSearch.Size = new System.Drawing.Size(140, 17);
             this.Lbl_StudentIdSearch.TabIndex = 41;
             this.Lbl_StudentIdSearch.Text = "Student ID Search";
             this.Lbl_StudentIdSearch.Visible = false;
@@ -242,7 +263,7 @@
             this.Lbl_Student_FName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Student_FName.Location = new System.Drawing.Point(385, 85);
             this.Lbl_Student_FName.Name = "Lbl_Student_FName";
-            this.Lbl_Student_FName.Size = new System.Drawing.Size(172, 20);
+            this.Lbl_Student_FName.Size = new System.Drawing.Size(147, 17);
             this.Lbl_Student_FName.TabIndex = 42;
             this.Lbl_Student_FName.Text = "Student First Name";
             // 
@@ -252,7 +273,7 @@
             this.Lbl_Student_LName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Student_LName.Location = new System.Drawing.Point(385, 131);
             this.Lbl_Student_LName.Name = "Lbl_Student_LName";
-            this.Lbl_Student_LName.Size = new System.Drawing.Size(170, 20);
+            this.Lbl_Student_LName.Size = new System.Drawing.Size(146, 17);
             this.Lbl_Student_LName.TabIndex = 43;
             this.Lbl_Student_LName.Text = "Student Last Name";
             // 
@@ -264,7 +285,7 @@
             this.Cb_Student_FName.FormattingEnabled = true;
             this.Cb_Student_FName.Location = new System.Drawing.Point(589, 80);
             this.Cb_Student_FName.Name = "Cb_Student_FName";
-            this.Cb_Student_FName.Size = new System.Drawing.Size(212, 28);
+            this.Cb_Student_FName.Size = new System.Drawing.Size(212, 25);
             this.Cb_Student_FName.TabIndex = 45;
             // 
             // Cb_Student_LName
@@ -275,7 +296,7 @@
             this.Cb_Student_LName.FormattingEnabled = true;
             this.Cb_Student_LName.Location = new System.Drawing.Point(589, 123);
             this.Cb_Student_LName.Name = "Cb_Student_LName";
-            this.Cb_Student_LName.Size = new System.Drawing.Size(212, 28);
+            this.Cb_Student_LName.Size = new System.Drawing.Size(212, 25);
             this.Cb_Student_LName.TabIndex = 46;
             // 
             // Btn_search_student_by_id
@@ -299,7 +320,7 @@
             this.Cb_ClassId.FormattingEnabled = true;
             this.Cb_ClassId.Location = new System.Drawing.Point(159, 30);
             this.Cb_ClassId.Name = "Cb_ClassId";
-            this.Cb_ClassId.Size = new System.Drawing.Size(146, 28);
+            this.Cb_ClassId.Size = new System.Drawing.Size(146, 25);
             this.Cb_ClassId.TabIndex = 50;
             // 
             // Lbl_Classroom
@@ -308,7 +329,7 @@
             this.Lbl_Classroom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Classroom.Location = new System.Drawing.Point(21, 188);
             this.Lbl_Classroom.Name = "Lbl_Classroom";
-            this.Lbl_Classroom.Size = new System.Drawing.Size(99, 20);
+            this.Lbl_Classroom.Size = new System.Drawing.Size(83, 17);
             this.Lbl_Classroom.TabIndex = 51;
             this.Lbl_Classroom.Text = "Classroom";
             // 
@@ -320,7 +341,7 @@
             this.Cb_Classroom.FormattingEnabled = true;
             this.Cb_Classroom.Location = new System.Drawing.Point(159, 180);
             this.Cb_Classroom.Name = "Cb_Classroom";
-            this.Cb_Classroom.Size = new System.Drawing.Size(146, 28);
+            this.Cb_Classroom.Size = new System.Drawing.Size(146, 25);
             this.Cb_Classroom.TabIndex = 52;
             // 
             // Cb_Subject
@@ -331,7 +352,7 @@
             this.Cb_Subject.FormattingEnabled = true;
             this.Cb_Subject.Location = new System.Drawing.Point(589, 168);
             this.Cb_Subject.Name = "Cb_Subject";
-            this.Cb_Subject.Size = new System.Drawing.Size(212, 28);
+            this.Cb_Subject.Size = new System.Drawing.Size(212, 25);
             this.Cb_Subject.TabIndex = 53;
             // 
             // Lbl_Subject
@@ -340,7 +361,7 @@
             this.Lbl_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Subject.Location = new System.Drawing.Point(385, 176);
             this.Lbl_Subject.Name = "Lbl_Subject";
-            this.Lbl_Subject.Size = new System.Drawing.Size(72, 20);
+            this.Lbl_Subject.Size = new System.Drawing.Size(62, 17);
             this.Lbl_Subject.TabIndex = 54;
             this.Lbl_Subject.Text = "Subject";
             // 
@@ -350,7 +371,7 @@
             this.Lbl_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherId.Location = new System.Drawing.Point(18, 226);
             this.Lbl_TeacherId.Name = "Lbl_TeacherId";
-            this.Lbl_TeacherId.Size = new System.Drawing.Size(102, 20);
+            this.Lbl_TeacherId.Size = new System.Drawing.Size(88, 17);
             this.Lbl_TeacherId.TabIndex = 55;
             this.Lbl_TeacherId.Text = "Teacher ID";
             // 
@@ -362,7 +383,7 @@
             this.Cb_TeacherId.FormattingEnabled = true;
             this.Cb_TeacherId.Location = new System.Drawing.Point(159, 222);
             this.Cb_TeacherId.Name = "Cb_TeacherId";
-            this.Cb_TeacherId.Size = new System.Drawing.Size(146, 28);
+            this.Cb_TeacherId.Size = new System.Drawing.Size(146, 25);
             this.Cb_TeacherId.TabIndex = 56;
             // 
             // Txtb_StudentId_Search
@@ -370,7 +391,7 @@
             this.Txtb_StudentId_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txtb_StudentId_Search.Location = new System.Drawing.Point(589, 219);
             this.Txtb_StudentId_Search.Name = "Txtb_StudentId_Search";
-            this.Txtb_StudentId_Search.Size = new System.Drawing.Size(212, 27);
+            this.Txtb_StudentId_Search.Size = new System.Drawing.Size(212, 23);
             this.Txtb_StudentId_Search.TabIndex = 57;
             this.Txtb_StudentId_Search.Visible = false;
             this.Txtb_StudentId_Search.TextChanged += new System.EventHandler(this.Txtb_StudentId_TextChanged);
@@ -383,7 +404,7 @@
             this.lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl.Location = new System.Drawing.Point(385, 38);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(98, 20);
+            this.lbl.Size = new System.Drawing.Size(84, 17);
             this.lbl.TabIndex = 58;
             this.lbl.Text = "Student ID";
             // 
@@ -395,15 +416,26 @@
             this.Cb_StudentId.FormattingEnabled = true;
             this.Cb_StudentId.Location = new System.Drawing.Point(589, 30);
             this.Cb_StudentId.Name = "Cb_StudentId";
-            this.Cb_StudentId.Size = new System.Drawing.Size(212, 28);
+            this.Cb_StudentId.Size = new System.Drawing.Size(212, 25);
             this.Cb_StudentId.TabIndex = 59;
             this.Cb_StudentId.SelectedIndexChanged += new System.EventHandler(this.Cb_StudentId_SelectedIndexChanged);
+            // 
+            // Lbl_EnrolmentsDetails
+            // 
+            this.Lbl_EnrolmentsDetails.AutoSize = true;
+            this.Lbl_EnrolmentsDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_EnrolmentsDetails.Location = new System.Drawing.Point(12, 259);
+            this.Lbl_EnrolmentsDetails.Name = "Lbl_EnrolmentsDetails";
+            this.Lbl_EnrolmentsDetails.Size = new System.Drawing.Size(233, 29);
+            this.Lbl_EnrolmentsDetails.TabIndex = 60;
+            this.Lbl_EnrolmentsDetails.Text = "Enrolments Details";
             // 
             // Enrolments_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1560, 822);
+            this.Controls.Add(this.Lbl_EnrolmentsDetails);
             this.Controls.Add(this.Cb_StudentId);
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.Txtb_StudentId_Search);
@@ -436,7 +468,8 @@
             this.Controls.Add(this.Dgv_Enrolments);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Enrolments_form";
-            this.Text = "Enrolments";
+            this.ShowIcon = false;
+            this.Text = "Enrolments Manager";
             this.Load += new System.EventHandler(this.Enrolments_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Enrolments)).EndInit();
             this.ResumeLayout(false);
@@ -476,5 +509,6 @@
         private System.Windows.Forms.TextBox Txtb_StudentId_Search;
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.ComboBox Cb_StudentId;
+        private System.Windows.Forms.Label Lbl_EnrolmentsDetails;
     }
 }

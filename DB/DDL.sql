@@ -111,7 +111,6 @@ CREATE TABLE tbl_students (
   student_last_name_id INT(11) NOT NULL,
   student_dob_id INT(11) NOT NULL,
   gender_id INT(11) NOT NULL,
-  student_picture VARBINARY(255) NOT NULL,
   student_e_mail_id INT(11) NOT NULL,
   student_parent_id INT(11) NOT NULL,
   student_address_home_id INT(11) NOT NULL,

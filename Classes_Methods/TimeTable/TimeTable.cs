@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _401AZ_PROJECT.Classes_Methods.TimeTable
+namespace _401AZ_PROJECT.Classes_Methods.TimeTables
 {
-    public class TimeTable
+    public class TimeTable 
     {
         public int Class_Id { get; set; }
-        public string Day { get; set; }
+        public string Day_Name { get; set; }
         public TimeSpan Start_Time_Day { get; set; }
         public TimeSpan End_Time_Day { get; set; }
         public string Classroom { get; set; }
@@ -22,7 +22,7 @@ namespace _401AZ_PROJECT.Classes_Methods.TimeTable
         public int TeacherId { get; set; }
         public int DayId { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         //Create a new datatable with a variable classroom
         public List<TimeTable> GetClasses_By_Classroom(string classroom)
@@ -42,7 +42,7 @@ namespace _401AZ_PROJECT.Classes_Methods.TimeTable
                             classes.Add(new TimeTable
                             {
                                 Class_Id = reader.GetInt32(0),
-                                Day = reader.GetString(1),
+                                Day_Name = reader.GetString(1),
                                 Start_Time_Day = reader.GetTimeSpan(2),
                                 End_Time_Day = reader.GetTimeSpan(3),
                                 Classroom = reader.GetString(4),
@@ -77,7 +77,7 @@ namespace _401AZ_PROJECT.Classes_Methods.TimeTable
                             classes.Add(new TimeTable
                             {
                                 Class_Id = reader.GetInt32(0),
-                                Day = reader.GetString(1),
+                                Day_Name = reader.GetString(1),
                                 Start_Time_Day = reader.GetTimeSpan(2),
                                 End_Time_Day = reader.GetTimeSpan(3),
                                 Classroom = reader.GetString(4),

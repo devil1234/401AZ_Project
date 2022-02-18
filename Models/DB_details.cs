@@ -8,14 +8,10 @@ using System.Reflection;
 
 namespace _401AZ_PROJECT.Models
 {
-    public class DB_details
-    {
-        public string connection_details = "Server=localhost; User ID=root;Password=Joyride2!;Database=test2";
-        
-    }
     public class DataManager
     {
-
+        private string conn_details = "Server=localhost; User ID=root;Password=Joyride2!;Database=test2";
+        public string connection_details { get { return conn_details; } set { conn_details = value; } }
         public DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);

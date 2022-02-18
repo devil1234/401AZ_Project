@@ -1,4 +1,7 @@
 ﻿using _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial;
+using _401AZ_PROJECT.Classes_Methods.Enrolments;
+using _401AZ_PROJECT.Classes_Methods.TimeTables;
+using _401AZ_PROJECT.Models;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -9,12 +12,11 @@ using System.Threading.Tasks;
 
 namespace _401AZ_PROJECT.Models
 {
-    public class Classrooms
+    public class Classrooms : TimeTable
     {
         public int classroom_id { get; set; }
-        public int classroom { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public void InsertClassroom(string classroom_par)
         {
@@ -73,12 +75,37 @@ namespace _401AZ_PROJECT.Models
         }
     }
 
-    public class DateEnd
+    public class Person 
+    {
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
+        public DateTime DOB { get; set; }
+        public string Gender { get; set; }
+        public string EMail_Address { get; set; }
+        public string AddressCity { get; set; }
+        public int AddressId { get; set; }
+
+        public string AddressPostcode { get; set; }
+
+        public string AddressRegion { get; set; }
+
+        public string AddressStreet { get; set; }
+
+        public int ParentId { get; set; }
+
+        public string ParentFName { get; set; }
+
+        public string ParentLName { get; set; }
+
+        public string ParentPhoneNumber { get; set; }
+
+    }
+
+    public class DateEnd : Enrolment
     {
         public int date_end_id { get; set; }
-        public DateTime date_end { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public void InsertDateEnd(DateTime date_end_par)
         {
@@ -138,12 +165,11 @@ namespace _401AZ_PROJECT.Models
         }
     }
 
-    public class DateStart
+    public class DateStart : Enrolment
     {
         public int date_start_id { get; set; }
-        public DateTime date_end { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public void InsertDateStart(DateTime date_start_par)
         {
@@ -203,12 +229,11 @@ namespace _401AZ_PROJECT.Models
         }
     }
 
-    public class Days
+    public class Days : TimeTable
     {
         public int Day_Id_pk { get; set; }
-        public string Day_Name { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public List<Days> GetDays()
         {
@@ -238,24 +263,139 @@ namespace _401AZ_PROJECT.Models
         }
     }
 
-    public class DOB
+    public class DOB : Person
     {
         public int dob_id { get; set; }
-        public int dob { get; set; }
+
+        readonly DataManager c = new DataManager();
+
+        public void InsertDoB(DateTime dob_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_insert_dob", connection))
+                {
+                    cmd.Parameters.AddWithValue("dob_par", MySqlDbType.Time).Value = dob_par;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
+        public List<DOB> GetDoBIdByDoBDate(DateTime dob_par)
+        {
+            List<DOB> dob = new List<DOB>();
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_select_dobid_by_dob", connection))
+                {
+                    cmd.Parameters.AddWithValue("dob_par", MySqlDbType.Time).Value = dob_par;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            dob.Add(new DOB
+                            {
+                                dob_id = reader.GetInt32(0)
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+                return dob;
+            }
+        }
+
+        public void UpdateDoB(DateTime dob_old_par, DateTime dob_new_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_update_dob_by_date", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("dob_old_par", MySqlDbType.Time).Value = dob_old_par;
+                    cmd.Parameters.AddWithValue("dob_new_par", MySqlDbType.Time).Value = dob_new_par;
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 
-    public class Emails
+    public class Emails : Person
     {
         public int e_mail_id { get; set; }
-        public string e_mail_address { get; set; }
+
+        readonly DataManager c = new DataManager();
+
+        public void InsertEmail(string e_mail_address_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_insert_e_mail_address", connection))
+                {
+                    cmd.Parameters.AddWithValue("e_mail_address_par", e_mail_address_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
+        public List<Emails> GetEmailIdByEmail(string e_mail_address_par)
+        {
+            List<Emails> email = new List<Emails>();
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_select_e_mail_address_id_by_email", connection))
+                {
+                    cmd.Parameters.AddWithValue("e_mail_address_par", e_mail_address_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            email.Add(new Emails
+                            {
+                                e_mail_id = reader.GetInt32(0)
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+                return email;
+            }
+        }
+
+        public void UpdateEmail(string e_mail_address_old_par, string e_mail_address_new_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_update_e_mail_address_by_e_mail", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("e_mail_address_old_par", e_mail_address_old_par);
+                    cmd.Parameters.AddWithValue("e_mail_address_new_par", e_mail_address_new_par);
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 
-    public class EndTimeDay
+    public class EndTimeDay : TimeTable
     {
         public int end_time_day_id { get; set; }
-        public DateTime end_time_day { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public void InsertEndTimeDay(DateTime end_time_day_par)
         {
@@ -297,14 +437,29 @@ namespace _401AZ_PROJECT.Models
                 return d;
             }
         }
+
+        public void UpdateEndTimeDayIdByEtd(DateTime end_time_day_old_par, DateTime end_time_day_new_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_update_end_time_day_by_end_time_day", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("end_time_day_old_par", MySqlDbType.Time).Value = end_time_day_old_par;
+                    cmd.Parameters.AddWithValue("end_time_day_new_par", MySqlDbType.Time).Value = end_time_day_new_par;
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 
-    public class FileExtension
+    public class FileExtension : TeachingMaterials
     {
         public int File_Extension_Id { get; set; }
-        public string File_Extension { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public void InsertFileExtension(FileExtension fe)
         {
@@ -351,34 +506,173 @@ namespace _401AZ_PROJECT.Models
 
     }
 
-    public class FirstNames
+    public class FirstNames : Person
     {
         public int first_name_id { get; set; }
-        public string first_name { get; set; }
+
+        readonly DataManager c = new DataManager();
+
+        public void InsertFirstName(string first_name_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_insert_first_name", connection))
+                {
+                    cmd.Parameters.AddWithValue("first_name_par", first_name_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
+        public List<FirstNames> GetFirstNameIdByFName(string first_name_par)
+        {
+            List<FirstNames> fn = new List<FirstNames>();
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_select_first_name_by_first_name", connection))
+                {
+                    cmd.Parameters.AddWithValue("first_name_par", first_name_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            fn.Add(new FirstNames
+                            {
+                                first_name_id = reader.GetInt32(0)
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+                return fn;
+            }
+        }
+
+        public void UpdateFName(string first_name_old_par, string first_name_new_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_update_first_name", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("first_name_old_par", first_name_old_par);
+                    cmd.Parameters.AddWithValue("first_name_new_par", first_name_new_par);
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 
-    public class Genders
+    public class Genders : Person
     {
         public int gender_id { get; set; }
-        public string gender { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
+
+        public List<Genders> GetGenders()
+        {
+            List<Genders> genders = new List<Genders>();
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("sp_select_genders", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            genders.Add(new Genders
+                            {
+                                gender_id = reader.GetInt32(0),
+                                Gender = reader.GetString(1),
+
+                            });
+                        }
+                    }
+                }
+                return genders;
+            }
+        }
     }
 
-    public class LastName
+    public class LastName : Person
     {
         public int last_name_id { get; set; }
-        public string last_name { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
+
+        public void InsertLastName(string last_name_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_insert_last_name", connection))
+                {
+                    cmd.Parameters.AddWithValue("last_name_par", last_name_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
+        public List<LastName> GetLastNameIdByLName(string last_name_par)
+        {
+            List<LastName> ln = new List<LastName>();
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_select_last_name_by_last_name", connection))
+                {
+                    cmd.Parameters.AddWithValue("last_name_par", last_name_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ln.Add(new LastName
+                            {
+                                last_name_id = reader.GetInt32(0)
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+                return ln;
+            }
+        }
+
+        public void UpdateLName(string last_name_old_par, string last_name_new_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_update_last_name", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("last_name_old_par", last_name_old_par);
+                    cmd.Parameters.AddWithValue("last_name_new_par", last_name_new_par);
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 
-    public class StartTimeDay
+    public class StartTimeDay : TimeTable
     {
         public int start_time_day_id { get; set; }
-        public DateTime start_time { get; set; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public void InsertStartTimeDay(DateTime start_time_day_par)
         {

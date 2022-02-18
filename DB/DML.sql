@@ -473,8 +473,8 @@ DELETE FROM tbl_student_parents_details WHERE parent_id = 1;
   /* START */
 /* TBL_STUDENTS */
 /* INSERT STATEMENT */
-INSERT INTO tbl_students (student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_picture,student_e_mail_id, student_parent_id, student_address_home_id) VALUES 
-('1','1','1','1','','1','1','1');
+INSERT INTO tbl_students (student_first_name_id, student_last_name_id, student_dob_id, gender_id, student_e_mail_id, student_parent_id, student_address_home_id) VALUES 
+('1','1','1','1','1','1','1');
 
 /* SELECT STATEMENT */
 SELECT * FROM tbl_students; 

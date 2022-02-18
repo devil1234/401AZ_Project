@@ -9,22 +9,11 @@ using System.Threading.Tasks;
 
 namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
 {
-    public class Teachers
+    public class Teachers : Person
     {
         public int Teacher_Id { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
-        public DateTime Date_Of_Birth { get; set; }
-        public string Gender { get; set; }
-        public string E_mail { get; set; }
-        public string Teacher_Address_Street { get; set; }
-        public string Teacher_Address_City { get; set; }
-        public string Teacher_Address_Region { get; set; }
-        public string Teacher_Address_Postcode { get; set; }
-        public string Text { get; set; }
-        public override string ToString() { return Text; }
 
-        readonly DB_details c = new DB_details();
+        readonly DataManager c = new DataManager();
 
         public List<Teachers> GetTeachers()
         {
@@ -45,13 +34,13 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                                 Teacher_Id = reader.GetInt32(0),
                                 First_Name = reader.GetString(1),
                                 Last_Name = reader.GetString(2),
-                                Date_Of_Birth = reader.GetDateTime(3),
+                                DOB = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                E_mail = reader.GetString(5),
-                                Teacher_Address_Street = reader.GetString(6),
-                                Teacher_Address_City = reader.GetString(7),
-                                Teacher_Address_Region = reader.GetString(8),
-                                Teacher_Address_Postcode = reader.GetString(9)
+                                EMail_Address = reader.GetString(5),
+                                AddressStreet = reader.GetString(6),
+                                AddressCity = reader.GetString(7),
+                                AddressRegion = reader.GetString(8),
+                                AddressPostcode = reader.GetString(9)
 
                             });
                         }
@@ -115,6 +104,30 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                 }
                 return teachers;
             }
+        }
+
+        async public void InsertTeacher(string first_name_par, string last_name_par, DateTime dob_par, string e_mail_address_par, 
+            string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                await connection.OpenAsync();
+                using (MySqlCommand cmd = new MySqlCommand("sp_insert_teachers_with_last_inserted_id_multiple_tbl", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("first_name_par", first_name_par);
+                    cmd.Parameters.AddWithValue("last_name_par", last_name_par);
+                    cmd.Parameters.AddWithValue("dob_par", MySqlDbType.Date).Value = dob_par;
+                    cmd.Parameters.AddWithValue("e_mail_address_par", e_mail_address_par);
+                    cmd.Parameters.AddWithValue("address_street_par", address_street_par);
+                    cmd.Parameters.AddWithValue("address_city_par", address_city_par);
+                    cmd.Parameters.AddWithValue("address_region_par", address_region_par);
+                    cmd.Parameters.AddWithValue("address_postcode_par", address_postcode_par);
+                    await cmd.ExecuteNonQueryAsync();
+                }
+
+            }
+
         }
     }
 }
