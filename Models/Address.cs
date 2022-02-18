@@ -1,14 +1,9 @@
-﻿using _401AZ_PROJECT.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MySqlConnector;
 using System.Data;
-using _401AZ_PROJECT.Classes_Methods.Students.Students;
 
-namespace _401AZ_PROJECT.Classes_Methods.Addresses
+namespace _401AZ_PROJECT.Models 
 {
     public class Address : Person
     {

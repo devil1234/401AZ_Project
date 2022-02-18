@@ -99,12 +99,13 @@
     <Compile Include="Forms\TimetableForm.Designer.cs">
       <DependentUpon>TimetableForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\DateEnd.cs" />
     <Compile Include="Models\DateStart.cs" />
     <Compile Include="Models\Days.cs" />
     <Compile Include="Models\DataManager.cs" />
-    <Compile Include="Classes_Methods\TimeTable\TimeTable.cs" />
-    <Compile Include="Classes_Methods\Enrolments\Enrolment.cs" />
+    <Compile Include="Models\TimeTable.cs" />
+    <Compile Include="Models\Enrolment.cs" />
     <Compile Include="Models\Dob.cs" />
     <Compile Include="Models\Emails.cs" />
     <Compile Include="Models\EndTimeDay.cs" />
@@ -113,11 +114,11 @@
     <Compile Include="Models\Genders.cs" />
     <Compile Include="Models\LastName.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\PersonalDetails\Address.cs" />
-    <Compile Include="Classes_Methods\Students\StudentParentsDetail.cs" />
-    <Compile Include="Classes_Methods\Students\Student.cs" />
-    <Compile Include="Classes_Methods\Teachers\Teachers.cs" />
-    <Compile Include="Classes_Methods\Teaching Materials\TeachingMaterials.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\StudentParentsDetail.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Teachers.cs" />
+    <Compile Include="Models\TeachingMaterials.cs" />
     <Compile Include="Forms\Project.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +171,12 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes_Methods\Enrolments\" />
+    <Folder Include="Classes_Methods\Students\" />
+    <Folder Include="Classes_Methods\Teachers\" />
+    <Folder Include="Classes_Methods\TimeTable\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

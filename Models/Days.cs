@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using _401AZ_PROJECT.Classes_Methods.TimeTables;
 using MySqlConnector;
 
 namespace _401AZ_PROJECT.Models

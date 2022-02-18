@@ -1,17 +1,9 @@
-﻿using _401AZ_PROJECT.Classes_Methods.Addresses;
-using _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails;
-using _401AZ_PROJECT.Classes_Methods.Students.Students;
+﻿using _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails;
 using _401AZ_PROJECT.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _401AZ_PROJECT
@@ -377,7 +369,7 @@ namespace _401AZ_PROJECT
             {
                 _fn.InsertFirstName(studentFName);
             }
-            var studentFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName(studentFName)).Rows[0].Field<string>("first_name_id"));
+            var studentFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName(studentFName)).Rows[0].Field<string>("FirstNameId"));
 
             //Retrive the Student LName from txtbox, insert it into db with checks and retrieve the id
             var studentLName = Txtb_StudentLName.Text;
@@ -385,7 +377,7 @@ namespace _401AZ_PROJECT
             {
                 _ln.InsertLastName(studentLName);
             }
-            var studentLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(studentLName)).Rows[0].Field<string>("last_name_id"));
+            var studentLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(studentLName)).Rows[0].Field<string>("LastNameId"));
 
             //Retrive the Student DOB from DateTimePicker, insert it into db with checks and retrieve the id
             var dob = Dtp_DOB.Value.ToShortDateString();
@@ -394,7 +386,7 @@ namespace _401AZ_PROJECT
                 _dob.InsertDoB(Convert.ToDateTime(dob));
             }
             var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(dob))).Rows[0].Field<string>("dob_id"));
+                (Convert.ToDateTime(dob))).Rows[0].Field<string>("DobId"));
 
             //Retrive the Student Gender from ComboBox
             var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
@@ -406,7 +398,7 @@ namespace _401AZ_PROJECT
                 _em.InsertEmail(studentEmail);
             }
             var studentEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
-                (studentEmail)).Rows[0].Field<string>("e_mail_id"));
+                (studentEmail)).Rows[0].Field<string>("EMailId"));
 
             //Retrieve parent details from txtboxes,insert with checks and retrieve the id
             var parentFname = Txtb_ParentFName.Text;
@@ -428,7 +420,7 @@ namespace _401AZ_PROJECT
             {
                 _adr.InsertAddressDetails(addressStreet, addressCity, addressRegion, addressPostCode);
             }
-            var addressId = Int32.Parse(_dm.ToDataTable(_adr.GetAddressesByCity
+            var addressId = int.Parse(_dm.ToDataTable(_adr.GetAddressesByCity
                 (addressCity)).Rows[0].Field<string>("AddressId"));
 
             //Insert the Student Details
@@ -481,7 +473,7 @@ namespace _401AZ_PROJECT
         private void Btn_Save_Click(object sender, EventArgs e)
         {
             //Retrieve the StudentId
-            var studentId = Int32.Parse(Dgv_Students.SelectedCells[0].Value.ToString());
+            var studentId = int.Parse(Dgv_Students.SelectedCells[0].Value.ToString());
 
             //Update Student FName
             var studentFNameNew = TxtB_StudentFName.Text;
@@ -490,8 +482,8 @@ namespace _401AZ_PROJECT
                 var studentFnameOld = Dgv_Students.SelectedCells[1].Value.ToString();
                 _fn.UpdateFName(studentFnameOld, studentFNameNew);
             }
-            var studentFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName
-                (studentFNameNew)).Rows[0].Field<string>("first_name_id"));
+            var studentFNameId = int.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName
+                (studentFNameNew)).Rows[0].Field<string>("FirstNameId"));
 
             //Update Student LName
             var studentLNameNew = Txtb_StudentLName.Text;
@@ -500,8 +492,8 @@ namespace _401AZ_PROJECT
                 var studentLnameOld = Dgv_Students.SelectedCells[2].Value.ToString();
                 _ln.UpdateLName(studentLnameOld, studentLNameNew);
             }
-            var studentLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName
-                (studentLNameNew)).Rows[0].Field<string>("last_name_id"));
+            var studentLNameId = int.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName
+                (studentLNameNew)).Rows[0].Field<string>("LastNameId"));
 
             //Update DOB
             var dobNew = Dtp_DOB.Value.ToShortDateString();
@@ -510,11 +502,11 @@ namespace _401AZ_PROJECT
                 var dobOld = Dgv_Students.SelectedCells[3].Value.ToString();
                 _dob.UpdateDoB(Convert.ToDateTime(dobOld), Convert.ToDateTime(dobNew));
             }
-            var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(dobNew))).Rows[0].Field<string>("dob_id"));
+            var dobId = int.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
+                (Convert.ToDateTime(dobNew))).Rows[0].Field<string>("DobId"));
 
             //Update Gender
-            var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
+            var genderId = int.Parse(Cb_Gender.SelectedValue.ToString());
 
             //Update Email
             var emailNew = Txtb_email.Text;
@@ -523,12 +515,12 @@ namespace _401AZ_PROJECT
                 var emailOld = Dgv_Students.SelectedCells[5].Value.ToString();
                 _em.UpdateEmail(emailOld, emailNew);
             }
-            var studentEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
-                (emailNew)).Rows[0].Field<string>("e_mail_id"));
+            var studentEmailId = int.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
+                (emailNew)).Rows[0].Field<string>("EMailId"));
 
             //Parent Details
             //Retrieve the text from txtboxes and passed on update function
-            var parentId = Int32.Parse(Dgv_Students.SelectedCells[6].Value.ToString());
+            var parentId = int.Parse(Dgv_Students.SelectedCells[6].Value.ToString());
             var parentFnameNew = Txtb_ParentFName.Text;
             var parentLnameNew = Txtb_ParentFName.Text;
             var parentPnNew = Txtb_ParentPN.Text;
@@ -536,7 +528,7 @@ namespace _401AZ_PROJECT
 
             //Address Details
             //For addressId exist two methods can be retrivied
-            var addressId = Int32.Parse(Dgv_Students.SelectedCells[10].Value.ToString());
+            var addressId = int.Parse(Dgv_Students.SelectedCells[10].Value.ToString());
             var addressStreet = Txtb_AddressStreet.Text;
             var addressCity = Txtb_AddressCity.Text;
             var addressRegion = Txtb_AddressRegion.Text;

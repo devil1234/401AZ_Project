@@ -1,15 +1,7 @@
-﻿using _401AZ_PROJECT.Classes_Methods.Teachers.Teacher;
-using _401AZ_PROJECT.Classes_Methods.TimeTables;
-using _401AZ_PROJECT.Models;
-using MySqlConnector;
+﻿using _401AZ_PROJECT.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _401AZ_PROJECT
@@ -200,7 +192,7 @@ namespace _401AZ_PROJECT
 
             //cb_TeacherId
             Cb_TeacherId.DataSource = _dm.ToDataTable(_teacher.GetTeacher_FName_LName());
-            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            Cb_TeacherId.DisplayMember = "TeacherId";
             if (dgv_classes.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
                 Cb_TeacherId.SelectedValue = Int32.Parse(dgv_classes.SelectedCells[8].Value.ToString());
@@ -343,14 +335,14 @@ namespace _401AZ_PROJECT
 
             Cb_T_Fname.DataSource = Cb_TeacherId.DataSource;
             Cb_T_Lname.DataSource = Cb_TeacherId.DataSource;
-            Cb_T_Fname.DisplayMember = "First_Name";
-            Cb_T_Fname.ValueMember = "Teacher_Id";
+            Cb_T_Fname.DisplayMember = "FirstName";
+            Cb_T_Fname.ValueMember = "TeacherId";
 
-            Cb_T_Lname.DisplayMember = "Last_Name";
-            Cb_T_Lname.ValueMember = "Teacher_Id";
+            Cb_T_Lname.DisplayMember = "LastName";
+            Cb_T_Lname.ValueMember = "TeacherId";
 
-            Cb_TeacherId.DisplayMember = "Teacher_Id";
-            Cb_TeacherId.ValueMember = "Teacher_Id";
+            Cb_TeacherId.DisplayMember = "TeacherId";
+            Cb_TeacherId.ValueMember = "TeacherId";
 
 
         }

@@ -1,14 +1,8 @@
-﻿using _401AZ_PROJECT.Classes_Methods.Addresses;
-using _401AZ_PROJECT.Classes_Methods.Teachers.Teacher;
-using _401AZ_PROJECT.Models;
+﻿using _401AZ_PROJECT.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _401AZ_PROJECT
@@ -333,14 +327,14 @@ namespace _401AZ_PROJECT
             {
                 _fn.InsertFirstName(teacherFName);
             }
-            var teacherFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName(teacherFName)).Rows[0].Field<string>("first_name_id"));
+            var teacherFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName(teacherFName)).Rows[0].Field<string>("FirstNameId"));
 
             var teacherLName = Txtb_TeacherLName.Text;
             if (_dm.ToDataTable(_ln.GetLastNameIdByLName(teacherLName)).Rows.Count == 0)
             {
                 _ln.InsertLastName(teacherLName);
             }
-            var teacherLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(teacherLName)).Rows[0].Field<string>("last_name_id"));
+            var teacherLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(teacherLName)).Rows[0].Field<string>("LastNameId"));
 
             //Retrive the Teacher DOB from DateTimePicker, insert it into db with checks and retrieve the id
             var dob = Dtp_DOB.Value.ToShortDateString();
@@ -349,7 +343,7 @@ namespace _401AZ_PROJECT
                 _dob.InsertDoB(Convert.ToDateTime(dob));
             }
             var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(dob))).Rows[0].Field<string>("dob_id"));
+                (Convert.ToDateTime(dob))).Rows[0].Field<string>("DobId"));
 
             //Retrive the Teacher Gender from ComboBox
             var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
@@ -361,7 +355,7 @@ namespace _401AZ_PROJECT
                 _em.InsertEmail(teacherEmail);
             }
             var teacherEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
-                (teacherEmail)).Rows[0].Field<string>("e_mail_id"));
+                (teacherEmail)).Rows[0].Field<string>("EMailId"));
 
             var addressStreet = Txtb_AddressStreet.Text;
             var addressCity = Txtb_AddressCity.Text;
@@ -430,7 +424,7 @@ namespace _401AZ_PROJECT
                 _fn.UpdateFName(teacherFnameOld, teacherFNameNew);
             }
             var teacherFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFName
-                (teacherFNameNew)).Rows[0].Field<string>("first_name_id"));
+                (teacherFNameNew)).Rows[0].Field<string>("FirstNameId"));
 
             //Update Teacher LName
             var teacherLNameNew = Txtb_TeacherLName.Text;
@@ -440,7 +434,7 @@ namespace _401AZ_PROJECT
                 _ln.UpdateLName(teacherLnameOld, teacherLNameNew);
             }
             var teacherLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName
-                (teacherLNameNew)).Rows[0].Field<string>("last_name_id"));
+                (teacherLNameNew)).Rows[0].Field<string>("LastNameId"));
 
             //Update DOB
             var dobNew = Dtp_DOB.Value.ToShortDateString();
@@ -450,7 +444,7 @@ namespace _401AZ_PROJECT
                 _dob.UpdateDoB(Convert.ToDateTime(dobOld), Convert.ToDateTime(dobNew));
             }
             var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(dobNew))).Rows[0].Field<string>("dob_id"));
+                (Convert.ToDateTime(dobNew))).Rows[0].Field<string>("DobId"));
 
             //Update Gender
             var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
@@ -463,7 +457,7 @@ namespace _401AZ_PROJECT
                 _em.UpdateEmail(emailOld, emailNew);
             }
             var teacherEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
-                (emailNew)).Rows[0].Field<string>("e_mail_id"));
+                (emailNew)).Rows[0].Field<string>("EMailId"));
 
             //Address Details
             //For addressId exist two methods can be retrivied

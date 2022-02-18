@@ -1,17 +1,10 @@
 ﻿using _401AZ_PROJECT.Models;
-using MySqlConnector;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using _401AZ_PROJECT.Classes_Methods.Enrolments;
-using _401AZ_PROJECT.Classes_Methods.Students.Students;
-using _401AZ_PROJECT.Classes_Methods.TimeTables;
 
 namespace _401AZ_PROJECT
 {
@@ -452,10 +445,10 @@ namespace _401AZ_PROJECT
         {
             Cb_Student_FName.DataSource = Cb_StudentId.DataSource;
             Cb_Student_LName.DataSource = Cb_StudentId.DataSource;
-            Cb_Student_FName.DisplayMember = "First_Name";
+            Cb_Student_FName.DisplayMember = "FirstName";
             Cb_Student_FName.ValueMember = "StudentId";
 
-            Cb_Student_LName.DisplayMember = "Last_Name";
+            Cb_Student_LName.DisplayMember = "LastName";
             Cb_Student_LName.ValueMember = "StudentId";
 
             Cb_StudentId.DisplayMember = "StudentId";

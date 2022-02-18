@@ -1,13 +1,9 @@
-﻿using _401AZ_PROJECT.Models;
-using MySqlConnector;
+﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace _401AZ_PROJECT.Classes_Methods.TimeTables
+namespace _401AZ_PROJECT.Models
 {
     public class TimeTable 
     {

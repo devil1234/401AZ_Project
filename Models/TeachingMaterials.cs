@@ -1,13 +1,9 @@
 ﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using _401AZ_PROJECT.Models;
 
-namespace _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial
+namespace _401AZ_PROJECT.Models
 {
     public class TeachingMaterials
     {

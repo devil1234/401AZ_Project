@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using _401AZ_PROJECT.Classes.Teaching_Materials;
-using _401AZ_PROJECT.Classes.Teaching_Materials.TeachingMaterial;
-using _401AZ_PROJECT.Classes_Methods.Teachers.Teacher;
 using _401AZ_PROJECT.Models;
 
 namespace _401AZ_PROJECT
@@ -20,7 +13,7 @@ namespace _401AZ_PROJECT
         readonly DataManager _dm = new DataManager();
         readonly TeachingMaterials _tm = new TeachingMaterials();
         readonly FileExtension _fe = new FileExtension();
-        readonly Teachers _teacher = new Teachers();
+        private readonly Teachers _teacher = new Teachers();
 
         public TeachingMaterialsForm()
         {
@@ -33,15 +26,13 @@ namespace _401AZ_PROJECT
             byte[] rawData;
             FileStream fs;
 
-            TeachingMaterials t = new TeachingMaterials();
-            FileExtension fe = new FileExtension();
 
-            Fd_Upload.Filter = "all file|*.*";
+            Fd_Upload.Filter = @"all file|*.*";
             var filepath = Fd_Upload.FileName;
             
-            t.Filename = Path.GetFileNameWithoutExtension(filepath);
-            fe.FileExtension = Path.GetExtension(filepath);
-            t.Description = Txt_Description.Text;
+            _tm.Filename = Path.GetFileNameWithoutExtension(filepath);
+            _fe.FileExtension = Path.GetExtension(filepath);
+            _tm.Description = Txt_Description.Text;
 
             fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
             fileSize = Convert.ToUInt32(fs.Length);
@@ -50,20 +41,20 @@ namespace _401AZ_PROJECT
             fs.Read(rawData, 0, (Convert.ToInt32(fileSize)));
             fs.Close();
 
-            int teacherId = Int32.Parse(Cb_TeacherId.SelectedValue.ToString());
+            var teacherId = int.Parse(Cb_TeacherId.SelectedValue.ToString());
 
-            if (_dm.ToDataTable(fe.GetFileExtensionId(fe.FileExtension)).Rows.Count == 0)
+            if (_dm.ToDataTable(_fe.GetFileExtensionId(_fe.FileExtension)).Rows.Count == 0)
             {
-                fe.InsertFileExtension(fe);
+                _fe.InsertFileExtension(_fe);
             }
 
-            var fileExtensionId = _dm.ToDataTable(fe.GetFileExtensionId(fe.FileExtension)).Rows[0].Field<string>("file_extension_id");
+            var fileExtensionId = _dm.ToDataTable(_fe.GetFileExtensionId(_fe.FileExtension)).Rows[0].Field<string>("FileExtensionId");
             if (Txt_Description.Text.Length < 0)
             {
-                Txt_Description.Text = "No Description";
+                Txt_Description.Text = @"No Description";
             }
 
-            try {t.InsertTeachingMaterial(t.Filename, Convert.ToInt32(fileExtensionId), t.Description, rawData, teacherId);}
+            try {_tm.InsertTeachingMaterial(_tm.Filename, Convert.ToInt32(fileExtensionId), _tm.Description, rawData, teacherId);}
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
 
@@ -113,7 +104,7 @@ namespace _401AZ_PROJECT
         private void Btn_Upload_Click(object sender, EventArgs e)
         {
             Cb_TeacherId.DataSource = _dm.ToDataTable(_teacher.GetTeacher_FName_LName());
-            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            Cb_TeacherId.DisplayMember = "TeacherId";
             if (Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
                 Cb_TeacherId.SelectedValue = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[4].Value.ToString());
@@ -143,7 +134,7 @@ namespace _401AZ_PROJECT
         {
             Dgv_TeachingMaterials.DataSource = _dm.ToDataTable(_tm.GetTeachingMaterials());
             Dgv_TeachingMaterials.Columns["FileContent"].Visible = false;
-            Dgv_TeachingMaterials.Columns["Teacher_id"].Visible = false;
+            Dgv_TeachingMaterials.Columns["TeacherId"].Visible = false;
         }
 
         private void Btn_DeleteRecord_Click(object sender, EventArgs e)
@@ -167,31 +158,33 @@ namespace _401AZ_PROJECT
 
         private void Btn_Download_Click(object sender, EventArgs e)
         {
-            if(Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
+            if (Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>()
+                .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
 
-                string fnNoExt = Dgv_TeachingMaterials.SelectedCells[1].Value.ToString();
-                string fe = Dgv_TeachingMaterials.SelectedCells[2].Value.ToString();
-                
-                sv_Download.Filter = fnNoExt + fe + "|*" + fe;
-                sv_Download.Title = "Get a file from database";
-                sv_Download.FileName = fnNoExt + fe;
-                sv_Download.DefaultExt = fe;
-                sv_Download.ShowDialog();
-            }
-        }
+                var index = int.Parse(Dgv_TeachingMaterials.SelectedCells[0].Value.ToString());
+                try
+                {
+                    var downloadFile = _tm.GetTeachingMaterialsWithFileContentByTeachingId(index);
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    var fnNoExt = Dgv_TeachingMaterials.SelectedCells[1].Value.ToString();
+                    var fe = Dgv_TeachingMaterials.SelectedCells[2].Value.ToString();
+                    saveFileDialog.Filter = fnNoExt + fe + @"|*" + fe;
+                    saveFileDialog.Title = @"Get a file from database";
+                    saveFileDialog.FileName = fnNoExt + fe;
+                    saveFileDialog.DefaultExt = fe;
 
-        private void sv_Download_FileOk(object sender, CancelEventArgs e)
-        {
-            int index = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[0].Value.ToString());
-            TeachingMaterials downloadData = _tm.GetTeachingMaterialsWithFileContentByTeachingId(index);
-            try 
-            {   
-                File.WriteAllBytes(sv_Download.FileName, downloadData.FileContent);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    {
+                        if (saveFileDialog.FileName != "")
+                            File.WriteAllBytes(saveFileDialog.FileName, downloadFile.FileContent);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -199,14 +192,14 @@ namespace _401AZ_PROJECT
         {
             Cb_TFName.DataSource = Cb_TeacherId.DataSource;
             Cb_TLName.DataSource = Cb_TeacherId.DataSource;
-            Cb_TFName.DisplayMember = "First_Name";
-            Cb_TFName.ValueMember = "Teacher_Id";
+            Cb_TFName.DisplayMember = "FirstName";
+            Cb_TFName.ValueMember = "TeacherId";
 
-            Cb_TLName.DisplayMember = "Last_Name";
-            Cb_TLName.ValueMember = "Teacher_Id";
+            Cb_TLName.DisplayMember = "LastName";
+            Cb_TLName.ValueMember = "TeacherId";
 
-            Cb_TeacherId.DisplayMember = "Teacher_Id";
-            Cb_TeacherId.ValueMember = "Teacher_Id";
+            Cb_TeacherId.DisplayMember = "TeacherId";
+            Cb_TeacherId.ValueMember = "TeacherId";
         }
     }
 }

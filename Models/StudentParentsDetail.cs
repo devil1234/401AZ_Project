@@ -1,12 +1,10 @@
-﻿using MySqlConnector;
+﻿using _401AZ_PROJECT.Models;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace _401AZ_PROJECT.Models
+namespace _401AZ_PROJECT.Classes_Methods.Students.StudentParentsDetails
 {
     public class StudentParentsDetail : Person
     {

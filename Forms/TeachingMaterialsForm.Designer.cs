@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Dgv_TeachingMaterials = new System.Windows.Forms.DataGridView();
             this.Btn_Upload = new System.Windows.Forms.Button();
             this.Btn_Download = new System.Windows.Forms.Button();
@@ -59,23 +59,23 @@
             this.Dgv_TeachingMaterials.AllowUserToResizeRows = false;
             this.Dgv_TeachingMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgv_TeachingMaterials.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_TeachingMaterials.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_TeachingMaterials.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.Dgv_TeachingMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_TeachingMaterials.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_TeachingMaterials.DefaultCellStyle = dataGridViewCellStyle4;
             this.Dgv_TeachingMaterials.Location = new System.Drawing.Point(12, 150);
             this.Dgv_TeachingMaterials.MultiSelect = false;
             this.Dgv_TeachingMaterials.Name = "Dgv_TeachingMaterials";
@@ -131,7 +131,7 @@
             this.Lbl_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherId.Location = new System.Drawing.Point(10, 15);
             this.Lbl_TeacherId.Name = "Lbl_TeacherId";
-            this.Lbl_TeacherId.Size = new System.Drawing.Size(88, 17);
+            this.Lbl_TeacherId.Size = new System.Drawing.Size(102, 20);
             this.Lbl_TeacherId.TabIndex = 4;
             this.Lbl_TeacherId.Text = "Teacher ID";
             this.Lbl_TeacherId.Visible = false;
@@ -151,7 +151,7 @@
             // Btn_Cancel
             // 
             this.Btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Cancel.Location = new System.Drawing.Point(1239, 210);
+            this.Btn_Cancel.Location = new System.Drawing.Point(1239, 270);
             this.Btn_Cancel.Name = "Btn_Cancel";
             this.Btn_Cancel.Size = new System.Drawing.Size(176, 54);
             this.Btn_Cancel.TabIndex = 7;
@@ -176,7 +176,7 @@
             this.Txt_Description.Location = new System.Drawing.Point(166, 72);
             this.Txt_Description.MaxLength = 255;
             this.Txt_Description.Name = "Txt_Description";
-            this.Txt_Description.Size = new System.Drawing.Size(1056, 23);
+            this.Txt_Description.Size = new System.Drawing.Size(1056, 27);
             this.Txt_Description.TabIndex = 9;
             this.Txt_Description.Text = "No Description";
             this.Txt_Description.Visible = false;
@@ -201,7 +201,7 @@
             this.Cb_TeacherId.Location = new System.Drawing.Point(166, 15);
             this.Cb_TeacherId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_TeacherId.Name = "Cb_TeacherId";
-            this.Cb_TeacherId.Size = new System.Drawing.Size(213, 25);
+            this.Cb_TeacherId.Size = new System.Drawing.Size(213, 28);
             this.Cb_TeacherId.TabIndex = 29;
             this.Cb_TeacherId.Visible = false;
             this.Cb_TeacherId.SelectedIndexChanged += new System.EventHandler(this.Cb_TeacherId_SelectedIndexChanged);
@@ -225,7 +225,7 @@
             this.Cb_TFName.Location = new System.Drawing.Point(569, 15);
             this.Cb_TFName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_TFName.Name = "Cb_TFName";
-            this.Cb_TFName.Size = new System.Drawing.Size(163, 25);
+            this.Cb_TFName.Size = new System.Drawing.Size(163, 28);
             this.Cb_TFName.TabIndex = 31;
             this.Cb_TFName.Visible = false;
             // 
@@ -248,7 +248,7 @@
             this.Cb_TLName.Location = new System.Drawing.Point(880, 15);
             this.Cb_TLName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_TLName.Name = "Cb_TLName";
-            this.Cb_TLName.Size = new System.Drawing.Size(163, 25);
+            this.Cb_TLName.Size = new System.Drawing.Size(163, 28);
             this.Cb_TLName.TabIndex = 33;
             this.Cb_TLName.Visible = false;
             // 
@@ -258,11 +258,11 @@
             this.Lbl_TMDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TMDetails.Location = new System.Drawing.Point(11, 112);
             this.Lbl_TMDetails.Name = "Lbl_TMDetails";
-            this.Lbl_TMDetails.Size = new System.Drawing.Size(255, 24);
+            this.Lbl_TMDetails.Size = new System.Drawing.Size(324, 29);
             this.Lbl_TMDetails.TabIndex = 34;
             this.Lbl_TMDetails.Text = "Teaching Materials Details";
             // 
-            // Teaching_materials_form
+            // TeachingMaterialsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
