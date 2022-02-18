@@ -82,22 +82,15 @@ namespace _401AZ_PROJECT.Models
         public DateTime DOB { get; set; }
         public string Gender { get; set; }
         public string EMail_Address { get; set; }
-        public string AddressCity { get; set; }
-        public int AddressId { get; set; }
-
-        public string AddressPostcode { get; set; }
-
-        public string AddressRegion { get; set; }
-
-        public string AddressStreet { get; set; }
-
         public int ParentId { get; set; }
-
         public string ParentFName { get; set; }
-
         public string ParentLName { get; set; }
-
         public string ParentPhoneNumber { get; set; }
+        public int AddressId { get; set; }
+        public string AddressStreet { get; set; }
+        public string AddressCity { get; set; }
+        public string AddressRegion { get; set; }
+        public string AddressPostcode { get; set; }
 
     }
 

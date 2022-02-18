@@ -37,11 +37,11 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                                 DOB = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
                                 EMail_Address = reader.GetString(5),
-                                AddressStreet = reader.GetString(6),
-                                AddressCity = reader.GetString(7),
-                                AddressRegion = reader.GetString(8),
-                                AddressPostcode = reader.GetString(9)
-
+                                AddressId = reader.GetInt32(6),
+                                AddressStreet = reader.GetString(7),
+                                AddressCity = reader.GetString(8),
+                                AddressRegion = reader.GetString(9),
+                                AddressPostcode = reader.GetString(10)
                             });
                         }
                     }
@@ -106,28 +106,99 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
             }
         }
 
-        async public void InsertTeacher(string first_name_par, string last_name_par, DateTime dob_par, string e_mail_address_par, 
-            string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
+        // GET THE LIST OF TEACHERS BY ID 
+        public List<Teachers> GetTeacherByID(int teacher_id_par)
+        {
+            List<Teachers> tc = new List<Teachers>();
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("sp_select_teacher_by_id", connection))
+                {
+                    cmd.Parameters.AddWithValue("teacher_id_par", teacher_id_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            tc.Add(new Teachers
+                            {
+                                Teacher_Id = reader.GetInt32(0),
+                                First_Name = reader.GetString(1),
+                                Last_Name = reader.GetString(2),
+                                DOB = reader.GetDateTime(3),
+                                Gender = reader.GetString(4),
+                                EMail_Address = reader.GetString(5),
+                                AddressId = reader.GetInt32(6),
+                                AddressStreet = reader.GetString(7),
+                                AddressCity = reader.GetString(8),
+                                AddressRegion = reader.GetString(9),
+                                AddressPostcode = reader.GetString(10)
+
+                            });
+                        }
+                    }
+                }
+                return tc;
+            }
+        }
+
+        async public void InsertTeacher(int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
             using (var connection = new MySqlConnection(c.connection_details))
             {
                 await connection.OpenAsync();
-                using (MySqlCommand cmd = new MySqlCommand("sp_insert_teachers_with_last_inserted_id_multiple_tbl", connection))
+                using (MySqlCommand cmd = new MySqlCommand("sp_insert_teacher", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("first_name_par", first_name_par);
-                    cmd.Parameters.AddWithValue("last_name_par", last_name_par);
-                    cmd.Parameters.AddWithValue("dob_par", MySqlDbType.Date).Value = dob_par;
-                    cmd.Parameters.AddWithValue("e_mail_address_par", e_mail_address_par);
-                    cmd.Parameters.AddWithValue("address_street_par", address_street_par);
-                    cmd.Parameters.AddWithValue("address_city_par", address_city_par);
-                    cmd.Parameters.AddWithValue("address_region_par", address_region_par);
-                    cmd.Parameters.AddWithValue("address_postcode_par", address_postcode_par);
+                    cmd.Parameters.AddWithValue("first_name_id_par", first_name_id_par);
+                    cmd.Parameters.AddWithValue("last_name_id_par", last_name_id_par);
+                    cmd.Parameters.AddWithValue("dob_id_par", dob_id_par);
+                    cmd.Parameters.AddWithValue("gender_id_par", gender_id_par);
+                    cmd.Parameters.AddWithValue("e_mail_id_par", e_mail_id_par);
+                    cmd.Parameters.AddWithValue("teachers_address_id_par", teachers_address_id_par);
                     await cmd.ExecuteNonQueryAsync();
                 }
 
             }
 
+        }
+
+        public void DeleteTeacher(int teacher_id_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_delete_teacher_by_teacher_id", connection))
+                {
+                    cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("teacher_id_par", teacher_id_par);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateTeacher(int teacher_id_par, int first_name_id_par, int last_name_id_par, int dob_id_par,int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
+        {
+            using (var connection = new MySqlConnection(c.connection_details))
+            {
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand("sp_update_teacher_by_teacher_id", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("teacher_id_par", teacher_id_par);
+                    cmd.Parameters.AddWithValue("first_name_id_par", first_name_id_par);
+                    cmd.Parameters.AddWithValue("last_name_id_par", last_name_id_par);
+                    cmd.Parameters.AddWithValue("dob_id_par", dob_id_par);
+                    cmd.Parameters.AddWithValue("gender_id_par", gender_id_par);
+                    cmd.Parameters.AddWithValue("e_mail_id_par", e_mail_id_par);
+                    cmd.Parameters.AddWithValue("teachers_address_id_par", teachers_address_id_par);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

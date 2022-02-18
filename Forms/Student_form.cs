@@ -232,7 +232,7 @@ namespace _401AZ_PROJECT
 
         private void Dgv_Students_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (this.Dgv_Students.Columns[e.ColumnIndex].Name == "StudentDOB")
+            if (this.Dgv_Students.Columns[e.ColumnIndex].Name == "DOB")
             {
                 ShortFormDateFormat(e);
             }
@@ -547,6 +547,7 @@ namespace _401AZ_PROJECT
             st.UpdateStudent(StudentId, StudentFNameId, StudentLNameId, dobId, GenderId, StudentEmailId, parentId, addressId);
 
             Btn_Cancel.PerformClick();
+            
         }
     }
 }

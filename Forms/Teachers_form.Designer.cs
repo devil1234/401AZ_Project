@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Btn_search_teacher = new System.Windows.Forms.Button();
             this.Btn_EnableSearch = new System.Windows.Forms.Button();
             this.Txtb_AddressPostCode = new System.Windows.Forms.TextBox();
@@ -44,11 +44,11 @@
             this.Lbl_gender = new System.Windows.Forms.Label();
             this.Dtp_DOB = new System.Windows.Forms.DateTimePicker();
             this.Lbl_Dob = new System.Windows.Forms.Label();
-            this.Txtb_StudentLName = new System.Windows.Forms.TextBox();
+            this.Txtb_TeacherLName = new System.Windows.Forms.TextBox();
             this.Lbl_TeacherLName = new System.Windows.Forms.Label();
             this.Lbl_TeacherFname = new System.Windows.Forms.Label();
-            this.TxtB_StudentFName = new System.Windows.Forms.TextBox();
-            this.Txtb_StudentId = new System.Windows.Forms.TextBox();
+            this.TxtB_TeacherFName = new System.Windows.Forms.TextBox();
+            this.Txtb_TeacherId = new System.Windows.Forms.TextBox();
             this.Lbl_TeacherId = new System.Windows.Forms.Label();
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_InsertNew = new System.Windows.Forms.Button();
@@ -78,6 +78,7 @@
             this.Btn_search_teacher.Text = "Search";
             this.Btn_search_teacher.UseVisualStyleBackColor = false;
             this.Btn_search_teacher.Visible = false;
+            this.Btn_search_teacher.Click += new System.EventHandler(this.Btn_search_teacher_Click);
             // 
             // Btn_EnableSearch
             // 
@@ -89,6 +90,7 @@
             this.Btn_EnableSearch.TabIndex = 96;
             this.Btn_EnableSearch.Text = "Search By Teacher ID";
             this.Btn_EnableSearch.UseVisualStyleBackColor = false;
+            this.Btn_EnableSearch.Click += new System.EventHandler(this.Btn_EnableSearch_Click);
             // 
             // Txtb_AddressPostCode
             // 
@@ -183,7 +185,7 @@
             this.Cb_Gender.Enabled = false;
             this.Cb_Gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cb_Gender.FormattingEnabled = true;
-            this.Cb_Gender.Location = new System.Drawing.Point(212, 140);
+            this.Cb_Gender.Location = new System.Drawing.Point(228, 140);
             this.Cb_Gender.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_Gender.Name = "Cb_Gender";
             this.Cb_Gender.Size = new System.Drawing.Size(159, 24);
@@ -204,7 +206,7 @@
             this.Dtp_DOB.Enabled = false;
             this.Dtp_DOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dtp_DOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.Dtp_DOB.Location = new System.Drawing.Point(212, 103);
+            this.Dtp_DOB.Location = new System.Drawing.Point(228, 101);
             this.Dtp_DOB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dtp_DOB.Name = "Dtp_DOB";
             this.Dtp_DOB.Size = new System.Drawing.Size(159, 23);
@@ -220,16 +222,16 @@
             this.Lbl_Dob.TabIndex = 91;
             this.Lbl_Dob.Text = "Date of Birth";
             // 
-            // Txtb_StudentLName
+            // Txtb_TeacherLName
             // 
-            this.Txtb_StudentLName.Enabled = false;
-            this.Txtb_StudentLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txtb_StudentLName.Location = new System.Drawing.Point(212, 61);
-            this.Txtb_StudentLName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Txtb_StudentLName.MaxLength = 10;
-            this.Txtb_StudentLName.Name = "Txtb_StudentLName";
-            this.Txtb_StudentLName.Size = new System.Drawing.Size(159, 23);
-            this.Txtb_StudentLName.TabIndex = 72;
+            this.Txtb_TeacherLName.Enabled = false;
+            this.Txtb_TeacherLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txtb_TeacherLName.Location = new System.Drawing.Point(228, 61);
+            this.Txtb_TeacherLName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Txtb_TeacherLName.MaxLength = 10;
+            this.Txtb_TeacherLName.Name = "Txtb_TeacherLName";
+            this.Txtb_TeacherLName.Size = new System.Drawing.Size(159, 23);
+            this.Txtb_TeacherLName.TabIndex = 72;
             // 
             // Lbl_TeacherLName
             // 
@@ -251,26 +253,29 @@
             this.Lbl_TeacherFname.TabIndex = 89;
             this.Lbl_TeacherFname.Text = "Teacher First Name";
             // 
-            // TxtB_StudentFName
+            // TxtB_TeacherFName
             // 
-            this.TxtB_StudentFName.Enabled = false;
-            this.TxtB_StudentFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtB_StudentFName.Location = new System.Drawing.Point(212, 31);
-            this.TxtB_StudentFName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TxtB_StudentFName.MaxLength = 10;
-            this.TxtB_StudentFName.Name = "TxtB_StudentFName";
-            this.TxtB_StudentFName.Size = new System.Drawing.Size(159, 23);
-            this.TxtB_StudentFName.TabIndex = 71;
+            this.TxtB_TeacherFName.Enabled = false;
+            this.TxtB_TeacherFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtB_TeacherFName.Location = new System.Drawing.Point(228, 31);
+            this.TxtB_TeacherFName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtB_TeacherFName.MaxLength = 10;
+            this.TxtB_TeacherFName.Name = "TxtB_TeacherFName";
+            this.TxtB_TeacherFName.Size = new System.Drawing.Size(159, 23);
+            this.TxtB_TeacherFName.TabIndex = 71;
             // 
-            // Txtb_StudentId
+            // Txtb_TeacherId
             // 
-            this.Txtb_StudentId.Enabled = false;
-            this.Txtb_StudentId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txtb_StudentId.Location = new System.Drawing.Point(212, 4);
-            this.Txtb_StudentId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Txtb_StudentId.Name = "Txtb_StudentId";
-            this.Txtb_StudentId.Size = new System.Drawing.Size(159, 23);
-            this.Txtb_StudentId.TabIndex = 70;
+            this.Txtb_TeacherId.Enabled = false;
+            this.Txtb_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txtb_TeacherId.Location = new System.Drawing.Point(228, 1);
+            this.Txtb_TeacherId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Txtb_TeacherId.Name = "Txtb_TeacherId";
+            this.Txtb_TeacherId.Size = new System.Drawing.Size(159, 23);
+            this.Txtb_TeacherId.TabIndex = 70;
+            this.Txtb_TeacherId.TextChanged += new System.EventHandler(this.Txtb_TeacherId_TextChanged);
+            this.Txtb_TeacherId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txtb_TeacherId_KeyDown);
+            this.Txtb_TeacherId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txtb_TeacherId_KeyPress);
             // 
             // Lbl_TeacherId
             // 
@@ -293,6 +298,7 @@
             this.Btn_Cancel.Text = "Cancel";
             this.Btn_Cancel.UseVisualStyleBackColor = false;
             this.Btn_Cancel.Visible = false;
+            this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
             // Btn_InsertNew
             // 
@@ -304,6 +310,7 @@
             this.Btn_InsertNew.TabIndex = 86;
             this.Btn_InsertNew.Text = "Insert New";
             this.Btn_InsertNew.UseVisualStyleBackColor = false;
+            this.Btn_InsertNew.Click += new System.EventHandler(this.Btn_InsertNew_Click);
             // 
             // Btn_Refresh
             // 
@@ -315,6 +322,7 @@
             this.Btn_Refresh.TabIndex = 85;
             this.Btn_Refresh.Text = "Refresh";
             this.Btn_Refresh.UseVisualStyleBackColor = false;
+            this.Btn_Refresh.Click += new System.EventHandler(this.Btn_Refresh_Click);
             // 
             // Btn_Delete
             // 
@@ -326,6 +334,7 @@
             this.Btn_Delete.TabIndex = 84;
             this.Btn_Delete.Text = "Delete";
             this.Btn_Delete.UseVisualStyleBackColor = false;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
             // 
             // Btn_Save
             // 
@@ -338,6 +347,7 @@
             this.Btn_Save.Text = "Update Save";
             this.Btn_Save.UseVisualStyleBackColor = false;
             this.Btn_Save.Visible = false;
+            this.Btn_Save.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
             // Btn_Update
             // 
@@ -349,6 +359,7 @@
             this.Btn_Update.TabIndex = 82;
             this.Btn_Update.Text = "Update";
             this.Btn_Update.UseVisualStyleBackColor = false;
+            this.Btn_Update.Click += new System.EventHandler(this.Btn_Update_Click);
             // 
             // Btn_SaveNew
             // 
@@ -362,6 +373,7 @@
             this.Btn_SaveNew.Text = "Save New";
             this.Btn_SaveNew.UseVisualStyleBackColor = false;
             this.Btn_SaveNew.Visible = false;
+            this.Btn_SaveNew.Click += new System.EventHandler(this.Btn_SaveNew_Click);
             // 
             // Lbl_TeacherDetails
             // 
@@ -380,23 +392,23 @@
             this.Dgv_Teachers.AllowUserToResizeColumns = false;
             this.Dgv_Teachers.AllowUserToResizeRows = false;
             this.Dgv_Teachers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_Teachers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Teachers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.Dgv_Teachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_Teachers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Teachers.DefaultCellStyle = dataGridViewCellStyle18;
             this.Dgv_Teachers.Location = new System.Drawing.Point(12, 241);
             this.Dgv_Teachers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dgv_Teachers.Name = "Dgv_Teachers";
@@ -409,6 +421,8 @@
             this.Dgv_Teachers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Dgv_Teachers.Size = new System.Drawing.Size(1520, 594);
             this.Dgv_Teachers.TabIndex = 69;
+            this.Dgv_Teachers.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_Teachers_CellFormatting);
+            this.Dgv_Teachers.SelectionChanged += new System.EventHandler(this.Dgv_Teachers_SelectionChanged);
             // 
             // Lbl_AddressPostCode
             // 
@@ -473,11 +487,11 @@
             this.Controls.Add(this.Lbl_gender);
             this.Controls.Add(this.Dtp_DOB);
             this.Controls.Add(this.Lbl_Dob);
-            this.Controls.Add(this.Txtb_StudentLName);
+            this.Controls.Add(this.Txtb_TeacherLName);
             this.Controls.Add(this.Lbl_TeacherLName);
             this.Controls.Add(this.Lbl_TeacherFname);
-            this.Controls.Add(this.TxtB_StudentFName);
-            this.Controls.Add(this.Txtb_StudentId);
+            this.Controls.Add(this.TxtB_TeacherFName);
+            this.Controls.Add(this.Txtb_TeacherId);
             this.Controls.Add(this.Lbl_TeacherId);
             this.Controls.Add(this.Btn_Cancel);
             this.Controls.Add(this.Btn_InsertNew);
@@ -493,6 +507,7 @@
             this.Name = "Teachers_form";
             this.ShowIcon = false;
             this.Text = "Teachers Manager";
+            this.Load += new System.EventHandler(this.Teachers_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Teachers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -515,11 +530,11 @@
         private System.Windows.Forms.Label Lbl_gender;
         private System.Windows.Forms.DateTimePicker Dtp_DOB;
         private System.Windows.Forms.Label Lbl_Dob;
-        private System.Windows.Forms.TextBox Txtb_StudentLName;
+        private System.Windows.Forms.TextBox Txtb_TeacherLName;
         private System.Windows.Forms.Label Lbl_TeacherLName;
         private System.Windows.Forms.Label Lbl_TeacherFname;
-        private System.Windows.Forms.TextBox TxtB_StudentFName;
-        private System.Windows.Forms.TextBox Txtb_StudentId;
+        private System.Windows.Forms.TextBox TxtB_TeacherFName;
+        private System.Windows.Forms.TextBox Txtb_TeacherId;
         private System.Windows.Forms.Label Lbl_TeacherId;
         private System.Windows.Forms.Button Btn_Cancel;
         private System.Windows.Forms.Button Btn_InsertNew;

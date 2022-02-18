@@ -4,10 +4,10 @@
 /* INSERT SP WITH DUPLICATE CHECKS */
 DELIMITER //
 CREATE PROCEDURE sp_insert_address(
-    IN `address_street_par` VARCHAR(30),
-	IN `address_city_par` VARCHAR(30),
-	IN `address_region_par` VARCHAR(30),
-	IN `address_postcode_par` VARCHAR(30))
+    IN address_street_par VARCHAR(30),
+	IN address_city_par VARCHAR(30),
+	IN address_region_par VARCHAR(30),
+	IN address_postcode_par VARCHAR(30))
 BEGIN
 INSERT INTO tbl_addresses (address_street, address_city, address_region, address_postcode)
 SELECT * FROM (SELECT address_street_par, address_city_par, address_region_par,address_postcode_par) AS tmp
@@ -1364,6 +1364,68 @@ END //
 DELIMITER ;
 
 
+//* INSERT WITH LAST IDS ON SINGLE SP */
+DELIMITER //
+CREATE PROCEDURE sp_insert_teachers_with_last_inserted_id_multiple_tbl(
+    IN first_name_par VARCHAR(10),
+    IN last_name_par VARCHAR(10),
+    IN dob_par DATE,
+    IN gender_id_par INT,
+    IN e_mail_address_par VARCHAR(255),
+    IN address_street_par VARCHAR(30),
+	IN address_city_par VARCHAR(30),
+	IN address_region_par VARCHAR(30),
+	IN address_postcode_par VARCHAR(30))
+)
+BEGIN
+INSERT INTO tbl_first_names (first_name)
+SELECT * FROM (SELECT first_name_par ) AS tmp
+WHERE NOT EXISTS (
+    SELECT first_name FROM tbl_first_names WHERE first_name = first_name_par
+) LIMIT 1;
+SET @tbl_first_name_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_last_names (last_name)
+SELECT * FROM (SELECT last_name_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT last_name FROM tbl_last_names WHERE last_name = last_name_par
+) LIMIT 1;
+SET @tbl_last_name_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_dob (dob)
+SELECT * FROM (SELECT dob_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT dob FROM tbl_dob WHERE dob = dob_par
+) LIMIT 1;
+SET @tbl_dob_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_emails (e_mail_address)
+SELECT * FROM (SELECT e_mail_address_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT e_mail_address FROM tbl_emails WHERE e_mail_address = e_mail_address_par
+) LIMIT 1;
+SET @tbl_email_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_addresses (address_street, address_city, address_region, address_postcode)
+SELECT * FROM (SELECT address_street_par, address_city_par, address_region_par,address_postcode_par) AS tmp
+WHERE NOT EXISTS (
+    SELECT address_street, address_city, address_region, address_postcode FROM tbl_addresses 
+	 WHERE 
+	 address_street = address_street_par AND 
+	 address_city = address_city_par AND
+	 address_region = address_region_par AND
+	 address_postcode = address_postcode_par
+) LIMIT 1;
+SET @tbl_address_id = LAST_INSERT_ID();
+
+INSERT INTO tbl_teachers (first_name_id,last_name_id, dob_id, gender_id, e_mail_id, teachers_address_id) VALUES 
+(@tbl_first_name_id, @tbl_last_name_id, @tbl_dob_id, gender_id_par, @tbl_email_id, @tbl_address_id); 
+
+END //
+DELIMTER ; 
+
+/* END SP */
+
 /*SELECT SP TEACHER FNAME AND LASTNAME */
 DELIMITER //
 CREATE PROCEDURE sp_select_teacher_fname_lname(
@@ -1413,6 +1475,40 @@ FROM
         ON (tbl_teachers.dob_id = tbl_dob.dob_id)
     INNER JOIN tbl_addresses 
         ON (tbl_teachers.teachers_address_id = tbl_addresses.address_id);
+END // 
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_select_teacher_by_id(
+    IN teacher_id_par INT
+)
+BEGIN
+SELECT
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name,
+    tbl_dob.dob,
+    tbl_genders.gender,
+    tbl_emails.e_mail_address,
+    tbl_addresses.address_street,
+    tbl_addresses.address_city,
+    tbl_addresses.address_region,
+    tbl_addresses.address_postcode
+FROM
+    tbl_teachers
+    INNER JOIN tbl_emails 
+        ON (tbl_teachers.e_mail_id = tbl_emails.e_mail_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_genders 
+        ON (tbl_teachers.gender_id = tbl_genders.gender_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_dob 
+        ON (tbl_teachers.dob_id = tbl_dob.dob_id)
+    INNER JOIN tbl_addresses 
+        ON (tbl_teachers.teachers_address_id = tbl_addresses.address_id)
+    WHERE tbl_teachers.teacher_id = teacher_id_par;
 END // 
 DELIMITER ;
 
@@ -1506,7 +1602,7 @@ FROM
 END // 
 DELIMITER ;
 
-/* SELECT SP WITH INNER JOIN FROM OTHER TABLES BY TEACHER_ID  */
+/* SELECT SP WITH INNER JOIN FROM OTHER TABLES BY TEACHING_ID  */
 DELIMITER //
 CREATE PROCEDURE sp_select_teaching_material_with_file_content_by_teaching_id(
     IN teaching_id_par INT
