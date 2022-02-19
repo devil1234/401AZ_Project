@@ -233,6 +233,9 @@ namespace _401AZ_PROJECT
 
                 saveFileDialog.ShowDialog();
 
+                pb1.Visible = false;
+                LblProgress.Visible = false;
+                Btn_Download.Enabled = true;
 
             }
         }
