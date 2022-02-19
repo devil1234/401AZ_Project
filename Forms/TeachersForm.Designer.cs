@@ -1,6 +1,24 @@
-﻿namespace _401AZ_PROJECT
+﻿// ***********************************************************************
+// Assembly         : 401AZ_PROJECT
+// Author           : Stefan-Robert Ursu
+// Created          : 02-18-2022
+//
+// Last Modified By : Stefan-Robert Ursu
+// Last Modified On : 02-19-2022
+// ***********************************************************************
+// <copyright file="TeachersForm.Designer.cs" company="Personal Project">
+//     Copyright ©  2022
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+namespace _401AZ_PROJECT
 {
-    partial class Teachers_form
+    /// <summary>
+    /// Class TeachersForm.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
+    partial class TeachersForm
     {
         /// <summary>
         /// Required designer variable.
@@ -504,7 +522,7 @@
             this.Controls.Add(this.Dgv_Teachers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Teachers_form";
+            this.Name = "TeachersForm";
             this.ShowIcon = false;
             this.Text = "Teachers Manager";
             this.Load += new System.EventHandler(this.Teachers_form_Load);
@@ -516,38 +534,137 @@
 
         #endregion
 
+        /// <summary>
+        /// The BTN search teacher
+        /// </summary>
         private System.Windows.Forms.Button Btn_search_teacher;
+        /// <summary>
+        /// The BTN enable search
+        /// </summary>
         private System.Windows.Forms.Button Btn_EnableSearch;
+        /// <summary>
+        /// The TXTB address post code
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressPostCode;
+        /// <summary>
+        /// The TXTB address region
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressRegion;
+        /// <summary>
+        /// The TXTB address city
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressCity;
+        /// <summary>
+        /// The TXTB address street
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressStreet;
+        /// <summary>
+        /// The cb address identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_AddressId;
+        /// <summary>
+        /// The label address identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_AddressId;
+        /// <summary>
+        /// The TXTB email
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_email;
+        /// <summary>
+        /// The label email
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Email;
+        /// <summary>
+        /// The cb gender
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_Gender;
+        /// <summary>
+        /// The label gender
+        /// </summary>
         private System.Windows.Forms.Label Lbl_gender;
+        /// <summary>
+        /// The DTP dob
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Dtp_DOB;
+        /// <summary>
+        /// The label dob
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Dob;
+        /// <summary>
+        /// The TXTB teacher l name
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_TeacherLName;
+        /// <summary>
+        /// The label teacher l name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_TeacherLName;
+        /// <summary>
+        /// The label teacher fname
+        /// </summary>
         private System.Windows.Forms.Label Lbl_TeacherFname;
+        /// <summary>
+        /// The text b teacher f name
+        /// </summary>
         private System.Windows.Forms.TextBox TxtB_TeacherFName;
+        /// <summary>
+        /// The TXTB teacher identifier
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_TeacherId;
+        /// <summary>
+        /// The label teacher identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_TeacherId;
+        /// <summary>
+        /// The BTN cancel
+        /// </summary>
         private System.Windows.Forms.Button Btn_Cancel;
+        /// <summary>
+        /// The BTN insert new
+        /// </summary>
         private System.Windows.Forms.Button Btn_InsertNew;
+        /// <summary>
+        /// The BTN refresh
+        /// </summary>
         private System.Windows.Forms.Button Btn_Refresh;
+        /// <summary>
+        /// The BTN delete
+        /// </summary>
         private System.Windows.Forms.Button Btn_Delete;
+        /// <summary>
+        /// The BTN save
+        /// </summary>
         private System.Windows.Forms.Button Btn_Save;
+        /// <summary>
+        /// The BTN update
+        /// </summary>
         private System.Windows.Forms.Button Btn_Update;
+        /// <summary>
+        /// The BTN save new
+        /// </summary>
         private System.Windows.Forms.Button Btn_SaveNew;
+        /// <summary>
+        /// The label teacher details
+        /// </summary>
         private System.Windows.Forms.Label Lbl_TeacherDetails;
+        /// <summary>
+        /// The DGV teachers
+        /// </summary>
         private System.Windows.Forms.DataGridView Dgv_Teachers;
+        /// <summary>
+        /// The label address post code
+        /// </summary>
         private System.Windows.Forms.Label Lbl_AddressPostCode;
+        /// <summary>
+        /// The label address region
+        /// </summary>
         private System.Windows.Forms.Label Lbl_AddressRegion;
+        /// <summary>
+        /// The label address city
+        /// </summary>
         private System.Windows.Forms.Label Lbl_AddressCity;
+        /// <summary>
+        /// The label address street
+        /// </summary>
         private System.Windows.Forms.Label Lbl_AddressStreet;
     }
 }

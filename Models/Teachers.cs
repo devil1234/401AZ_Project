@@ -1,28 +1,35 @@
-﻿using _401AZ_PROJECT.Models;
-using MySqlConnector;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySqlConnector;
 
-namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
+namespace _401AZ_PROJECT.Models
 {
+    /// <summary>
+    /// Class Teachers.
+    /// Implements the <see cref="_401AZ_PROJECT.Models.Person" />
+    /// </summary>
+    /// <seealso cref="_401AZ_PROJECT.Models.Person" />
     public class Teachers : Person
     {
-        public int Teacher_Id { get; set; }
+        /// <summary>
+        /// Gets or sets the teacher identifier.
+        /// </summary>
+        /// <value>The teacher identifier.</value>
+        public int TeacherId { get; set; }
+        private readonly DataManager _c = new DataManager();
 
-        readonly DataManager c = new DataManager();
-
+        /// <summary>
+        /// Gets the teachers.
+        /// </summary>
+        /// <returns>List&lt;Teachers&gt;.</returns>
         public List<Teachers> GetTeachers()
         {
-            List<Teachers> teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            var teachers = new List<Teachers>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand("sp_select_teachers", connection))
+                using (var cmd = new MySqlCommand("sp_select_teachers", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     using (var reader = cmd.ExecuteReader())
@@ -31,12 +38,12 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             teachers.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2),
-                                DOB = reader.GetDateTime(3),
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dob = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                EMail_Address = reader.GetString(5),
+                                EMailAddress = reader.GetString(5),
                                 AddressId = reader.GetInt32(6),
                                 AddressStreet = reader.GetString(7),
                                 AddressCity = reader.GetString(8),
@@ -50,14 +57,18 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
             }
         }
 
+        /// <summary>
+        /// Gets the teacher f name l name by identifier.
+        /// </summary>
+        /// <returns>List&lt;Teachers&gt;.</returns>
         public List<Teachers> GetTeacher_FName_LName_By_Id()
         {
-            List<Teachers> teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            var teachers = new List<Teachers>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand("sp_select_teacher_fname_lname_by_id", connection))
+                using (var cmd = new MySqlCommand("sp_select_teacher_fname_lname_by_id", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     using (var reader = cmd.ExecuteReader())
@@ -66,9 +77,9 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             teachers.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2)
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2)
 
                             });
                         }
@@ -78,14 +89,18 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
             }
         }
 
+        /// <summary>
+        /// Gets the name of the teacher f name l.
+        /// </summary>
+        /// <returns>List&lt;Teachers&gt;.</returns>
         public List<Teachers> GetTeacher_FName_LName()
         {
-            List<Teachers> teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            var teachers = new List<Teachers>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand("sp_select_teacher_fname_lname", connection))
+                using (var cmd = new MySqlCommand("sp_select_teacher_fname_lname", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     using (var reader = cmd.ExecuteReader())
@@ -94,9 +109,9 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             teachers.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2)
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2)
 
                             });
                         }
@@ -107,14 +122,19 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
         }
 
         // GET THE LIST OF TEACHERS BY ID 
-        public List<Teachers> GetTeacherByID(int teacher_id_par)
+        /// <summary>
+        /// Gets the teacher by identifier.
+        /// </summary>
+        /// <param name="teacher_id_par">The teacher identifier par.</param>
+        /// <returns>List&lt;Teachers&gt;.</returns>
+        public List<Teachers> GetTeacherById(int teacher_id_par)
         {
-            List<Teachers> tc = new List<Teachers>();
-            using (var connection = new MySqlConnection(c.connection_details))
+            var tc = new List<Teachers>();
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand("sp_select_teacher_by_id", connection))
+                using (var cmd = new MySqlCommand("sp_select_teacher_by_id", connection))
                 {
                     cmd.Parameters.AddWithValue("teacher_id_par", teacher_id_par);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -124,12 +144,12 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
                         {
                             tc.Add(new Teachers
                             {
-                                Teacher_Id = reader.GetInt32(0),
-                                First_Name = reader.GetString(1),
-                                Last_Name = reader.GetString(2),
-                                DOB = reader.GetDateTime(3),
+                                TeacherId = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dob = reader.GetDateTime(3),
                                 Gender = reader.GetString(4),
-                                EMail_Address = reader.GetString(5),
+                                EMailAddress = reader.GetString(5),
                                 AddressId = reader.GetInt32(6),
                                 AddressStreet = reader.GetString(7),
                                 AddressCity = reader.GetString(8),
@@ -144,12 +164,21 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
             }
         }
 
+        /// <summary>
+        /// Inserts the teacher.
+        /// </summary>
+        /// <param name="first_name_id_par">The first name identifier par.</param>
+        /// <param name="last_name_id_par">The last name identifier par.</param>
+        /// <param name="dob_id_par">The dob identifier par.</param>
+        /// <param name="gender_id_par">The gender identifier par.</param>
+        /// <param name="e_mail_id_par">The e mail identifier par.</param>
+        /// <param name="teachers_address_id_par">The teachers address identifier par.</param>
         async public void InsertTeacher(int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 await connection.OpenAsync();
-                using (MySqlCommand cmd = new MySqlCommand("sp_insert_teacher", connection))
+                using (var cmd = new MySqlCommand("sp_insert_teacher", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("first_name_id_par", first_name_id_par);
@@ -165,12 +194,16 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
 
         }
 
+        /// <summary>
+        /// Deletes the teacher.
+        /// </summary>
+        /// <param name="teacher_id_par">The teacher identifier par.</param>
         public void DeleteTeacher(int teacher_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
-                using (MySqlCommand cmd = new MySqlCommand("sp_delete_teacher_by_teacher_id", connection))
+                using (var cmd = new MySqlCommand("sp_delete_teacher_by_teacher_id", connection))
                 {
                     cmd.Connection = connection;
                     cmd.Parameters.AddWithValue("teacher_id_par", teacher_id_par);
@@ -181,12 +214,22 @@ namespace _401AZ_PROJECT.Classes_Methods.Teachers.Teacher
             }
         }
 
-        public void UpdateTeacher(int teacher_id_par, int first_name_id_par, int last_name_id_par, int dob_id_par,int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
+        /// <summary>
+        /// Updates the teacher.
+        /// </summary>
+        /// <param name="teacher_id_par">The teacher identifier par.</param>
+        /// <param name="first_name_id_par">The first name identifier par.</param>
+        /// <param name="last_name_id_par">The last name identifier par.</param>
+        /// <param name="dob_id_par">The dob identifier par.</param>
+        /// <param name="gender_id_par">The gender identifier par.</param>
+        /// <param name="e_mail_id_par">The e mail identifier par.</param>
+        /// <param name="teachers_address_id_par">The teachers address identifier par.</param>
+        public void UpdateTeacher(int teacher_id_par, int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
-            using (var connection = new MySqlConnection(c.connection_details))
+            using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
                 connection.Open();
-                using (MySqlCommand cmd = new MySqlCommand("sp_update_teacher_by_teacher_id", connection))
+                using (var cmd = new MySqlCommand("sp_update_teacher_by_teacher_id", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("teacher_id_par", teacher_id_par);

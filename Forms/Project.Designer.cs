@@ -1,5 +1,23 @@
-﻿namespace _401AZ_PROJECT
+﻿// ***********************************************************************
+// Assembly         : 401AZ_PROJECT
+// Author           : Stefan-Robert Ursu
+// Created          : 02-18-2022
+//
+// Last Modified By : Stefan-Robert Ursu
+// Last Modified On : 02-19-2022
+// ***********************************************************************
+// <copyright file="Project.Designer.cs" company="Personal Project">
+//     Copyright ©  2022
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+namespace _401AZ_PROJECT
 {
+    /// <summary>
+    /// Class Project.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class Project
     {
         /// <summary>
@@ -126,11 +144,29 @@
 
         #endregion
 
+        /// <summary>
+        /// The BTN teachers
+        /// </summary>
         private System.Windows.Forms.Button Btn_teachers;
+        /// <summary>
+        /// The BTN timetables
+        /// </summary>
         private System.Windows.Forms.Button Btn_timetables;
+        /// <summary>
+        /// The BTN enrolments
+        /// </summary>
         private System.Windows.Forms.Button Btn_enrolments;
+        /// <summary>
+        /// The BTN students
+        /// </summary>
         private System.Windows.Forms.Button Btn_students;
+        /// <summary>
+        /// The BTN teaching material
+        /// </summary>
         private System.Windows.Forms.Button Btn_teaching_material;
+        /// <summary>
+        /// The label welcome
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Welcome;
     }
 }

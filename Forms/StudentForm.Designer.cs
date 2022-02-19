@@ -1,6 +1,24 @@
-﻿namespace _401AZ_PROJECT
+﻿// ***********************************************************************
+// Assembly         : 401AZ_PROJECT
+// Author           : Stefan-Robert Ursu
+// Created          : 02-18-2022
+//
+// Last Modified By : Stefan-Robert Ursu
+// Last Modified On : 02-19-2022
+// ***********************************************************************
+// <copyright file="StudentForm.Designer.cs" company="Personal Project">
+//     Copyright ©  2022
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+namespace _401AZ_PROJECT
 {
-    partial class Student_form
+    /// <summary>
+    /// Class StudentForm.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
+    partial class StudentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -607,7 +625,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.Name = "Student_form";
+            this.Name = "StudentForm";
             this.ShowIcon = false;
             this.Text = "Students Manager";
             this.Load += new System.EventHandler(this.Student_form_Load);
@@ -619,46 +637,169 @@
 
         #endregion
 
+        /// <summary>
+        /// The DGV students
+        /// </summary>
         private System.Windows.Forms.DataGridView Dgv_Students;
+        /// <summary>
+        /// The label student details
+        /// </summary>
         private System.Windows.Forms.Label Lbl_StudentDetails;
+        /// <summary>
+        /// The BTN cancel
+        /// </summary>
         private System.Windows.Forms.Button Btn_Cancel;
+        /// <summary>
+        /// The BTN insert new
+        /// </summary>
         private System.Windows.Forms.Button Btn_InsertNew;
+        /// <summary>
+        /// The BTN refresh
+        /// </summary>
         private System.Windows.Forms.Button Btn_Refresh;
+        /// <summary>
+        /// The BTN delete
+        /// </summary>
         private System.Windows.Forms.Button Btn_Delete;
+        /// <summary>
+        /// The BTN save
+        /// </summary>
         private System.Windows.Forms.Button Btn_Save;
+        /// <summary>
+        /// The BTN update
+        /// </summary>
         private System.Windows.Forms.Button Btn_Update;
+        /// <summary>
+        /// The BTN save new
+        /// </summary>
         private System.Windows.Forms.Button Btn_SaveNew;
+        /// <summary>
+        /// The label student identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_StudentId;
+        /// <summary>
+        /// The TXTB student identifier
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_StudentId;
+        /// <summary>
+        /// The text b student f name
+        /// </summary>
         private System.Windows.Forms.TextBox TxtB_StudentFName;
+        /// <summary>
+        /// The label student fname
+        /// </summary>
         private System.Windows.Forms.Label Lbl_StudentFname;
+        /// <summary>
+        /// The label student l name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_StudentLName;
+        /// <summary>
+        /// The TXTB student l name
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_StudentLName;
+        /// <summary>
+        /// The label dob
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Dob;
+        /// <summary>
+        /// The DTP dob
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Dtp_DOB;
+        /// <summary>
+        /// The label gender
+        /// </summary>
         private System.Windows.Forms.Label Lbl_gender;
+        /// <summary>
+        /// The cb gender
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_Gender;
+        /// <summary>
+        /// The label email
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Email;
+        /// <summary>
+        /// The TXTB email
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_email;
+        /// <summary>
+        /// The label parent f name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Parent_FName;
+        /// <summary>
+        /// The TXTB parent f name
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_ParentFName;
+        /// <summary>
+        /// The text b parent l name
+        /// </summary>
         private System.Windows.Forms.TextBox TxtB_ParentLName;
+        /// <summary>
+        /// The label parent l name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_ParentLName;
+        /// <summary>
+        /// The label parent identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_ParentId;
+        /// <summary>
+        /// The cb parent identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_ParentId;
+        /// <summary>
+        /// The label1
+        /// </summary>
         private System.Windows.Forms.Label label1;
+        /// <summary>
+        /// The label2
+        /// </summary>
         private System.Windows.Forms.Label label2;
+        /// <summary>
+        /// The label3
+        /// </summary>
         private System.Windows.Forms.Label label3;
+        /// <summary>
+        /// The label4
+        /// </summary>
         private System.Windows.Forms.Label label4;
+        /// <summary>
+        /// The label5
+        /// </summary>
         private System.Windows.Forms.Label label5;
+        /// <summary>
+        /// The label6
+        /// </summary>
         private System.Windows.Forms.Label label6;
+        /// <summary>
+        /// The cb address identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_AddressId;
+        /// <summary>
+        /// The TXTB address street
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressStreet;
+        /// <summary>
+        /// The TXTB address city
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressCity;
+        /// <summary>
+        /// The TXTB address region
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressRegion;
+        /// <summary>
+        /// The TXTB address post code
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_AddressPostCode;
+        /// <summary>
+        /// The TXTB parent pn
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_ParentPN;
+        /// <summary>
+        /// The BTN enable search
+        /// </summary>
         private System.Windows.Forms.Button Btn_EnableSearch;
+        /// <summary>
+        /// The BTN search student
+        /// </summary>
         private System.Windows.Forms.Button Btn_search_student;
     }
 }

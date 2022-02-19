@@ -1,42 +1,52 @@
-﻿using _401AZ_PROJECT.Classes_Methods.Addresses;
-using _401AZ_PROJECT.Classes_Methods.Teachers.Teacher;
-using _401AZ_PROJECT.Models;
+﻿using _401AZ_PROJECT.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _401AZ_PROJECT
 {
-    public partial class Teachers_form : Form
+    /// <summary>
+    /// Class TeachersForm.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
+    public partial class TeachersForm : Form
     {
-        readonly DataManager DM = new DataManager();
-        readonly FirstNames fn = new FirstNames();
-        readonly LastName ln = new LastName();
-        readonly DOB dob = new DOB();
-        readonly Genders genders = new Genders();
-        readonly Emails em = new Emails();
-        readonly Address adr = new Address();
-        readonly Teachers tc = new Teachers();
+        /// <summary>
+        /// The initializes the classes required for this form to work
+        /// </summary>
+        private readonly DataManager _dm = new DataManager();
+        private readonly FirstNames _fn = new FirstNames();
+        private readonly LastName _ln = new LastName();
+        private readonly Dob _dob = new Dob();
+        private readonly Genders _genders = new Genders();
+        private readonly Emails _em = new Emails();
+        private readonly Address _adr = new Address();
+        private readonly Teachers _tc = new Teachers();
 
-        public Teachers_form()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeachersForm" /> class.
+        /// </summary>
+        public TeachersForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Shorts the form date format.
+        /// </summary>
+        /// <param name="formatting">The <see cref="DataGridViewCellFormattingEventArgs" /> instance containing the event data.</param>
         private static void ShortFormDateFormat(DataGridViewCellFormattingEventArgs formatting)
         {
             if (formatting.Value != null)
             {
                 try
                 {
-                    StringBuilder dateString = new StringBuilder();
-                    DateTime theDate = DateTime.Parse(formatting.Value.ToString());
+                    var dateString = new StringBuilder();
+                    var theDate = DateTime.Parse(formatting.Value.ToString());
 
                     dateString.Append(theDate.ToShortDateString());
                     formatting.Value = dateString.ToString();
@@ -49,6 +59,11 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the Txtb_TeacherId control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Txtb_TeacherId_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Txtb_TeacherId.Text))
@@ -61,17 +76,32 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_search_teacher control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_search_teacher_Click(object sender, EventArgs e)
         {
-            Dgv_Teachers.DataSource = DM.ToDataTable(tc.GetTeacherByID(Convert.ToInt32(Txtb_TeacherId.Text)));
+            Dgv_Teachers.DataSource = _dm.ToDataTable(_tc.GetTeacherById(Convert.ToInt32(Txtb_TeacherId.Text)));
         }
 
+        /// <summary>
+        /// Handles the Load event of the Teachers_form control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Teachers_form_Load(object sender, EventArgs e)
         {
-            Dgv_Teachers.DataSource = DM.ToDataTable(tc.GetTeachers());
+            Dgv_Teachers.DataSource = _dm.ToDataTable(_tc.GetTeachers());
             Populate_Form();
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_EnableSearch control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_EnableSearch_Click(object sender, EventArgs e)
         {
             if (Btn_search_teacher.Visible == false)
@@ -87,6 +117,11 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Handles the KeyDown event of the Txtb_TeacherId control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         private void Txtb_TeacherId_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -96,12 +131,22 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Refresh control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            Dgv_Teachers.DataSource = DM.ToDataTable(tc.GetTeachers());
+            Dgv_Teachers.DataSource = _dm.ToDataTable(_tc.GetTeachers());
             Populate_Form();
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the Dgv_Teachers control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Dgv_Teachers_SelectionChanged(object sender, EventArgs e)
         {
             if (Dgv_Teachers.SelectedRows.Count > 0)
@@ -114,6 +159,9 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Populates the form.
+        /// </summary>
         private void Populate_Form()
         {
             //COLUMNS TO HIDE BECAUSE THEY ARE EMTY AND THEY SHOW BECAUSE OF INHERITENCE
@@ -162,6 +210,9 @@ namespace _401AZ_PROJECT
             Txtb_AddressPostCode.Text = Dgv_Teachers.SelectedCells[14].Value.ToString();
         }
 
+        /// <summary>
+        /// Unpopulates the form.
+        /// </summary>
         public void Unpopulate_Form()
         {
             //Teacher ID Txtbox
@@ -199,14 +250,24 @@ namespace _401AZ_PROJECT
             Txtb_AddressPostCode.Text = null;
         }
 
+        /// <summary>
+        /// Handles the CellFormatting event of the Dgv_Teachers control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DataGridViewCellFormattingEventArgs" /> instance containing the event data.</param>
         private void Dgv_Teachers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (this.Dgv_Teachers.Columns[e.ColumnIndex].Name == "DOB")
+            if (Dgv_Teachers.Columns[e.ColumnIndex].Name == "DOB")
             {
                 ShortFormDateFormat(e);
             }
         }
 
+        /// <summary>
+        /// Handles the KeyPress event of the Txtb_TeacherId control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="KeyPressEventArgs" /> instance containing the event data.</param>
         private void Txtb_TeacherId_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -215,6 +276,11 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_InsertNew control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_InsertNew_Click(object sender, EventArgs e)
         {
             Button_Enable();
@@ -222,18 +288,24 @@ namespace _401AZ_PROJECT
             PopulateButtons();
         }
 
+        /// <summary>
+        /// Populates the buttons.
+        /// </summary>
         private void PopulateButtons()
         {
             //DateTimePicker Date Of Birth
-            Dtp_DOB.Text = DateTime.Now.ToString();
+            Dtp_DOB.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 
             //Gender ComboBox
-            Cb_Gender.DataSource = DM.ToDataTable(genders.GetGenders());
+            Cb_Gender.DataSource = _dm.ToDataTable(_genders.GetGenders());
             Cb_Gender.DisplayMember = "Gender";
-            Cb_Gender.ValueMember = "gender_id";
+            Cb_Gender.ValueMember = "GenderId";
             Cb_Gender.Text = Dgv_Teachers.SelectedCells[4].Value.ToString();
         }
 
+        /// <summary>
+        /// Buttons the enable.
+        /// </summary>
         private void Button_Enable()
         {
             //Teacher FName
@@ -274,6 +346,9 @@ namespace _401AZ_PROJECT
             Lbl_TeacherDetails.Visible = false;
         }
 
+        /// <summary>
+        /// Buttons the disable.
+        /// </summary>
         private void Button_Disable()
         {
             Unpopulate_Form();
@@ -321,81 +396,101 @@ namespace _401AZ_PROJECT
             Populate_Form();
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Cancel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Button_Disable();
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_SaveNew control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_SaveNew_Click(object sender, EventArgs e)
         {
-            var TeacherFName = TxtB_TeacherFName.Text;
-            if (DM.ToDataTable(fn.GetFirstNameIdByFName(TeacherFName)).Rows.Count == 0)
+            var teacherFName = TxtB_TeacherFName.Text;
+            if (_dm.ToDataTable(_fn.GetFirstNameIdByFirstName(teacherFName)).Rows.Count == 0)
             {
-                fn.InsertFirstName(TeacherFName);
+                _fn.InsertFirstName(teacherFName);
             }
-            var TeacherFNameId = Int32.Parse(DM.ToDataTable(fn.GetFirstNameIdByFName(TeacherFName)).Rows[0].Field<string>("first_name_id"));
+            var teacherFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFirstName(teacherFName)).Rows[0].Field<string>("FirstNameId"));
 
-            var TeacherLName = Txtb_TeacherLName.Text;
-            if (DM.ToDataTable(ln.GetLastNameIdByLName(TeacherLName)).Rows.Count == 0)
+            var teacherLName = Txtb_TeacherLName.Text;
+            if (_dm.ToDataTable(_ln.GetLastNameIdByLName(teacherLName)).Rows.Count == 0)
             {
-                ln.InsertLastName(TeacherLName);
+                _ln.InsertLastName(teacherLName);
             }
-            var TeacherLNameId = Int32.Parse(DM.ToDataTable(ln.GetLastNameIdByLName(TeacherLName)).Rows[0].Field<string>("last_name_id"));
+            var teacherLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(teacherLName)).Rows[0].Field<string>("LastNameId"));
 
             //Retrive the Teacher DOB from DateTimePicker, insert it into db with checks and retrieve the id
-            var DOB = Dtp_DOB.Value.ToShortDateString();
-            if (DM.ToDataTable(dob.GetDoBIdByDoBDate(Convert.ToDateTime(DOB))).Rows.Count == 0)
+            var dob = Dtp_DOB.Value.ToShortDateString();
+            if (_dm.ToDataTable(_dob.GetDoBIdByDoBDate(Convert.ToDateTime(dob))).Rows.Count == 0)
             {
-                dob.InsertDoB(Convert.ToDateTime(DOB));
+                _dob.InsertDoB(Convert.ToDateTime(dob));
             }
-            var dobId = Int32.Parse(DM.ToDataTable(dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(DOB))).Rows[0].Field<string>("dob_id"));
+            var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
+                (Convert.ToDateTime(dob))).Rows[0].Field<string>("DobId"));
 
             //Retrive the Teacher Gender from ComboBox
-            var GenderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
+            var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
 
             //Retrive the Teacher email from txtbox, insert it into db with checks and retrieve the id
-            var TeacherEmail = Txtb_email.Text;
-            if (DM.ToDataTable(em.GetEmailIdByEmail(TeacherEmail)).Rows.Count == 0)
+            var teacherEmail = Txtb_email.Text;
+            if (_dm.ToDataTable(_em.GetEmailIdByEmail(teacherEmail)).Rows.Count == 0)
             {
-                em.InsertEmail(TeacherEmail);
+                _em.InsertEmail(teacherEmail);
             }
-            var TeacherEmailId = Int32.Parse(DM.ToDataTable(em.GetEmailIdByEmail
-                (TeacherEmail)).Rows[0].Field<string>("e_mail_id"));
+            var teacherEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
+                (teacherEmail)).Rows[0].Field<string>("EMailId"));
 
-            var AddressStreet = Txtb_AddressStreet.Text;
-            var AddressCity = Txtb_AddressCity.Text;
-            var AddressRegion = Txtb_AddressRegion.Text;
-            var AddressPostCode = Txtb_AddressPostCode.Text;
-            if (DM.ToDataTable(adr.GetAddressesByCity(AddressCity)).Rows.Count == 0)
+            var addressStreet = Txtb_AddressStreet.Text;
+            var addressCity = Txtb_AddressCity.Text;
+            var addressRegion = Txtb_AddressRegion.Text;
+            var addressPostCode = Txtb_AddressPostCode.Text;
+            if (_dm.ToDataTable(_adr.GetAddressesByCity(addressCity)).Rows.Count == 0)
             {
-                adr.InsertAddressDetails(AddressStreet, AddressCity, AddressRegion, AddressPostCode);
+                _adr.InsertAddressDetails(addressStreet, addressCity, addressRegion, addressPostCode);
             }
-            var AddressId = Int32.Parse(DM.ToDataTable(adr.GetAddressesByCity
-                (AddressCity)).Rows[0].Field<string>("AddressId"));
+            var addressId = Int32.Parse(_dm.ToDataTable(_adr.GetAddressesByCity
+                (addressCity)).Rows[0].Field<string>("AddressId"));
 
             //Insert the Teacher Details
-            tc.InsertTeacher(TeacherFNameId, TeacherLNameId, dobId, GenderId, TeacherEmailId, AddressId);
+            _tc.InsertTeacher(teacherFNameId, teacherLNameId, dobId, genderId, teacherEmailId, addressId);
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Delete control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
             if (Dgv_Teachers.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
             {
-                int index = Int32.Parse(Dgv_Teachers.SelectedCells[0].Value.ToString());
-                string caption = "Are you sure you want to delete?";
-                string message = "Do you want to delete the Teacher with the record Id of" + " " + index + " ?";
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show(message, caption, buttons);
+                var index = Int32.Parse(Dgv_Teachers.SelectedCells[0].Value.ToString());
+                var caption = "Are you sure you want to delete?";
+                var message = "Do you want to delete the Teacher with the record Id of" + " " + index + " ?";
+                var buttons = MessageBoxButtons.YesNo;
+                var result = MessageBox.Show(message, caption, buttons);
 
                 if (result == DialogResult.Yes)
                 {
-                    tc.DeleteTeacher(index);
+                    _tc.DeleteTeacher(index);
                     Btn_Refresh.PerformClick();
                 }
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Update control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Update_Click(object sender, EventArgs e)
         {
             if (Dgv_Teachers.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
@@ -418,64 +513,69 @@ namespace _401AZ_PROJECT
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Save control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Save_Click(object sender, EventArgs e)
         {
-            var TeacherId = Int32.Parse(Dgv_Teachers.SelectedCells[0].Value.ToString());
+            var teacherId = Int32.Parse(Dgv_Teachers.SelectedCells[0].Value.ToString());
 
             //Update Teacher FName
-            var TeacherFName_new = TxtB_TeacherFName.Text;
-            if (TeacherFName_new != null)
+            var teacherFNameNew = TxtB_TeacherFName.Text;
+            if (teacherFNameNew != null)
             {
-                var TeacherFname_old = Dgv_Teachers.SelectedCells[1].Value.ToString();
-                fn.UpdateFName(TeacherFname_old, TeacherFName_new);
+                var teacherFnameOld = Dgv_Teachers.SelectedCells[1].Value.ToString();
+                _fn.UpdateFirstName(teacherFnameOld, teacherFNameNew);
             }
-            var TeacherFNameId = Int32.Parse(DM.ToDataTable(fn.GetFirstNameIdByFName
-                (TeacherFName_new)).Rows[0].Field<string>("first_name_id"));
+            var teacherFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFirstName
+                (teacherFNameNew)).Rows[0].Field<string>("FirstNameId"));
 
             //Update Teacher LName
-            var TeacherLName_new = Txtb_TeacherLName.Text;
-            if (TeacherLName_new != null)
+            var teacherLNameNew = Txtb_TeacherLName.Text;
+            if (teacherLNameNew != null)
             {
-                var TeacherLname_old = Dgv_Teachers.SelectedCells[2].Value.ToString();
-                ln.UpdateLName(TeacherLname_old, TeacherLName_new);
+                var teacherLnameOld = Dgv_Teachers.SelectedCells[2].Value.ToString();
+                _ln.UpdateLName(teacherLnameOld, teacherLNameNew);
             }
-            var TeacherLNameId = Int32.Parse(DM.ToDataTable(ln.GetLastNameIdByLName
-                (TeacherLName_new)).Rows[0].Field<string>("last_name_id"));
+            var teacherLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName
+                (teacherLNameNew)).Rows[0].Field<string>("LastNameId"));
 
             //Update DOB
-            var dob_new = Dtp_DOB.Value.ToShortDateString();
-            if (dob_new != Dgv_Teachers.SelectedCells[3].Value.ToString())
+            var dobNew = Dtp_DOB.Value.ToShortDateString();
+            if (dobNew != Dgv_Teachers.SelectedCells[3].Value.ToString())
             {
-                var dob_old = Dgv_Teachers.SelectedCells[3].Value.ToString();
-                dob.UpdateDoB(Convert.ToDateTime(dob_old), Convert.ToDateTime(dob_new));
+                var dobOld = Dgv_Teachers.SelectedCells[3].Value.ToString();
+                _dob.UpdateDoB(Convert.ToDateTime(dobOld), Convert.ToDateTime(dobNew));
             }
-            var dobId = Int32.Parse(DM.ToDataTable(dob.GetDoBIdByDoBDate
-                (Convert.ToDateTime(dob_new))).Rows[0].Field<string>("dob_id"));
+            var dobId = Int32.Parse(_dm.ToDataTable(_dob.GetDoBIdByDoBDate
+                (Convert.ToDateTime(dobNew))).Rows[0].Field<string>("DobId"));
 
             //Update Gender
-            var GenderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
+            var genderId = Int32.Parse(Cb_Gender.SelectedValue.ToString());
 
             //Update Email
-            var Email_new = Txtb_email.Text;
-            if (Email_new != null)
+            var emailNew = Txtb_email.Text;
+            if (emailNew != null)
             {
-                var email_old = Dgv_Teachers.SelectedCells[5].Value.ToString();
-                em.UpdateEmail(email_old, Email_new);
+                var emailOld = Dgv_Teachers.SelectedCells[5].Value.ToString();
+                _em.UpdateEmail(emailOld, emailNew);
             }
-            var TeacherEmailId = Int32.Parse(DM.ToDataTable(em.GetEmailIdByEmail
-                (Email_new)).Rows[0].Field<string>("e_mail_id"));
+            var teacherEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
+                (emailNew)).Rows[0].Field<string>("EMailId"));
 
             //Address Details
             //For addressId exist two methods can be retrivied
             var addressId = Int32.Parse(Dgv_Teachers.SelectedCells[10].Value.ToString());
-            var AddressStreet = Txtb_AddressStreet.Text;
-            var AddressCity = Txtb_AddressCity.Text;
-            var AddressRegion = Txtb_AddressRegion.Text;
-            var AddressPostcode = Txtb_AddressPostCode.Text;
-            adr.UpdateAddressDetails(addressId, AddressStreet, AddressCity, AddressRegion, AddressPostcode);
+            var addressStreet = Txtb_AddressStreet.Text;
+            var addressCity = Txtb_AddressCity.Text;
+            var addressRegion = Txtb_AddressRegion.Text;
+            var addressPostcode = Txtb_AddressPostCode.Text;
+            _adr.UpdateAddressDetails(addressId, addressStreet, addressCity, addressRegion, addressPostcode);
 
             //Update the Teacher details
-            tc.UpdateTeacher(TeacherId, TeacherFNameId, TeacherLNameId, dobId, GenderId, TeacherEmailId, addressId);
+            _tc.UpdateTeacher(teacherId, teacherFNameId, teacherLNameId, dobId, genderId, teacherEmailId, addressId);
 
             Btn_Cancel.PerformClick();
             Btn_Refresh.PerformClick();

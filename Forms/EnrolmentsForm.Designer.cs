@@ -1,6 +1,24 @@
-﻿namespace _401AZ_PROJECT
+﻿// ***********************************************************************
+// Assembly         : 401AZ_PROJECT
+// Author           : Stefan-Robert Ursu
+// Created          : 02-18-2022
+//
+// Last Modified By : Stefan-Robert Ursu
+// Last Modified On : 02-19-2022
+// ***********************************************************************
+// <copyright file="EnrolmentsForm.Designer.cs" company="Personal Project">
+//     Copyright ©  2022
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+namespace _401AZ_PROJECT
 {
-    partial class Enrolments_form
+    /// <summary>
+    /// Class EnrolmentsForm.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
+    partial class EnrolmentsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -467,7 +485,7 @@
             this.Controls.Add(this.Btn_SaveNew);
             this.Controls.Add(this.Dgv_Enrolments);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Enrolments_form";
+            this.Name = "EnrolmentsForm";
             this.ShowIcon = false;
             this.Text = "Enrolments Manager";
             this.Load += new System.EventHandler(this.Enrolments_form_Load);
@@ -479,36 +497,129 @@
 
         #endregion
 
+        /// <summary>
+        /// The DGV enrolments
+        /// </summary>
         private System.Windows.Forms.DataGridView Dgv_Enrolments;
+        /// <summary>
+        /// The BTN cancel
+        /// </summary>
         private System.Windows.Forms.Button Btn_Cancel;
+        /// <summary>
+        /// The BTN insert new
+        /// </summary>
         private System.Windows.Forms.Button btn_InsertNew;
+        /// <summary>
+        /// The BTN refresh
+        /// </summary>
         private System.Windows.Forms.Button Btn_Refresh;
+        /// <summary>
+        /// The BTN enable search by identifier
+        /// </summary>
         private System.Windows.Forms.Button btn_EnableSearchById;
+        /// <summary>
+        /// The BTN delete
+        /// </summary>
         private System.Windows.Forms.Button Btn_Delete;
+        /// <summary>
+        /// The BTN save
+        /// </summary>
         private System.Windows.Forms.Button Btn_Save;
+        /// <summary>
+        /// The BTN update
+        /// </summary>
         private System.Windows.Forms.Button Btn_Update;
+        /// <summary>
+        /// The BTN save new
+        /// </summary>
         private System.Windows.Forms.Button Btn_SaveNew;
+        /// <summary>
+        /// The DTP date start
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Dtp_DateStart;
+        /// <summary>
+        /// The DTP date end
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Dtp_DateEnd;
+        /// <summary>
+        /// The label date start
+        /// </summary>
         private System.Windows.Forms.Label Lbl_DateStart;
+        /// <summary>
+        /// The label date end
+        /// </summary>
         private System.Windows.Forms.Label Lbl_DateEnd;
+        /// <summary>
+        /// The label class identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_ClassId;
+        /// <summary>
+        /// The label student identifier search
+        /// </summary>
         private System.Windows.Forms.Label Lbl_StudentIdSearch;
+        /// <summary>
+        /// The label student f name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Student_FName;
+        /// <summary>
+        /// The label student l name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Student_LName;
+        /// <summary>
+        /// The cb student f name
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_Student_FName;
+        /// <summary>
+        /// The cb student l name
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_Student_LName;
+        /// <summary>
+        /// The BTN search student by identifier
+        /// </summary>
         private System.Windows.Forms.Button Btn_search_student_by_id;
+        /// <summary>
+        /// The cb class identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_ClassId;
+        /// <summary>
+        /// The label classroom
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Classroom;
+        /// <summary>
+        /// The cb classroom
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_Classroom;
+        /// <summary>
+        /// The cb subject
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_Subject;
+        /// <summary>
+        /// The label subject
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Subject;
+        /// <summary>
+        /// The label teacher identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_TeacherId;
+        /// <summary>
+        /// The cb teacher identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_TeacherId;
+        /// <summary>
+        /// The TXTB student identifier search
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_StudentId_Search;
+        /// <summary>
+        /// The label
+        /// </summary>
         private System.Windows.Forms.Label lbl;
+        /// <summary>
+        /// The cb student identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_StudentId;
+        /// <summary>
+        /// The label enrolments details
+        /// </summary>
         private System.Windows.Forms.Label Lbl_EnrolmentsDetails;
     }
 }

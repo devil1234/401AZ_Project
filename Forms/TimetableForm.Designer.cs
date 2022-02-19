@@ -1,6 +1,11 @@
 ﻿namespace _401AZ_PROJECT
 {
-    partial class Timetable_form
+    /// <summary>
+    /// Class TimetableForm.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
+    partial class TimetableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,7 +55,7 @@
             this.Dtp_End_Time = new System.Windows.Forms.DateTimePicker();
             this.Btn_Refresh = new System.Windows.Forms.Button();
             this.Lbl_Teacher_First_Name = new System.Windows.Forms.Label();
-            this.Lbl_Teacher_Last_Name = new System.Windows.Forms.Label();
+            this.Lbl_Teacher_LastName = new System.Windows.Forms.Label();
             this.Lbl_Subject = new System.Windows.Forms.Label();
             this.Cb_T_Fname = new System.Windows.Forms.ComboBox();
             this.Cb_T_Lname = new System.Windows.Forms.ComboBox();
@@ -320,15 +325,15 @@
             this.Lbl_Teacher_First_Name.TabIndex = 19;
             this.Lbl_Teacher_First_Name.Text = "Teacher First Name";
             // 
-            // Lbl_Teacher_Last_Name
+            // Lbl_Teacher_LastName
             // 
-            this.Lbl_Teacher_Last_Name.AutoSize = true;
-            this.Lbl_Teacher_Last_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Teacher_Last_Name.Location = new System.Drawing.Point(507, 110);
-            this.Lbl_Teacher_Last_Name.Name = "Lbl_Teacher_Last_Name";
-            this.Lbl_Teacher_Last_Name.Size = new System.Drawing.Size(150, 17);
-            this.Lbl_Teacher_Last_Name.TabIndex = 20;
-            this.Lbl_Teacher_Last_Name.Text = "Teacher Last Name";
+            this.Lbl_Teacher_LastName.AutoSize = true;
+            this.Lbl_Teacher_LastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.Lbl_Teacher_LastName.Location = new System.Drawing.Point(507, 110);
+            this.Lbl_Teacher_LastName.Name = "Lbl_Teacher_LastName";
+            this.Lbl_Teacher_LastName.Size = new System.Drawing.Size(150, 17);
+            this.Lbl_Teacher_LastName.TabIndex = 20;
+            this.Lbl_Teacher_LastName.Text = "Teacher Last Name";
             // 
             // Lbl_Subject
             // 
@@ -464,7 +469,7 @@
             this.Controls.Add(this.Cb_T_Lname);
             this.Controls.Add(this.Cb_T_Fname);
             this.Controls.Add(this.Lbl_Subject);
-            this.Controls.Add(this.Lbl_Teacher_Last_Name);
+            this.Controls.Add(this.Lbl_Teacher_LastName);
             this.Controls.Add(this.Lbl_Teacher_First_Name);
             this.Controls.Add(this.Btn_Refresh);
             this.Controls.Add(this.Dtp_End_Time);
@@ -488,7 +493,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.Name = "Timetable_form";
+            this.Name = "TimetableForm";
             this.ShowIcon = false;
             this.Text = "Time tables manager";
             this.Load += new System.EventHandler(this.Timetable_Load);
@@ -500,36 +505,129 @@
 
         #endregion
 
+        /// <summary>
+        /// My SQL data adapter1
+        /// </summary>
         private MySqlConnector.MySqlDataAdapter mySqlDataAdapter1;
+        /// <summary>
+        /// My SQL data adapter2
+        /// </summary>
         private MySqlConnector.MySqlDataAdapter mySqlDataAdapter2;
+        /// <summary>
+        /// The DGV classes
+        /// </summary>
         private System.Windows.Forms.DataGridView dgv_classes;
+        /// <summary>
+        /// The label class name search
+        /// </summary>
         private System.Windows.Forms.Label Lbl_ClassNameSearch;
+        /// <summary>
+        /// The text class search
+        /// </summary>
         private System.Windows.Forms.TextBox Txt_class_search;
+        /// <summary>
+        /// The BTN search timetable
+        /// </summary>
         private System.Windows.Forms.Button Btn_search_timetable;
+        /// <summary>
+        /// The BTN update
+        /// </summary>
         private System.Windows.Forms.Button Btn_Update;
+        /// <summary>
+        /// The BTN save
+        /// </summary>
         private System.Windows.Forms.Button Btn_Save;
+        /// <summary>
+        /// The BTN delete
+        /// </summary>
         private System.Windows.Forms.Button Btn_Delete;
+        /// <summary>
+        /// The BTN enable search
+        /// </summary>
         private System.Windows.Forms.Button btn_EnableSearch;
+        /// <summary>
+        /// The label class identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_ClassID;
+        /// <summary>
+        /// The label day
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Day;
+        /// <summary>
+        /// The label start time
+        /// </summary>
         private System.Windows.Forms.Label Lbl_StartTime;
+        /// <summary>
+        /// The label end time day
+        /// </summary>
         private System.Windows.Forms.Label Lbl_EndTimeDay;
+        /// <summary>
+        /// The tb class identifier
+        /// </summary>
         private System.Windows.Forms.TextBox Tb_ClassId;
+        /// <summary>
+        /// The cb day
+        /// </summary>
         private System.Windows.Forms.ComboBox cb_Day;
+        /// <summary>
+        /// The DTP start time
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Dtp_Start_Time;
+        /// <summary>
+        /// The DTP end time
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Dtp_End_Time;
+        /// <summary>
+        /// The BTN refresh
+        /// </summary>
         private System.Windows.Forms.Button Btn_Refresh;
+        /// <summary>
+        /// The label teacher first name
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Teacher_First_Name;
-        private System.Windows.Forms.Label Lbl_Teacher_Last_Name;
+        /// <summary>
+        /// The label teacher last name
+        /// </summary>
+        private System.Windows.Forms.Label Lbl_Teacher_LastName;
+        /// <summary>
+        /// The label subject
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Subject;
+        /// <summary>
+        /// The cb t fname
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_T_Fname;
+        /// <summary>
+        /// The cb t lname
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_T_Lname;
+        /// <summary>
+        /// The BTN cancel
+        /// </summary>
         private System.Windows.Forms.Button Btn_Cancel;
+        /// <summary>
+        /// The label teacher identifier
+        /// </summary>
         private System.Windows.Forms.Label Lbl_TeacherId;
+        /// <summary>
+        /// The cb teacher identifier
+        /// </summary>
         private System.Windows.Forms.ComboBox Cb_TeacherId;
+        /// <summary>
+        /// The TXTB subject
+        /// </summary>
         private System.Windows.Forms.TextBox Txtb_Subject;
+        /// <summary>
+        /// The label timetabledetails
+        /// </summary>
         private System.Windows.Forms.Label Lbl_Timetabledetails;
+        /// <summary>
+        /// The BTN save new
+        /// </summary>
         private System.Windows.Forms.Button Btn_SaveNew;
+        /// <summary>
+        /// The BTN insert new
+        /// </summary>
         private System.Windows.Forms.Button btn_InsertNew;
     }
 }

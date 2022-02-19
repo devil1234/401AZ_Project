@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("401AZ_PROJECT")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("401AZ_PROJECT")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Personal Project")]
 [assembly: AssemblyProduct("401AZ_PROJECT")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyCopyright("Stefan-Robert Ursu")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
