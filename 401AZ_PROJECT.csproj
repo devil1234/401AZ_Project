@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>test.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>packages\MySqlConnector.2.1.5\lib\net471\MySqlConnector.dll</HintPath>
@@ -69,67 +75,79 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Enrolments_form.cs">
+    <Compile Include="Forms\EnrolmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Enrolments_form.Designer.cs">
-      <DependentUpon>Enrolments_form.cs</DependentUpon>
+    <Compile Include="Forms\EnrolmentsForm.Designer.cs">
+      <DependentUpon>EnrolmentsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Student_form.cs">
+    <Compile Include="Forms\StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Student_form.Designer.cs">
-      <DependentUpon>Student_form.cs</DependentUpon>
+    <Compile Include="Forms\StudentForm.Designer.cs">
+      <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Teachers_form.cs">
+    <Compile Include="Forms\TeachersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Teachers_form.Designer.cs">
-      <DependentUpon>Teachers_form.cs</DependentUpon>
+    <Compile Include="Forms\TeachersForm.Designer.cs">
+      <DependentUpon>TeachersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Teaching_materials_form.cs">
+    <Compile Include="Forms\TeachingMaterialsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Teaching_materials_form.Designer.cs">
-      <DependentUpon>Teaching_materials_form.cs</DependentUpon>
+    <Compile Include="Forms\TeachingMaterialsForm.Designer.cs">
+      <DependentUpon>TeachingMaterialsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Timetable_form.cs">
+    <Compile Include="Forms\TimetableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Timetable_form.Designer.cs">
-      <DependentUpon>Timetable_form.cs</DependentUpon>
+    <Compile Include="Forms\TimetableForm.Designer.cs">
+      <DependentUpon>TimetableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB_details.cs" />
-    <Compile Include="Classes_Methods\TimeTable\TimeTable.cs" />
-    <Compile Include="Classes_Methods\Enrolments\Enrolments.cs" />
-    <Compile Include="Models\PersonalDetails\Addresses.cs" />
-    <Compile Include="Classes_Methods\Students\StudentParentsDetails.cs" />
-    <Compile Include="Classes_Methods\Students\Students.cs" />
-    <Compile Include="Classes_Methods\Teachers\Teacher.cs" />
-    <Compile Include="Classes_Methods\Teaching Materials\TeachingMaterials.cs" />
+    <Compile Include="Models\DateEnd.cs" />
+    <Compile Include="Models\DateStart.cs" />
+    <Compile Include="Models\Days.cs" />
+    <Compile Include="Models\DataManager.cs" />
+    <Compile Include="Models\Dob.cs" />
+    <Compile Include="Models\Emails.cs" />
+    <Compile Include="Models\EndTimeDay.cs" />
+    <Compile Include="Models\FileExtension.cs" />
+    <Compile Include="Models\FirstNames.cs" />
+    <Compile Include="Models\Genders.cs" />
+    <Compile Include="Models\LastName.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\StartTimeDay.cs" />
+    <Compile Include="Models\TimeTable.cs" />
+    <Compile Include="Models\Enrolment.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\StudentParentsDetail.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Teachers.cs" />
+    <Compile Include="Models\TeachingMaterials.cs" />
     <Compile Include="Forms\Project.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Project.Designer.cs">
       <DependentUpon>Project.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\Classrooms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Enrolments_form.resx">
-      <DependentUpon>Enrolments_form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\EnrolmentsForm.resx">
+      <DependentUpon>EnrolmentsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Student_form.resx">
-      <DependentUpon>Student_form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StudentForm.resx">
+      <DependentUpon>StudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Teachers_form.resx">
-      <DependentUpon>Teachers_form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\TeachersForm.resx">
+      <DependentUpon>TeachersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Teaching_materials_form.resx">
-      <DependentUpon>Teaching_materials_form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\TeachingMaterialsForm.resx">
+      <DependentUpon>TeachingMaterialsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Timetable_form.resx">
-      <DependentUpon>Timetable_form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\TimetableForm.resx">
+      <DependentUpon>TimetableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Project.resx">
       <DependentUpon>Project.cs</DependentUpon>
@@ -153,11 +171,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="test.snk" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
