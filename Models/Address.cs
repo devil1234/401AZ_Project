@@ -17,7 +17,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the addresses by city.
         /// </summary>
-        /// <param name="address_city_par">The address city par.</param>
+        /// <param name="address_city_par">The address city parameter</param>
         /// <returns>List&lt;Address&gt;.</returns>
         public List<Address> GetAddressesByCity(string address_city_par)
         {
@@ -53,10 +53,10 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the address details.
         /// </summary>
-        /// <param name="address_street_par">The address street par.</param>
-        /// <param name="address_city_par">The address city par.</param>
-        /// <param name="address_region_par">The address region par.</param>
-        /// <param name="address_postcode_par">The address postcode par.</param>
+        /// <param name="address_street_par">The address street parameter</param>
+        /// <param name="address_city_par">The address city parameter</param>
+        /// <param name="address_region_par">The address region parameter</param>
+        /// <param name="address_postcode_par">The address postcode parameter</param>
         /// <returns>addressId</returns>
         public int InsertAddressDetails(string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
         {
@@ -82,11 +82,11 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the address details.
         /// </summary>
-        /// <param name="address_id_par">The address identifier par.</param>
-        /// <param name="address_street_par">The address street par.</param>
-        /// <param name="address_city_par">The address city par.</param>
-        /// <param name="address_region_par">The address region par.</param>
-        /// <param name="address_postcode_par">The address postcode par.</param>
+        /// <param name="address_id_par">The address identifier parameter</param>
+        /// <param name="address_street_par">The address street parameter</param>
+        /// <param name="address_city_par">The address city parameter</param>
+        /// <param name="address_region_par">The address region parameter</param>
+        /// <param name="address_postcode_par">The address postcode parameter</param>
         public void UpdateAddressDetails(int address_id_par, string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

@@ -23,7 +23,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the date of birth.
         /// </summary>
-        /// <param name="dob_par">The dob par.</param>
+        /// <param name="dob_par">The dob parameter</param>
         public void InsertDoB(DateTime dob_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -42,7 +42,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the date of birth identifier by date of birth parameter.
         /// </summary>
-        /// <param name="dob_par">The dob par.</param>
+        /// <param name="dob_par">The dob parameter</param>
         /// <returns>List&lt;Dob&gt;.</returns>
         public List<Dob> GetDoBIdByDoBDate(DateTime dob_par)
         {
@@ -73,8 +73,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the date of birth.
         /// </summary>
-        /// <param name="dob_old_par">The dob old par.</param>
-        /// <param name="dob_new_par">The dob new par.</param>
+        /// <param name="dob_old_par">The dob old parameter</param>
+        /// <param name="dob_new_par">The dob new parameter</param>
         public void UpdateDoB(DateTime dob_old_par, DateTime dob_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

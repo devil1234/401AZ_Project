@@ -23,7 +23,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the date end.
         /// </summary>
-        /// <param name="date_end_par">The date end par.</param>
+        /// <param name="date_end_par">The date end parameter</param>
         public void InsertDateEnd(DateTime date_end_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -42,7 +42,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the end date by date.
         /// </summary>
-        /// <param name="date_end_par">The date end par.</param>
+        /// <param name="date_end_par">The date end parameter</param>
         /// <returns>List&lt;DateEnd&gt;.</returns>
         public List<DateEnd> GetEndDateByDate(DateTime date_end_par)
         {
@@ -73,8 +73,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the date end by date.
         /// </summary>
-        /// <param name="date_end_old_par">The date end old par.</param>
-        /// <param name="date_end_new_par">The date end new par.</param>
+        /// <param name="date_end_old_par">The date end old parameter</param>
+        /// <param name="date_end_new_par">The date end new parameter</param>
         public void UpdateDateEndByDate(DateTime date_end_old_par, DateTime date_end_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

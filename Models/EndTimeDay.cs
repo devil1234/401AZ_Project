@@ -23,7 +23,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the end time day.
         /// </summary>
-        /// <param name="end_time_day_par">The end time day par.</param>
+        /// <param name="end_time_day_par">The end time day parameter</param>
         public void InsertEndTimeDay(DateTime end_time_day_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -73,8 +73,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the end time day identifier by end of time.
         /// </summary>
-        /// <param name="end_time_day_old_par">The end time day old par.</param>
-        /// <param name="end_time_day_new_par">The end time day new par.</param>
+        /// <param name="end_time_day_old_par">The end time day old parameter</param>
+        /// <param name="end_time_day_new_par">The end time day new parameter</param>
         public void UpdateEndTimeDayIdByEndofTime(DateTime end_time_day_old_par, DateTime end_time_day_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

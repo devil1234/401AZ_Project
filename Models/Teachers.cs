@@ -56,41 +56,9 @@ namespace _401AZ_PROJECT.Models
                 return teachers;
             }
         }
-
+        
         /// <summary>
-        /// Gets the teacher f name l name by identifier.
-        /// </summary>
-        /// <returns>List&lt;Teachers&gt;.</returns>
-        public List<Teachers> GetTeacher_FName_LName_By_Id()
-        {
-            var teachers = new List<Teachers>();
-            using (var connection = new MySqlConnection(_c.ConnectionDetails))
-            {
-                connection.Open();
-
-                using (var cmd = new MySqlCommand("sp_select_teacher_fname_lname_by_id", connection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            teachers.Add(new Teachers
-                            {
-                                TeacherId = reader.GetInt32(0),
-                                FirstName = reader.GetString(1),
-                                LastName = reader.GetString(2)
-
-                            });
-                        }
-                    }
-                }
-                return teachers;
-            }
-        }
-
-        /// <summary>
-        /// Gets the name of the teacher f name l.
+        /// Gets the name of the teacher FirstName and Lastname.
         /// </summary>
         /// <returns>List&lt;Teachers&gt;.</returns>
         public List<Teachers> GetTeacher_FName_LName()
@@ -125,7 +93,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the teacher by identifier.
         /// </summary>
-        /// <param name="teacher_id_par">The teacher identifier par.</param>
+        /// <param name="teacher_id_par">The teacher identifier parameter</param>
         /// <returns>List&lt;Teachers&gt;.</returns>
         public List<Teachers> GetTeacherById(int teacher_id_par)
         {
@@ -167,13 +135,13 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the teacher.
         /// </summary>
-        /// <param name="first_name_id_par">The first name identifier par.</param>
-        /// <param name="last_name_id_par">The last name identifier par.</param>
-        /// <param name="dob_id_par">The dob identifier par.</param>
-        /// <param name="gender_id_par">The gender identifier par.</param>
-        /// <param name="e_mail_id_par">The e mail identifier par.</param>
-        /// <param name="teachers_address_id_par">The teachers address identifier par.</param>
-        async public void InsertTeacher(int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
+        /// <param name="first_name_id_par">The first name identifier parameter</param>
+        /// <param name="last_name_id_par">The last name identifier parameter</param>
+        /// <param name="dob_id_par">The dob identifier parameter</param>
+        /// <param name="gender_id_par">The gender identifier parameter</param>
+        /// <param name="e_mail_id_par">The e mail identifier parameter</param>
+        /// <param name="teachers_address_id_par">The teachers address identifier parameter</param>
+        public async void InsertTeacher(int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
@@ -197,7 +165,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Deletes the teacher.
         /// </summary>
-        /// <param name="teacher_id_par">The teacher identifier par.</param>
+        /// <param name="teacher_id_par">The teacher identifier parameter</param>
         public void DeleteTeacher(int teacher_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -217,13 +185,13 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the teacher.
         /// </summary>
-        /// <param name="teacher_id_par">The teacher identifier par.</param>
-        /// <param name="first_name_id_par">The first name identifier par.</param>
-        /// <param name="last_name_id_par">The last name identifier par.</param>
-        /// <param name="dob_id_par">The dob identifier par.</param>
-        /// <param name="gender_id_par">The gender identifier par.</param>
-        /// <param name="e_mail_id_par">The e mail identifier par.</param>
-        /// <param name="teachers_address_id_par">The teachers address identifier par.</param>
+        /// <param name="teacher_id_par">The teacher identifier parameter</param>
+        /// <param name="first_name_id_par">The first name identifier parameter</param>
+        /// <param name="last_name_id_par">The last name identifier parameter</param>
+        /// <param name="dob_id_par">The dob identifier parameter</param>
+        /// <param name="gender_id_par">The gender identifier parameter</param>
+        /// <param name="e_mail_id_par">The e mail identifier parameter</param>
+        /// <param name="teachers_address_id_par">The teachers address identifier parameter</param>
         public void UpdateTeacher(int teacher_id_par, int first_name_id_par, int last_name_id_par, int dob_id_par, int gender_id_par, int e_mail_id_par, int teachers_address_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

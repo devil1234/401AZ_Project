@@ -145,12 +145,12 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the timetable.
         /// </summary>
-        /// <param name="classroom_id_par">The classroom identifier par.</param>
-        /// <param name="subject_par">The subject par.</param>
-        /// <param name="teacher_id_par">The teacher identifier par.</param>
-        /// <param name="start_time_day_id_par">The start time day identifier par.</param>
-        /// <param name="end_time_day_id_par">The end time day identifier par.</param>
-        /// <param name="day_id_par">The day identifier par.</param>
+        /// <param name="classroom_id_par">The classroom identifier parameter</param>
+        /// <param name="subject_par">The subject parameter</param>
+        /// <param name="teacher_id_par">The teacher identifier parameter</param>
+        /// <param name="start_time_day_id_par">The start time day identifier parameter</param>
+        /// <param name="end_time_day_id_par">The end time day identifier parameter</param>
+        /// <param name="day_id_par">The day identifier parameter</param>
         public async void InsertTimetable(int classroom_id_par, string subject_par, int teacher_id_par, int start_time_day_id_par, int end_time_day_id_par, int day_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -195,13 +195,13 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the time table.
         /// </summary>
-        /// <param name="class_id_par">The class identifier par.</param>
-        /// <param name="classroom_id_par">The classroom identifier par.</param>
-        /// <param name="subject_par">The subject par.</param>
-        /// <param name="teacher_id_par">The teacher identifier par.</param>
-        /// <param name="start_time_day_id_par">The start time day identifier par.</param>
-        /// <param name="end_time_day_id_par">The end time day identifier par.</param>
-        /// <param name="day_id_par">The day identifier par.</param>
+        /// <param name="class_id_par">The class identifier parameter</param>
+        /// <param name="classroom_id_par">The classroom identifier parameter</param>
+        /// <param name="subject_par">The subject parameter</param>
+        /// <param name="teacher_id_par">The teacher identifier parameter</param>
+        /// <param name="start_time_day_id_par">The start time day identifier parameter</param>
+        /// <param name="end_time_day_id_par">The end time day identifier parameter</param>
+        /// <param name="day_id_par">The day identifier parameter</param>
         public void UpdateTimeTable(int class_id_par, int classroom_id_par, string subject_par, int teacher_id_par, int start_time_day_id_par, int end_time_day_id_par, int day_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

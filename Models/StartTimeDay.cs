@@ -23,7 +23,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the start time day.
         /// </summary>
-        /// <param name="start_time_day_par">The start time day par.</param>
+        /// <param name="start_time_day_par">The start time day parameter</param>
         public void InsertStartTimeDay(DateTime start_time_day_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -73,8 +73,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the start time day identifier by standard.
         /// </summary>
-        /// <param name="start_time_day_old_par">The start time day old par.</param>
-        /// <param name="start_time_day_new_par">The start time day new par.</param>
+        /// <param name="start_time_day_old_par">The start time day old parameter</param>
+        /// <param name="start_time_day_new_par">The start time day new parameter</param>
         public void UpdateStartTimeDayIdByStd(DateTime start_time_day_old_par, DateTime start_time_day_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

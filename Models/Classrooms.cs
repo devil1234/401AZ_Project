@@ -22,7 +22,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the classroom.
         /// </summary>
-        /// <param name="classroom_par">The classroom par.</param>
+        /// <param name="classroom_par">The classroom parameter</param>
         public void InsertClassroom(string classroom_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -41,7 +41,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the classroom identifier.
         /// </summary>
-        /// <param name="classroom_par">The classroom par.</param>
+        /// <param name="classroom_par">The classroom parameter</param>
         /// <returns>List&lt;Classrooms&gt;.</returns>
         public List<Classrooms> GetClassroomId(string classroom_par)
         {
@@ -71,8 +71,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the classroom.
         /// </summary>
-        /// <param name="classroom_old_par">The classroom old par.</param>
-        /// <param name="classroom_new_par">The classroom new par.</param>
+        /// <param name="classroom_old_par">The classroom old parameter</param>
+        /// <param name="classroom_new_par">The classroom new parameter</param>
         public void UpdateClassroom(string classroom_old_par, string classroom_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

@@ -168,10 +168,10 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the enrolment.
         /// </summary>
-        /// <param name="student_id_par">The student identifier par.</param>
-        /// <param name="class_id_par">The class identifier par.</param>
-        /// <param name="date_start_id_par">The date start identifier par.</param>
-        /// <param name="date_end_id_par">The date end identifier par.</param>
+        /// <param name="student_id_par">The student identifier parameter</param>
+        /// <param name="class_id_par">The class identifier parameter</param>
+        /// <param name="date_start_id_par">The date start identifier parameter</param>
+        /// <param name="date_end_id_par">The date end identifier parameter</param>
         public async void InsertEnrolment(int student_id_par, int class_id_par, int date_start_id_par, int date_end_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -194,10 +194,10 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the enrolment.
         /// </summary>
-        /// <param name="student_id_par">The student identifier par.</param>
-        /// <param name="class_id_par">The class identifier par.</param>
-        /// <param name="date_start_id_par">The date start identifier par.</param>
-        /// <param name="date_end_id_par">The date end identifier par.</param>
+        /// <param name="student_id_par">The student identifier parameter</param>
+        /// <param name="class_id_par">The class identifier parameter</param>
+        /// <param name="date_start_id_par">The date start identifier parameter</param>
+        /// <param name="date_end_id_par">The date end identifier parameter</param>
         public void UpdateEnrolment(int student_id_par, int class_id_par, int date_start_id_par, int date_end_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

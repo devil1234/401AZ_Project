@@ -19,39 +19,6 @@ namespace _401AZ_PROJECT.Models
         public int StudentId { get; set; }
         private readonly DataManager _c = new DataManager();
 
-        //SELECT FNAME AND LNAME FOR STUDENT BY STUDENT ID
-        /// <summary>
-        /// Gets the student f name l name by identifier.
-        /// </summary>
-        /// <returns>List&lt;Student&gt;.</returns>
-        public List<Student> GetStudent_FName_LName_By_Id()
-        {
-            var students = new List<Student>();
-            using (var connection = new MySqlConnection(_c.ConnectionDetails))
-            {
-                connection.Open();
-
-                using (var cmd = new MySqlCommand("sp_select_student_fname_lname_by_id", connection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            students.Add(new Student
-                            {
-                                StudentId = reader.GetInt32(0),
-                                FirstName = reader.GetString(1),
-                                LastName = reader.GetString(2)
-
-                            });
-                        }
-                    }
-                }
-                return students;
-            }
-        }
-
         // SELECT ONLY THE STUDENT FNAME AND LNAME AND RETURNING AS A LIST
         /// <summary>
         /// Gets the name of the student f name l.
@@ -181,13 +148,13 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the student.
         /// </summary>
-        /// <param name="student_first_name_id_par">The student first name identifier par.</param>
-        /// <param name="student_last_Name_id_par">The student last name identifier par.</param>
-        /// <param name="student_dob_id_par">The student dob identifier par.</param>
-        /// <param name="gender_id_par">The gender identifier par.</param>
-        /// <param name="student_e_mail_id_par">The student e mail identifier par.</param>
-        /// <param name="student_parent_id_par">The student parent identifier par.</param>
-        /// <param name="student_address_home_id_par">The student address home identifier par.</param>
+        /// <param name="student_first_name_id_par">The student first name identifier parameter</param>
+        /// <param name="student_last_Name_id_par">The student last name identifier parameter</param>
+        /// <param name="student_dob_id_par">The student dob identifier parameter</param>
+        /// <param name="gender_id_par">The gender identifier parameter</param>
+        /// <param name="student_e_mail_id_par">The student e mail identifier parameter</param>
+        /// <param name="student_parent_id_par">The student parent identifier parameter</param>
+        /// <param name="student_address_home_id_par">The student address home identifier parameter</param>
         async public void InsertStudent(int student_first_name_id_par, int student_last_Name_id_par, int student_dob_id_par, 
             int gender_id_par, int student_e_mail_id_par, int student_parent_id_par, int student_address_home_id_par)
         {
@@ -213,7 +180,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Deletes the student.
         /// </summary>
-        /// <param name="student_id_par">The student identifier par.</param>
+        /// <param name="student_id_par">The student identifier parameter</param>
         public void DeleteStudent(int student_id_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -233,14 +200,14 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the student.
         /// </summary>
-        /// <param name="student_id_par">The student identifier par.</param>
-        /// <param name="student_FirstNameId_par">The student first name identifier par.</param>
-        /// <param name="student_LastNameId_par">The student last name identifier par.</param>
-        /// <param name="student_DobId_par">The student dob identifier par.</param>
-        /// <param name="GenderId_par">The gender identifier par.</param>
-        /// <param name="student_EMailId_par">The student e mail identifier par.</param>
-        /// <param name="student_parent_id_par">The student parent identifier par.</param>
-        /// <param name="student_address_home_id_par">The student address home identifier par.</param>
+        /// <param name="student_id_par">The student identifier parameter</param>
+        /// <param name="student_FirstNameId_par">The student first name identifier parameter</param>
+        /// <param name="student_LastNameId_par">The student last name identifier parameter</param>
+        /// <param name="student_DobId_par">The student dob identifier parameter</param>
+        /// <param name="GenderId_par">The gender identifier parameter</param>
+        /// <param name="student_EMailId_par">The student e mail identifier parameter</param>
+        /// <param name="student_parent_id_par">The student parent identifier parameter</param>
+        /// <param name="student_address_home_id_par">The student address home identifier parameter</param>
         public void UpdateStudent(int student_id_par, int student_first_name_id_par, int student_last_Name_id_par, int student_dob_id_par,
             int gender_id_par, int student_e_mail_id_par, int student_parent_id_par, int student_address_home_id_par)
         {

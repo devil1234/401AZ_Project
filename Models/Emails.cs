@@ -22,7 +22,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the email.
         /// </summary>
-        /// <param name="e_mail_address_par">The e mail address par.</param>
+        /// <param name="e_mail_address_par">The e mail address parameter</param>
         public void InsertEmail(string e_mail_address_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -41,7 +41,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the email identifier by email.
         /// </summary>
-        /// <param name="e_mail_address_par">The e mail address par.</param>
+        /// <param name="e_mail_address_par">The e mail address parameter</param>
         /// <returns>List&lt;Emails&gt;.</returns>
         public List<Emails> GetEmailIdByEmail(string e_mail_address_par)
         {
@@ -72,8 +72,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the email address.
         /// </summary>
-        /// <param name="e_mail_address_old_par">The e mail address old par.</param>
-        /// <param name="e_mail_address_new_par">The e mail address new par.</param>
+        /// <param name="e_mail_address_old_par">The e mail address old parameter</param>
+        /// <param name="e_mail_address_new_par">The e mail address new parameter</param>
         public void UpdateEmail(string e_mail_address_old_par, string e_mail_address_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

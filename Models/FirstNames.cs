@@ -22,7 +22,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the first name.
         /// </summary>
-        /// <param name="first_name_par">The first name par.</param>
+        /// <param name="first_name_par">The first name parameter</param>
         public void InsertFirstName(string first_name_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -39,7 +39,7 @@ namespace _401AZ_PROJECT.Models
         }
         
         /// <summary>Gets the first name by using the first_name_par.</summary>
-        /// <param name="first_name_par">The first name par.</param>
+        /// <param name="first_name_par">The first name parameter</param>
         /// <returns>List&lt;FirstNames&gt;.</returns>
         public List<FirstNames> GetFirstNameIdByFirstName(string first_name_par)
         {
@@ -70,8 +70,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the first name.
         /// </summary>
-        /// <param name="first_name_old_par">The first name old par.</param>
-        /// <param name="first_name_new_par">The first name new par.</param>
+        /// <param name="first_name_old_par">The first name old parameter</param>
+        /// <param name="first_name_new_par">The first name new parameter</param>
         public void UpdateFirstName(string first_name_old_par, string first_name_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

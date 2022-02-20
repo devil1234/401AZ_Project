@@ -23,7 +23,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the date start.
         /// </summary>
-        /// <param name="date_start_par">The date start par.</param>
+        /// <param name="date_start_par">The date start parameter</param>
         public void InsertDateStart(DateTime date_start_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -42,7 +42,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the start date by date.
         /// </summary>
-        /// <param name="date_start_par">The date start par.</param>
+        /// <param name="date_start_par">The date start parameter</param>
         /// <returns>List&lt;DateStart&gt;.</returns>
         public List<DateStart> GetStartDateByDate(DateTime date_start_par)
         {
@@ -73,8 +73,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the date start by date.
         /// </summary>
-        /// <param name="date_start_old_par">The date start old par.</param>
-        /// <param name="date_start_new_par">The date start new par.</param>
+        /// <param name="date_start_old_par">The date start old parameter</param>
+        /// <param name="date_start_new_par">The date start new parameter</param>
         public void UpdateDateStartByDate(DateTime date_start_old_par, DateTime date_start_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

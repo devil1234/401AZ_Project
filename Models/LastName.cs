@@ -25,7 +25,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the last name.
         /// </summary>
-        /// <param name="last_name_par">The last name par.</param>
+        /// <param name="last_name_par">The last name parameter</param>
         public void InsertLastName(string last_name_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -44,7 +44,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the last name of the name identifier by l.
         /// </summary>
-        /// <param name="last_name_par">The last name par.</param>
+        /// <param name="last_name_par">The last name parameter</param>
         /// <returns>List&lt;LastName&gt;.</returns>
         public List<LastName> GetLastNameIdByLName(string last_name_par)
         {
@@ -75,8 +75,8 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the name of the l.
         /// </summary>
-        /// <param name="last_name_old_par">The last name old par.</param>
-        /// <param name="last_name_new_par">The last name new par.</param>
+        /// <param name="last_name_old_par">The last name old parameter</param>
+        /// <param name="last_name_new_par">The last name new parameter</param>
         public void UpdateLName(string last_name_old_par, string last_name_new_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))

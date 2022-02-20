@@ -18,7 +18,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Gets the name of the parent details by f.
         /// </summary>
-        /// <param name="parent_fname_par">The parent fname par.</param>
+        /// <param name="parent_fname_par">The parent fname parameter</param>
         /// <returns>List&lt;StudentParentsDetail&gt;.</returns>
         public List<StudentParentsDetail> GetParentDetailsByFName(string parent_fname_par)
         {
@@ -53,10 +53,10 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Updates the parent details.
         /// </summary>
-        /// <param name="parent_id_par">The parent identifier par.</param>
-        /// <param name="first_name_par">The first name par.</param>
-        /// <param name="last_name_par">The last name par.</param>
-        /// <param name="phone_number_par">The phone number par.</param>
+        /// <param name="parent_id_par">The parent identifier parameter</param>
+        /// <param name="first_name_par">The first name parameter</param>
+        /// <param name="last_name_par">The last name parameter</param>
+        /// <param name="phone_number_par">The phone number parameter</param>
         public void UpdateParentDetails(int parent_id_par, string first_name_par, string last_name_par, string phone_number_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
@@ -79,9 +79,9 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// Inserts the parents details.
         /// </summary>
-        /// <param name="first_name_par">The first name par.</param>
-        /// <param name="last_name_par">The last name par.</param>
-        /// <param name="phone_number_par">The phone number par.</param>
+        /// <param name="first_name_par">The first name parameter</param>
+        /// <param name="last_name_par">The last name parameter</param>
+        /// <param name="phone_number_par">The phone number parameter</param>
         /// <returns>System.Int32.</returns>
         public int InsertParentsDetails(string first_name_par, string last_name_par, string phone_number_par)
         {
