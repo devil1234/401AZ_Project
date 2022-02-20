@@ -173,7 +173,7 @@ ALTER TABLE tbl_students
   ADD CONSTRAINT fk_student_address_home_id FOREIGN KEY (student_address_home_id) REFERENCES tbl_addresses (address_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_student_dob_id FOREIGN KEY (student_dob_id) REFERENCES tbl_dob (dob_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_student_e_mail_id FOREIGN KEY (student_e_mail_id) REFERENCES tbl_emails (e_mail_id) ON UPDATE CASCADE ON DELETE NO ACTION,
-  ADD CONSTRAINT fk_student_first_name_id FOREIGN KEY (student_first_name_id) REFERENCES tbl_first_name (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT fk_student_first_name_id FOREIGN KEY (student_first_name_id) REFERENCES tbl_first_names (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_student_last_name_id FOREIGN KEY (student_last_name_id) REFERENCES tbl_last_names (last_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_student_parent_id FOREIGN KEY (student_parent_id) REFERENCES tbl_student_parents_details (parent_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
@@ -187,7 +187,7 @@ ALTER TABLE tbl_teachers
   ADD KEY teachers_address_id (teachers_address_id),
   ADD CONSTRAINT fk_dob_id1 FOREIGN KEY (dob_id) REFERENCES tbl_dob (dob_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_e_mail_id1 FOREIGN KEY (e_mail_id) REFERENCES tbl_emails (e_mail_id) ON UPDATE CASCADE ON DELETE NO ACTION,
-  ADD CONSTRAINT fk_first_name_id1 FOREIGN KEY (first_name_Id) REFERENCES tbl_first_name (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT fk_first_name_id1 FOREIGN KEY (first_name_Id) REFERENCES tbl_first_names (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_gender_id1 FOREIGN KEY (gender_Id) REFERENCES tbl_genders (gender_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_last_name_id1 FOREIGN KEY (last_name_Id) REFERENCES tbl_last_names (last_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_teachers_address_id FOREIGN KEY (teachers_address_id) REFERENCES tbl_addresses (address_id) ON DELETE NO ACTION ON UPDATE NO ACTION;

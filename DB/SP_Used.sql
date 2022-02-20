@@ -64,6 +64,7 @@ END //
 DELIMITER ;
 
 /* "Sp_SelectClassroomByName" */
+DELIMITER //
 CREATE PROCEDURE sp_select_classroom_by_name(
     IN classroom_par VARCHAR(10)
 )
@@ -108,7 +109,7 @@ CREATE PROCEDURE sp_select_date_end_by_date(
 BEGIN
 SELECT * FROM tbl_date_end WHERE date_end = date_end_par;
 END //
-DELIMTER ;
+DELIMITER ;
 
 /* "Sp_UpdateDateEndByDate" */
 DELIMITER //
@@ -146,7 +147,7 @@ CREATE PROCEDURE sp_select_date_start_by_date(
 BEGIN
 SELECT * FROM tbl_date_start WHERE date_start= date_start_par;
 END //
-DELIMTER ;
+DELIMITER ;
 
 /* "Sp_UpdateDateStartByDate" */
 DELIMITER //
@@ -434,7 +435,7 @@ CREATE PROCEDURE sp_select_first_name_by_first_name(
 BEGIN
 SELECT * FROM tbl_first_names WHERE first_name = first_name_par;
 END //
-DELIMTER ;
+DELIMITER ;
 
 /* "Sp_UpdateFirstName" */
 DELIMITER //
@@ -477,7 +478,7 @@ CREATE PROCEDURE sp_select_last_name_by_last_name(
 BEGIN
 SELECT * FROM tbl_last_names WHERE last_name = last_name_par;
 END //
-DELIMTER ;
+DELIMITER ;
 
 /* "Sp_UpdateLastName" */
 DELIMITER //
@@ -666,7 +667,7 @@ END //
 DELIMITER ;
 
 /* "Sp_UpdateStudent" */
-ELIMITER //
+DELIMITER //
 CREATE PROCEDURE sp_update_student(
     IN student_id_par INT,
     IN student_first_name_id_par INT,
@@ -725,7 +726,7 @@ CREATE PROCEDURE sp_insert_student_parent_details(
     IN first_name_par VARCHAR(10),
     IN last_name_par VARCHAR(10),
     IN phone_number_par VARCHAR(11),
-    OUT parent_id_pare INT(11)
+    OUT parent_id_par INT(11)
 )
 BEGIN
 INSERT INTO tbl_student_parents_details (first_name, last_name, phone_number)
@@ -984,7 +985,7 @@ FROM
     INNER JOIN tbl_last_names 
         ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
     INNER JOIN tbl_days 
-        ON (tbl_classes.day_id = tbl_days.day_id);
+        ON (tbl_classes.day_id = tbl_days.day_id)
 	WHERE tbl_classrooms.classroom LIKE classroom_par;
 END // 
 DELIMITER ;
@@ -1034,5 +1035,67 @@ SET
 	end_time_day_id = IFNULL(end_time_day_id_par, end_time_day_id),
 	day_id = IFNULL(day_id_par, day_id)
 WHERE class_id = class_id_par;
+END // 
+DELIMITER ;
+
+/* "Sp_SelectTimeTable" */
+DELIMITER //
+CREATE PROCEDURE sp_select_time_table(
+)
+
+BEGIN
+SELECT
+	tbl_classes.class_id,
+	tbl_days.day,
+	tbl_start_time_day.start_time_day,
+    tbl_end_time_day.end_time_day,
+    tbl_classrooms.classroom,
+	tbl_first_names.first_name AS Teacher_FName,
+	tbl_last_names.last_name AS Teacher_LName, 
+	tbl_classes.subject,
+	tbl_teachers.teacher_id,
+	tbl_days.day_id
+FROM
+    tbl_classes
+    INNER JOIN tbl_teachers 
+        ON (tbl_classes.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_classrooms 
+        ON (tbl_classes.classroom_id = tbl_classrooms.classroom_id)
+    INNER JOIN tbl_start_time_day 
+        ON (tbl_classes.start_time_day_id = tbl_start_time_day.start_time_day_id)
+    INNER JOIN tbl_end_time_day 
+        ON (tbl_classes.end_time_day_id = tbl_end_time_day.end_time_day_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_Id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_Id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_days 
+        ON (tbl_classes.day_id = tbl_days.day_id);
+END // 
+DELIMITER ;
+
+/* "Sp_SelectTeachingMaterial" */
+DELIMITER //
+CREATE PROCEDURE sp_select_teaching_material(
+)
+BEGIN
+SELECT
+    tbl_teaching_materials.teaching_id,
+    tbl_teaching_materials.file_name,
+    tbl_file_extensions.file_extension,
+    tbl_teaching_materials.description,
+    tbl_teachers.teacher_id,
+    tbl_first_names.first_name,
+    tbl_last_names.last_name
+FROM
+    tbl_teaching_materials
+    INNER JOIN tbl_teachers 
+        ON (tbl_teaching_materials.teacher_id = tbl_teachers.teacher_id)
+    INNER JOIN tbl_first_names 
+        ON (tbl_teachers.first_name_id = tbl_first_names.first_name_id)
+    INNER JOIN tbl_last_names 
+        ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
+    INNER JOIN tbl_file_extensions 
+        ON (tbl_teaching_materials.file_extension_id = tbl_file_extensions.file_extension_id);
 END // 
 DELIMITER ;
