@@ -114,9 +114,9 @@ namespace _401AZ_PROJECT.Models
             {
                 connection.Open();
 
-                using (var cmd = new MySqlCommand("CALL sp_select_time_table", connection))
+                using (var cmd = new MySqlCommand("sp_select_time_table", connection))
                 {
-                    //cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.StoredProcedure;
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
