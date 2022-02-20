@@ -652,10 +652,10 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE sp_select_end_time_day_by_std(
-    IN end_time_day TIME
+    IN end_time_day_par TIME
 )
 BEGIN
-SELECT * FROM tbl_end_time_day WHERE end_time_day = end_time_day;
+SELECT * FROM tbl_end_time_day WHERE end_time_day = end_time_day_par;
 END // 
 DELIMITER ;
 
@@ -1046,10 +1046,10 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE sp_select_start_time_day_by_std(
-    IN start_time_day TIME
+    IN start_time_day_par TIME
 )
 BEGIN
-SELECT * FROM tbl_start_time_day WHERE start_time_day = start_time_day;
+SELECT * FROM tbl_start_time_day WHERE start_time_day = start_time_day_par;
 END // 
 DELIMITER ;
 
