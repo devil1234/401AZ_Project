@@ -13,7 +13,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// The MySQL connection details
         /// </summary>
-        public string ConnectionDetails = "Server=localhost; User ID=root;Password=Joyride2!;Database=test2";
+        public string ConnectionDetails = "Server=localhost; User ID=cw2;Password=Joyride2!;Database=coursework2";
         /// <summary>
         /// Converts to data table.
         /// </summary>
