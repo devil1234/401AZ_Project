@@ -1358,7 +1358,7 @@ WHERE NOT EXISTS (
 	dob_id = dob_id_par AND
 	gender_id = gender_id_par AND
 	e_mail_id = e_mail_id_par AND
-	teachers_address_home_id =teachers_address_home_id_par
+	teachers_address_id = teachers_address_id
 ) LIMIT 1;
 END // 
 DELIMITER ;
