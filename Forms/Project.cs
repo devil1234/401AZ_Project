@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace _401AZ_PROJECT
+namespace _401AZ_PROJECT.Forms
 {
     /// <summary>
     /// Class Project.

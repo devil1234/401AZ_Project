@@ -1,12 +1,12 @@
-﻿using _401AZ_PROJECT.Models;
-using System;
+﻿using System;
 using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using _401AZ_PROJECT.Models;
 
-namespace _401AZ_PROJECT
+namespace _401AZ_PROJECT.Forms
 {
     /// <summary>
     /// Class StudentForm.
@@ -148,13 +148,18 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Dgv_Students_SelectionChanged(object sender, EventArgs e)
         {
-            if (Dgv_Students.SelectedRows.Count > 0)
+            switch (Dgv_Students.SelectedRows.Count > 0)
             {
-                Populate_Form();
-            }
-            else
-            {
-                Unpopulate_Form();
+                case true:
+                    Btn_Update.Enabled = true;
+                    Btn_Delete.Enabled = true;
+                    Populate_Form();
+                    break;
+                default:
+                    Btn_Update.Enabled = false;
+                    Btn_Delete.Enabled = false;
+                    Unpopulate_Form();
+                    break;
             }
         }
 
@@ -163,7 +168,11 @@ namespace _401AZ_PROJECT
         /// </summary>
         private void Populate_Form()
         {
-            if (Dgv_Students.SelectedRows.Count <= 0) return;
+            switch (Dgv_Students.SelectedRows.Count <= 0)
+            {
+                case true:
+                    return;
+            }
             //Hide Columns
             Dgv_Students.Columns["ParentId"].Visible = false;
             Dgv_Students.Columns["AddressId"].Visible = false;
@@ -280,9 +289,11 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="DataGridViewCellFormattingEventArgs" /> instance containing the event data.</param>
         private void Dgv_Students_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (Dgv_Students.Columns[e.ColumnIndex].Name == "DOB")
+            switch (Dgv_Students.Columns[e.ColumnIndex].Name)
             {
-                ShortFormDateFormat(e);
+                case "DOB":
+                    ShortFormDateFormat(e);
+                    break;
             }
         }
 
@@ -293,9 +304,11 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="KeyPressEventArgs" /> instance containing the event data.</param>
         private void Txtb_StudentId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            switch (char.IsControl(e.KeyChar))
             {
-                e.Handled = true;
+                case false when !char.IsDigit(e.KeyChar):
+                    e.Handled = true;
+                    break;
             }
         }
 
@@ -323,7 +336,14 @@ namespace _401AZ_PROJECT
             Cb_Gender.DataSource = _dm.ToDataTable(_genders.GetGenders());
             Cb_Gender.DisplayMember = "Gender";
             Cb_Gender.ValueMember = "GenderId";
-            Cb_Gender.Text = Dgv_Students.SelectedCells[4].Value.ToString();
+            switch (Dgv_Students.SelectedRows.Count <= 0)
+            {
+                case true:
+                    return;
+                default:
+                    Cb_Gender.Text = Dgv_Students.SelectedCells[4].Value.ToString();
+                    break;
+            }
         }
 
         /// <summary>
@@ -450,17 +470,45 @@ namespace _401AZ_PROJECT
         {
             //Retrive the Student FName from txtbox, insert it into db with checks and retrieve the id
             var studentFName = TxtB_StudentFName.Text;
+            switch (studentFName)
+            {
+                case null:
+                    MessageBox.Show(@"The student first name cannot be empty! Please fill the box!", @"Warning!!!", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+            }
             if (_dm.ToDataTable(_fn.GetFirstNameIdByFirstName(studentFName)).Rows.Count == 0)
             {
-                _fn.InsertFirstName(studentFName);
+                try
+                {
+                    _fn.InsertFirstName(studentFName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Convert.ToString(ex));
+                }
             }
             var studentFNameId = Int32.Parse(_dm.ToDataTable(_fn.GetFirstNameIdByFirstName(studentFName)).Rows[0].Field<string>("FirstNameId"));
 
             //Retrive the Student LName from txtbox, insert it into db with checks and retrieve the id
             var studentLName = Txtb_StudentLName.Text;
+            switch (studentLName)
+            {
+                case null:
+                    MessageBox.Show(@"The student last name cannot be empty! Please fill the box!", @"Warning!!!", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+            }
             if (_dm.ToDataTable(_ln.GetLastNameIdByLName(studentLName)).Rows.Count == 0)
             {
-                _ln.InsertLastName(studentLName);
+                try
+                {
+                    _ln.InsertLastName(studentLName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Convert.ToString(ex));
+                }
             }
             var studentLNameId = Int32.Parse(_dm.ToDataTable(_ln.GetLastNameIdByLName(studentLName)).Rows[0].Field<string>("LastNameId"));
 
@@ -478,9 +526,29 @@ namespace _401AZ_PROJECT
 
             //Retrieve the Student email from txtbox, insert it into db with checks and retrieve the id
             var studentEmail = Txtb_email.Text;
+            switch (studentEmail)
+            {
+                case null:
+                    MessageBox.Show(@"The student e-mail cannot be empty! Please fill the box!", @"Warning!!!", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+            }
+            if (!_dm.IsValidEmail(studentEmail))
+            {
+                MessageBox.Show(@"Please use a valid e-mail address!!!", @"Warning!!!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
             if (_dm.ToDataTable(_em.GetEmailIdByEmail(studentEmail)).Rows.Count == 0)
             {
-                _em.InsertEmail(studentEmail);
+                try
+                {
+                    _em.InsertEmail(studentEmail);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Convert.ToString(ex));
+                }
             }
             var studentEmailId = Int32.Parse(_dm.ToDataTable(_em.GetEmailIdByEmail
                 (studentEmail)).Rows[0].Field<string>("EMailId"));
@@ -489,9 +557,22 @@ namespace _401AZ_PROJECT
             var parentFname = Txtb_ParentFName.Text;
             var parentLname = TxtB_ParentLName.Text;
             var parentPn = Txtb_ParentPN.Text;
+            if (parentFname == null || parentLname == null || parentPn == null)
+            {
+                MessageBox.Show(@"The parent details cannot be empty!!! Please fill all the boxes!!!", @"Warning!!!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
             if(_dm.ToDataTable(_spd.GetParentDetailsByFName(parentFname)).Rows.Count == 0)
             {
-                _spd.InsertParentsDetails(parentFname, parentLname, parentPn);
+                try
+                {
+                    _spd.InsertParentsDetails(parentFname, parentLname, parentPn);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Convert.ToString(ex));
+                }
             }
             var parentId = Int32.Parse(_dm.ToDataTable(_spd.GetParentDetailsByFName
                 (parentFname)).Rows[0].Field<string>("ParentId"));
@@ -501,15 +582,35 @@ namespace _401AZ_PROJECT
             var addressCity = Txtb_AddressCity.Text;
             var addressRegion = Txtb_AddressRegion.Text;
             var addressPostCode = Txtb_AddressPostCode.Text;
+            if (addressStreet == null || addressCity == null || addressRegion == null || addressPostCode == null)
+            {
+                MessageBox.Show(@"The student address details cannot be empty!!! Please fill all the boxes!!!", @"Warning!!!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
             if (_dm.ToDataTable(_adr.GetAddressesByCity(addressCity)).Rows.Count == 0)
             {
-                _adr.InsertAddressDetails(addressStreet, addressCity, addressRegion, addressPostCode);
+                try
+                {
+                    _adr.InsertAddressDetails(addressStreet, addressCity, addressRegion, addressPostCode);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Convert.ToString(ex));
+                }
             }
             var addressId = Int32.Parse(_dm.ToDataTable(_adr.GetAddressesByCity
                 (addressCity)).Rows[0].Field<string>("AddressId"));
 
             //Insert the Student Details
-            _st.InsertStudent(studentFNameId, studentLNameId, dobId, genderId, studentEmailId, parentId, addressId);
+            try
+            {
+                _st.InsertStudent(studentFNameId, studentLNameId, dobId, genderId, studentEmailId, parentId, addressId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Convert.ToString(ex));
+            }
             Btn_Cancel.PerformClick();
         }
 
@@ -529,10 +630,12 @@ namespace _401AZ_PROJECT
                 var buttons = MessageBoxButtons.YesNo;
                 var result = MessageBox.Show(message, caption, buttons);
 
-                if (result == DialogResult.Yes)
+                switch (result)
                 {
-                    _st.DeleteStudent(index);
-                    Btn_Refresh.PerformClick();
+                    case DialogResult.Yes:
+                        _st.DeleteStudent(index);
+                        Btn_Refresh.PerformClick();
+                        break;
                 }
             }
         }
@@ -577,6 +680,7 @@ namespace _401AZ_PROJECT
 
             //Update Student FName
             var studentFNameNew = TxtB_StudentFName.Text;
+
             if(studentFNameNew != null)
             {
                 var studentFnameOld = Dgv_Students.SelectedCells[1].Value.ToString();
@@ -610,6 +714,12 @@ namespace _401AZ_PROJECT
 
             //Update Email
             var emailNew = Txtb_email.Text;
+            if (!_dm.IsValidEmail(emailNew))
+            {
+                MessageBox.Show(@"Please use a valid e-mail address!!!", @"Warning!!!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
             if (emailNew != null)
             {
                 var emailOld = Dgv_Students.SelectedCells[5].Value.ToString();
@@ -624,6 +734,12 @@ namespace _401AZ_PROJECT
             var parentFnameNew = Txtb_ParentFName.Text;
             var parentLnameNew = Txtb_ParentFName.Text;
             var parentPnNew = Txtb_ParentPN.Text;
+            if (parentFnameNew == null || parentLnameNew == null || parentPnNew == null)
+            {
+                MessageBox.Show(@"The parent details cannot be empty!!! Please fill all the boxes!!!", @"Warning!!!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
             _spd.UpdateParentDetails(parentId, parentFnameNew, parentLnameNew, parentPnNew);
 
             //Address Details
@@ -632,6 +748,12 @@ namespace _401AZ_PROJECT
             var addressCity = Txtb_AddressCity.Text;
             var addressRegion = Txtb_AddressRegion.Text;
             var addressPostcode = Txtb_AddressPostCode.Text;
+            if (addressStreet == null || addressCity == null || addressRegion == null || addressPostcode == null)
+            {
+                MessageBox.Show(@"The student address details cannot be empty!!! Please fill all the boxes!!!", @"Warning!!!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
             _adr.UpdateAddressDetails(addressId, addressStreet, addressCity, addressRegion, addressPostcode);
 
             //Update the student details

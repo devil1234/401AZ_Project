@@ -1,13 +1,13 @@
-﻿using _401AZ_PROJECT.Models;
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using _401AZ_PROJECT.Models;
 
-namespace _401AZ_PROJECT
+namespace _401AZ_PROJECT.Forms
 {
     /// <summary>
     /// Class EnrolmentsForm.
@@ -74,14 +74,18 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="DataGridViewCellFormattingEventArgs" /> instance containing the event data.</param>
         private void Dgv_Enrolments_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (Dgv_Enrolments.Columns[e.ColumnIndex].Name == "StartDate")
+            switch (Dgv_Enrolments.Columns[e.ColumnIndex].Name)
             {
-                ShortFormDateFormat(e);
+                case "StartDate":
+                    ShortFormDateFormat(e);
+                    break;
             }
 
-            if (Dgv_Enrolments.Columns[e.ColumnIndex].Name == "EndDate")
+            switch (Dgv_Enrolments.Columns[e.ColumnIndex].Name)
             {
-                ShortFormDateFormat(e);
+                case "EndDate":
+                    ShortFormDateFormat(e);
+                    break;
             }
         }
 
@@ -101,7 +105,11 @@ namespace _401AZ_PROJECT
         /// </summary>
         private void PopulateForm()
         {
-            if (Dgv_Enrolments.SelectedRows.Count <= 0) return;
+            switch (Dgv_Enrolments.SelectedRows.Count <= 0)
+            {
+                case true:
+                    return;
+            }
             //StudentID
             Cb_StudentId.Items.Insert(0, Dgv_Enrolments.SelectedCells[0].Value.ToString());
             Cb_StudentId.SelectedIndex = 0;
@@ -281,27 +289,28 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btn_EnableSearchById_Click(object sender, EventArgs e)
         {
-            if (Btn_search_student_by_id.Visible == false)
+            switch (Btn_search_student_by_id.Visible)
             {
-                Txtb_StudentId_Search.Visible = true;
-                Txtb_StudentId_Search.Text = null;
-                Lbl_StudentIdSearch.Visible = true;
-                Btn_search_student_by_id.Visible = true;
-                Btn_Refresh.Visible = false;
-                btn_InsertNew.Visible=false;
-                Btn_Update.Visible=false;
-                Btn_Delete.Visible=false;
-            }
-            else
-            {
-                Txtb_StudentId_Search.Visible = false;
-                Lbl_StudentIdSearch.Visible = false;
-                Btn_search_student_by_id.Visible = false;
-                Btn_Refresh.Visible = true;
-                btn_InsertNew.Visible = true;
-                Btn_Update.Visible = true;
-                Btn_Delete.Visible = true;
-                Btn_Refresh.PerformClick();
+                case false:
+                    Txtb_StudentId_Search.Visible = true;
+                    Txtb_StudentId_Search.Text = null;
+                    Lbl_StudentIdSearch.Visible = true;
+                    Btn_search_student_by_id.Visible = true;
+                    Btn_Refresh.Visible = false;
+                    btn_InsertNew.Visible=false;
+                    Btn_Update.Visible=false;
+                    Btn_Delete.Visible=false;
+                    break;
+                default:
+                    Txtb_StudentId_Search.Visible = false;
+                    Lbl_StudentIdSearch.Visible = false;
+                    Btn_search_student_by_id.Visible = false;
+                    Btn_Refresh.Visible = true;
+                    btn_InsertNew.Visible = true;
+                    Btn_Update.Visible = true;
+                    Btn_Delete.Visible = true;
+                    Btn_Refresh.PerformClick();
+                    break;
             }
         }
 
@@ -330,10 +339,12 @@ namespace _401AZ_PROJECT
                 var buttons = MessageBoxButtons.YesNo;
                 var result = MessageBox.Show(message, caption, buttons);
 
-                if (result == DialogResult.Yes)
+                switch (result)
                 {
-                    _enrol.DeleteEnrolment(index);
-                    Btn_Refresh.PerformClick();
+                    case DialogResult.Yes:
+                        _enrol.DeleteEnrolment(index);
+                        Btn_Refresh.PerformClick();
+                        break;
                 }
             }
         }
@@ -399,10 +410,12 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         private void Txtb_StudentId_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            switch (e.KeyCode)
             {
-                Btn_search_student_by_id.PerformClick();
-                Txtb_StudentId_Search.Clear();
+                case Keys.Enter:
+                    Btn_search_student_by_id.PerformClick();
+                    Txtb_StudentId_Search.Clear();
+                    break;
             }
         }
 
@@ -413,9 +426,11 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="KeyPressEventArgs" /> instance containing the event data.</param>
         private void Txtb_StudentId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            switch (char.IsControl(e.KeyChar))
             {
-                e.Handled = true;
+                case false when !char.IsDigit(e.KeyChar):
+                    e.Handled = true;
+                    break;
             }
         }
 
@@ -437,11 +452,25 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_SaveNew_Click(object sender, EventArgs e)
         {
-            //Retrive the StudentId from Combobox 
-            var studentId = Int32.Parse(Cb_StudentId.SelectedValue.ToString());
-
-            //Retrieve the ClassId from Combobox
+            switch (Cb_ClassId.SelectedIndex)
+            {
+                //Retrieve the ClassId from Combobox
+                case -1:
+                    MessageBox.Show(@"Please insert a timetable before creating an enrolment!!", @"Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+            }
             var classId = Int32.Parse(Cb_ClassId.SelectedValue.ToString());
+
+            switch (Cb_StudentId.SelectedIndex)
+            {
+                //Retrive the StudentId from Combobox 
+                case -1:
+                    MessageBox.Show(@"Please insert student details before creating an enrolment!!", @"Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+            }
+            var studentId = Int32.Parse(Cb_StudentId.SelectedValue.ToString());
 
             //check if the Date Start is existing in db, if not insert it and retrieve the id
             var dateStart = Dtp_DateStart.Value.ToShortDateString();
@@ -474,8 +503,12 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Update_Click(object sender, EventArgs e)
         {
-            if (!Dgv_Enrolments.Rows.Cast<DataGridViewRow>()
-                    .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null))) return;
+            switch (Dgv_Enrolments.Rows.Cast<DataGridViewRow>()
+                        .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
+            {
+                case false:
+                    return;
+            }
             //hide the buttons
             Button_Enable();
 
@@ -559,13 +592,18 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Dgv_Enrolments_SelectionChanged(object sender, EventArgs e)
         {
-            if (Dgv_Enrolments.SelectedRows.Count > 0)
+            switch (Dgv_Enrolments.SelectedRows.Count > 0)
             {
-                PopulateForm();
-            }
-            else
-            {
-                UnpopulateForm();
+                case true:
+                    Btn_Update.Enabled = true;
+                    Btn_Delete.Enabled = true;
+                    PopulateForm();
+                    break;
+                default:
+                    Btn_Update.Enabled = false;
+                    Btn_Delete.Enabled = false;
+                    UnpopulateForm();
+                    break;
             }
         }
     }

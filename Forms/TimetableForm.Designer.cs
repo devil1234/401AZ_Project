@@ -1,4 +1,4 @@
-﻿namespace _401AZ_PROJECT
+﻿namespace _401AZ_PROJECT.Forms
 {
     /// <summary>
     /// Class TimetableForm.
@@ -131,7 +131,7 @@
             this.Lbl_ClassNameSearch.Location = new System.Drawing.Point(13, 194);
             this.Lbl_ClassNameSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_ClassNameSearch.Name = "Lbl_ClassNameSearch";
-            this.Lbl_ClassNameSearch.Size = new System.Drawing.Size(127, 17);
+            this.Lbl_ClassNameSearch.Size = new System.Drawing.Size(150, 20);
             this.Lbl_ClassNameSearch.TabIndex = 1;
             this.Lbl_ClassNameSearch.Text = "Classroom name";
             // 
@@ -143,7 +143,7 @@
             this.Txt_class_search.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_class_search.MaxLength = 10;
             this.Txt_class_search.Name = "Txt_class_search";
-            this.Txt_class_search.Size = new System.Drawing.Size(117, 23);
+            this.Txt_class_search.Size = new System.Drawing.Size(117, 27);
             this.Txt_class_search.TabIndex = 2;
             this.Txt_class_search.TextChanged += new System.EventHandler(this.Txt_class_search_TextChanged);
             this.Txt_class_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_class_search_KeyDown);
@@ -164,6 +164,7 @@
             // 
             // Btn_Update
             // 
+            this.Btn_Update.Enabled = false;
             this.Btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Update.Location = new System.Drawing.Point(1060, 111);
             this.Btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -189,6 +190,7 @@
             // 
             // Btn_Delete
             // 
+            this.Btn_Delete.Enabled = false;
             this.Btn_Delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Delete.Location = new System.Drawing.Point(1060, 190);
             this.Btn_Delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -218,7 +220,7 @@
             this.Lbl_ClassID.Location = new System.Drawing.Point(13, 43);
             this.Lbl_ClassID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_ClassID.Name = "Lbl_ClassID";
-            this.Lbl_ClassID.Size = new System.Drawing.Size(67, 17);
+            this.Lbl_ClassID.Size = new System.Drawing.Size(82, 20);
             this.Lbl_ClassID.TabIndex = 10;
             this.Lbl_ClassID.Text = "Class ID";
             // 
@@ -229,7 +231,7 @@
             this.Lbl_Day.Location = new System.Drawing.Point(13, 82);
             this.Lbl_Day.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Day.Name = "Lbl_Day";
-            this.Lbl_Day.Size = new System.Drawing.Size(36, 17);
+            this.Lbl_Day.Size = new System.Drawing.Size(42, 20);
             this.Lbl_Day.TabIndex = 11;
             this.Lbl_Day.Text = "Day";
             // 
@@ -240,7 +242,7 @@
             this.Lbl_StartTime.Location = new System.Drawing.Point(13, 114);
             this.Lbl_StartTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_StartTime.Name = "Lbl_StartTime";
-            this.Lbl_StartTime.Size = new System.Drawing.Size(83, 17);
+            this.Lbl_StartTime.Size = new System.Drawing.Size(97, 20);
             this.Lbl_StartTime.TabIndex = 12;
             this.Lbl_StartTime.Text = "Start Time";
             // 
@@ -251,7 +253,7 @@
             this.Lbl_EndTimeDay.Location = new System.Drawing.Point(13, 146);
             this.Lbl_EndTimeDay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_EndTimeDay.Name = "Lbl_EndTimeDay";
-            this.Lbl_EndTimeDay.Size = new System.Drawing.Size(76, 17);
+            this.Lbl_EndTimeDay.Size = new System.Drawing.Size(88, 20);
             this.Lbl_EndTimeDay.TabIndex = 13;
             this.Lbl_EndTimeDay.Text = "End Time";
             // 
@@ -264,7 +266,7 @@
             this.Tb_ClassId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Tb_ClassId.Name = "Tb_ClassId";
             this.Tb_ClassId.ReadOnly = true;
-            this.Tb_ClassId.Size = new System.Drawing.Size(117, 23);
+            this.Tb_ClassId.Size = new System.Drawing.Size(117, 27);
             this.Tb_ClassId.TabIndex = 14;
             // 
             // cb_Day
@@ -275,7 +277,7 @@
             this.cb_Day.Location = new System.Drawing.Point(200, 75);
             this.cb_Day.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cb_Day.Name = "cb_Day";
-            this.cb_Day.Size = new System.Drawing.Size(117, 25);
+            this.cb_Day.Size = new System.Drawing.Size(117, 28);
             this.cb_Day.TabIndex = 15;
             // 
             // Dtp_Start_Time
@@ -288,7 +290,7 @@
             this.Dtp_Start_Time.Name = "Dtp_Start_Time";
             this.Dtp_Start_Time.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Dtp_Start_Time.ShowUpDown = true;
-            this.Dtp_Start_Time.Size = new System.Drawing.Size(117, 23);
+            this.Dtp_Start_Time.Size = new System.Drawing.Size(117, 27);
             this.Dtp_Start_Time.TabIndex = 16;
             // 
             // Dtp_End_Time
@@ -300,7 +302,7 @@
             this.Dtp_End_Time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dtp_End_Time.Name = "Dtp_End_Time";
             this.Dtp_End_Time.ShowUpDown = true;
-            this.Dtp_End_Time.Size = new System.Drawing.Size(117, 23);
+            this.Dtp_End_Time.Size = new System.Drawing.Size(117, 27);
             this.Dtp_End_Time.TabIndex = 17;
             // 
             // Btn_Refresh
@@ -321,7 +323,7 @@
             this.Lbl_Teacher_First_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Lbl_Teacher_First_Name.Location = new System.Drawing.Point(507, 75);
             this.Lbl_Teacher_First_Name.Name = "Lbl_Teacher_First_Name";
-            this.Lbl_Teacher_First_Name.Size = new System.Drawing.Size(151, 17);
+            this.Lbl_Teacher_First_Name.Size = new System.Drawing.Size(176, 20);
             this.Lbl_Teacher_First_Name.TabIndex = 19;
             this.Lbl_Teacher_First_Name.Text = "Teacher First Name";
             // 
@@ -331,7 +333,7 @@
             this.Lbl_Teacher_LastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Lbl_Teacher_LastName.Location = new System.Drawing.Point(507, 110);
             this.Lbl_Teacher_LastName.Name = "Lbl_Teacher_LastName";
-            this.Lbl_Teacher_LastName.Size = new System.Drawing.Size(150, 17);
+            this.Lbl_Teacher_LastName.Size = new System.Drawing.Size(174, 20);
             this.Lbl_Teacher_LastName.TabIndex = 20;
             this.Lbl_Teacher_LastName.Text = "Teacher Last Name";
             // 
@@ -341,7 +343,7 @@
             this.Lbl_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Lbl_Subject.Location = new System.Drawing.Point(507, 148);
             this.Lbl_Subject.Name = "Lbl_Subject";
-            this.Lbl_Subject.Size = new System.Drawing.Size(62, 17);
+            this.Lbl_Subject.Size = new System.Drawing.Size(72, 20);
             this.Lbl_Subject.TabIndex = 21;
             this.Lbl_Subject.Text = "Subject";
             // 
@@ -354,7 +356,7 @@
             this.Cb_T_Fname.Location = new System.Drawing.Point(707, 71);
             this.Cb_T_Fname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_T_Fname.Name = "Cb_T_Fname";
-            this.Cb_T_Fname.Size = new System.Drawing.Size(225, 25);
+            this.Cb_T_Fname.Size = new System.Drawing.Size(225, 28);
             this.Cb_T_Fname.TabIndex = 22;
             // 
             // Cb_T_Lname
@@ -366,7 +368,7 @@
             this.Cb_T_Lname.Location = new System.Drawing.Point(707, 106);
             this.Cb_T_Lname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_T_Lname.Name = "Cb_T_Lname";
-            this.Cb_T_Lname.Size = new System.Drawing.Size(225, 25);
+            this.Cb_T_Lname.Size = new System.Drawing.Size(225, 28);
             this.Cb_T_Lname.TabIndex = 23;
             // 
             // Btn_Cancel
@@ -388,7 +390,7 @@
             this.Lbl_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherId.Location = new System.Drawing.Point(507, 42);
             this.Lbl_TeacherId.Name = "Lbl_TeacherId";
-            this.Lbl_TeacherId.Size = new System.Drawing.Size(88, 17);
+            this.Lbl_TeacherId.Size = new System.Drawing.Size(102, 20);
             this.Lbl_TeacherId.TabIndex = 27;
             this.Lbl_TeacherId.Text = "Teacher ID";
             // 
@@ -401,7 +403,7 @@
             this.Cb_TeacherId.Location = new System.Drawing.Point(707, 34);
             this.Cb_TeacherId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_TeacherId.Name = "Cb_TeacherId";
-            this.Cb_TeacherId.Size = new System.Drawing.Size(225, 25);
+            this.Cb_TeacherId.Size = new System.Drawing.Size(225, 28);
             this.Cb_TeacherId.TabIndex = 28;
             this.Cb_TeacherId.SelectedIndexChanged += new System.EventHandler(this.Cb_TeacherId_SelectedIndexChanged);
             // 
@@ -413,7 +415,7 @@
             this.Txtb_Subject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_Subject.MaxLength = 30;
             this.Txtb_Subject.Name = "Txtb_Subject";
-            this.Txtb_Subject.Size = new System.Drawing.Size(225, 23);
+            this.Txtb_Subject.Size = new System.Drawing.Size(225, 27);
             this.Txtb_Subject.TabIndex = 29;
             // 
             // Lbl_Timetabledetails
@@ -422,7 +424,7 @@
             this.Lbl_Timetabledetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Timetabledetails.Location = new System.Drawing.Point(12, 235);
             this.Lbl_Timetabledetails.Name = "Lbl_Timetabledetails";
-            this.Lbl_Timetabledetails.Size = new System.Drawing.Size(168, 24);
+            this.Lbl_Timetabledetails.Size = new System.Drawing.Size(216, 29);
             this.Lbl_Timetabledetails.TabIndex = 30;
             this.Lbl_Timetabledetails.Text = "Timetable details";
             // 
@@ -435,7 +437,7 @@
             this.Btn_SaveNew.Location = new System.Drawing.Point(1060, 77);
             this.Btn_SaveNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_SaveNew.Name = "Btn_SaveNew";
-            this.Btn_SaveNew.Size = new System.Drawing.Size(159, 27);
+            this.Btn_SaveNew.Size = new System.Drawing.Size(159, 30);
             this.Btn_SaveNew.TabIndex = 5;
             this.Btn_SaveNew.Text = "Save New";
             this.Btn_SaveNew.UseVisualStyleBackColor = false;
@@ -449,13 +451,13 @@
             this.btn_InsertNew.Location = new System.Drawing.Point(1060, 39);
             this.btn_InsertNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_InsertNew.Name = "btn_InsertNew";
-            this.btn_InsertNew.Size = new System.Drawing.Size(159, 27);
+            this.btn_InsertNew.Size = new System.Drawing.Size(159, 30);
             this.btn_InsertNew.TabIndex = 25;
             this.btn_InsertNew.Text = "Insert New";
             this.btn_InsertNew.UseVisualStyleBackColor = false;
             this.btn_InsertNew.Click += new System.EventHandler(this.btn_InsertNew_Click);
             // 
-            // Timetable_form
+            // TimetableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

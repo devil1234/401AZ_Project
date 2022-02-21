@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace _401AZ_PROJECT
+namespace _401AZ_PROJECT.Forms
 {
     /// <summary>
     /// Class StudentForm.
@@ -180,6 +180,7 @@ namespace _401AZ_PROJECT
             // 
             // Btn_Delete
             // 
+            this.Btn_Delete.Enabled = false;
             this.Btn_Delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Delete.Location = new System.Drawing.Point(1547, 169);
             this.Btn_Delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -205,6 +206,7 @@ namespace _401AZ_PROJECT
             // 
             // Btn_Update
             // 
+            this.Btn_Update.Enabled = false;
             this.Btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.Btn_Update.Location = new System.Drawing.Point(1547, 84);
             this.Btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

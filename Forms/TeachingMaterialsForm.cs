@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using _401AZ_PROJECT.Models;
 
-namespace _401AZ_PROJECT
+namespace _401AZ_PROJECT.Forms
 {
     /// <summary>
     /// Class TeachingMaterialsForm.
@@ -66,9 +66,11 @@ namespace _401AZ_PROJECT
             }
 
             var fileExtensionId = _dm.ToDataTable(fe.GetFileExtensionId(fe.FileExtension)).Rows[0].Field<string>("FileExtensionId");
-            if (Txt_Description.Text.Length < 0)
+            switch (Txt_Description.Text.Length < 0)
             {
-                Txt_Description.Text = @"No Description";
+                case true:
+                    Txt_Description.Text = @"No Description";
+                    break;
             }
 
             try {t.InsertTeachingMaterial(t.Filename, Convert.ToInt32(fileExtensionId), t.Description, rawData, teacherId);}
@@ -132,11 +134,9 @@ namespace _401AZ_PROJECT
         private void Btn_Upload_Click(object sender, EventArgs e)
         {
             Cb_TeacherId.DataSource = _dm.ToDataTable(_teacher.GetTeacher_FName_LName());
-            Cb_TeacherId.DisplayMember = "Teacher_Id";
+            Cb_TeacherId.DisplayMember = "TeacherId";
             if (Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
-            {
                 Cb_TeacherId.SelectedValue = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[4].Value.ToString());
-            }
             HideButtons();
         }
 
@@ -148,6 +148,14 @@ namespace _401AZ_PROJECT
         private void Btn_ChooseFile_Click(object sender, EventArgs e)
         {
             Fd_Upload.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            switch (Cb_TeacherId.SelectedIndex)
+            {
+                //Retrieve the ClassId from Combobox
+                case -1:
+                    MessageBox.Show(@"Please add a teacher before uploading a teaching material!!", @"Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+            }
             Fd_Upload.ShowDialog();
         }
 
@@ -192,19 +200,36 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_DeleteRecord_Click(object sender, EventArgs e)
         {
-            if (Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
-            {
-                var index = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[0].Value.ToString());
-                var caption = "Are you sure you want to delete?";
-                var message = "Do you want to delete the file with the record Id of" + " " + index + " ?";
-                var buttons = MessageBoxButtons.YesNo;
-                var result = MessageBox.Show(message, caption, buttons);
+            if (!Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>()
+                    .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null))) return;
+            var index = Int32.Parse(Dgv_TeachingMaterials.SelectedCells[0].Value.ToString());
+            var caption = "Are you sure you want to delete?";
+            var message = "Do you want to delete the file with the record Id of" + " " + index + " ?";
+            var buttons = MessageBoxButtons.YesNo;
+            var result = MessageBox.Show(message, caption, buttons);
 
-                if (result == DialogResult.Yes)
-                {
+            switch (result)
+            {
+                case DialogResult.Yes:
                     _tm.DeleteTeachingMaterial(index);
                     Btn_Refresh.PerformClick();
-                }
+                    break;
+                case DialogResult.None:
+                    break;
+                case DialogResult.OK:
+                    break;
+                case DialogResult.Cancel:
+                    break;
+                case DialogResult.Abort:
+                    break;
+                case DialogResult.Retry:
+                    break;
+                case DialogResult.Ignore:
+                    break;
+                case DialogResult.No:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
         }
@@ -216,28 +241,25 @@ namespace _401AZ_PROJECT
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Btn_Download_Click(object sender, EventArgs e)
         {
-            if(Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>().Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
-            {
+            if (!Dgv_TeachingMaterials.Rows.Cast<DataGridViewRow>()
+                    .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null))) return;
+            //Show progress bar and labels
+            pb1.Visible = true;
+            LblProgress.Visible = true;
+            Btn_Download.Enabled = false;
+            var fnNoExt = Dgv_TeachingMaterials.SelectedCells[1].Value.ToString();
+            var fe = Dgv_TeachingMaterials.SelectedCells[2].Value.ToString();
 
-                //Show progress bar and labels
-                pb1.Visible = true;
-                LblProgress.Visible = true;
-                Btn_Download.Enabled = false;
-                var fnNoExt = Dgv_TeachingMaterials.SelectedCells[1].Value.ToString();
-                var fe = Dgv_TeachingMaterials.SelectedCells[2].Value.ToString();
+            saveFileDialog.Filter = fnNoExt + fe + @"|*" + fe;
+            saveFileDialog.Title = @"Get a file from database";
+            saveFileDialog.FileName = fnNoExt + fe;
+            saveFileDialog.DefaultExt = fe;
 
-                saveFileDialog.Filter = fnNoExt + fe + @"|*" + fe;
-                saveFileDialog.Title = @"Get a file from database";
-                saveFileDialog.FileName = fnNoExt + fe;
-                saveFileDialog.DefaultExt = fe;
+            saveFileDialog.ShowDialog();
 
-                saveFileDialog.ShowDialog();
-
-                pb1.Visible = false;
-                LblProgress.Visible = false;
-                Btn_Download.Enabled = true;
-
-            }
+            pb1.Visible = false;
+            LblProgress.Visible = false;
+            Btn_Download.Enabled = true;
         }
 
         /// <summary>
