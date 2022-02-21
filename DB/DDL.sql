@@ -139,11 +139,11 @@ CREATE TABLE tbl_teaching_materials (
 );
 
 ALTER TABLE tbl_classes 
-  ADD KEY classroom_id1 (classroom_id),
-  ADD KEY start_time_id (start_time_day_id),
-  ADD KEY end_time_id (end_time_day_id),
-  ADD KEY day_id (day_id),
-  ADD KEY teacher_id_2 (teacher_id),
+  ADD KEY fk_classroom_id1 (classroom_id),
+  ADD KEY fk_start_time_id (start_time_day_id),
+  ADD KEY fk_end_time_id (end_time_day_id),
+  ADD KEY fk_day_id (day_id),
+  ADD KEY fk_teacher_id_2 (teacher_id),
   ADD CONSTRAINT fk_classroom_id1 FOREIGN KEY (classroom_id) REFERENCES tbl_classrooms (classroom_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_day_id FOREIGN KEY (day_id) REFERENCES tbl_days (day_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_end_time_id FOREIGN KEY (end_time_day_id) REFERENCES tbl_end_time_day (end_time_day_id) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -151,10 +151,10 @@ ALTER TABLE tbl_classes
   ADD CONSTRAINT fk_teacher_id_2 FOREIGN KEY (teacher_id) REFERENCES tbl_teachers (teacher_id) ON UPDATE CASCADE ON DELETE NO ACTION;
   
 ALTER TABLE tbl_enrolments
-  ADD KEY student_id_2 (student_id),
-  ADD KEY class_id (class_id),
-  ADD KEY date_start_id (date_start_id),
-  ADD KEY date_end_id (date_end_id),
+  ADD KEY fk_student_id_2 (student_id),
+  ADD KEY fk_class_id (class_id),
+  ADD KEY fk_date_start_id (date_start_id),
+  ADD KEY fk_date_end_id (date_end_id),
   ADD CONSTRAINT fk_class_id FOREIGN KEY (class_id) REFERENCES tbl_classes (class_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_date_end_id FOREIGN KEY (date_end_id) REFERENCES tbl_date_end (date_end_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_date_start_id FOREIGN KEY (date_start_id) REFERENCES tbl_date_start (date_start_id) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -162,13 +162,13 @@ ALTER TABLE tbl_enrolments
   
 ALTER TABLE tbl_students
   AUTO_INCREMENT=20000,
-  ADD KEY student_first_name_id (student_first_name_id),
-  ADD KEY student_last_name_id (student_last_name_id),
-  ADD KEY student_dob_id (student_dob_id),
-  ADD KEY gender_id (gender_id),
-  ADD KEY student_e_mail_id (student_e_mail_id),
-  ADD KEY student_address_home_id (student_address_home_id),
-  ADD KEY student_parent_id (student_parent_id),
+  ADD KEY fk_student_first_name_id (student_first_name_id),
+  ADD KEY fk_student_last_name_id (student_last_name_id),
+  ADD KEY fk_student_dob_id (student_dob_id),
+  ADD KEY fk_gender_id (gender_id),
+  ADD KEY fk_student_e_mail_id (student_e_mail_id),
+  ADD KEY fk_student_address_home_id (student_address_home_id),
+  ADD KEY fk_student_parent_id (student_parent_id),
   ADD CONSTRAINT fk_gender_id FOREIGN KEY (gender_id) REFERENCES tbl_genders (gender_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_student_address_home_id FOREIGN KEY (student_address_home_id) REFERENCES tbl_addresses (address_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_student_dob_id FOREIGN KEY (student_dob_id) REFERENCES tbl_dob (dob_id) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -179,21 +179,22 @@ ALTER TABLE tbl_students
 
 ALTER TABLE tbl_teachers
   AUTO_INCREMENT=50000,
-  ADD KEY first_name_id1 (first_name_Id),
-  ADD KEY last_name_id1 (last_name_Id),
-  ADD KEY dob_id1 (dob_id),
-  ADD KEY gender_id1 (gender_Id),
-  ADD KEY e_mail_id1 (e_mail_id),
-  ADD KEY teachers_address_id (teachers_address_id),
+  ADD KEY fk_first_name_id1 (first_name_Id),
+  ADD KEY fk_last_name_id1 (last_name_Id),
+  ADD KEY fk_dob_id1 (dob_id),
+  ADD KEY fk_gender_id1 (gender_Id),
+  ADD KEY fk_e_mail_id1 (e_mail_id),
+  ADD KEY fk_teachers_address_id (teachers_address_id),
   ADD CONSTRAINT fk_dob_id1 FOREIGN KEY (dob_id) REFERENCES tbl_dob (dob_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_e_mail_id1 FOREIGN KEY (e_mail_id) REFERENCES tbl_emails (e_mail_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_first_name_id1 FOREIGN KEY (first_name_Id) REFERENCES tbl_first_names (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_gender_id1 FOREIGN KEY (gender_Id) REFERENCES tbl_genders (gender_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_last_name_id1 FOREIGN KEY (last_name_Id) REFERENCES tbl_last_names (last_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
-  ADD CONSTRAINT fk_teachers_address_id FOREIGN KEY (teachers_address_id) REFERENCES tbl_addresses (address_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT fk_teachers_address_id FOREIGN KEY (teachers_address_id) REFERENCES tbl_addresses (address_id) ON UPDATE CASCADE ON DELETE NO ACTION,
 
 ALTER TABLE tbl_teaching_materials
-  ADD KEY file_extension_id (file_extension_id),
-  ADD KEY teacher_id_1 (teacher_id),
+  ADD KEY fk_file_extension_id (file_extension_id),
+  ADD KEY fk_teacher_id_1 (teacher_id),
   ADD CONSTRAINT fk_file_extension_id FOREIGN KEY (file_extension_id) REFERENCES tbl_file_extensions (file_extension_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_teacher_id_1 FOREIGN KEY (teacher_id) REFERENCES tbl_teachers (teacher_id) ON UPDATE CASCADE ON DELETE NO ACTION;
+  
