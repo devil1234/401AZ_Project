@@ -46,8 +46,8 @@ namespace _401AZ_PROJECT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Dgv_Students = new System.Windows.Forms.DataGridView();
             this.Lbl_StudentDetails = new System.Windows.Forms.Label();
             this.Btn_Cancel = new System.Windows.Forms.Button();
@@ -75,12 +75,12 @@ namespace _401AZ_PROJECT
             this.Lbl_ParentLName = new System.Windows.Forms.Label();
             this.Lbl_ParentId = new System.Windows.Forms.Label();
             this.Cb_ParentId = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.Lbl_AddressId = new System.Windows.Forms.Label();
+            this.Lbl_AddressStreet = new System.Windows.Forms.Label();
+            this.Lbl_AddressCity = new System.Windows.Forms.Label();
+            this.Lbl_AddressRegion = new System.Windows.Forms.Label();
+            this.Lbl_AddressPostcode = new System.Windows.Forms.Label();
+            this.Lbl_ParentPhoneNumber = new System.Windows.Forms.Label();
             this.Cb_AddressId = new System.Windows.Forms.ComboBox();
             this.Txtb_AddressStreet = new System.Windows.Forms.TextBox();
             this.Txtb_AddressCity = new System.Windows.Forms.TextBox();
@@ -99,23 +99,23 @@ namespace _401AZ_PROJECT
             this.Dgv_Students.AllowUserToResizeColumns = false;
             this.Dgv_Students.AllowUserToResizeRows = false;
             this.Dgv_Students.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_Students.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Students.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.Dgv_Students.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_Students.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Students.DefaultCellStyle = dataGridViewCellStyle2;
             this.Dgv_Students.Location = new System.Drawing.Point(9, 235);
             this.Dgv_Students.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dgv_Students.Name = "Dgv_Students";
@@ -137,7 +137,7 @@ namespace _401AZ_PROJECT
             this.Lbl_StudentDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_StudentDetails.Location = new System.Drawing.Point(11, 203);
             this.Lbl_StudentDetails.Name = "Lbl_StudentDetails";
-            this.Lbl_StudentDetails.Size = new System.Drawing.Size(149, 24);
+            this.Lbl_StudentDetails.Size = new System.Drawing.Size(190, 29);
             this.Lbl_StudentDetails.TabIndex = 4;
             this.Lbl_StudentDetails.Text = "Student Details";
             // 
@@ -235,7 +235,7 @@ namespace _401AZ_PROJECT
             this.Lbl_StudentId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_StudentId.Location = new System.Drawing.Point(13, 9);
             this.Lbl_StudentId.Name = "Lbl_StudentId";
-            this.Lbl_StudentId.Size = new System.Drawing.Size(84, 17);
+            this.Lbl_StudentId.Size = new System.Drawing.Size(98, 20);
             this.Lbl_StudentId.TabIndex = 34;
             this.Lbl_StudentId.Text = "Student ID";
             // 
@@ -246,7 +246,7 @@ namespace _401AZ_PROJECT
             this.Txtb_StudentId.Location = new System.Drawing.Point(213, 6);
             this.Txtb_StudentId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_StudentId.Name = "Txtb_StudentId";
-            this.Txtb_StudentId.Size = new System.Drawing.Size(159, 23);
+            this.Txtb_StudentId.Size = new System.Drawing.Size(159, 27);
             this.Txtb_StudentId.TabIndex = 1;
             this.Txtb_StudentId.TextChanged += new System.EventHandler(this.Txtb_StudentId_TextChanged);
             this.Txtb_StudentId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txtb_StudentId_KeyDown);
@@ -260,7 +260,7 @@ namespace _401AZ_PROJECT
             this.TxtB_StudentFName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtB_StudentFName.MaxLength = 10;
             this.TxtB_StudentFName.Name = "TxtB_StudentFName";
-            this.TxtB_StudentFName.Size = new System.Drawing.Size(159, 23);
+            this.TxtB_StudentFName.Size = new System.Drawing.Size(159, 27);
             this.TxtB_StudentFName.TabIndex = 2;
             // 
             // Lbl_StudentFname
@@ -269,7 +269,7 @@ namespace _401AZ_PROJECT
             this.Lbl_StudentFname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_StudentFname.Location = new System.Drawing.Point(12, 36);
             this.Lbl_StudentFname.Name = "Lbl_StudentFname";
-            this.Lbl_StudentFname.Size = new System.Drawing.Size(147, 17);
+            this.Lbl_StudentFname.Size = new System.Drawing.Size(172, 20);
             this.Lbl_StudentFname.TabIndex = 37;
             this.Lbl_StudentFname.Text = "Student First Name";
             // 
@@ -279,7 +279,7 @@ namespace _401AZ_PROJECT
             this.Lbl_StudentLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_StudentLName.Location = new System.Drawing.Point(13, 69);
             this.Lbl_StudentLName.Name = "Lbl_StudentLName";
-            this.Lbl_StudentLName.Size = new System.Drawing.Size(146, 17);
+            this.Lbl_StudentLName.Size = new System.Drawing.Size(170, 20);
             this.Lbl_StudentLName.TabIndex = 38;
             this.Lbl_StudentLName.Text = "Student Last Name";
             // 
@@ -291,7 +291,7 @@ namespace _401AZ_PROJECT
             this.Txtb_StudentLName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_StudentLName.MaxLength = 10;
             this.Txtb_StudentLName.Name = "Txtb_StudentLName";
-            this.Txtb_StudentLName.Size = new System.Drawing.Size(159, 23);
+            this.Txtb_StudentLName.Size = new System.Drawing.Size(159, 27);
             this.Txtb_StudentLName.TabIndex = 3;
             // 
             // Lbl_Dob
@@ -300,7 +300,7 @@ namespace _401AZ_PROJECT
             this.Lbl_Dob.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Dob.Location = new System.Drawing.Point(13, 110);
             this.Lbl_Dob.Name = "Lbl_Dob";
-            this.Lbl_Dob.Size = new System.Drawing.Size(100, 17);
+            this.Lbl_Dob.Size = new System.Drawing.Size(118, 20);
             this.Lbl_Dob.TabIndex = 40;
             this.Lbl_Dob.Text = "Date of Birth";
             // 
@@ -312,7 +312,7 @@ namespace _401AZ_PROJECT
             this.Dtp_DOB.Location = new System.Drawing.Point(213, 105);
             this.Dtp_DOB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dtp_DOB.Name = "Dtp_DOB";
-            this.Dtp_DOB.Size = new System.Drawing.Size(159, 23);
+            this.Dtp_DOB.Size = new System.Drawing.Size(159, 27);
             this.Dtp_DOB.TabIndex = 4;
             // 
             // Lbl_gender
@@ -321,7 +321,7 @@ namespace _401AZ_PROJECT
             this.Lbl_gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_gender.Location = new System.Drawing.Point(13, 142);
             this.Lbl_gender.Name = "Lbl_gender";
-            this.Lbl_gender.Size = new System.Drawing.Size(62, 17);
+            this.Lbl_gender.Size = new System.Drawing.Size(70, 20);
             this.Lbl_gender.TabIndex = 42;
             this.Lbl_gender.Text = "Gender";
             // 
@@ -334,7 +334,7 @@ namespace _401AZ_PROJECT
             this.Cb_Gender.Location = new System.Drawing.Point(213, 142);
             this.Cb_Gender.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_Gender.Name = "Cb_Gender";
-            this.Cb_Gender.Size = new System.Drawing.Size(159, 24);
+            this.Cb_Gender.Size = new System.Drawing.Size(159, 28);
             this.Cb_Gender.TabIndex = 5;
             // 
             // Lbl_Email
@@ -343,7 +343,7 @@ namespace _401AZ_PROJECT
             this.Lbl_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Email.Location = new System.Drawing.Point(389, 9);
             this.Lbl_Email.Name = "Lbl_Email";
-            this.Lbl_Email.Size = new System.Drawing.Size(117, 17);
+            this.Lbl_Email.Size = new System.Drawing.Size(138, 20);
             this.Lbl_Email.TabIndex = 44;
             this.Lbl_Email.Text = "E-Mail Address";
             // 
@@ -355,7 +355,7 @@ namespace _401AZ_PROJECT
             this.Txtb_email.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_email.MaxLength = 30;
             this.Txtb_email.Name = "Txtb_email";
-            this.Txtb_email.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_email.Size = new System.Drawing.Size(257, 27);
             this.Txtb_email.TabIndex = 6;
             // 
             // Lbl_Parent_FName
@@ -364,7 +364,7 @@ namespace _401AZ_PROJECT
             this.Lbl_Parent_FName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Parent_FName.Location = new System.Drawing.Point(389, 70);
             this.Lbl_Parent_FName.Name = "Lbl_Parent_FName";
-            this.Lbl_Parent_FName.Size = new System.Drawing.Size(139, 17);
+            this.Lbl_Parent_FName.Size = new System.Drawing.Size(163, 20);
             this.Lbl_Parent_FName.TabIndex = 46;
             this.Lbl_Parent_FName.Text = "Parent First Name";
             // 
@@ -376,7 +376,7 @@ namespace _401AZ_PROJECT
             this.Txtb_ParentFName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_ParentFName.MaxLength = 10;
             this.Txtb_ParentFName.Name = "Txtb_ParentFName";
-            this.Txtb_ParentFName.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_ParentFName.Size = new System.Drawing.Size(257, 27);
             this.Txtb_ParentFName.TabIndex = 8;
             // 
             // TxtB_ParentLName
@@ -387,7 +387,7 @@ namespace _401AZ_PROJECT
             this.TxtB_ParentLName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtB_ParentLName.MaxLength = 10;
             this.TxtB_ParentLName.Name = "TxtB_ParentLName";
-            this.TxtB_ParentLName.Size = new System.Drawing.Size(257, 23);
+            this.TxtB_ParentLName.Size = new System.Drawing.Size(257, 27);
             this.TxtB_ParentLName.TabIndex = 9;
             // 
             // Lbl_ParentLName
@@ -396,7 +396,7 @@ namespace _401AZ_PROJECT
             this.Lbl_ParentLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_ParentLName.Location = new System.Drawing.Point(389, 102);
             this.Lbl_ParentLName.Name = "Lbl_ParentLName";
-            this.Lbl_ParentLName.Size = new System.Drawing.Size(138, 17);
+            this.Lbl_ParentLName.Size = new System.Drawing.Size(161, 20);
             this.Lbl_ParentLName.TabIndex = 48;
             this.Lbl_ParentLName.Text = "Parent Last Name";
             // 
@@ -407,7 +407,7 @@ namespace _401AZ_PROJECT
             this.Lbl_ParentId.Location = new System.Drawing.Point(389, 42);
             this.Lbl_ParentId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_ParentId.Name = "Lbl_ParentId";
-            this.Lbl_ParentId.Size = new System.Drawing.Size(71, 16);
+            this.Lbl_ParentId.Size = new System.Drawing.Size(89, 20);
             this.Lbl_ParentId.TabIndex = 52;
             this.Lbl_ParentId.Text = "Parent ID";
             // 
@@ -420,68 +420,68 @@ namespace _401AZ_PROJECT
             this.Cb_ParentId.Location = new System.Drawing.Point(624, 39);
             this.Cb_ParentId.Margin = new System.Windows.Forms.Padding(4);
             this.Cb_ParentId.Name = "Cb_ParentId";
-            this.Cb_ParentId.Size = new System.Drawing.Size(257, 24);
+            this.Cb_ParentId.Size = new System.Drawing.Size(257, 28);
             this.Cb_ParentId.TabIndex = 7;
             // 
-            // label1
+            // Lbl_AddressId
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(909, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 17);
-            this.label1.TabIndex = 54;
-            this.label1.Text = "Address ID";
+            this.Lbl_AddressId.AutoSize = true;
+            this.Lbl_AddressId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_AddressId.Location = new System.Drawing.Point(909, 12);
+            this.Lbl_AddressId.Name = "Lbl_AddressId";
+            this.Lbl_AddressId.Size = new System.Drawing.Size(103, 20);
+            this.Lbl_AddressId.TabIndex = 54;
+            this.Lbl_AddressId.Text = "Address ID";
             // 
-            // label2
+            // Lbl_AddressStreet
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(909, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 17);
-            this.label2.TabIndex = 55;
-            this.label2.Text = "Adress Street";
+            this.Lbl_AddressStreet.AutoSize = true;
+            this.Lbl_AddressStreet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_AddressStreet.Location = new System.Drawing.Point(909, 44);
+            this.Lbl_AddressStreet.Name = "Lbl_AddressStreet";
+            this.Lbl_AddressStreet.Size = new System.Drawing.Size(135, 20);
+            this.Lbl_AddressStreet.TabIndex = 55;
+            this.Lbl_AddressStreet.Text = "Address Street";
             // 
-            // label3
+            // Lbl_AddressCity
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(909, 81);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 17);
-            this.label3.TabIndex = 56;
-            this.label3.Text = "Adress City";
+            this.Lbl_AddressCity.AutoSize = true;
+            this.Lbl_AddressCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_AddressCity.Location = new System.Drawing.Point(909, 81);
+            this.Lbl_AddressCity.Name = "Lbl_AddressCity";
+            this.Lbl_AddressCity.Size = new System.Drawing.Size(117, 20);
+            this.Lbl_AddressCity.TabIndex = 56;
+            this.Lbl_AddressCity.Text = "Address City";
             // 
-            // label4
+            // Lbl_AddressRegion
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(909, 112);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 17);
-            this.label4.TabIndex = 57;
-            this.label4.Text = "Adress Region";
+            this.Lbl_AddressRegion.AutoSize = true;
+            this.Lbl_AddressRegion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_AddressRegion.Location = new System.Drawing.Point(909, 112);
+            this.Lbl_AddressRegion.Name = "Lbl_AddressRegion";
+            this.Lbl_AddressRegion.Size = new System.Drawing.Size(142, 20);
+            this.Lbl_AddressRegion.TabIndex = 57;
+            this.Lbl_AddressRegion.Text = "Address Region";
             // 
-            // label5
+            // Lbl_AddressPostcode
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(909, 142);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(130, 17);
-            this.label5.TabIndex = 58;
-            this.label5.Text = "Adress Postcode";
+            this.Lbl_AddressPostcode.AutoSize = true;
+            this.Lbl_AddressPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_AddressPostcode.Location = new System.Drawing.Point(909, 142);
+            this.Lbl_AddressPostcode.Name = "Lbl_AddressPostcode";
+            this.Lbl_AddressPostcode.Size = new System.Drawing.Size(162, 20);
+            this.Lbl_AddressPostcode.TabIndex = 58;
+            this.Lbl_AddressPostcode.Text = "Address Postcode";
             // 
-            // label6
+            // Lbl_ParentPhoneNumber
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(389, 142);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(158, 16);
-            this.label6.TabIndex = 59;
-            this.label6.Text = "Parent Phone Number";
+            this.Lbl_ParentPhoneNumber.AutoSize = true;
+            this.Lbl_ParentPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_ParentPhoneNumber.Location = new System.Drawing.Point(389, 142);
+            this.Lbl_ParentPhoneNumber.Name = "Lbl_ParentPhoneNumber";
+            this.Lbl_ParentPhoneNumber.Size = new System.Drawing.Size(193, 20);
+            this.Lbl_ParentPhoneNumber.TabIndex = 59;
+            this.Lbl_ParentPhoneNumber.Text = "Parent Phone Number";
             // 
             // Cb_AddressId
             // 
@@ -492,7 +492,7 @@ namespace _401AZ_PROJECT
             this.Cb_AddressId.Location = new System.Drawing.Point(1088, 7);
             this.Cb_AddressId.Margin = new System.Windows.Forms.Padding(4);
             this.Cb_AddressId.Name = "Cb_AddressId";
-            this.Cb_AddressId.Size = new System.Drawing.Size(257, 24);
+            this.Cb_AddressId.Size = new System.Drawing.Size(257, 28);
             this.Cb_AddressId.TabIndex = 61;
             // 
             // Txtb_AddressStreet
@@ -503,7 +503,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressStreet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressStreet.MaxLength = 30;
             this.Txtb_AddressStreet.Name = "Txtb_AddressStreet";
-            this.Txtb_AddressStreet.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressStreet.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressStreet.TabIndex = 11;
             // 
             // Txtb_AddressCity
@@ -514,7 +514,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressCity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressCity.MaxLength = 30;
             this.Txtb_AddressCity.Name = "Txtb_AddressCity";
-            this.Txtb_AddressCity.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressCity.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressCity.TabIndex = 12;
             // 
             // Txtb_AddressRegion
@@ -525,7 +525,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressRegion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressRegion.MaxLength = 30;
             this.Txtb_AddressRegion.Name = "Txtb_AddressRegion";
-            this.Txtb_AddressRegion.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressRegion.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressRegion.TabIndex = 13;
             // 
             // Txtb_AddressPostCode
@@ -536,7 +536,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressPostCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressPostCode.MaxLength = 7;
             this.Txtb_AddressPostCode.Name = "Txtb_AddressPostCode";
-            this.Txtb_AddressPostCode.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressPostCode.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressPostCode.TabIndex = 14;
             // 
             // Txtb_ParentPN
@@ -547,7 +547,7 @@ namespace _401AZ_PROJECT
             this.Txtb_ParentPN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_ParentPN.MaxLength = 30;
             this.Txtb_ParentPN.Name = "Txtb_ParentPN";
-            this.Txtb_ParentPN.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_ParentPN.Size = new System.Drawing.Size(257, 27);
             this.Txtb_ParentPN.TabIndex = 10;
             // 
             // Btn_EnableSearch
@@ -576,7 +576,7 @@ namespace _401AZ_PROJECT
             this.Btn_search_student.Visible = false;
             this.Btn_search_student.Click += new System.EventHandler(this.Btn_search_student_Click);
             // 
-            // Student_form
+            // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -589,12 +589,12 @@ namespace _401AZ_PROJECT
             this.Controls.Add(this.Txtb_AddressCity);
             this.Controls.Add(this.Txtb_AddressStreet);
             this.Controls.Add(this.Cb_AddressId);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Lbl_ParentPhoneNumber);
+            this.Controls.Add(this.Lbl_AddressPostcode);
+            this.Controls.Add(this.Lbl_AddressRegion);
+            this.Controls.Add(this.Lbl_AddressCity);
+            this.Controls.Add(this.Lbl_AddressStreet);
+            this.Controls.Add(this.Lbl_AddressId);
             this.Controls.Add(this.Cb_ParentId);
             this.Controls.Add(this.Lbl_ParentId);
             this.Controls.Add(this.TxtB_ParentLName);
@@ -748,27 +748,27 @@ namespace _401AZ_PROJECT
         /// <summary>
         /// The label1
         /// </summary>
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Lbl_AddressId;
         /// <summary>
         /// The label2
         /// </summary>
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Lbl_AddressStreet;
         /// <summary>
         /// The label3
         /// </summary>
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Lbl_AddressCity;
         /// <summary>
         /// The label4
         /// </summary>
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label Lbl_AddressRegion;
         /// <summary>
         /// The label5
         /// </summary>
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label Lbl_AddressPostcode;
         /// <summary>
         /// The label6
         /// </summary>
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label Lbl_ParentPhoneNumber;
         /// <summary>
         /// The cb address identifier
         /// </summary>

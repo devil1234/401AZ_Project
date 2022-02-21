@@ -46,8 +46,8 @@ namespace _401AZ_PROJECT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Btn_search_teacher = new System.Windows.Forms.Button();
             this.Btn_EnableSearch = new System.Windows.Forms.Button();
             this.Txtb_AddressPostCode = new System.Windows.Forms.TextBox();
@@ -118,7 +118,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressPostCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressPostCode.MaxLength = 7;
             this.Txtb_AddressPostCode.Name = "Txtb_AddressPostCode";
-            this.Txtb_AddressPostCode.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressPostCode.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressPostCode.TabIndex = 80;
             // 
             // Txtb_AddressRegion
@@ -129,7 +129,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressRegion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressRegion.MaxLength = 30;
             this.Txtb_AddressRegion.Name = "Txtb_AddressRegion";
-            this.Txtb_AddressRegion.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressRegion.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressRegion.TabIndex = 79;
             // 
             // Txtb_AddressCity
@@ -140,7 +140,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressCity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressCity.MaxLength = 30;
             this.Txtb_AddressCity.Name = "Txtb_AddressCity";
-            this.Txtb_AddressCity.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressCity.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressCity.TabIndex = 78;
             // 
             // Txtb_AddressStreet
@@ -151,7 +151,7 @@ namespace _401AZ_PROJECT
             this.Txtb_AddressStreet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_AddressStreet.MaxLength = 30;
             this.Txtb_AddressStreet.Name = "Txtb_AddressStreet";
-            this.Txtb_AddressStreet.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_AddressStreet.Size = new System.Drawing.Size(257, 27);
             this.Txtb_AddressStreet.TabIndex = 77;
             // 
             // Cb_AddressId
@@ -163,7 +163,7 @@ namespace _401AZ_PROJECT
             this.Cb_AddressId.Location = new System.Drawing.Point(653, 38);
             this.Cb_AddressId.Margin = new System.Windows.Forms.Padding(4);
             this.Cb_AddressId.Name = "Cb_AddressId";
-            this.Cb_AddressId.Size = new System.Drawing.Size(257, 24);
+            this.Cb_AddressId.Size = new System.Drawing.Size(257, 28);
             this.Cb_AddressId.TabIndex = 95;
             // 
             // Lbl_AddressId
@@ -172,7 +172,7 @@ namespace _401AZ_PROJECT
             this.Lbl_AddressId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_AddressId.Location = new System.Drawing.Point(472, 45);
             this.Lbl_AddressId.Name = "Lbl_AddressId";
-            this.Lbl_AddressId.Size = new System.Drawing.Size(87, 17);
+            this.Lbl_AddressId.Size = new System.Drawing.Size(103, 20);
             this.Lbl_AddressId.TabIndex = 94;
             this.Lbl_AddressId.Text = "Address ID";
             // 
@@ -184,7 +184,7 @@ namespace _401AZ_PROJECT
             this.Txtb_email.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_email.MaxLength = 30;
             this.Txtb_email.Name = "Txtb_email";
-            this.Txtb_email.Size = new System.Drawing.Size(257, 23);
+            this.Txtb_email.Size = new System.Drawing.Size(257, 27);
             this.Txtb_email.TabIndex = 76;
             // 
             // Lbl_Email
@@ -193,7 +193,7 @@ namespace _401AZ_PROJECT
             this.Lbl_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Email.Location = new System.Drawing.Point(469, 10);
             this.Lbl_Email.Name = "Lbl_Email";
-            this.Lbl_Email.Size = new System.Drawing.Size(117, 17);
+            this.Lbl_Email.Size = new System.Drawing.Size(138, 20);
             this.Lbl_Email.TabIndex = 93;
             this.Lbl_Email.Text = "E-Mail Address";
             // 
@@ -206,7 +206,7 @@ namespace _401AZ_PROJECT
             this.Cb_Gender.Location = new System.Drawing.Point(228, 140);
             this.Cb_Gender.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Cb_Gender.Name = "Cb_Gender";
-            this.Cb_Gender.Size = new System.Drawing.Size(159, 24);
+            this.Cb_Gender.Size = new System.Drawing.Size(159, 28);
             this.Cb_Gender.TabIndex = 75;
             // 
             // Lbl_gender
@@ -215,7 +215,7 @@ namespace _401AZ_PROJECT
             this.Lbl_gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_gender.Location = new System.Drawing.Point(14, 147);
             this.Lbl_gender.Name = "Lbl_gender";
-            this.Lbl_gender.Size = new System.Drawing.Size(62, 17);
+            this.Lbl_gender.Size = new System.Drawing.Size(70, 20);
             this.Lbl_gender.TabIndex = 92;
             this.Lbl_gender.Text = "Gender";
             // 
@@ -227,7 +227,7 @@ namespace _401AZ_PROJECT
             this.Dtp_DOB.Location = new System.Drawing.Point(228, 101);
             this.Dtp_DOB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dtp_DOB.Name = "Dtp_DOB";
-            this.Dtp_DOB.Size = new System.Drawing.Size(159, 23);
+            this.Dtp_DOB.Size = new System.Drawing.Size(159, 27);
             this.Dtp_DOB.TabIndex = 73;
             // 
             // Lbl_Dob
@@ -236,7 +236,7 @@ namespace _401AZ_PROJECT
             this.Lbl_Dob.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Dob.Location = new System.Drawing.Point(14, 109);
             this.Lbl_Dob.Name = "Lbl_Dob";
-            this.Lbl_Dob.Size = new System.Drawing.Size(100, 17);
+            this.Lbl_Dob.Size = new System.Drawing.Size(118, 20);
             this.Lbl_Dob.TabIndex = 91;
             this.Lbl_Dob.Text = "Date of Birth";
             // 
@@ -248,7 +248,7 @@ namespace _401AZ_PROJECT
             this.Txtb_TeacherLName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_TeacherLName.MaxLength = 10;
             this.Txtb_TeacherLName.Name = "Txtb_TeacherLName";
-            this.Txtb_TeacherLName.Size = new System.Drawing.Size(159, 23);
+            this.Txtb_TeacherLName.Size = new System.Drawing.Size(159, 27);
             this.Txtb_TeacherLName.TabIndex = 72;
             // 
             // Lbl_TeacherLName
@@ -257,7 +257,7 @@ namespace _401AZ_PROJECT
             this.Lbl_TeacherLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherLName.Location = new System.Drawing.Point(14, 64);
             this.Lbl_TeacherLName.Name = "Lbl_TeacherLName";
-            this.Lbl_TeacherLName.Size = new System.Drawing.Size(150, 17);
+            this.Lbl_TeacherLName.Size = new System.Drawing.Size(174, 20);
             this.Lbl_TeacherLName.TabIndex = 90;
             this.Lbl_TeacherLName.Text = "Teacher Last Name";
             // 
@@ -267,7 +267,7 @@ namespace _401AZ_PROJECT
             this.Lbl_TeacherFname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherFname.Location = new System.Drawing.Point(13, 34);
             this.Lbl_TeacherFname.Name = "Lbl_TeacherFname";
-            this.Lbl_TeacherFname.Size = new System.Drawing.Size(151, 17);
+            this.Lbl_TeacherFname.Size = new System.Drawing.Size(176, 20);
             this.Lbl_TeacherFname.TabIndex = 89;
             this.Lbl_TeacherFname.Text = "Teacher First Name";
             // 
@@ -279,7 +279,7 @@ namespace _401AZ_PROJECT
             this.TxtB_TeacherFName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtB_TeacherFName.MaxLength = 10;
             this.TxtB_TeacherFName.Name = "TxtB_TeacherFName";
-            this.TxtB_TeacherFName.Size = new System.Drawing.Size(159, 23);
+            this.TxtB_TeacherFName.Size = new System.Drawing.Size(159, 27);
             this.TxtB_TeacherFName.TabIndex = 71;
             // 
             // Txtb_TeacherId
@@ -289,7 +289,7 @@ namespace _401AZ_PROJECT
             this.Txtb_TeacherId.Location = new System.Drawing.Point(228, 1);
             this.Txtb_TeacherId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txtb_TeacherId.Name = "Txtb_TeacherId";
-            this.Txtb_TeacherId.Size = new System.Drawing.Size(159, 23);
+            this.Txtb_TeacherId.Size = new System.Drawing.Size(159, 27);
             this.Txtb_TeacherId.TabIndex = 70;
             this.Txtb_TeacherId.TextChanged += new System.EventHandler(this.Txtb_TeacherId_TextChanged);
             this.Txtb_TeacherId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txtb_TeacherId_KeyDown);
@@ -301,7 +301,7 @@ namespace _401AZ_PROJECT
             this.Lbl_TeacherId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherId.Location = new System.Drawing.Point(13, 7);
             this.Lbl_TeacherId.Name = "Lbl_TeacherId";
-            this.Lbl_TeacherId.Size = new System.Drawing.Size(88, 17);
+            this.Lbl_TeacherId.Size = new System.Drawing.Size(102, 20);
             this.Lbl_TeacherId.TabIndex = 88;
             this.Lbl_TeacherId.Text = "Teacher ID";
             // 
@@ -399,7 +399,7 @@ namespace _401AZ_PROJECT
             this.Lbl_TeacherDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_TeacherDetails.Location = new System.Drawing.Point(12, 200);
             this.Lbl_TeacherDetails.Name = "Lbl_TeacherDetails";
-            this.Lbl_TeacherDetails.Size = new System.Drawing.Size(156, 24);
+            this.Lbl_TeacherDetails.Size = new System.Drawing.Size(198, 29);
             this.Lbl_TeacherDetails.TabIndex = 74;
             this.Lbl_TeacherDetails.Text = "Teacher Details";
             // 
@@ -410,23 +410,23 @@ namespace _401AZ_PROJECT
             this.Dgv_Teachers.AllowUserToResizeColumns = false;
             this.Dgv_Teachers.AllowUserToResizeRows = false;
             this.Dgv_Teachers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_Teachers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Teachers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.Dgv_Teachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_Teachers.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Teachers.DefaultCellStyle = dataGridViewCellStyle2;
             this.Dgv_Teachers.Location = new System.Drawing.Point(12, 241);
             this.Dgv_Teachers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dgv_Teachers.Name = "Dgv_Teachers";
@@ -448,9 +448,9 @@ namespace _401AZ_PROJECT
             this.Lbl_AddressPostCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_AddressPostCode.Location = new System.Drawing.Point(469, 173);
             this.Lbl_AddressPostCode.Name = "Lbl_AddressPostCode";
-            this.Lbl_AddressPostCode.Size = new System.Drawing.Size(130, 17);
+            this.Lbl_AddressPostCode.Size = new System.Drawing.Size(162, 20);
             this.Lbl_AddressPostCode.TabIndex = 101;
-            this.Lbl_AddressPostCode.Text = "Adress Postcode";
+            this.Lbl_AddressPostCode.Text = "Address Postcode";
             // 
             // Lbl_AddressRegion
             // 
@@ -458,9 +458,9 @@ namespace _401AZ_PROJECT
             this.Lbl_AddressRegion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_AddressRegion.Location = new System.Drawing.Point(469, 137);
             this.Lbl_AddressRegion.Name = "Lbl_AddressRegion";
-            this.Lbl_AddressRegion.Size = new System.Drawing.Size(114, 17);
+            this.Lbl_AddressRegion.Size = new System.Drawing.Size(142, 20);
             this.Lbl_AddressRegion.TabIndex = 100;
-            this.Lbl_AddressRegion.Text = "Adress Region";
+            this.Lbl_AddressRegion.Text = "Address Region";
             // 
             // Lbl_AddressCity
             // 
@@ -468,9 +468,9 @@ namespace _401AZ_PROJECT
             this.Lbl_AddressCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_AddressCity.Location = new System.Drawing.Point(469, 106);
             this.Lbl_AddressCity.Name = "Lbl_AddressCity";
-            this.Lbl_AddressCity.Size = new System.Drawing.Size(90, 17);
+            this.Lbl_AddressCity.Size = new System.Drawing.Size(117, 20);
             this.Lbl_AddressCity.TabIndex = 99;
-            this.Lbl_AddressCity.Text = "Adress City";
+            this.Lbl_AddressCity.Text = "Address City";
             // 
             // Lbl_AddressStreet
             // 
@@ -478,11 +478,11 @@ namespace _401AZ_PROJECT
             this.Lbl_AddressStreet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_AddressStreet.Location = new System.Drawing.Point(469, 74);
             this.Lbl_AddressStreet.Name = "Lbl_AddressStreet";
-            this.Lbl_AddressStreet.Size = new System.Drawing.Size(107, 17);
+            this.Lbl_AddressStreet.Size = new System.Drawing.Size(135, 20);
             this.Lbl_AddressStreet.TabIndex = 98;
-            this.Lbl_AddressStreet.Text = "Adress Street";
+            this.Lbl_AddressStreet.Text = "Address Street";
             // 
-            // Teachers_form
+            // TeachersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
