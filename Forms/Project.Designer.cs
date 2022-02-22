@@ -57,7 +57,7 @@ namespace _401AZ_PROJECT.Forms
             // Btn_teachers
             // 
             this.Btn_teachers.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_teachers.Location = new System.Drawing.Point(12, 219);
+            this.Btn_teachers.Location = new System.Drawing.Point(12, 102);
             this.Btn_teachers.Name = "Btn_teachers";
             this.Btn_teachers.Size = new System.Drawing.Size(671, 52);
             this.Btn_teachers.TabIndex = 0;
@@ -68,7 +68,7 @@ namespace _401AZ_PROJECT.Forms
             // Btn_timetables
             // 
             this.Btn_timetables.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_timetables.Location = new System.Drawing.Point(12, 106);
+            this.Btn_timetables.Location = new System.Drawing.Point(12, 218);
             this.Btn_timetables.Name = "Btn_timetables";
             this.Btn_timetables.Size = new System.Drawing.Size(671, 52);
             this.Btn_timetables.TabIndex = 1;
@@ -79,7 +79,7 @@ namespace _401AZ_PROJECT.Forms
             // Btn_enrolments
             // 
             this.Btn_enrolments.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_enrolments.Location = new System.Drawing.Point(12, 163);
+            this.Btn_enrolments.Location = new System.Drawing.Point(12, 276);
             this.Btn_enrolments.Name = "Btn_enrolments";
             this.Btn_enrolments.Size = new System.Drawing.Size(671, 52);
             this.Btn_enrolments.TabIndex = 2;
@@ -90,7 +90,7 @@ namespace _401AZ_PROJECT.Forms
             // Btn_students
             // 
             this.Btn_students.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_students.Location = new System.Drawing.Point(11, 276);
+            this.Btn_students.Location = new System.Drawing.Point(11, 160);
             this.Btn_students.Name = "Btn_students";
             this.Btn_students.Size = new System.Drawing.Size(671, 52);
             this.Btn_students.TabIndex = 3;
@@ -101,7 +101,7 @@ namespace _401AZ_PROJECT.Forms
             // Btn_teaching_material
             // 
             this.Btn_teaching_material.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_teaching_material.Location = new System.Drawing.Point(12, 333);
+            this.Btn_teaching_material.Location = new System.Drawing.Point(12, 334);
             this.Btn_teaching_material.Name = "Btn_teaching_material";
             this.Btn_teaching_material.Size = new System.Drawing.Size(671, 52);
             this.Btn_teaching_material.TabIndex = 4;
@@ -114,14 +114,14 @@ namespace _401AZ_PROJECT.Forms
             this.Lbl_Welcome.Font = new System.Drawing.Font("Microsoft Uighur", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Welcome.Location = new System.Drawing.Point(3, 19);
             this.Lbl_Welcome.Name = "Lbl_Welcome";
-            this.Lbl_Welcome.Size = new System.Drawing.Size(689, 75);
+            this.Lbl_Welcome.Size = new System.Drawing.Size(689, 80);
             this.Lbl_Welcome.TabIndex = 5;
             this.Lbl_Welcome.Text = "Welcome to Harris & Sons Education Consulting LTD. DBMS!";
             this.Lbl_Welcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Project
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(691, 398);
