@@ -489,7 +489,7 @@ namespace _401AZ_PROJECT.Forms
                     return;
                 default:
                 {
-                    if (_dm.IsValidEmail(teacherEmail))
+                    if (!_dm.IsValidEmail(teacherEmail))
                     {
                         MessageBox.Show(@"Teacher Email Address should be a valid email address!!!", @"Warning!!!",
                             MessageBoxButtons.OK,
@@ -528,6 +528,7 @@ namespace _401AZ_PROJECT.Forms
 
             //Insert the Teacher Details
             _tc.InsertTeacher(teacherFNameId, teacherLNameId, dobId, genderId, teacherEmailId, addressId);
+            Btn_Cancel.PerformClick();
         }
 
         /// <summary>
