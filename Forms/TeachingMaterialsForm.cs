@@ -333,5 +333,18 @@ namespace _401AZ_PROJECT.Forms
         {
             pb1.Value = e.ProgressPercentage;
         }
+
+        private void Dgv_TeachingMaterials_SelectionChanged(object sender, EventArgs e)
+        {
+            switch (Dgv_TeachingMaterials.SelectedRows.Count > 0)
+            {
+                case true:
+                    Btn_Download.Enabled = true;
+                    break;
+                default:
+                    Btn_Download.Enabled = false;
+                    break;
+            }
+        }
     }
 }
