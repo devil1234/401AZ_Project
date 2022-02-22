@@ -17,16 +17,9 @@ CREATE PROCEDURE sp_insert_address(
 	IN address_region_par VARCHAR(30),
 	IN address_postcode_par VARCHAR(30))
 BEGIN
-INSERT INTO tbl_addresses (address_street, address_city, address_region, address_postcode)
-SELECT * FROM (SELECT address_street_par, address_city_par, address_region_par,address_postcode_par) AS tmp
-WHERE NOT EXISTS (
-    SELECT address_street, address_city, address_region, address_postcode FROM tbl_addresses 
-	 WHERE 
-	 address_street = address_street_par AND 
-	 address_city = address_city_par AND
-	 address_region = address_region_par AND
-	 address_postcode = address_postcode_par
-) LIMIT 1;
+BEGIN
+INSERT INTO tbl_addresses (address_street, address_city, address_region, address_postcode) VALUES
+(address_street_par, address_city_par, address_region_par,address_postcode_par);
 END // 
 DELIMITER ;
 
@@ -754,6 +747,7 @@ SELECT
     tbl_dob.dob,
     tbl_genders.gender,
     tbl_emails.e_mail_address,
+    tbl_addresses.address_id,
     tbl_addresses.address_street,
     tbl_addresses.address_city,
     tbl_addresses.address_region,
@@ -1097,5 +1091,14 @@ FROM
         ON (tbl_teachers.last_name_id = tbl_last_names.last_name_id)
     INNER JOIN tbl_file_extensions 
         ON (tbl_teaching_materials.file_extension_id = tbl_file_extensions.file_extension_id);
+END // 
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_insert_file_extension(
+    IN file_extension_par VARCHAR(6)
+)
+BEGIN
+INSERT INTO tbl_file_extensions (file_extension) VALUES (file_extension_par);
 END // 
 DELIMITER ;
