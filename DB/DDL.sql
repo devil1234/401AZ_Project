@@ -190,7 +190,7 @@ ALTER TABLE tbl_teachers
   ADD CONSTRAINT fk_first_name_id1 FOREIGN KEY (first_name_Id) REFERENCES tbl_first_names (first_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_gender_id1 FOREIGN KEY (gender_Id) REFERENCES tbl_genders (gender_id) ON UPDATE CASCADE ON DELETE NO ACTION,
   ADD CONSTRAINT fk_last_name_id1 FOREIGN KEY (last_name_Id) REFERENCES tbl_last_names (last_name_id) ON UPDATE CASCADE ON DELETE NO ACTION,
-  ADD CONSTRAINT fk_teachers_address_id FOREIGN KEY (teachers_address_id) REFERENCES tbl_addresses (address_id) ON UPDATE CASCADE ON DELETE NO ACTION,
+  ADD CONSTRAINT fk_teachers_address_id FOREIGN KEY (teachers_address_id) REFERENCES tbl_addresses (address_id) ON UPDATE CASCADE ON DELETE NO ACTION;
 
 ALTER TABLE tbl_teaching_materials
   ADD KEY fk_file_extension_id (file_extension_id),
