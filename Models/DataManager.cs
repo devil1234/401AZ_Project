@@ -15,7 +15,7 @@ namespace _401AZ_PROJECT.Models
         /// <summary>
         /// The MySQL connection details
         /// </summary>
-        private string _connDetails = "Server=localhost; User ID=root;Password=Joyride2!;Database=coursework2";
+        private string _connDetails = "Server=database-1.cxzvecmb7lgx.us-east-1.rds.amazonaws.com; User ID=user;Password=joyride249716!;Database=coursework2";
         public string ConnectionDetails { get { return _connDetails; } set { _connDetails = value; } }
         /// <summary>
         /// Converts to data table.
