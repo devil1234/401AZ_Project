@@ -58,7 +58,7 @@ namespace _401AZ_PROJECT.Models
         /// <param name="address_region_par">The address region parameter</param>
         /// <param name="address_postcode_par">The address postcode parameter</param>
         /// <returns>addressId</returns>
-        public int InsertAddressDetails(string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
+        public void InsertAddressDetails(string address_street_par, string address_city_par, string address_region_par, string address_postcode_par)
         {
             using (var connection = new MySqlConnection(_c.ConnectionDetails))
             {
@@ -69,12 +69,8 @@ namespace _401AZ_PROJECT.Models
                     cmd.Parameters.AddWithValue("address_city_par", address_city_par);
                     cmd.Parameters.AddWithValue("address_region_par", address_region_par);
                     cmd.Parameters.AddWithValue("address_postcode_par", address_postcode_par);
-                    cmd.Parameters.Add("@address_id_par", MySqlDbType.Int32, 11);
-                    cmd.Parameters["@address_id_par"].Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteScalar();
-                    var addressId = Convert.ToInt32(cmd.Parameters["@address_id_par"].Value.ToString());
-                    return addressId;
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
