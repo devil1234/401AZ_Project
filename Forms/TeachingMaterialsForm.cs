@@ -296,6 +296,7 @@ namespace _401AZ_PROJECT.Forms
             FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
             fs.Seek(0, SeekOrigin.End);
             await fs.WriteAsync(downloadData.FileContent, 0, fileContentLenght);
+            fs.Close();
 
             //File.WriteAllBytes(saveFileDialog.FileName, downloadData.FileContent);
         }
