@@ -254,17 +254,21 @@ namespace _401AZ_PROJECT.Forms
             cb_Day.DataSource = _dm.ToDataTable(_day.GetDays());
             cb_Day.DisplayMember = "DayName";
             cb_Day.ValueMember = "DayId";
-            if (dgv_classes.Rows.Cast<DataGridViewRow>()
-                .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
-            {
-                cb_Day.Text = dgv_classes.SelectedCells[1].Value.ToString();
-            }
-            
+
             //Start Time Day
             Dtp_Start_Time.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 
             //End Time Day
             Dtp_End_Time.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+            if (dgv_classes.Rows.Cast<DataGridViewRow>()
+                .Any(x => x.Cells.Cast<DataGridViewCell>().Any(c => c.Value != null)))
+            {
+                cb_Day.Text = dgv_classes.SelectedCells[1].Value.ToString();
+
+                Dtp_Start_Time.Text = dgv_classes.SelectedCells[2].Value.ToString();
+                Dtp_End_Time.Text = dgv_classes.SelectedCells[3].Value.ToString();
+            }
+            
 
             //cb_TeacherId
             Cb_TeacherId.DataSource = _dm.ToDataTable(_teacher.GetTeacher_FName_LName());
