@@ -342,6 +342,7 @@ namespace _401AZ_PROJECT.Forms
             this.MaximizeBox = false;
             this.Name = "TeachingMaterialsForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Teaching Materials";
             this.Load += new System.EventHandler(this.Teaching_materials_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_TeachingMaterials)).EndInit();

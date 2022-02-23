@@ -489,6 +489,7 @@ namespace _401AZ_PROJECT.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "EnrolmentsForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enrolments Manager";
             this.Load += new System.EventHandler(this.Enrolments_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Enrolments)).EndInit();

@@ -629,6 +629,7 @@ namespace _401AZ_PROJECT.Forms
             this.MaximizeBox = false;
             this.Name = "StudentForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Students Manager";
             this.Load += new System.EventHandler(this.Student_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Students)).EndInit();

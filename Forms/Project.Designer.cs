@@ -137,6 +137,7 @@ namespace _401AZ_PROJECT.Forms
             this.MaximizeBox = false;
             this.Name = "Project";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Database Management System Harris Sons Education";
             this.ResumeLayout(false);
 

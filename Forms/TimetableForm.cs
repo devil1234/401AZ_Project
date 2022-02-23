@@ -345,10 +345,10 @@ namespace _401AZ_PROJECT.Forms
             btn_InsertNew.Enabled = true;
             btn_InsertNew.Visible = true;
 
-            Btn_Delete.Enabled = true;
+            Btn_Delete.Enabled = false;
             Btn_Delete.Visible = true;
 
-            Btn_Update.Enabled = true;
+            Btn_Update.Enabled = false;
             Btn_Update.Visible = true;
 
             Btn_Save.Visible= false;

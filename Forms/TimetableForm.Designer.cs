@@ -497,6 +497,7 @@
             this.MaximizeBox = false;
             this.Name = "TimetableForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Time tables manager";
             this.Load += new System.EventHandler(this.Timetable_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_classes)).EndInit();
