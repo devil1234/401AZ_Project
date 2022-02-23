@@ -341,9 +341,11 @@ namespace _401AZ_PROJECT.Forms
             {
                 case true:
                     Btn_Download.Enabled = true;
+                    Btn_DeleteRecord.Enabled = true;
                     break;
                 default:
                     Btn_Download.Enabled = false;
+                    Btn_DeleteRecord.Enabled = false;
                     break;
             }
         }

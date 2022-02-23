@@ -46,8 +46,8 @@ namespace _401AZ_PROJECT.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Dgv_TeachingMaterials = new System.Windows.Forms.DataGridView();
             this.Btn_Upload = new System.Windows.Forms.Button();
             this.Btn_Download = new System.Windows.Forms.Button();
@@ -80,23 +80,23 @@ namespace _401AZ_PROJECT.Forms
             this.Dgv_TeachingMaterials.AllowUserToResizeRows = false;
             this.Dgv_TeachingMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgv_TeachingMaterials.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_TeachingMaterials.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_TeachingMaterials.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.Dgv_TeachingMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_TeachingMaterials.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_TeachingMaterials.DefaultCellStyle = dataGridViewCellStyle4;
             this.Dgv_TeachingMaterials.Location = new System.Drawing.Point(12, 150);
             this.Dgv_TeachingMaterials.MultiSelect = false;
             this.Dgv_TeachingMaterials.Name = "Dgv_TeachingMaterials";
@@ -188,7 +188,7 @@ namespace _401AZ_PROJECT.Forms
             this.Lbl_Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Description.Location = new System.Drawing.Point(10, 71);
             this.Lbl_Description.Name = "Lbl_Description";
-            this.Lbl_Description.Size = new System.Drawing.Size(143, 24);
+            this.Lbl_Description.Size = new System.Drawing.Size(190, 24);
             this.Lbl_Description.TabIndex = 8;
             this.Lbl_Description.Text = "File Description";
             this.Lbl_Description.Visible = false;
@@ -196,16 +196,17 @@ namespace _401AZ_PROJECT.Forms
             // Txt_Description
             // 
             this.Txt_Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_Description.Location = new System.Drawing.Point(166, 72);
+            this.Txt_Description.Location = new System.Drawing.Point(206, 68);
             this.Txt_Description.MaxLength = 255;
             this.Txt_Description.Name = "Txt_Description";
-            this.Txt_Description.Size = new System.Drawing.Size(1056, 27);
+            this.Txt_Description.Size = new System.Drawing.Size(1016, 27);
             this.Txt_Description.TabIndex = 9;
             this.Txt_Description.Text = "No Description";
             this.Txt_Description.Visible = false;
             // 
             // Btn_DeleteRecord
             // 
+            this.Btn_DeleteRecord.Enabled = false;
             this.Btn_DeleteRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_DeleteRecord.Location = new System.Drawing.Point(1239, 646);
             this.Btn_DeleteRecord.Name = "Btn_DeleteRecord";
