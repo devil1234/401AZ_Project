@@ -291,7 +291,7 @@ namespace _401AZ_PROJECT.Forms
         {
             switch (Dgv_Students.Columns[e.ColumnIndex].Name)
             {
-                case "DOB":
+                case "Dob":
                     ShortFormDateFormat(e);
                     break;
             }
@@ -732,7 +732,7 @@ namespace _401AZ_PROJECT.Forms
             //Retrieve the text from txtboxes and passed on update function
             var parentId = Int32.Parse(Dgv_Students.SelectedCells[6].Value.ToString());
             var parentFnameNew = Txtb_ParentFName.Text;
-            var parentLnameNew = Txtb_ParentFName.Text;
+            var parentLnameNew = TxtB_ParentLName.Text;
             var parentPnNew = Txtb_ParentPN.Text;
             if (parentFnameNew == null || parentLnameNew == null || parentPnNew == null)
             {
